@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Übungsteil 2</title>
+	
+	<meta charset="utf-8">
+	
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://unpkg.com/d3-geo-scale-bar@1.1.1/build/d3-geo-scale-bar.min.js"></script>
+	
+	<script src="geojson/Bundeslaender.geojson"></script>
+	<script src="geojson/BundeslaenderPunkte.geojson"></script>
+	
+	<link href="css/style.css" rel="stylesheet">
+	
+	
+</head>
+<body>
+
+	<svg width = "100%" height = "80">
+		<rect x="0" y="0" width="100%" height="80" fill="brown" opacity=""></rect>
+		<text x="30" y="50" stroke="black" font-family="sans-serif" font-size="24px">Übungsteil 2 - SDG Indikator 1.2.1</text>
+		<image x="1700" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_1/index.html"></a></image>
+		<image x="1800" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"></image>
+	</svg>
+	
+	
+	<div position:relative; width = "1000"; height = "0" class="div">
+	
+<!-- Legende -->
+	<div width = "500" height = "600" style="float:left">
+	<svg width = "500" height = "600">
+	<text x="50" y="50" stroke="black" font-family="sans-serif" font-size="24px">Darstelltung der absoluten Bevölkerungsgröße</text>
+	<text x="50" y="80" stroke="black" font-family="sans-serif" font-size="24px">in den Bundesländern in Deutschland</text>
+	<text x="50" y="100" stroke="black" font-family="sans-serif" font-size="14px">im Jahr 2018</text>
+	<!-- <g class = "legende" transform = "translate(50,150)">
+	<text class="caption" stroke="black" font-family="sans-serif" font-size="20px">Anteil der frühkindlichen Bildung</text>
+	<text class="subtitleText" y="20" stroke="black" font-family="sans-serif" font-size="16px">in Prozent</text>
+	</g -->>
+	
+	<g class="scale" transform = "translate(50,200)">
+	</g>
+		
+	</div>
+	
+	<div width = "800" height = "0" style="float:left">
+    <svg x="0" width = "800" height = "0"> 
+	<div class="map1"></div>
+	
+    </svg>
+	</div>
+
+	
+<!-- Infobereich -->
+	<div width = "500" height = "770" style="float:right">
+	<svg width = "500" height = "770"> 
+	<rect width="500" height="800" fill="brown" opacity="0.5"></rect>
+	
+	<text x="30" y="50" font-family="sans-serif" font-size="20px">Weitere Informationen:</text>
+	<text x="30" y="80" font-family="sans-serif" font-size="16px">Bevölkerung unterhalb der nationalen Armutsgrenze</text>
+	<text x="30" y="110" font-family="sans-serif" font-size="16px">Definition: Indikator 1.2.1 ist der Anteil der Bevölkerung, der</text>
+	<text x="30" y="130" font-family="sans-serif" font-size="16px">unterhalb der nationalen Armutsgrenze lebt.</text>
+	
+	<text x="30" y="180" font-family="sans-serif" font-size="16px">Die Armutsrate ist seit 1990 um mehr als die Hälfte gesunken.</text>
+	<text x="30" y="200" font-family="sans-serif" font-size="16px">Dennoch lebt immer noch jeder fünfte Mensch in den </text>
+	<text x="30" y="220" font-family="sans-serif" font-size="16px">Entwicklungsregionen von weniger als 1,90 Dollar pro Tag.</text>
+	<text x="30" y="240" font-family="sans-serif" font-size="16px">Millionen weitere Menschen verdienen kaum mehr als diesen... </text>
+
+	<text x="30" y="300" font-family="sans-serif" font-size="16px">Im Übungsteil 1 wird der Anteil der frühkindlichen Bildung </text>
+	<text x="30" y="320" font-family="sans-serif" font-size="16px">anhand von Kindern im Alter von 5 Jahren an den Beispielen </text>
+	<text x="30" y="340" font-family="sans-serif" font-size="16px">Deutschland und Südafrika dargestellt.</text>
+	
+	<text x="30" y="400" font-family="sans-serif" font-size="16px">Aufgabenstellung:</text>
+	<text x="30" y="430" font-family="sans-serif" font-size="16px">ordnen Sie jeweils die drei Bundesländer mit dem höchsten</text>
+	<text x="30" y="450" font-family="sans-serif" font-size="16px">und niedrigsten Anteil an frühkindlicher Bildung der Karte zu!</text>
+	
+    <div><button width = "500" height = "50" onclick="window.location.href = 'https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Lehreinheit_Startseite/Lehreinheit.html';">Zurück zur Startseite</button>
+	</div>
+	</svg>
+	
+	</div>
+	
+	</div>
+	
+	<svg width = "100%" height = "70">
+		<rect x="0" y="0" width="100%" height="200" fill="brown" opacity="0.5"></rect>
+		
+		<text x="30" y="30" font-family="sans-serif" font-size="16px">Quelle der Karte: https://geodata.lib.utexas.edu/catalog/stanford-js788dt6134 </text>
+		<text x="30" y="55" font-family="sans-serif" font-size="16px">Quelle der Zahlen: </text>
+	
+	</svg>
+	
+	<svg width = "100%" height = "70">
+		<rect x="0" y="0" width="100%" height="70" fill="brown" opacity=""></rect>
+		<text x="30" y="40" stroke="black" font-family="sans-serif" font-size="20px">Hochschule Karlsruhe | Geoinformationsmanagement | Agnes Jeworrek und Maria Siebert	</text>
+	</svg>	
+	
+	<div><script src="js/mapBundeslaenderZahlen.js"></script></div>
+	
+</body>
+</html>	

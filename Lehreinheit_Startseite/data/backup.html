@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Lehreinheit Startseite</title>
+	
+	<meta charset="utf-8">
+	
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	
+	<link href="style.css" rel="stylesheet">
+	
+</head>
+<body>
+
+	<svg width = "100%" height = "80">
+		<rect x="0" y="0" width="100%" height="80" fill="brown" opacity=""></rect>
+		<text x="30" y="50" fill="white" font-family="sans-serif" font-size="24px">Lehreinheit für Studierende</text>
+		<image x="1700" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_1/index.html"></a></image>
+		<image x="1800" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"></image>
+	</svg>
+	
+	
+	<svg width = "100%" height = "3000">
+		<rect x="0" y="0" width="100%" height="3000" fill="chocolate" opacity="0.5"></rect>
+		
+		<text x="50" y="80" fill="black" font-family="sans-serif" font-size="26px">Links und Informationen zu den Übungsteilen</text>
+		
+		<text x="50" y="150" fill="black" font-family="sans-serif" font-size="20px">Übungsteil 1 - Indikator 4.2.2: Teilnahmequote an organisiertem Lernen (ein Jahr vor dem offiziellen Einschulungsalter)</text>
+		<text x="50" y="180" fill="black" font-family="sans-serif" font-size="18px">Zuweisung der drei höchsten und niedrigsten Werte zum SDG Indikator 4.2.2 für die Bundesländer in Deutschland und die Provinzen in Südafrika</text>
+		<text x="50" y="210" fill="black" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_1/Bundeslaender_leere%20Karte/index.html" fill="#5F9EA0">Interaktive Deutschlandkarte</a> | <a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_1/Provinzen_leere%20Karte/index.html" fill="#5F9EA0"> Interaktive Südafrika Karte</a></text>
+		<text x="50" y="240" fill="black" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Multiple%20Choice%20Test_1/MC.html" fill="#5F9EA0">Multiple Choice Test 1</a></text>
+		
+		<text x="50" y="300" fill="black" font-family="sans-serif" font-size="20px">Übungsteil 2 - Indikator 1.2.1: Anteil der Bevölkerung, der unter der nationalen Armutsgrenze lebt</text>
+		<text x="50" y="330" fill="black" font-family="sans-serif" font-size="18px">Zuweisung der relativen Werte der Bevölkerung, die unter der nationalen Armutsgrenze lebt (wählen Sie das Land, welches nicht Ihr Herkunftsland ist)</text>
+		<text x="50" y="360" fill="black" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Uebungsteil_2/index.html" fill="#5F9EA0">Interaktive Deutschlandkarte</a> | <a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Uebungsteil_2/index.html" fill="#5F9EA0">Interaktive Südafrika Karte</a></text>
+		<text x="50" y="390" fill="black" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Multiple%20Choice%20Test_2/MC.html" fill="#5F9EA0">Multiple Choice Test 2</a></text>
+		
+		<text x="50" y="450" fill="black" font-family="sans-serif" font-size="20px">Übungsteil 4 - Die vier Grundformen der Bevölkerungspyramiden</text>
+		<text x="50" y="480" fill="black" font-family="sans-serif" font-size="18px">Zuweisung der vier Grundformen der Bevölkerungspyramiden aller Länder in Afrika und Europa</text>
+		<text x="50" y="510" fill="black" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Uebungsteil_4/Europa_Aufgabe/index.html" fill="#5F9EA0">Interaktive Europa Karte</a> | <a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Uebungsteil_4/Afrika_Aufgabe/index.html" fill="#5F9EA0">Interaktive Afrika Karte</a></text>
+		<text x="50" y="540" fill="black" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Multiple%20Choice%20Test_3/MC.html" fill="#5F9EA0">Multiple Choice Test</a></text>
+		
+		<text x="50" y="600" fill="black" font-family="sans-serif" font-size="20px">Übungsteil 5 - Korrelation zwischen den beiden Indikatoren</text>
+		<text x="50" y="630" fill="black" font-family="sans-serif" font-size="18px">Darstellung der Zusammenhänge zwischen der Verteilung der Armut und der frühkindlichen Bildung</text>
+		<text x="50" y="660" fill="black" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_5/Regierungsbezirke_Bildung/Regierungsbezirke.html" fill="#5F9EA0">Interaktive Karte Deutschland</a></text>
+		<text x="50" y="690" fill="black" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_5/Municipality_Bildung/Municipality.html" fill="#5F9EA0">Interaktive Karte Südafrika</a></text>
+		<text x="50" y="720" fill="grey" opacity="" font-family="sans-serif" font-size="18px"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Multiple%20Choice%20Test_5/MC.html" fill="#5F9EA0">Multiple Choice Test 5</a></text>
+		
+		
+		
+		
+		<image id="pic" x="30" y="800" width="0" height="0" xlink:href="data/Bundesländer.jpg"></image>
+		<image id="pic" x="900" y="800" width="0" height="0" xlink:href="data/Regierungsbezirke.jpg"></image>
+		<image id="pic" x="30" y="1900" width="0" height="0" xlink:href="data/Provinzen.jpg"></image>
+		<image id="pic" x="900" y="1900" width="0" height="0" xlink:href="data/Municipality.jpg"></image>
+
+	</svg>
+	
+	<!-- <svg width = "100%" height = "2200">
+		<rect x="0" y="0" width="100%" height="2200" fill="chocolate" opacity="0.5"></rect>
+		
+		<image id="pic" x="30" y="0" width="0" height="0" xlink:href="data/Bundesländer.jpg"></image>
+		<image id="pic" x="900" y="0" width="0" height="0" xlink:href="data/Regierungsbezirke.jpg"></image>
+		<image id="pic" x="30" y="1100" width="0" height="0" xlink:href="data/Provinzen.jpg"></image>
+		<image id="pic" x="900" y="1100" width="0" height="0" xlink:href="data/Municipality.jpg"></image>
+
+	</svg>
+	 -->
+	
+	<div id="footer" width = "100%">
+	<svg width = "100%" height = "70">
+		<rect width="100%" height="70" fill="brown" opacity=""></rect>
+		<text x="30" y="45" fill="white" font-family="sans-serif" font-size="20px">Hochschule Karlsruhe | Geoinformationsmanagement | Agnes Jeworrek und Maria Siebert	</text>
+	</svg>
+	</div>
+	
+	 
+	
+</body>
+</html>	

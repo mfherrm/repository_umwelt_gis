@@ -1,0 +1,26 @@
+.laenderzahlen {
+	fill: light blue;
+	stroke: white;
+	stroke-width: 1px;
+}
+
+*{
+	margin: 1px;
+	padding: 1px;
+}
+
+
+image{
+	width:90px;
+	height:50px;
+}
+button {
+	margin-bottom: 5px;
+	width:500px;
+	height:50px;
+}
+
+#Bild1 {
+	width: 85%;
+	height: 85%;
+}

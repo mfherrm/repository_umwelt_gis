@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Übungsteil 4</title>
+	
+	<meta charset="utf-8">
+	
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://unpkg.com/d3-geo-scale-bar@1.1.1/build/d3-geo-scale-bar.min.js"></script>
+	
+	<script src="geojson/Europa.geojson"></script>
+	<script src="geojson/EuropaPunkte.geojson"></script>
+	
+	<link href="css/style.css" rel="stylesheet">
+	
+</head>
+<body>
+
+	<svg width = "100%" height = "80">
+		<rect x="0" y="0" width="100%" height="80" fill="brown" opacity=""></rect>
+		<text x="30" y="50" fill="white" font-family="sans-serif" font-size="24px">Übungsteil 4 - Die vier Grundformen der Bevölkerungspyramiden</text>
+		<image x="1700" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg"><a href="https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/%C3%9Cbungsteil_1/index.html"></a></image>
+		<image x="1800" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"></image>
+	</svg>
+	
+	
+	<div position:relative; width = "1000"; height = "0" class="div">
+	
+<div width = "320" height = "270" style="float:left">
+		<svg width = "320" height = "270"> 
+		<rect x="0" y="0" width="400" height="270" fill="brown" opacity="0.5"></rect>
+		<text x="20" y="40" font-family="sans-serif" font-size="20px">Aufgabenstellung:</text>
+		<text x="20" y="70" font-family="sans-serif" font-size="16px">Überlegen Sie sich, wo welche</text>
+		<text x="20" y="100" font-family="sans-serif" font-size="16px">Bevölkerungspyramide zugeordnet</text>
+		<text x="20" y="130" fill="black" font-family="sans-serif" font-size="16px">werden könnte.</text>
+		<text x="20" y="160" fill="black" font-family="sans-serif" font-size="16px">Ziehen Sie die entsprechende</text>
+		<text x="20" y="190" fill="black" font-family="sans-serif" font-size="16px">Form in die jeweiligen Länder.</text>
+		<text x="20" y="220" fill="black" font-family="sans-serif" font-size="16px">Vergleichen Sie Ihr Ergebnis</text>
+		<text x="20" y="250" fill="black" font-family="sans-serif" font-size="16px">mit der Lösungskarte.</text>
+		
+    </svg>
+	</div>
+	
+    </svg>
+	</div>
+
+	
+<!-- Infobereich -->
+	<div width = "200" height = "700" style="float:right">
+	<div><button width = "400" height = "50" onclick="window.location.href = 'https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Uebungsteil_4/Europa_Lösungskarte/index.html';">Lösungskarte Europa</button></div>
+	<div><button width = "400" height = "50" onclick="window.location.href = 'https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Multiple%20Choice%20Test_1/MC.html';">Zum Multiple Choice Test</button></div>
+	<svg width = "400" height = "700"> 
+	<rect width="400" height="700" fill="brown" opacity="0.5"></rect>
+	
+	<text x="30" y="50" font-family="sans-serif" font-size="20px">Weitere Informationen:</text>
+	<text x="30" y="80" font-family="sans-serif" font-size="16px">Die vier Grundformen der Bevölkerungspyramiden </text>
+	<text x="30" y="110" font-family="sans-serif" font-size="16px">1: die Pagodenform (stark wachsende Bevölkerung) </text>
+	<text x="30" y="130" font-family="sans-serif" font-size="16px">2: die Dreiecksform (wachsende Bevölkerung)</text>
+	<text x="30" y="150" font-family="sans-serif" font-size="16px">3: die Glockenform (stationäre Bevölkerung)</text>
+	<text x="30" y="170" font-family="sans-serif" font-size="16px">4: die Urnenform (schrumpfende Bevölkerung)</text>
+	<image id="pyramide" x="30" y="190" width="430" height="300" xlink:href="image/Grundformen.jpg"></image>
+	<text x="30" y="405" font-family="sans-serif" font-size="16px"><a href="https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-3-642-25153-5_3/MediaObjects/978-3-642-25153-5_3_Fig11_HTML.gif" fill="grey">Grundformen der Alterspyramiden</a></text>
+
+	<text x="30" y="650" font-family="sans-serif" font-size="16px">Weitere Informationen finden Sie unter:</text>
+	<text x="30" y="670" font-family="sans-serif" font-size="16px"><a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx" fill="grey">https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx</a></text>
+	
+    <div><button width = "400" height = "50" onclick="window.location.href = 'https://www.imm.hs-karlsruhe.de/intern/UmweltGIS/GruppeD/Lehreinheit_Startseite/Lehreinheit.html';">Zurück zur Startseite</button>
+	</div>
+	</svg>
+	
+	</div>
+	
+	</div>
+	<svg width = "100%" height = "70">
+		<rect x="0" y="0" width="100%" height="200" fill="brown" opacity="0.5"></rect>
+		
+		<text x="30" y="30" font-family="sans-serif" font-size="16px">Quelle der Karte: <a href="https://geodata.lib.utexas.edu/catalog/stanford-yf665vp7551" fill="grey">https://geodata.lib.utexas.edu/catalog/stanford-yf665vp7551<a/> </text>
+		<text x="30" y="55" font-family="sans-serif" font-size="16px">Quelle der Alterspyramiden: <a href="https://www.populationpyramid.net/europe/2019/" fill="grey">https://www.populationpyramid.net/europe/2019/<a/></text>
+	
+	</svg>	
+	
+	<svg width = "100%" height = "70">
+		<rect x="0" y="0" width="100%" height="70" fill="brown" opacity=""></rect>
+		<text x="30" y="45" fill="white" font-family="sans-serif" font-size="20px">Hochschule Karlsruhe | Geoinformationsmanagement | Agnes Jeworrek und Maria Siebert	</text>
+	
+	</svg>
+	
+	<div><script src="js/map.js"></script></div>
+	
+</body>
+</html>	
