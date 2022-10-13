@@ -1,0 +1,21 @@
+.laender {
+    fill: steelblue;
+    stroke: lightgray;
+    stroke-width: 1.5px;
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+}
+
+.col-2 {
+    background-color: yellow;
+}
+/*
+.airport {
+    fill: green;
+    stroke: black;
+    stroke-width: 1px;
+}
+*/
