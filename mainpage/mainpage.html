@@ -9,13 +9,17 @@
     <!-- D3.js import --> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
+    <!-- Leaflet import-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
     <!-- Bootstrap CSS JS import -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+     <!-- Google Font import-->
+     <link rel="preconnect" href="https://fonts.googleapis.com"> 
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
 
     <!-- my Script -->
     <script src="js/index.js"></script>
@@ -23,15 +27,16 @@
     <!-- my CSS -->
     <link rel="stylesheet" href="./css/style.css">
 
-    <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
-
 </head>
 <body>
-    <div class="header row align-items-center">
-        <div class="col">
-            <p class="text-left">Startseite der Lehreinheit</p>
+    <div class="header row align-items-center justify-content-between">
+        <div class="row">
+            <div class="col">
+                <p class="text-left">Main Page</p>
+            </div>
+            <div class="col">
+                <p class="float-end text-right">language</p>
+            </div>
         </div>
     </div>
     <div class="container-fluid">
@@ -40,6 +45,27 @@
             </div>
             <div class="col-8 content flex-column">
                 <div class="p-2">
+                    <div class="p-2">
+                        <h4>Introduction</h4>
+                        <ul>
+                            <li>All Multiple-Coice-Tests (MCTs) can be repeated as often as you want. Including the assessment test at the end</li>
+                            <li>you should maintain a diary with general notes, your questions and things you find interessing. This will help you to keep track of the things you learn and also your progress!</li>
+                        </ul>
+                    </div>
+                    <div class="p-2">
+                        <h5>Roadmap</h5>
+                        <ul>            
+                            <li>"Introduction" - E-Learning + MCT </li>                
+                            <li>"Statistics" - Face-to-Face unit with rotation learning model </li>
+                            <li>"Population pyramids" - Lecture + MCT</li>
+                            <li>"SDGs" - Face-to-Face unit students teach students</li>
+                            <li>"Correlation" - Lecture + MCT</li>
+                            <li>"Repetition" - Face-to-Face unit to answer questions</li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <div class="p-2">   
                    <p>Links und Informationen zu den Übungsteilen</p>
                    <p>Am Ende der Seite finden Sie Übersichtskarten, die Ihnen bei der Lösung der Aufgaben helfen</p>
                    <p>Übungsteil 1 - Indikator 4.2.2: Teilnahmequote an organisiertem Lernen (ein Jahr vor dem offiziellen Einschulungsalter)</p>
