@@ -20,8 +20,8 @@ var g = svg.append("g")
     .attr("id", "Bev");	
 
 d3.queue()
-	.defer(d3.json, "geojson/Bundeslaender.geojson")
-	.defer(d3.json, "geojson/BundeslaenderPunkte.geojson")
+	.defer(d3.json,"../geojson/ger_bundeslaender.geojson")
+	.defer(d3.json,"../geojson/ger_bundeslaender_circles.geojson")
 	.await(makeMyMap);	
 
 /* function makeMyMap(error, laender, airport) {

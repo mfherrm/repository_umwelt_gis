@@ -20,7 +20,7 @@ var path = d3.geoPath()
 	.projection(projection);
 	
 d3.queue()
-	.defer(d3.json,"geojson/Bundeslaender.geojson")
+	.defer(d3.json,"../geojson/ger_bundeslaender.geojson")
 	.await(makeMyMap);
 	
 var y = d3.scaleLinear()

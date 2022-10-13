@@ -16,7 +16,7 @@ var path = d3.geoPath()
 	.projection(projection);
 	
 d3.queue()
-	.defer(d3.json, "geojson/Afrika.geojson")
+	.defer(d3.json,"../geojson/africa.geojson")
 	.await(makeMyMap)		
 	
 		

@@ -21,7 +21,7 @@ const scaleBar = d3.geoScaleBar()
     .size([width, height]);
 	
 d3.queue()
-	.defer(d3.json, "geojson/Bundeslaender.geojson")
+	.defer(d3.json,"../geojson/ger_bundeslaender.geojson")
 	.await(makeMyMap)		
 	
 		
