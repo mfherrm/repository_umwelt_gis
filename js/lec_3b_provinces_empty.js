@@ -30,7 +30,7 @@ var path = d3.geoPath()
 	
 
 d3.queue()
-	.defer(d3.json,"geojson/Provinzen.geojson")
+	.defer(d3.json,"../geojson/za_provinces.geojson")
 	.await(makeMyMap);
 	
 		

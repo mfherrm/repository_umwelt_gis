@@ -56,7 +56,7 @@ const scaleBar = d3.geoScaleBar()
     .size([width, height]);
 
 d3.queue()
-	.defer(d3.json,"geojson/Afrika.geojson")
+	.defer(d3.json,"../geojson/africa.geojson")
 	.await(makeMyMap);
 
 d3.select("body").select("div").select(".legende").selectAll("g")
