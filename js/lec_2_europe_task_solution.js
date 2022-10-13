@@ -1,3 +1,5 @@
+console.log("hi lec_2_europe_task_solution.js")
+
 let box = document.querySelector(".map1")
 var width = box.offsetWidth;
 var height = 800;

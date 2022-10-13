@@ -1,3 +1,5 @@
+console.log("lec_3a_bundeslaender_circles_full.js")
+
 var width = window.innerWidth-50,
 	height = window.innerHeight-50;
 	

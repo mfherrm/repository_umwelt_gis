@@ -1,0 +1,1 @@
+console.log("hi lec_2_continent_task.js ICH BIN LEEER")

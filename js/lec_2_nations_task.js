@@ -1,0 +1,1 @@
+console.log("hi lec_2_nations.js ICH BIN LEEER")

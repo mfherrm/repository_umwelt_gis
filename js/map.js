@@ -1,4 +1,4 @@
-console.log("JavaScript Let's gooo")
+console.log("hi map.js ICH BIN D3 CODE VON TONI");
 
 const width = d3.select(".map").innerWidth-50, //attr width/height ansprechen
     height = d3.select(".map").innerHeight-50;

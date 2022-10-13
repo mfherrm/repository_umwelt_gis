@@ -1,3 +1,5 @@
+console.log("hi lec_3b_provinces_empty.js")
+
 let box = document.querySelector(".map1")
 var width = box.offsetWidth;
 var height = 800;

@@ -1,3 +1,5 @@
+console.log("hi lec_4_regierungsbezirke_poverty.js");
+
 let box = document.querySelector(".map1")
 var width = box.offsetWidth;
 var height = 800;
@@ -57,7 +59,7 @@ const scaleBar = d3.geoScaleBar()
     .size([width, height]);
 
 d3.queue()
-	.defer(d3.json,"geojson/Regierungsbezirke.geojson")
+	.defer(d3.json,"../geojson/ger_regierungsbezirke.geojson")
 	.await(makeMyMap);
 
 d3.select("body").select("div").select(".legende").selectAll("g")

@@ -1,3 +1,5 @@
+console.log("hi lec_4_regierungsbezirke_education.js")
+
 let box = document.querySelector(".map1")
 var width = box.offsetWidth;
 var height = 800;

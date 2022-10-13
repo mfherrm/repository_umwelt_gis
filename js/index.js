@@ -1,3 +1,5 @@
+console.log("hi index.js ICH BIN LEAFLET CODE VON TONI")
+
 window.addEventListener("DOMContentLoaded", event=>{
     console.log("Alles bereit")
     initMap();
@@ -8,10 +10,7 @@ function initMap(){
 
     var marker = new L.marker([]);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-    
-    
-    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);    
 }
 
 function markerOnClick(e){

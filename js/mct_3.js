@@ -1,3 +1,5 @@
+console.log("hi mct_3.js");
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill
 // Production steps of ECMA-262, Edition 6, 22.1.2.1
 if (!Array.from) {
