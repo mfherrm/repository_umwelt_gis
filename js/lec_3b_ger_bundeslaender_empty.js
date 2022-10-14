@@ -1,57 +1,50 @@
 console.log("hi lec_3b_ger_bundeslaender_empty.js")
 
+let initX;
+let mouseClicked = false;
+
 let box = document.querySelector(".map1")
 var width = box.offsetWidth;
 var height = 800;
 
-
 var svg = d3.select("body").select(".map1").append("svg")
 	.attr("width", width)
-	.attr("height", height);
-	
+	.attr("height", height)
+	.on("mousedown", function(){
+		console.log(laender.GEN);
+		d3.event.preventDefault();
+		initX= d3.mouse(this)[0];
+		mouseClicked=true;
 
-		
+	});
+			
 var projection = d3.geoMercator()
 	.translate([0, 0])
 	.scale(1);
 
-
 var path = d3.geoPath()
 	.projection(projection);
-	
-d3.queue()
-	.defer(d3.json,"../geojson/ger_bundeslaender.geojson")
-	.await(makeMyMap);
 	
 var y = d3.scaleLinear()
 	.domain([1,8])
 	.rangeRound([40,215]);
 
-var textLegende = [
-	"95,0 ≤ 95,7",
-	"93,0 < 95,0",
-	"90,0 < 93,0",
-	"85,3 < 90,0"
-	];
-
-var colors=[
-	"rgb(0,74,74)",
-	"rgb(40,105,104)",
-	"rgb(79,137,133)",
-	"rgb(99,165,161)"
-];
-
-
+d3.queue()
+	.defer(d3.json,"../geojson/ger_bundeslaender.geojson")
+	.await(makeMyMap);
 	
-			
-function getColor(b){
-	return 	b >=95 ? colors[0]:
-			b >=93 ? colors[1]:
-			b >=90 ? colors[2]:
-					colors[3];
+var color = d3.scaleThreshold()
+	.domain(d3.range(2,9));
+		
+function getBundesland(b){
+	if (b!=null) return "rgb(192,192,192)"		
 	
 }
 
+function selected(){
+	d3.select('.selected').classed('selected', false);
+	d3.select(this).classed('selected, true');
+}
 
 d3.select("body").select("div").select(".legende").selectAll("g")
 	.data(color.range().map(function(d){
@@ -96,7 +89,8 @@ function makeMyMap(error, laender) {
 			.data(laender.features)
 			.enter().append("path")
 				.attr("d", path)
-				.attr("class", "laender")	
+				.attr("class", "laender")
+				.attr("fill", function(d){return getBundesland(d.properties.GEN);})	
 			
 				
 }

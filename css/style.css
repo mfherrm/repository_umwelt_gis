@@ -56,3 +56,13 @@ a:visited {
 .text-right {
     padding-right: 1rem;
 }
+
+.laender {
+    stroke: gray ;
+}
+
+.selected{
+    stroke: white;
+    fill: lightcoral;
+
+}
