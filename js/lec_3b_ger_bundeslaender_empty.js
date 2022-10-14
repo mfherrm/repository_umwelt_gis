@@ -11,10 +11,10 @@ var svg = d3.select("body").select(".map1").append("svg")
 	.attr("width", width)
 	.attr("height", height)
 	.on("mousedown", function(){
-		console.log(laender.GEN);
-		d3.event.preventDefault();
+		
 		initX= d3.mouse(this)[0];
 		mouseClicked=true;
+		console.log((d3.select(svg)));
 
 	});
 			
@@ -72,9 +72,9 @@ d3.select("body").select("div").select(".legende").selectAll("g")
 			
 		});	
 	
-function makeMyMap(error, laender) {
+function makeMyMap(error, countries) {
 			
-	var b = path.bounds (laender),
+	var b = path.bounds (countries),
 	s = .95 / Math.max((b[1][0] - b[0][0]) /
 		width, (b[1][1] - b[0][1])/height),
 	t = [(width - s * (b[1][0] + b[0][0])) /
@@ -85,11 +85,11 @@ function makeMyMap(error, laender) {
 		.translate(t)
 		
 				
-		var laender = svg.selectAll(".laender")
-			.data(laender.features)
+		var countries = svg.selectAll(".countries")
+			.data(countries.features)
 			.enter().append("path")
 				.attr("d", path)
-				.attr("class", "laender")
+				.attr("class", "countries")
 				.attr("fill", function(d){return getBundesland(d.properties.GEN);})	
 			
 				
