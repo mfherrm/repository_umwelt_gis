@@ -1,5 +1,5 @@
 console.log("hi index.js ICH BIN LEAFLET CODE VON TONI")
-
+/*
 window.addEventListener("DOMContentLoaded", event=>{
     console.log("Alles bereit")
     initMap();
@@ -16,3 +16,4 @@ function initMap(){
 function markerOnClick(e){
     console.log(this.getLatLlng());
 }
+*/
