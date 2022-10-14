@@ -27,18 +27,26 @@
     <!-- my CSS -->
     <link rel="stylesheet" href="./css/style.css">
 
+
+    <!-- JQuery for navbar-->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+
 </head>
 <body>
-    <div class="header row align-items-center justify-content-between">
-        <div class="row">
-            <div class="col">
-                <p class="text-left">Main Page</p>
-            </div>
-            <div class="col">
-                <p class="float-end text-right">language</p>
-            </div>
-        </div>
+
+    <!-- navbar placeholder-->
+    <div id="nav-placeholder">
+
     </div>
+    <script>
+        $.get("./pages/nav.html", function(data){
+            $("#nav-placeholder").replaceWith(data);
+        });
+        </script>
+    <!--end of Navigation bar-->
+
+
     <div class="container-fluid">
         <div class="row main">
             <div class="col-2">
@@ -48,8 +56,8 @@
                     <div class="p-2">
                         <h4>Introduction</h4>
                         <ul>
-                            <li>All Multiple-Coice-Tests (MCTs) can be repeated as often as you want. Including the assessment test at the end</li>
-                            <li>you should maintain a diary with general notes, your questions and things you find interessing. This will help you to keep track of the things you learn and also your progress!</li>
+                            <li>All Multiple-Coice-Tests (MCTs) and the assessment can be repeated multiple times. </li>
+                            <li>It is recommended that you keep a journal. What you want to include are your notes, any questions you have and whatever you found interessing. This will help you to keep track of the things you learned as well as your progress!</li>
                         </ul>
                     </div>
                     <div class="p-2">
