@@ -37,49 +37,84 @@
 
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
-
+        <script>
+            $.get("./nav.html", function(data){
+                $("#nav-placeholder").replaceWith(data);
+            });
+            </script>
     </div>
-    <script>
-        $.get("./nav.html", function(data){
-            $("#nav-placeholder").replaceWith(data);
-        });
-        </script>
+    
     <!--end of Navigation bar-->
 
-	<div id="content">
 
-		
-	</div>
+    <div class="container-fluid" id="content">
+        <div class="row main">
+            <div class="col-2 content">
+                    <h5> Unit 2 - Population pyramids</h5> 
+                    <div class="d-flex flex-wrap">
+                        <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige Schriftfeld.</text>
+                        Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
+                    </div>
+            </div>
+            <div class="col-8 content flex-column row" id = middle>
+                <div class="chart">
+                    <script src="../js/unit2.js"> </script>
+                </div>
+                
+                <div class="chart">
+                    <script src="../js/unit2.js"> </script>
+                </div>
+                
+                
+                
+                    <div width = "0" height = "400" style="float:left">
+                        <svg width = "0" height = "400"> 
+                            <div><a href="./lec_2_solutions.html"><img src="../images/arrow_right.png" width="50" height="50"></a> </div>
+                        </svg>
+                    </div>
+            </div>
 
-	<body>
-		<div class="container-fluid">
-			
-			<div class="row">
-				<div class="col-2">
-	
-				</div>
-				<div class="col-8">
-					
-					<<script src="../js/unit2.js"> </script>
+            <div class="col-2 content">
+            <!-- Infobereich -->
+            <div width = "200" height = "700" style="float:right">
+                
+             	<svg width = "400" height = "700"> 
+                
+                <text x="30" y="50" font-family="sans-serif" font-size="20px">Weitere Informationen:</text>
+                <text x="30" y="80" font-family="sans-serif" font-size="16px">Die vier Grundformen der Bevölkerungspyramiden </text>
+                <text x="30" y="110" font-family="sans-serif" font-size="16px">1: die Pagodenform (stark wachsende Bevölkerung) </text>
+                <text x="30" y="130" font-family="sans-serif" font-size="16px">2: die Dreiecksform (wachsende Bevölkerung)</text>
+                <text x="30" y="150" font-family="sans-serif" font-size="16px">3: die Glockenform (stationäre Bevölkerung)</text>
+                <text x="30" y="170" font-family="sans-serif" font-size="16px">4: die Urnenform (schrumpfende Bevölkerung)</text>
+                <image id="pyramide" x="30" y="190" width="430" height="300" xlink:href="../images/population_pyramids.jpg"></image>
+                <text x="30" y="405" font-family="sans-serif" font-size="16px"><a href="https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-3-642-25153-5_3/MediaObjects/978-3-642-25153-5_3_Fig11_HTML.gif" fill="grey">Grundformen der Alterspyramiden</a></text>
+                <text x="30" y="650" font-family="sans-serif" font-size="16px">Weitere Informationen finden Sie hier:</text>
+                <text x="30" y="670" font-family="sans-serif" font-size="16px"><a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx" fill="grey">Bevölkerungspyramiden</a></text>
+                <text x="30" y="30" font-family="sans-serif" font-size="16px">Quelle der Karte: <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344" fill="grey">https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344<a/> </text>
+                <text x="30" y="55" font-family="sans-serif" font-size="16px">Quelle der Alterspyramiden: <a href="https://www.populationpyramid.net/africa/2019/" fill="grey">https://www.populationpyramid.net/africa/2019/<a/></text>
 
-				</div>
-				 <div class="col-2">
-					
-				</div>
-			</div>
-			
-		</div>
-	</body>
+                <div><button width = "400" height = "50" onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button></div>
+                <div><button width = "400" height = "50" onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button></div>
+            
+                
+                </svg>
+                
+                </div>
+            </div>
+        </div>
+    </div>    
+        
 
-
+            
     <!-- footer placeholder-->
-    <div id="footer-placeholder"></div>
+    <div id="footer-placeholder">
         <script>
-            $.get("../pages/footer.html", function(data){
+            $.get("./footer.html", function(data){
                 $("#footer-placeholder").replaceWith(data);
             });
         </script>
     <!--end of Footer bar-->
+    </div>
 
 </body>
 </html>

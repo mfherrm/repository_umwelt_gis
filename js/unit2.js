@@ -1,7 +1,7 @@
 // SET UP DIMENSIONS
 var w = 500,
     h = 300;
-    
+        
 // margin.middle is distance from center line to each y-axis
 var margin = {
   top: 20,
@@ -19,19 +19,33 @@ var pointA = regionWidth,
     pointB = w - regionWidth;
 
 // some contrived data
-var popData = fetch ("../json/africa2019.json").then (function (response) {
-    console.log(popData);return response.json();
- }).catch (function (error) {
-    console.log ("error: " + error);
- });;
+
+
+
+var exampleData =[];
+var fetchData=[]
+async function postData(file=""){
+  
+  
+  const response = await fetch(file).then((response)=>response.json()).then(data => data.forEach(function (d) {
+    var i =0;
+    fetchData.push({
+        group: d.group,
+        male: +d.male,
+        female: +d.female
+    })
+    i=i+1;
+  
+})).then(exampleData=fetchData).then( function(){
+  
 
 // GET THE TOTAL POPULATION SIZE AND CREATE A FUNCTION FOR RETURNING THE PERCENTAGE
-var totalPopulation = d3.sum(popData, function(d) { return d.male + d.female; }),
+var totalPopulation = d3.sum(exampleData, function(d) { return d.male + d.female; }),
     percentage = function(d) { return d / totalPopulation; };
   
   
 // CREATE SVG
-var svg = d3.select('body').append('svg')
+var svg = d3.select('.chart').append('svg')
   .attr('width', margin.left + w + margin.right)
   .attr('height', margin.top + h + margin.bottom)
   // ADD A GROUP FOR THE SPACE WITHIN THE MARGINS
@@ -41,8 +55,8 @@ var svg = d3.select('body').append('svg')
 // find the maximum data value on either side
 //  since this will be shared by both of the x-axes
 var maxValue = Math.max(
-  d3.max(popData, function(d) { return percentage(d.male); }),
-  d3.max(popData, function(d) { return percentage(d.female); })
+  d3.max(exampleData, function(d) { return percentage(d.male); }),
+  d3.max(exampleData, function(d) { return percentage(d.female); })
 );
 
 // SET UP SCALES
@@ -63,7 +77,7 @@ var xScaleRight = d3.scale.linear()
   .range([0, regionWidth]);
 
 var yScale = d3.scale.ordinal()
-  .domain(d3.map(popData, d=> d.group))
+  .domain(exampleData.map(function(d) { return d.group; }))
   .rangeRoundBands([h,0], 0.1);
 
 
@@ -123,7 +137,7 @@ svg.append('g')
 
 // DRAW BARS
 leftBarGroup.selectAll('.bar.left')
-  .data(popData)
+  .data(exampleData)
   .enter().append('rect')
     .attr('class', 'bar left')
     .attr('x', 0)
@@ -132,17 +146,21 @@ leftBarGroup.selectAll('.bar.left')
     .attr('height', yScale.rangeBand());
 
 rightBarGroup.selectAll('.bar.right')
-  .data(popData)
+  .data(exampleData)
   .enter().append('rect')
     .attr('class', 'bar right')
     .attr('x', 0)
     .attr('y', function(d) { return yScale(d.group); })
     .attr('width', function(d) { return xScale(percentage(d.female)); })
     .attr('height', yScale.rangeBand());
+}
+  
+);
 
+}
 
-// so sick of string concatenation for translations
+postData("../json/africa2019.json").then(console.log(fetchData)).then(exampleData=fetchData).then(console.log(exampleData));
+
 function translation(x,y) {
-    console.log(typeof popData)
   return 'translate(' + x + ',' + y + ')';
 }
