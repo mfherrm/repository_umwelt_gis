@@ -94,9 +94,9 @@ a:visited {
 
 .tooltip {
     position: absolute;
-    background: white;
-    border: 2px solid black;
-    left: 100px;
+    background: black;
+    border: none;
     padding: 5px;
     border-radius: 5px;
-  }
+    color: white;
+}

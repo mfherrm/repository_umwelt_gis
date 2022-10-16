@@ -26,11 +26,12 @@ var color = d3.scaleThreshold()
                 //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
                 .range(d3.schemeReds[6]);
 
-//Create tooltip for mouseover
-var tooltip = d3.select("body")
+//Create tooltip for mouseover on body for absolute position
+var tooltip = d3.select(".map")
                     .append("div")
                     .attr("class","tooltip")
-                    .attr("opacity",0)
+                    .attr("opacity",0);
+
             
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
@@ -49,19 +50,6 @@ function drawMap(data){
         .scale(s)
         .translate(t); 
 
-    var populationDensityData = new Map();
-
-    data.features.forEach(function (d) {
-        console.log(d)
-        populationDensityData[d.properties.ADM1_EN] = {
-            country: +d.properties.ADM0_EN,
-            pop_density: +d.properties.pop_dense_2020_adm1,
-            area_sqkm: +d.properties.Area_km2,
-            total_pop: +d.properties.T_TL
-        }
-    });
-
-    console.log(populationDensityData)
     //Bind data and create one path per GeoJSON feature
     svg.selectAll("path")
         .data(data.features)
@@ -69,6 +57,9 @@ function drawMap(data){
         .append("path")
         .attr("d", path)
         .attr("class", "province")
+        .attr("pop_dense2020", function(d){
+            return d.properties.pop_dense_2020_adm1;
+        })
         //get province name  
         .attr("name", function(d) {
             return d.properties.ADM1_EN;
@@ -79,22 +70,48 @@ function drawMap(data){
         })
         //Cursor on mouseover
         .style("cursor", "pointer")
-        .on("mouseover", function(d){
-            console.log(d);
-            tooltip.transition()
-                .duration(200)
-                .style("opacity", .9);
-            tooltip.html("d.properties.pop_dense_2020_adm1")
-                            /*
-            console.log(tooltip)
-            tooltip.transition()
-                .duration(200)
-            tooltip.html("2352345346345645645645")
-            */
-        })
-        .on("mouseout", function(d) {
-            tooltip.transition()
-                .duration(200)
-                .style("opacity", 0);
-        });
-}  
+        .on("mouseover", drawTooltip)
+        .on("mouseout", eraseTooltip);
+};
+
+//Build Tooltip
+function drawTooltip(){
+    let bbox = this.getBoundingClientRect();
+    //let bbox = this.getBBox();
+    //console.log(this);
+    //console.log(bbox.x); 
+    tooltip.transition()
+        .duration(200)
+        .style("opacity", .7)
+        .style("left", bbox.x + bbox.width/1.8 + 30 +"px")
+        .style("top", bbox.y + bbox.height/1.8 + 30  + "px");
+    tooltip.join(
+        enter => 
+            enter.append("p",d3.select(this).attr("name")),
+        update =>
+            update.html(d3.select(this).attr("name"))
+    );
+    
+    /*
+    html("<p>"+ d3.select(this).attr("name")+"</p>"
+                +"<p>"+ "Population Density 2020: <strong>"+d3.select(this).attr("pop_dense2020") + "</p>");
+    */
+};
+
+function eraseTooltip(){
+    tooltip.transition()
+            .duration(200)
+            .style("opacity", 0);
+};
+
+
+function getPosition(){
+    boundingClientRect = this.getBoundingClientRect();
+
+    var left = boundingClientRect.left;
+    var top = boundingClientRect.top;
+    var rectHeight = boundingClientRect.height;
+    var rectWidth = boundingClientRect.width;
+
+    console.log("left: " + left,", top: " + top, ", width: " + rectWidth +" ,height: "+rectHeight);
+}
