@@ -100,3 +100,7 @@ a:visited {
     border-radius: 5px;
     color: white;
 }
+
+.legend {
+    margin-left: 2rem;
+}
