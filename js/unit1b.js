@@ -1,8 +1,3 @@
-//16.10.22 to Do legend: Positioning, Spacing; From To Value-Class e.g. (0-10 ... 11-50)
-//16.10.22 to Do tooltip: More Values than 1 e.g. Province AND Pop Dense
-//16.10.22 to Do NEXT Scalebar -- https://stackoverflow.com/questions/44222003/how-to-add-or-create-a-map-scale-bar-to-a-map-created-with-d3-js
-//MAYBE MAYBE MAYBE write code so you only have to populate a map with the data e.g. key(province) + value1(pop-dense) +...+valueN and change the text
-
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -30,12 +25,18 @@ var color = d3.scaleThreshold()
                 .domain([10,20,50,100,250,500])
                 //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
                 .range(d3.schemeReds[6]);
+
+//Create tooltip for mouseover on body for absolute position
+var tooltip = d3.select(".map")
+                    .append("div")
+                    .attr("class","tooltip")
+                    .attr("opacity",0);
+
             
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .then(drawMap)
     .catch(error => {console.log("Ooops, Error: " + error)});
-
 
 //Build Map
 function drawMap(data){
@@ -43,10 +44,12 @@ function drawMap(data){
     var bbox = path.bounds(data),
         s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
         t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+
     // Update the projection    
     projection
         .scale(s)
         .translate(t); 
+
     //Bind data and create one path per GeoJSON feature
     svg.selectAll("path")
         .data(data.features)
@@ -68,20 +71,15 @@ function drawMap(data){
         //Cursor on mouseover
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
-        .on("mouseout", eraseTooltip); 
-        drawLegend();
+        .on("mouseout", eraseTooltip);
 };
 
 //Build Tooltip
-
-//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-var tooltip = d3.select(".map")
-                    .append("div")
-                    .attr("class","tooltip")
-                    .attr("opacity",0);
-
 function drawTooltip(){
     let bbox = this.getBoundingClientRect();
+    //let bbox = this.getBBox();
+    //console.log(this);
+    //console.log(bbox.x); 
     tooltip.transition()
         .duration(200)
         .style("opacity", .7)
@@ -93,6 +91,11 @@ function drawTooltip(){
         update =>
             update.html(d3.select(this).attr("name"))
     );
+    
+    /*
+    html("<p>"+ d3.select(this).attr("name")+"</p>"
+                +"<p>"+ "Population Density 2020: <strong>"+d3.select(this).attr("pop_dense2020") + "</p>");
+    */
 };
 
 function eraseTooltip(){
@@ -101,57 +104,7 @@ function eraseTooltip(){
             .style("opacity", 0);
 };
 
-//Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
-function drawLegend(){
-    //set Title
-    d3.select(".legend-title").html("<p>Population Density South Africa 2020 per km²</p>");
 
-    //create svg for Legend
-    var legendSvg = d3.select(".legend")
-                    .append("svg")
-                    .attr("width", "100%")
-                    //good height --> no. of class*spacing
-                    .attr("height", function(d,i){
-                        return 6*30
-                    });
-    
-    var legend = legendSvg.selectAll(".legend")
-                        .data(color.domain())
-                        .enter()
-                        .append("g")
-                        .attr("class","legend entry")
-                        .attr("transform", function(d,i) {
-                            //set spacing
-                            return "translate(0,"+ i * 25 +")";
-                        });
-
-    //fill rects by color domain (d) & range (i)                  
-    legend.append("rect")
-            //rect on position (5,5) in SVG with the width and height 20            
-            .attr("x",5)
-            .attr("y",5)
-            .attr("width", 20)
-            .attr("height", 20)
-            .attr("fill", function (d,i){
-                //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
-                return color(d-1);
-            })
-    
-    //get and set of color by domain (d) & range (i)
-    legend.append("text")
-            //play around for nice positonioning
-            //General tip for x--> Rect.X(5)+Rect.Width(20)+buffer(6)
-            //Genral tip for y--> anchor of text is at the bottom
-            .attr("x", 31)
-            .attr("y", 21)
-            .text(function (d,i){
-                console.log(d)
-                return d
-            })
-    console.log("grün gelb blau ich bin Legende");
-};
-
-//Function to get Position of an Element, implement on Event e.g. "click"
 function getPosition(){
     boundingClientRect = this.getBoundingClientRect();
 
@@ -162,3 +115,156 @@ function getPosition(){
 
     console.log("left: " + left,", top: " + top, ", width: " + rectWidth +" ,height: "+rectHeight);
 }
+
+
+
+// Start Scale ---------------------------------------------------------
+
+let g = svg.append("g");
+
+function scale() {
+// baseWidth refers to ideal scale width on the screen it also is the width of the initial measurement point
+var baseWidth = width / 4;
+var p1 = projection.invert([width/2 - baseWidth/2, height / 2]);
+var p2 = projection.invert([width/2 + baseWidth/2, height / 2]);
+var distance = getDistance(p1,p2);
+var unit = "m"; 
+var multiply = 1; 
+var bestFit = 1;
+var increment = width/10000; // This could be scaled to map width maybe width/10000;
+var scaleDistance = 0;
+var scaleWidth = 0;
+
+if ( distance > 1000 ) { 
+unit = "km"; multiply = 0.001;			
+}
+// Adjust distance to a round(er) number
+var i = 0;
+while (i < 400) {
+var temp = getDistance( projection.invert([ width/2 - (baseWidth / 2) + (increment * i), height / 2 ]),  projection.invert([ width/2 + baseWidth/2 - (increment * i), height / 2 ]));
+var ratio = temp / temp.toPrecision(1);
+    
+// If the second distance is moving away from a cleaner number, reverse direction.
+if (i == 1) {
+if (Math.abs(1 - ratio) > bestFit) { increment = - increment; }
+}
+// If we are moving away from a best fit after that, break
+else if (i > 2) {
+if (Math.abs(1 - ratio) > bestFit) { break }
+}				
+// See if the current distance is the cleanest number
+if (Math.abs(1-ratio) < bestFit) {
+bestFit = Math.abs(1 - ratio); 
+scaleDistance = temp; 
+scaleWidth = (baseWidth) - (2 * increment * i);
+}
+i++;
+}
+            
+// Now to build the scale			
+var bars = [];
+var smallBars = 10; 
+var bigBars = 4;
+var odd = true;
+var label = false;
+
+// Populate an array to represent the bars on the scale
+for (i = 0; i < smallBars; i++) {
+if (smallBars - 1 > i ) { label = false; } else { label = true; }
+bars.push( {width: 1 / (smallBars * (bigBars + 1)), offset: i / (smallBars * (bigBars + 1)), label: label, odd: odd } );
+odd = !odd;
+}
+for (i = 0; i < bigBars; i++) {
+bars.push( {width: 1 / (bigBars + 1), offset: (i + 1) / (bigBars + 1), label: true, odd: odd } );
+odd = !odd;
+}
+
+// Append the scale
+var scaleBar = g.selectAll(".scaleBar")
+.data(bars);
+
+// enter bars with no width
+scaleBar
+    .enter()
+    .append("rect")
+    .attr("x", 20)
+    .attr("y", height - 40)
+    .attr("height",20)
+    .attr("width",0)
+    .attr("class","scaleBar")
+    .merge(scaleBar) // merge so that rect are updates if they are in the enter selection or the update selection.
+    .transition()
+.attr("x", function(d) { return d.offset * scaleWidth + 20 })
+//.attr("y", height - 30)
+.attr("width", function(d) { return d.width * scaleWidth})
+//.attr("height", 10)
+.attr("fill", function (d) { if (d.odd) { return "#eee"; } else { return "#222"; } })
+    .duration(1000);
+
+g.selectAll(".scaleText").remove();
+
+g.selectAll(".scaleText") 
+.data(bars).enter()
+.filter( function (d) { return d.label == true })
+.append("text")
+.attr("class","scaleText")
+.attr("x",0)
+.attr("y",0)
+.style("text-anchor","start")
+.text(function(d) { return d3.format(",")(((d.offset + d.width) * scaleDistance).toPrecision(2) * multiply); })
+.attr("transform", function(d) { return "translate("+ ((d.offset + d.width) * scaleWidth + 20 )+","+ (height - 45) +") rotate(-45)" })
+    .style("opacity",0)
+    .transition()
+    .style("opacity",1)
+    .duration(1000);
+
+
+g.append("text")
+.attr("x", scaleWidth/2 + 20)
+.attr("y", height - 5)
+.text( function() { if(unit == "km") { return "kilometers"; } else { return "metres";}  })
+.style("text-anchor","middle")		      
+    .attr("class","scaleText")
+    .style("opacity",0)
+    .transition()
+    .style("opacity",1)
+    .duration(1000);
+}
+// End Scale -----------------------------------------
+scale();
+
+var currentScale = 750;
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+/* Latitude/longitude spherical geodesy tools                         (c) Chris Veness 2002-2016  */
+/*                                                                                   MIT Licence  */
+/* www.movable-type.co.uk/scripts/latlong.html                                                    */
+/* www.movable-type.co.uk/scripts/geodesy/docs/module-latlon-spherical.html                       */
+function getDistance(p1,p2) { 
+
+var lat1 = p1[1];
+var lat2 = p2[1];
+var lon1 = p1[0];
+var lon2 = p2[0];
+
+var R = 6371e3; // metres
+var φ1 = lat1* Math.PI / 180;
+var φ2 = lat2* Math.PI / 180;
+var Δφ = (lat2-lat1)* Math.PI / 180;
+var Δλ = (lon2-lon1)* Math.PI / 180;
+
+var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+Math.cos(φ1) * Math.cos(φ2) *
+Math.sin(Δλ/2) * Math.sin(Δλ/2);
+var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+var distance = R * c;
+
+return distance;
+
+}
+
+
+
+

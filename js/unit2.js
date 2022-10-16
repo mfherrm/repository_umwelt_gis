@@ -187,15 +187,20 @@ function drawTooltip() {
     .duration(200)
     .style("opacity", .7)
     .style("left", d3.mouse(this)[0] + bbox.width / 1.8 + 105 + "px")
-    .style("top", d3.mouse(this)[1] + bbox.height / 1.8 - 100 + "px");
-  tooltip.join(
+    .style("top", d3.mouse(this)[1] + bbox.height / 1.8 - 100 + "px")
+    ;
+    tooltip.html("<p>" + d3.select(this).attr("male") + "</p>");
+
+    console.log(this);
+  /*tooltip.join(
     enter =>
       enter.append("p", d3.select(this).attr("male")),
     update =>
       update.html(d3.select(this).attr("male"))
-  );
+  );*/
 
 };
+
 
 function eraseTooltip() {
   tooltip.transition()
