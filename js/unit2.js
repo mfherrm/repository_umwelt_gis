@@ -141,6 +141,7 @@ async function postData(file = "") {
     svg.append('g')
       .attr('class', 'axis x right')
       .attr('transform', translation(pointB, h))
+      .attr('amount', fetchData.female)
       .call(xAxisRight);
 
     // DRAW BARS
@@ -151,7 +152,8 @@ async function postData(file = "") {
       .attr('x', 0)
       .attr('y', function (d) { return yScale(d.group); })
       .attr('width', function (d) { return xScale(percentage(d.male)); })
-      .attr('height', yScale.rangeBand());
+      .attr('height', yScale.rangeBand())
+      .attr('male', function (d) {return d.male});;
 
     rightBarGroup.selectAll('.bar.right')
       .data(exampleData)
@@ -160,7 +162,8 @@ async function postData(file = "") {
       .attr('x', 0)
       .attr('y', function (d) { return yScale(d.group); })
       .attr('width', function (d) { return xScale(percentage(d.female)); })
-      .attr('height', yScale.rangeBand());
+      .attr('height', yScale.rangeBand())
+      .attr('female', function (d) {return d.female});
   }
 
   );
@@ -186,18 +189,32 @@ function drawTooltip() {
   tooltip.transition()
     .duration(200)
     .style("opacity", .7)
-    .style("left", d3.mouse(this)[0] + bbox.width / 1.8 + 105 + "px")
-    .style("top", d3.mouse(this)[1] + bbox.height / 1.8 - 100 + "px")
+    .style("top",  (d3.mouse(this)[1]) + "px")
+    .style("left", (d3.mouse(this)[0]) + "px")
     ;
-    tooltip.html("<p>" + d3.select(this).attr("male") + "</p>");
 
-    console.log(this);
-  /*tooltip.join(
-    enter =>
-      enter.append("p", d3.select(this).attr("male")),
-    update =>
-      update.html(d3.select(this).attr("male"))
-  );*/
+
+    var x= log();
+    tooltip.join(
+      enter =>
+        enter.append("p", x),
+      update =>
+        update.html(x)
+    );
+    //tooltip.html("<p>" + x + "</p>");
+    //console.log(x);
+    getPosition(); 
+    //console.log(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1])
+    //document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')? console.log(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')) : console.log("nice try gringo")
+
+    /*Array.prototype.forEach.call(this.childNodes[0].children, child => {
+      console.log(child);
+    });*/
+
+
+
+
+
 
 };
 
@@ -208,3 +225,23 @@ function eraseTooltip() {
     .style("opacity", 0);
 };
 
+function log(){if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')){
+  if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'){ 
+    return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('female')
+  } else if(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar left'){
+    return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('male')
+}}}
+ /**
+  .class=='bar left' .class=='bar right'
+  */
+ var left 
+function getPosition(){
+  boundingClientRect = document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getBoundingClientRect();
+
+  left = boundingClientRect.left;
+  var top = boundingClientRect.top;
+  var rectHeight = boundingClientRect.height;
+  var rectWidth = boundingClientRect.width;
+
+  console.log("left: " + left,", top: " + top, ", width: " + rectWidth +" ,height: "+rectHeight);
+}
