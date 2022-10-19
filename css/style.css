@@ -99,6 +99,7 @@ a:visited {
     padding: 5px;
     border-radius: 5px;
     color: white;
+    text-align: center;
 }
 
 .legend {

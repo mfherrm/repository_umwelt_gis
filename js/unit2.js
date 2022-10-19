@@ -189,12 +189,12 @@ var tooltip = d3.select(".chart")
   
 //Build Tooltip
 function drawTooltip() {
-  let bbox = this.getBoundingClientRect()
+  getPosition(); 
   tooltip.transition()
     .duration(200)
     .style("opacity", .7)
-    .style("top",  (d3.mouse(this)[1]) + "px")
-        .style("left", (d3.mouse(this)[0]) + "px")
+    .style("top",  (d3.mouse(this)[1]) + bar_height*4 + "px")
+    .style("left", left +  "px")
     ;
 
 
@@ -205,21 +205,6 @@ function drawTooltip() {
       update =>
         update.html(x)
     );
-    //tooltip.html("<p>" + x + "</p>");
-    //console.log(x);
-    getPosition(); 
-    //console.log(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1])
-    //document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')? console.log(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')) : console.log("nice try gringo")
-
-    /*Array.prototype.forEach.call(this.childNodes[0].children, child => {
-      console.log(child);
-    });*/
-
-
-
-
-
-
 };
 
 
@@ -230,23 +215,18 @@ function eraseTooltip() {
 };
 let bar_height;
 function log(){if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')){
+  bar_height= document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('height')
   if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'){ 
-    bar_height= document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('height')
     return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('female')
   } else if(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar left'){
     return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('male')
 }}}
- /**
-  .class=='bar left' .class=='bar right'
-  */
+
  var left 
 function getPosition(){
   boundingClientRect = document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getBoundingClientRect();
-
-  left = boundingClientRect.left;
-  var top = boundingClientRect.top;
-  var rectHeight = boundingClientRect.height;
   var rectWidth = boundingClientRect.width;
-
-  console.log("left: " + left,", top: " + top, ", width: " + rectWidth +" ,height: "+rectHeight);
+  document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'? (left = boundingClientRect.left + rectWidth-tooltip.attr('width')) : (left = boundingClientRect.left)
+ 
+  console.log("left: " + left, ", width: " + rectWidth);
 }
