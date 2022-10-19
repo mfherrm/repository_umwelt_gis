@@ -183,6 +183,10 @@ var tooltip = d3.select(".chart")
   .attr("opacity", 0)
   ;
 
+
+
+
+  
 //Build Tooltip
 function drawTooltip() {
   let bbox = this.getBoundingClientRect()
@@ -190,7 +194,7 @@ function drawTooltip() {
     .duration(200)
     .style("opacity", .7)
     .style("top",  (d3.mouse(this)[1]) + "px")
-    .style("left", (d3.mouse(this)[0]) + "px")
+        .style("left", (d3.mouse(this)[0]) + "px")
     ;
 
 
@@ -224,9 +228,10 @@ function eraseTooltip() {
     .duration(200)
     .style("opacity", 0);
 };
-
+let bar_height;
 function log(){if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')){
   if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'){ 
+    bar_height=
     return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('female')
   } else if(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar left'){
     return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('male')
