@@ -1,33 +1,27 @@
-// SET UP DIMENSIONS
-var w = 500,
-  h = 300;
-
-// margin.middle is distance from center line to each y-axis
-var margin = {
+var fetchData = [] //used to convert the json in to an array 
+let val //used to get the value of a population group
+let left //used to get the absolute position of an element's bounding box
+let len //used to get the hovered object (last Object of the node)
+let w = 500, h = 300; //desired width and height of the pyramid
+var margin = { //margins between the axes 
   top: 20,
   right: 20,
   bottom: 24,
   left: 20,
   middle: 28
 };
+var regionWidth = w / 2 - margin.middle; //width of each side of the chart
+var pointA = regionWidth, pointB = w - regionWidth; // x-coordinates of the y-axes
+let bar_height; //used to position the tooltip, height of a bar
+var bar_width; //used to position the tooltip, width of a bar
+var bounding_height; // used to position the tooltip, height of the bounding box
+var twidth= 80; // Desired minimum width of tooltip 
 
-// the width of each side of the chart
-var regionWidth = w / 2 - margin.middle;
+postData('../json/africa2019.json'); //uses a json-file to create a population pyramid
 
-// these are the x-coordinates of the y-axes
-var pointA = regionWidth,
-  pointB = w - regionWidth;
-
-// some contrived data
-
-
-
-var exampleData = [];
-var fetchData = []
-async function postData(file = "") {
-
-
-  const response = await fetch(file).then((response) => response.json()).then(data => data.forEach(function (d) {
+async function postData(file) {
+  //parses the file and converts it into an array
+  const response = await fetch(file).then((response) => response.json()).then(data => data.forEach(function (d) { 
     var i = 0;
     fetchData.push({
       group: d.group,
@@ -36,45 +30,37 @@ async function postData(file = "") {
     })
     i = i + 1;
 
-  })).then(exampleData = fetchData).then(function () {
+  })).then(function () { //creates a responsive population pyramid with tooltips 
 
 
-    // GET THE TOTAL POPULATION SIZE AND CREATE A FUNCTION FOR RETURNING THE PERCENTAGE
-    var totalPopulation = d3.sum(exampleData, function (d) { return d.male + d.female; }),
+    //calculates the total population and creates a function to return an age group's share of the total
+    var totalPopulation = d3.sum(fetchData, function (d) { return d.male + d.female; }),
       percentage = function (d) { return d / totalPopulation; };
 
 
-    // CREATE SVG
-    var svg = d3.select('#pyr').append('svg')
-      .attr('width', margin.left + w + margin.right)
-      .attr('height', margin.top + h + margin.bottom)
-      // ADD A GROUP FOR THE SPACE WITHIN THE MARGINS
+    // creates the svg
+    var svg = d3.select('#pyr')
+      .append('svg')
+      .attr('viewBox', '0 0 ' + (margin.left + w + margin.right) + ' ' + (margin.top + h + margin.bottom)) //margins are important so that the ratio of the axes are kept intact
+      .attr('preserveAspectRatio', 'xMinYMin')
       .append('g')
       .attr('transform', translation(margin.left, margin.top))
-      .style("cursor", "pointer")
-      .on("mouseover", drawTooltip)
-      .on("mouseout", eraseTooltip)
-      .attr("male", function (d) {
-        return exampleData.male;})
-      .attr("female", function (d) {
-        return exampleData.female;
-      });
+      .style('cursor', 'pointer')
+      .on('mouseover', drawTooltip)
+      .on('mouseout', eraseTooltip)
+      ;
 
-    // find the maximum data value on either side
-    //  since this will be shared by both of the x-axes
+    // finds the maximum data value on either side since this is shared by both of the x-axes
     var maxValue = Math.max(
-      d3.max(exampleData, function (d) { return percentage(d.male); }),
-      d3.max(exampleData, function (d) { return percentage(d.female); })
+      d3.max(fetchData, function (d) { return percentage(d.male); }),
+      d3.max(fetchData, function (d) { return percentage(d.female); })
     );
 
-    // SET UP SCALES
-
-    // the xScale goes from 0 to the width of a region
-    //  it will be reversed for the left x-axis
-    var xScale = d3.scale.linear()
-      .domain([0, maxValue])
-      .range([0, regionWidth])
-      .nice();
+    // the xScale goes from 0 to the width of a region, this is reversed for the left x-axis
+    var xScale = d3.scale.linear() //Linear relationship between input and output y= mx +c 
+      .domain([0, maxValue]) //complete set of values from 0 to maxValue
+      .range([0, regionWidth]) //resulting values of scaling from 0 to regionWidth
+      .nice(); //rounds the values for the ticks
 
     var xScaleLeft = d3.scale.linear()
       .domain([0, maxValue])
@@ -84,23 +70,23 @@ async function postData(file = "") {
       .domain([0, maxValue])
       .range([0, regionWidth]);
 
-    var yScale = d3.scale.ordinal()
-      .domain(exampleData.map(function (d) { return d.group; }))
-      .rangeRoundBands([h, 0], 0.1);
+    var yScale = d3.scale.ordinal() //scale with an ordered, fixed set of values 
+      .domain(fetchData.map(function (d) { return d.group; })) 
+      .rangeRoundBands([h, 0], 0.1); //sets output range from specified continuous interval with 0.1 padding inbetween
 
 
-    // SET UP AXES
+    //sets up axes
     var yAxisLeft = d3.svg.axis()
       .scale(yScale)
-      .orient('right')
-      .tickSize(4, 0)
-      .tickPadding(margin.middle - 4);
+      .orient('right') //specifies the direction in which the ticks point
+      .tickSize(4, 0) //sets the length of the tick marks
+      .tickPadding(margin.middle - 4); //sets how far away from the end oft he tick mark the text-anchor of the label text is placed
 
     var yAxisRight = d3.svg.axis()
       .scale(yScale)
       .orient('left')
       .tickSize(4, 0)
-      .tickFormat('');
+      .tickFormat(''); //specifies the format of the tick labels
 
     var xAxisRight = d3.svg.axis()
       .scale(xScale)
@@ -108,21 +94,20 @@ async function postData(file = "") {
       .tickFormat(d3.format('%'));
 
     var xAxisLeft = d3.svg.axis()
-      // REVERSE THE X-AXIS SCALE ON THE LEFT SIDE BY REVERSING THE RANGE
-      .scale(xScale.copy().range([pointA, 0]))
+      
+      .scale(xScale.copy().range([pointA, 0])) //reverses the x-axis scale on the left side by reversing the range
       .orient('bottom')
       .tickFormat(d3.format('%'));
 
-    // MAKE GROUPS FOR EACH SIDE OF CHART
-    // scale(-1,1) is used to reverse the left side so the bars grow left instead of right
+   //groups the respective elements together
     var leftBarGroup = svg.append('g')
-      .attr('transform', translation(pointA, 0) + 'scale(-1,1)');
+      .attr('transform', translation(pointA, 0) + 'scale(-1,1)'); //scale(-1,1) is used to reverse the left side so the bars grow left instead of right
     var rightBarGroup = svg.append('g')
       .attr('transform', translation(pointB, 0));
 
-    // DRAW AXES
+    //draws the axes
     svg.append('g')
-      .attr('class', 'axis y left')
+      .attr('class', 'axis y left') 
       .attr('transform', translation(pointA, 0))
       .call(yAxisLeft)
       .selectAll('text')
@@ -144,89 +129,89 @@ async function postData(file = "") {
       .attr('amount', fetchData.female)
       .call(xAxisRight);
 
-    // DRAW BARS
+    //draws the bars
     leftBarGroup.selectAll('.bar.left')
-      .data(exampleData)
+      .data(fetchData)
       .enter().append('rect')
       .attr('class', 'bar left')
       .attr('x', 0)
       .attr('y', function (d) { return yScale(d.group); })
       .attr('width', function (d) { return xScale(percentage(d.male)); })
       .attr('height', yScale.rangeBand())
-      .attr('male', function (d) {return d.male});;
+      .attr('male', function (d) { return d.male });;
 
     rightBarGroup.selectAll('.bar.right')
-      .data(exampleData)
+      .data(fetchData)
       .enter().append('rect')
       .attr('class', 'bar right')
       .attr('x', 0)
       .attr('y', function (d) { return yScale(d.group); })
       .attr('width', function (d) { return xScale(percentage(d.female)); })
       .attr('height', yScale.rangeBand())
-      .attr('female', function (d) {return d.female});
+      .attr('female', function (d) { return d.female });
   }
 
   );
 
 }
-
-postData("../json/africa2019.json").then(console.log(fetchData)).then(exampleData = fetchData).then(console.log(exampleData));
-
-function translation(x, y) {
-  return 'translate(' + x + ',' + y + ')';
-}
-
-//Create tooltip for mouseover on body for absolute position
-var tooltip = d3.select(".chart")
-  .append("div")
-  .attr("class", "tooltip")
-  .attr("opacity", 0)
+//creates tooltip for mouseover on body for absolute positions
+var tooltip = d3.select('.chart')
+  .append('div')
+  .attr('class', 'tooltip')
+  .attr('opacity', 0)
   ;
 
 
 
+// functions
 
-  
-//Build Tooltip
+//used to translate during transformation, similar to the d3.translate attribute
+function translation(x, y) {
+  return 'translate(' + x + ',' + y + ')';
+}
+
+//builds tooltip
 function drawTooltip() {
-  getPosition(); 
+  val = getValue();
+  getPosition();
+  if (document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right' ||document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar left'){
+  
+  window.addEventListener('resize',getPosition()); //so that tooltips stay at the same position no matter the window size
   tooltip.transition()
     .duration(200)
-    .style("opacity", .7)
-    .style("top",  (d3.mouse(this)[1]) + bar_height*4 + "px")
-    .style("left", left +  "px")
+    .style('opacity', .7)
+    .style('top', (bounding_height) + 'px')
+    .style('left', left + 'px')
+    .text(val)
     ;
+  
+}};
 
-
-    var x= log();
-    tooltip.join(
-      enter =>
-        enter.append("p", x),
-      update =>
-        update.html(x)
-    );
-};
-
-
+//erases tooltips after leaving the element
 function eraseTooltip() {
   tooltip.transition()
     .duration(200)
-    .style("opacity", 0);
+    .style('opacity', 0);
 };
-let bar_height;
-function log(){if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getElementsByTagName('rect')){
-  bar_height= document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('height')
-  if (document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'){ 
-    return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('female')
-  } else if(document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar left'){
-    return document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('male')
-}}}
 
- var left 
-function getPosition(){
-  boundingClientRect = document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getBoundingClientRect();
-  var rectWidth = boundingClientRect.width;
-  document.querySelectorAll( ":hover" )[document.querySelectorAll( ":hover" ).length-1].getAttribute('class')=='bar right'? (left = boundingClientRect.left + rectWidth-tooltip.attr('width')) : (left = boundingClientRect.left)
- 
-  console.log("left: " + left, ", width: " + rectWidth);
+//returns the value of either the male or the female population of a bar
+function getValue() {
+  if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getElementsByTagName('rect')) { //selects all bars
+    len = document.querySelectorAll(':hover').length - 1;
+
+    if (document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right') { //in case of the right bars there is no attribute for the male population
+        return document.querySelectorAll(':hover')[len].getAttribute('female')
+    } else if (document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar left') { //in case of the left bars there is no attribute for the female population
+        return document.querySelectorAll(':hover')[len].getAttribute('male')
+    }
+  }
+};
+
+//gets the dimensions of the svg element to make positioning of the tooltip consistent and easier
+function getPosition() { 
+  boundingClientRect = document.querySelectorAll(':hover')[len].getBoundingClientRect();
+  bar_width = boundingClientRect.width;
+  bounding_height = boundingClientRect.y;
+  document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right' ? (left = boundingClientRect.left + bar_width ) : (left =boundingClientRect.left-twidth) //in case of a right bar, boundingClientRect.left is the point at which the axes meet 
+
 }
