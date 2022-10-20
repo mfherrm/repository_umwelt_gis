@@ -191,7 +191,8 @@ function drawScalebar(){
                         //.distance(200)
                         // How far the tick text labels are from the lines
                         .tickPadding(8)
-                        
+                
+                       
     var scaleSvg = d3.select(".mapbox")
                         .append("g")
                         .attr("class","scalebar")
@@ -201,6 +202,8 @@ function drawScalebar(){
                         });;
     
     scaleSvg.append("g").call(scaleBar);
+
+    d3.selectAll(".tick").attr("class","scalebartick") 
 };
 
 //Function to get Position of an Element, implement on Event e.g. "click"
