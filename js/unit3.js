@@ -34,7 +34,7 @@ var color = d3.scaleThreshold()
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .then(drawMap)
-    .catch(error => {console.log("Ooops, Error: " + error)});
+    .catch(error => {console.log(error)});
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 var tooltip = d3.select(".map")
@@ -67,6 +67,9 @@ function drawMap(data){
         .attr("pop_dense2020", function(d){
             return d.properties.pop_dense_2020_adm1;
         })
+        .attr("T_TL", function(d){
+            return d.properties.T_TL;
+        })
         //get province name  
         .attr("name", function(d) {
             return d.properties.ADM1_EN;
@@ -84,23 +87,30 @@ function drawMap(data){
         drawScalebar();
         drawDiagram();
 
-        function drawDiagram(){
+        function drawDiagram(d){
+            console.log(this)
             console.log(data)
-            console.log(data.features)
-            
+            console.log(data.features[0].properties)
+            console.log((bbox[1][0]+bbox[0][0])/2)
+            console.log((bbox[1][1]+bbox[0][1])/2)
             circles.selectAll("circle")
             .data(data.features)
             .enter()
+            
             .append("circle")
                 .attr("cx",function(d,i){
-                    return 100
+                    return (bbox[1][0]+bbox[0][0])/2
                 })
                 .attr("cy",function(d,i){
-                    return 100
+                    return (bbox[1][1]+bbox[0][1])/2
                 })
                 .attr("r",function(d,i){
                     return 20
                 })
+                .attr('population', function(d){
+                    return d.properties.T_TL
+                })
+
             
         }
 };
