@@ -175,7 +175,6 @@ function drawTooltip() {
   val = getValue();
   getPosition();
   if (document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right' ||document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar left'){
-  
   window.addEventListener('resize',getPosition()); //so that tooltips stay at the same position no matter the window size
   tooltip.transition()
     .duration(200)
@@ -184,6 +183,7 @@ function drawTooltip() {
     .style('left', left + 'px')
     .text(val)
     ;
+  
   
 }};
 

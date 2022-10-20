@@ -78,23 +78,20 @@ function drawMap(data) {
         .style("fill", function (d) {
             return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
         })
-        //Cursor on mouseover
-        .style("cursor", "pointer")
-        .on("mouseover", drawTooltip)
-        .on("mouseout", eraseTooltip)
+
 
     drawLegend();
     drawScalebar();
     drawDiagram();
 
     function drawDiagram(d) {
-        let popTot = [] 
-        for (let i=0; i<data.features.length; i++){
+        let popTot = []
+        for (let i = 0; i < data.features.length; i++) {
             console.log(data.features[i].properties.T_TL)
             popTot.push(data.features[i].properties.T_TL)
 
         }
-        
+
 
         circles.selectAll("circle")
             .data(data.features)
@@ -103,12 +100,16 @@ function drawMap(data) {
             .attr("transform", function (d) { return "translate(" + projection([d.properties.xCentroid, d.properties.yCentroid]) + ")"; })
             .attr("r", function (d, i) {
                 var max = d3.max(popTot);
-                var size = 50* d.properties.T_TL / max
+                var size = 50 * d.properties.T_TL / max
                 return size
             })
             .attr('population', function (d) {
                 return d.properties.T_TL
             })
+            //Cursor on mouseover
+            .style("cursor", "pointer")
+            .on("mouseover", drawTooltip)
+            .on("mouseout", eraseTooltip)
 
 
     }
@@ -121,18 +122,20 @@ function drawMap(data) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    tooltip.transition()
-        .duration(200)
-        .style("opacity", .7)
-        .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
-        .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
+    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length-2].getAttribute('class') == 'circles'){
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", .7)
+            .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
+            .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
 
-    tooltip.join(
-        enter =>
-            enter.append("p", d3.select(this).attr("name")),
-        update =>
-            update.html(d3.select(this).attr("name"))
-    );
+        tooltip.join(
+            enter =>
+                enter.append("p", d3.select(this).attr("population")),
+            update =>
+                update.html(d3.select(this).attr("population"))
+        );
+    }
 };
 
 function eraseTooltip() {
