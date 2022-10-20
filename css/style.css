@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background-color: grey;
+    background-color: lightgrey;
 }
 p {
     color: white;
@@ -102,7 +102,24 @@ a:visited {
     text-align: center;
     min-width: 80px;
 }
+.maptitle {
+    text-align: center;
+}
 
-.legend {
-    margin-left: 2rem;
+.legend text {
+    font-size: 24pt;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.entry text {
+    font-size: 16pt;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.tick text, .label{
+    font-size: 20pt;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
 }
