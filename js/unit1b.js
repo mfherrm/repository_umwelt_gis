@@ -32,6 +32,11 @@ d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .then(drawMap)
     .catch(error => {console.log("Ooops, Error: " + error)});
 
+//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+var tooltip = d3.select(".map")
+                .append("div")
+                .attr("class","tooltip")
+                .attr("opacity",0);
 
 //Build Map
 function drawMap(data){
@@ -66,16 +71,10 @@ function drawMap(data){
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip); 
         drawLegend();
+        drawScalebar();
 };
 
 //Build Tooltip
-
-//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-var tooltip = d3.select(".map")
-                    .append("div")
-                    .attr("class","tooltip")
-                    .attr("opacity",0);
-
 function drawTooltip(){
     let bbox = this.getBoundingClientRect();
     tooltip.transition()
@@ -145,6 +144,37 @@ function drawLegend(){
                 return d
             })
     console.log("grün gelb blau ich bin Legende");
+};
+
+function drawScalebar(){
+    //Create Scalebar Generator, passing projection + dimension of map
+    var scaleBar = d3.geoScaleBar()
+                        .projection(projection)
+                        //function for size?
+                        .size([width, height])
+                        //positioning .top etc.
+                        .left(.005)
+                        .top(0.08)
+                        // A formatter function adds a "comma..." to "1,000"
+                        .tickFormat(d3.format(" "))
+                        // Set this to true to keep the bar's width constant
+                        .zoomClamp(false)
+                        //label + anchor
+                        .label("km")
+                        .labelAnchor("right")
+
+    //Create svg for scalebar
+    var scaleSvg = d3.select(".scale")
+                    .append("svg")
+                    .attr("class","scalebar")
+                    .attr("width","80%")
+                    .attr("height","20%");
+
+    //Call scaleBar to Create it
+    scaleSvg.append("g").call(scaleBar);
+
+
+    console.log("0 10 1000000 ich bin Masstab");
 };
 
 //Function to get Position of an Element, implement on Event e.g. "click"
