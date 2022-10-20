@@ -41,6 +41,9 @@ var tooltip = d3.select(".map")
                 .append("div")
                 .attr("class","tooltip")
                 .attr("opacity",0);
+var circles = d3.select(".mapbox")
+    .append("g")
+    .attr("class", "circles"); 
 
 //Build Map
 function drawMap(data){
@@ -48,7 +51,9 @@ function drawMap(data){
     var bbox = path.bounds(data),
         s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
         t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
-    // Update the projection    
+    
+        console.log(bbox)
+        // Update the projection    
     projection
         .scale(s)
         .translate(t); 
@@ -74,9 +79,30 @@ function drawMap(data){
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
+
         drawLegend();
         drawScalebar();
         drawDiagram();
+
+        function drawDiagram(){
+            console.log(data)
+            console.log(data.features)
+            
+            circles.selectAll("circle")
+            .data(data.features)
+            .enter()
+            .append("circle")
+                .attr("cx",function(d,i){
+                    return 100
+                })
+                .attr("cy",function(d,i){
+                    return 100
+                })
+                .attr("r",function(d,i){
+                    return 20
+                })
+            
+        }
 };
 
 
