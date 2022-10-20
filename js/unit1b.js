@@ -76,7 +76,10 @@ function drawMap(data){
         .on("mouseout", eraseTooltip)
         drawLegend();
         drawScalebar();
+        drawDiagram();
 };
+
+
 
 //Build Tooltip
 function drawTooltip(){
@@ -105,8 +108,7 @@ function eraseTooltip(){
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend(){
     //set Title
-    d3.select(".legend")
-       
+    d3.select(".legend");
 
     //create svg for Legend
     var legendSvg = d3.select(".mapbox")
@@ -174,7 +176,6 @@ function drawLegend(){
 
 //Build Scalebar -- 
 function drawScalebar(){
-
     let mapbox = getPosition($(".mapbox")[0]);
     console.log("test2: "+mapbox.width)
 
@@ -194,7 +195,6 @@ function drawScalebar(){
     var scaleSvg = d3.select(".mapbox")
                         .append("g")
                         .attr("class","scalebar")
-                        .attr("anchor","bottom")
                         //move the Scalbar like the legend
                         .attr("transform", function() {
                             return "translate(10,"+ mapbox.height*1.5+")";
