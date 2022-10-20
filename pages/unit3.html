@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Unit 3 - SDG - 1.2.1.</title>
+	
+	<meta charset="utf-8">
+	
+	 <!-- D3.js import --> 
+     <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+     <!-- D3-geo-scale-bar import-->
+     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+
+    <!-- Leaflet import-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+    <!-- Bootstrap CSS JS import -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+     <!-- Google Font import-->
+     <link rel="preconnect" href="https://fonts.googleapis.com"> 
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+
+    <!-- my Script -->
+    <script src="../js/index.js"></script>
+
+    <!-- my CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+
+    <!-- JQuery for navbar-->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+    <!-- navbar placeholder-->
+    <div id="nav-placeholder">
+        <script>
+            $.get("./nav.html", function(data){
+                $("#nav-placeholder").replaceWith(data);
+            });
+            </script>
+    </div>
+    
+    <!--end of Navigation bar-->
+
+
+    <div class="container-fluid" id="content">
+        <div class="row">
+            <div class="col-2 content">
+                <h5> SDG Indicator 1.2.1. </h5>
+                <div class="d-flex flex-wrap">
+                    <p align="left"> Schauen Sie sich die beiden Karten genau an. Arbeiten Sie die relativen Werte heraus, die dem Anteil der absoluten Bevölkerung und der unter der nationalen Armutsgrenze lebenden Menschen entsprechen.
+                        Mit hilfe der Pfeile können Sie zwischen den Karten switchen.</p>
+                </div>        
+            </div>
+            <div class="col-8 content" id = middle>
+                
+                <div class="map"> <script  src="../js/unit3.js"> </script></div>
+                
+            </div>
+
+            <div class="col-2 content">
+            
+                <!-- Infobereich -->
+                <h6>Bevölkerung unterhalb der nationalen Armutsgrenze</h6>
+                <p>Definition: Indikator 1.2.1 ist der Anteil der Bevölkerung, der unterhalb der nationalen Armutsgrenze lebt. Die Armutsrate ist seit 1990 um mehr als die Hälfte gesunken. 
+                    Dennoch lebt immer noch jeder fünfte Mensch in den Entwicklungsregionen von weniger als 1,90 Dollar pro Tag. Millionen weitere Menschen verdienen kaum mehr als diesen...
+                    Im Übungsteil 2 wird zum Einen die absoulte Bevölkerungsgröße dargestellt, zum anderen die absoulte Anzahl an Menschen, die unter der nationalen Armutsgrenze leben.
+                    Die nationale Armutsgrenze liegt in Deutschland bei einem 1-Personen Haushalt bei 781€ im Monat und in Südafrika bei 992 Rand pro Person. <br> Weitere Informationen: <br> </p>
+                    
+                    <a href="https://de.statista.com/statistik/daten/studie/510/umfrage/einstufung-in-arm-und-reich-fuer-singles-und-paare/">Nationale Armutsgrenze Deutschland</a> <br>
+                    <a href="https://www.suedafrika.net/suedafrika/gesellschaft/armut.html">nationale Armutsgrenze Südafrika</a>
+
+            </div>
+        </div>
+    </div>    
+        
+
+            
+    <!-- footer placeholder-->
+    <div id="footer-placeholder">
+        <script>
+            $.get("./footer.html", function(data){
+                $("#footer-placeholder").replaceWith(data);
+            });
+        </script>
+    <!--end of Footer bar-->
+    </div>
+    
+
+</body>
+</html>

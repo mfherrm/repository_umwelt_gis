@@ -106,3 +106,10 @@ a:visited {
 .legend {
     margin-left: 2rem;
 }
+
+  .circle {
+	fill:green;
+	fill-opacity:0.5;
+	stroke:#fff;
+	stroke-width:2px;
+}
