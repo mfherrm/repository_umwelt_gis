@@ -14,11 +14,21 @@ var svg = d3.select(".map")
 
 
 //Define map projection
+/*
+projection = d3.geoConicEqualArea()
+    .parallels([24, 32])
+    .rotate([15, 10
+            ])
+    .translate([0, 0])
+    .scale(1);
+*/
+
 var projection = d3.geoMercator()
     //.fitSize([mapWidth, mapHeight], geojson)
     .fitSize([width, height])
     .translate([0, 0])
     .scale(1);
+
 
 //Define path generator
 var path = d3.geoPath()
@@ -74,29 +84,28 @@ function drawMap(data){
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
+        .on("click", function(){
+            console.log(this);
+        });
         drawLegend();
         drawScalebar();
-        drawDiagram();
 };
-
-
 
 //Build Tooltip
 function drawTooltip(){
     window.onresize = this.getBoundingClientRect();
-    let bbox = this.getBoundingClientRect();
+    let bbox = this.getBoundingClientRect();  
     tooltip.transition()
         .duration(200)
         .style("opacity", .7)
         .style("left", bbox.x + bbox.width/1.8 + 30 +"px")
         .style("top", bbox.y + bbox.height/1.8 + 30  + "px");
-    
     tooltip.join(
         enter => 
-            enter.append("p",d3.select(this).attr("name")),
+            enter.html("<p>"+d3.select(this).attr("name")+"</p>"),
         update =>
-            update.html(d3.select(this).attr("name"))
-    );
+            update.html("<p>"+d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("pop_dense2020") + " </p>")
+    )   
 };
 
 function eraseTooltip(){
@@ -122,7 +131,7 @@ function drawLegend(){
                     })
                     .attr("transform", function(d,i) {
                         //set spacing
-                        return "translate(0,"+ 45 +")";
+                        return "translate(5,"+ 30 +")";
                     });
     
     var legend = legendSvg.selectAll(".legend")
@@ -131,13 +140,13 @@ function drawLegend(){
                         .append("g")
                         .attr("class","entry")
                         .attr("transform", function(d,i) {
-                            return "translate(0,"+ i * 40 +")";
+                            return "translate(5,"+ i * 33 +")";
                         });
 
     legendSvg.append("g")
             .append("text")
             .text(function(){
-                return "Population Density [%]";
+                return "Population Density per square km";
             })
             .attr("transform", function(d,i) {
                 //set spacing
@@ -146,10 +155,10 @@ function drawLegend(){
     //fill rects by color domain (d) & range (i)                  
     legend.append("rect")
             //rect on position (5,5) in SVG with the width and height 20            
-            .attr("x",5)
+            .attr("x",10)
             .attr("y",10)
-            .attr("width", 30)
-            .attr("height", 30)
+            .attr("width", 25)
+            .attr("height", 25)
             .attr("fill", function (d,i){
                 //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
                 return color(d-1);
@@ -160,8 +169,8 @@ function drawLegend(){
             //play around for nice positonioning
             //General tip for x--> Rect.X(5)+Rect.Width(20)+buffer(6)
             //Genral tip for y--> anchor of text is at the bottom
-            .attr("x", 56)
-            .attr("y", 36)
+            .attr("x", 46)
+            .attr("y", 31)
             .attr("color","white")
             .text(function (d,i){
                 if(i == 0){
