@@ -2,7 +2,10 @@
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 let prov
-
+var size
+var max
+var topX=(Math.cos(2) * 50 + 110)
+var topY= (Math.sin(-1) * 50 + 295)
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select(".map")
     .append("svg")
@@ -80,10 +83,10 @@ function drawMap(data) {
             return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
         })
 
-
-    drawLegend();
+    drawDiagram();    
     drawScalebar();
-    drawDiagram();
+    drawLegend();
+    
 
     function drawDiagram(d) {
         let popTot = []
@@ -100,8 +103,8 @@ function drawMap(data) {
             .append("circle")
             .attr("transform", function (d) { return "translate(" + projection([d.properties.xCentroid, d.properties.yCentroid]) + ")"; })
             .attr("r", function (d, i) {
-                var max = d3.max(popTot);
-                var size = 50 * d.properties.T_TL / max
+                max = d3.max(popTot);
+                size = 50 * d.properties.T_TL / max
                 return size
             })
             .attr('population', function (d) {
@@ -158,7 +161,6 @@ function eraseTooltip() {
 function drawLegend() {
     //set Title
     d3.select(".legend");
-
     //create svg for Legend
     var legendSvg = d3.select(".mapbox")
         .append("g")
@@ -203,6 +205,82 @@ function drawLegend() {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
         })
+        var legendCircleMax= d3.select('.legend')
+        .append('g')
+        .attr('class','legendCircle')
+        .append("circle")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("cx", 90)
+        .attr("cy", 305)
+        .attr('r', 50)
+        .style('fill', 'none')
+        .style('stroke', 'black')
+        .style('stroke-width', '1pt')
+        
+        var labelCircleRect= d3.select('.legendCircle')
+        .append('rect')
+        .attr('x', topX)
+        .attr('y', topY+2)
+        .attr('width', 90)
+        .attr('height', '1pt')
+
+        var labelCircle = d3.select('.legendCircle')
+        .append('text')
+        .attr('x', topX+92)
+        .attr('y', topY+8)
+        .text(max)
+
+        var legendCircleMid= d3.select('.legend')
+        .append('g')
+        .attr('class','legendCircle')
+        .append("circle")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("cx", 90)
+        .attr("cy", 321)
+        .attr('r', 50*Math.round(max/3/1000000*2)*1000000/max)
+        .style('fill', 'none')
+        .style('stroke', 'black')
+        .style('stroke-width', '1pt')
+
+        var labelCircleRect= d3.select('.legendCircle')
+        .append('rect')
+        .attr('x', topX)
+        .attr('y', topY+33)
+        .attr('width', 90)
+        .attr('height', '1pt')
+
+        var labelCircle = d3.select('.legendCircle')
+        .append('text')
+        .attr('x', topX+92)
+        .attr('y', topY+41)
+        .text(Math.round(max/3000000*2)*1000000)
+
+        var legendCircleBot= d3.select('.legend')
+        .append('g')
+        .attr('class','legendCircle')
+        .append("circle")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("cx", 90)
+        .attr("cy", 341)
+        .attr('r', 50*Math.round(max/4000000)*1000000/max)
+        .style('fill', 'none')
+        .style('stroke', 'black')
+        .style('stroke-width', '1pt')
+
+        var labelCircleRect= d3.select('.legendCircle')
+        .append('rect')
+        .attr('x', topX)
+        .attr('y', topY+73)
+        .attr('width', 90)
+        .attr('height', '0.75pt')
+
+        var labelCircle = d3.select('.legendCircle')
+        .append('text')
+        .attr('x', topX+92)
+        .attr('y', topY+78)
+        .text(Math.round(max/4/1000000)*1000000)
+
+        console.log(Math.round(max/3/1000000*2)*1000000)
 
     //get and set of color by domain (d) & range (i)
     legend.append("text")
@@ -264,3 +342,4 @@ function getPosition(ele) {
     console.log("left: " + left, ", top: " + top, ", width: " + rectWidth + " ,height: " + rectHeight);
     return boundingClientRect;
 }
+

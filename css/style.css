@@ -123,6 +123,12 @@ a:visited {
     font-family: 'Open Sans', sans-serif;
 }
 
+.legendCircle text {
+    font-size: 13pt;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .entry text {
     font-size: 18pt;
     font-weight: 500;
