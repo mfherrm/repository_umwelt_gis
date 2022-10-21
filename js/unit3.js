@@ -1,6 +1,7 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+let prov
 
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select(".map")
@@ -139,12 +140,18 @@ function drawTooltip() {
                 update.html(d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population"))
         );
     }
+    let name= d3.select(this).attr("province");
+    prov = document.querySelector('[name="'+ name + '"]');
+    this.style.stroke='white';
+    prov.style.stroke='white';
 };
 
 function eraseTooltip() {
     tooltip.transition()
         .duration(200)
         .style("opacity", 0);
+    prov.style.stroke='none'
+    this.style.stroke='none';
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
