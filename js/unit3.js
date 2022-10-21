@@ -4,8 +4,6 @@ var height = Math.max(document.documentElement.clientHeight, window.innerHeight 
 let prov
 var size
 var max
-var topX=(Math.cos(2) * 50 + 110)
-var topY= (Math.sin(-1) * 50 + 295)
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select(".map")
     .append("svg")
@@ -34,6 +32,8 @@ var color = d3.scaleThreshold()
     .domain([10, 20, 50, 100, 250, 500])
     //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
     .range(d3.schemeReds[6]);
+
+
 
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
@@ -83,10 +83,10 @@ function drawMap(data) {
             return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
         })
 
-    drawDiagram();    
+    drawDiagram();
     drawScalebar();
     drawLegend();
-    
+
 
     function drawDiagram(d) {
         let popTot = []
@@ -129,7 +129,7 @@ function drawMap(data) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length-2].getAttribute('class') == 'circles'){
+    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 2].getAttribute('class') == 'circles') {
         tooltip.transition()
             .duration(200)
             .style("opacity", .7)
@@ -138,34 +138,40 @@ function drawTooltip() {
 
         tooltip.join(
             enter =>
-                enter.append("p",  d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population")),
+                enter.append("p", d3.select(this).attr("province") + ': ' + d3.select(this).attr("population")),
             update =>
-                update.html(d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population"))
+                update.html(d3.select(this).attr("province") + ': ' + d3.select(this).attr("population"))
         );
     }
-    let name= d3.select(this).attr("province");
-    prov = document.querySelector('[name="'+ name + '"]');
-    this.style.stroke='white';
-    prov.style.stroke='white';
+    let name = d3.select(this).attr("province");
+    prov = document.querySelector('[name="' + name + '"]');
+    this.style.stroke = 'white';
+    prov.style.stroke = 'white';
 };
 
 function eraseTooltip() {
     tooltip.transition()
         .duration(200)
         .style("opacity", 0);
-    prov.style.stroke='none'
-    this.style.stroke='none';
+    prov.style.stroke = 'none'
+    this.style.stroke = 'none';
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend() {
+    let size = d3.scaleSqrt()
+        .domain([1, max])
+        .range([1, 50]);
+    let valuesToShow=[(Math.round(1/4*max/1000000)*1000000) ,(Math.round(2/3*max/1000000)*1000000), max];
+    let xCircle=90;
+    let yCircle=361;
+    let xLabel=190;
     //set Title
     d3.select(".legend");
     //create svg for Legend
     var legendSvg = d3.select(".mapbox")
         .append("g")
         .attr("class", "legend")
-        //.attr("viewBox", [0, 0, width, height])
         .attr("width", "100%")
         //good height --> no. of class*spacing
         .attr("height", function (d, i) {
@@ -196,7 +202,7 @@ function drawLegend() {
         });
     //fill rects by color domain (d) & range (i)                  
     legend.append("rect")
-        //rect on position (5,5) in SVG with the width and height 20            
+        //rect on position (5,5) in SVG with the width and height 30            
         .attr("x", 5)
         .attr("y", 10)
         .attr("width", 30)
@@ -205,82 +211,39 @@ function drawLegend() {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
         })
-        var legendCircleMax= d3.select('.legend')
+    var legendCircle = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
         .append('g')
-        .attr('class','legendCircle')
+        .attr('class', 'legendCircle')
         .append("circle")
-        //rect on position (5,5) in SVG with the width and height 20            
-        .attr("cx", 90)
-        .attr("cy", 305)
-        .attr('r', 50)
+        .attr("cx", xCircle)
+        .attr("cy", function(d){return yCircle - size(d)})
+        .attr('r', function(d){ console.log(size(d)); return size(d)
+        })
         .style('fill', 'none')
         .style('stroke', 'black')
-        .style('stroke-width', '1pt')
-        
-        var labelCircleRect= d3.select('.legendCircle')
-        .append('rect')
-        .attr('x', topX)
-        .attr('y', topY+2)
-        .attr('width', 90)
-        .attr('height', '1pt')
-
-        var labelCircle = d3.select('.legendCircle')
+    
+    var legendSegments = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
+        .append('line')
+        .attr('x1', function(d){ return xCircle})
+        .attr('x2', xLabel)
+        .attr('y1', function(d){ return yCircle -size(d)*2})
+        .attr('y2', function(d){ return yCircle -size(d)*2})
+        .attr('stroke', 'black')
+        .style('stroke-dasharray', ('2,2'))
+    
+    var legendLabels = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
         .append('text')
-        .attr('x', topX+92)
-        .attr('y', topY+8)
-        .text(max)
-
-        var legendCircleMid= d3.select('.legend')
-        .append('g')
-        .attr('class','legendCircle')
-        .append("circle")
-        //rect on position (5,5) in SVG with the width and height 20            
-        .attr("cx", 90)
-        .attr("cy", 321)
-        .attr('r', 50*Math.round(max/3/1000000*2)*1000000/max)
-        .style('fill', 'none')
-        .style('stroke', 'black')
-        .style('stroke-width', '1pt')
-
-        var labelCircleRect= d3.select('.legendCircle')
-        .append('rect')
-        .attr('x', topX)
-        .attr('y', topY+33)
-        .attr('width', 90)
-        .attr('height', '1pt')
-
-        var labelCircle = d3.select('.legendCircle')
-        .append('text')
-        .attr('x', topX+92)
-        .attr('y', topY+41)
-        .text(Math.round(max/3000000*2)*1000000)
-
-        var legendCircleBot= d3.select('.legend')
-        .append('g')
-        .attr('class','legendCircle')
-        .append("circle")
-        //rect on position (5,5) in SVG with the width and height 20            
-        .attr("cx", 90)
-        .attr("cy", 341)
-        .attr('r', 50*Math.round(max/4000000)*1000000/max)
-        .style('fill', 'none')
-        .style('stroke', 'black')
-        .style('stroke-width', '1pt')
-
-        var labelCircleRect= d3.select('.legendCircle')
-        .append('rect')
-        .attr('x', topX)
-        .attr('y', topY+73)
-        .attr('width', 90)
-        .attr('height', '0.75pt')
-
-        var labelCircle = d3.select('.legendCircle')
-        .append('text')
-        .attr('x', topX+92)
-        .attr('y', topY+78)
-        .text(Math.round(max/4/1000000)*1000000)
-
-        console.log(Math.round(max/3/1000000*2)*1000000)
+        .attr('x', xLabel)
+        .attr('y', function(d){ return yCircle -size(d)*2 + 5})
+        .text( function(d){return d})
+        .style('font-size', 17)
+        .attr('alignment-basline', 'middle')
 
     //get and set of color by domain (d) & range (i)
     legend.append("text")
