@@ -63,7 +63,7 @@ function drawMap(data) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", "province")
+        .attr("class", "province_diag")
         .attr("pop_dense2020", function (d) {
             return d.properties.pop_dense_2020_adm1;
         })
@@ -106,6 +106,9 @@ function drawMap(data) {
             .attr('population', function (d) {
                 return d.properties.T_TL
             })
+            .attr('province', function (d) {
+                return d.properties.ADM1_EN
+            })
             //Cursor on mouseover
             .style("cursor", "pointer")
             .on("mouseover", drawTooltip)
@@ -131,9 +134,9 @@ function drawTooltip() {
 
         tooltip.join(
             enter =>
-                enter.append("p", d3.select(this).attr("population")),
+                enter.append("p",  d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population")),
             update =>
-                update.html(d3.select(this).attr("population"))
+                update.html(d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population"))
         );
     }
 };
