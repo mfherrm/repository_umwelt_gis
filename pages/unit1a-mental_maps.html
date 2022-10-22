@@ -11,6 +11,10 @@
     
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+
+    <!-- D3 Projections import -->
+    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+
     <!-- Leaflet import-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
@@ -44,7 +48,23 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2 flex-column">
+                <div class="left-col">
+                    <h5>Introduction - Mental Maps</h5>
+                    <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                </div>
+                <div class="left-col">
+                    <p>No. of selected countries</p>
+                    <div class="progress-check form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" disabled >
+                    </div>
+                    <div class="progress-check form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" disabled>
+                    </div>
+                    <div class="progress-check form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" disabled>
+                    </div>
+                </div>
                 <!--
                 <div class="legend-title">
                 </div>
@@ -55,9 +75,9 @@
             </div>
             <div class="col-8">
                 <div class="maptitle justify-content-center">
-                    <h4>Title</h4>
+                    <h4>World Map</h4>
                 </div>
-                <div class="map" id="zaf">
+                <div class="worldmap">
                     
                 </div>
             </div>

@@ -1,10 +1,12 @@
+/* Styles for HTML-Tags and Layout */
 html, body {
     height: 100%;
     background-color: lightgrey;
 }
 p {
-    color: white;
     font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    text-justify: inter-word;
     padding: 0;
     margin: 0;
 }
@@ -50,6 +52,11 @@ a:visited {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
+.left-col{
+    padding-top: 3.2rem;
+    padding-left: .8rem
+}
+
 .text-left {
     padding-left: 1rem;
 }
@@ -57,36 +64,29 @@ a:visited {
     padding-right: 1rem;
 }
 
-.countries {
-    stroke: gray ;
-}
-
 .selected{
     stroke: white;
     fill: lightcoral;
-
+}
+/* Buttons */
+.progress-check{
+    margin-right:0;
 }
 
-  .axis line,
-  .axis path {
-    shape-rendering: crispEdges;
-    fill: transparent;
-    stroke: #555;
-  }
-  .axis text {
-    font-size: 11px;
-  }
-  
-  
-  .bar {
-    fill-opacity: 0.5;
-  }
-  .bar.left {
-    fill: steelblue;
-  }
-  .bar.right {
-    fill: firebrick;
-  }
+/* Styles for Map e.g. Boundaries */   
+.maptitle {
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.worldmap {
+    border: 2px solid grey;
+    border-radius: 5px;
+    overflow:hidden;
+    background: lightblue;
+}
+
 .province {
     stroke-width: 1.5pt;
     stroke: white;
@@ -95,7 +95,43 @@ a:visited {
     stroke-width: 5pt;
     fill: grey
 }
+.country {
+    stroke: white;
+    stroke-width: .5px;
+}
+.country:hover{
+    stroke:white;
+    stroke-width: 2px;
+}
+/* Styles for Graticular */
+.graticule {
+    fill: none;
+    stroke: black;
+    stroke-width: .3px;
+    stroke-opacity: .5;
+} 
 
+/*Styles for Legend */
+.legend text {
+    font-size: 18pt;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.entry text {
+    font-size: 18pt;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*Styles for Scale */
+.scalebartick text, .label{
+    font-size: 16pt;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*Styles for Tooltip*/
 .tooltip {
     position: absolute;
     background: black;
@@ -111,31 +147,33 @@ a:visited {
     text-align: left;
 }
 
-.maptitle {
-    margin-top: .8rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.legend text {
-    font-size: 18pt;
-    font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.entry text {
-    font-size: 18pt;
-    font-weight: 500;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.scalebartick text, .label{
-    font-size: 16pt;
-    font-weight: 500;
-    font-family: 'Open Sans', sans-serif;
-}
+/* Styles for Charts and Diagrams */
 .circles{
     opacity: 0.7;
 }
+
+.axis line, .axis path {
+  shape-rendering: crispEdges;
+  fill: transparent;
+  stroke: #555;
+}
+.axis text {
+  font-size: 11px;
+}
+
+.bar {
+  fill-opacity: 0.5;
+}
+
+.bar.left {
+  fill: steelblue;
+}
+
+.bar.right {
+  fill: firebrick;
+}
+
+
+
 
 
