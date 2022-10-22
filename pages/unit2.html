@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-	<title>Unit 2 - Population pyramids</title>
-	
-	<meta charset="utf-8">
-	
-	<!-- D3.js import --> 
+    <title>Unit 2 - Population pyramids</title>
+
+    <meta charset="utf-8">
+
+    <!-- D3.js import -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
-     <!-- Google Font import-->
-     <link rel="preconnect" href="https://fonts.googleapis.com"> 
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Google Font import-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my Script -->
     <script src="../js/index.js"></script>
@@ -33,70 +43,81 @@
 
 
 </head>
+
 <body>
 
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
         <script>
-            $.get("./nav.html", function(data){
+            $.get("./nav.html", function (data) {
                 $("#nav-placeholder").replaceWith(data);
             });
-            </script>
+        </script>
     </div>
-    
+
     <!--end of Navigation bar-->
 
 
     <div class="container-fluid" id="content">
         <div class="row">
             <div class="col-2 content">
-                    <h5> Unit 2 - Population pyramids</h5> 
-                    <div class="d-flex flex-wrap">
-                        <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige Schriftfeld.</text>
+                <h5> Unit 2 - Population pyramids</h5>
+                <div class="d-flex flex-wrap">
+                    <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
+                        zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
+                        Schriftfeld.</text>
                         Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
-                    </div>
+                </div>
             </div>
-            <div class="col-8 content" id = middle>
-                
-                <div class="col-6 chart" id="pyr"> <script  src="../js/unit2.js"> </script></div>
-                
+            <div class="col-8 content" id=middle>
+                <div class="row">
+                    <div class="col-6 chart" id="pyr">
+                        <script src="../js/populationPyramid.js"> </script>
+                    </div>
+                    <div class="col-6 chart"> <i class="bi-globe"> </i></div>
+                </div>
             </div>
 
             <div class="col-2 content">
-            <!-- Infobereich -->
-                
-               
+                <!-- Infobereich -->
+
+
+
                 <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-                <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3: Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-                <p>Weitere Informationen: <br> 
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a> <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
+                <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
+                    Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
+                <p>Weitere Informationen: <br>
+                    <a
+                        href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
+                    <br>
+                    <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
+                    <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
                 </p>
                 <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
                 <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
                 <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-                
-            
-                
-              
-                
+
+
+
+
+
             </div>
         </div>
-    </div>    
-        
+    </div>
 
-            
+
+
     <!-- footer placeholder-->
     <div id="footer-placeholder">
         <script>
-            $.get("./footer.html", function(data){
+            $.get("./footer.html", function (data) {
                 $("#footer-placeholder").replaceWith(data);
             });
         </script>
-    <!--end of Footer bar-->
+        <!--end of Footer bar-->
     </div>
-    
+
 
 </body>
+
 </html>
