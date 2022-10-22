@@ -161,8 +161,16 @@ a:visited {
   font-size: 11px;
 }
 
-.bar {
-  fill-opacity: 0.5;
+.legendCircle text {
+    font-size: 13pt;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.entry text {
+    font-size: 18pt;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .bar.left {

@@ -2,7 +2,8 @@
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 let prov
-
+var size
+var max
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select(".map")
     .append("svg")
@@ -31,6 +32,8 @@ var color = d3.scaleThreshold()
     .domain([10, 20, 50, 100, 250, 500])
     //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
     .range(d3.schemeReds[6]);
+
+
 
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
@@ -80,10 +83,10 @@ function drawMap(data) {
             return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
         })
 
-
-    drawLegend();
-    drawScalebar();
     drawDiagram();
+    drawScalebar();
+    drawLegend();
+
 
     function drawDiagram(d) {
         let popTot = []
@@ -100,8 +103,8 @@ function drawMap(data) {
             .append("circle")
             .attr("transform", function (d) { return "translate(" + projection([d.properties.xCentroid, d.properties.yCentroid]) + ")"; })
             .attr("r", function (d, i) {
-                var max = d3.max(popTot);
-                var size = 50 * d.properties.T_TL / max
+                max = d3.max(popTot);
+                size = 50 * d.properties.T_TL / max
                 return size
             })
             .attr('population', function (d) {
@@ -126,7 +129,7 @@ function drawMap(data) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length-2].getAttribute('class') == 'circles'){
+    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 2].getAttribute('class') == 'circles') {
         tooltip.transition()
             .duration(200)
             .style("opacity", .7)
@@ -135,35 +138,40 @@ function drawTooltip() {
 
         tooltip.join(
             enter =>
-                enter.append("p",  d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population")),
+                enter.append("p", d3.select(this).attr("province") + ': ' + d3.select(this).attr("population")),
             update =>
-                update.html(d3.select(this).attr("province")+ ': ' + d3.select(this).attr("population"))
+                update.html(d3.select(this).attr("province") + ': ' + d3.select(this).attr("population"))
         );
     }
-    let name= d3.select(this).attr("province");
-    prov = document.querySelector('[name="'+ name + '"]');
-    this.style.stroke='white';
-    prov.style.stroke='white';
+    let name = d3.select(this).attr("province");
+    prov = document.querySelector('[name="' + name + '"]');
+    this.style.stroke = 'white';
+    prov.style.stroke = 'white';
 };
 
 function eraseTooltip() {
     tooltip.transition()
         .duration(200)
         .style("opacity", 0);
-    prov.style.stroke='none'
-    this.style.stroke='none';
+    prov.style.stroke = 'none'
+    this.style.stroke = 'none';
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend() {
+    let size = d3.scaleSqrt()
+        .domain([1, max])
+        .range([1, 50]);
+    let valuesToShow=[(Math.round(1/4*max/1000000)*1000000) ,(Math.round(2/3*max/1000000)*1000000), max];
+    let xCircle=90;
+    let yCircle=361;
+    let xLabel=190;
     //set Title
     d3.select(".legend");
-
     //create svg for Legend
     var legendSvg = d3.select(".mapbox")
         .append("g")
         .attr("class", "legend")
-        //.attr("viewBox", [0, 0, width, height])
         .attr("width", "100%")
         //good height --> no. of class*spacing
         .attr("height", function (d, i) {
@@ -194,7 +202,7 @@ function drawLegend() {
         });
     //fill rects by color domain (d) & range (i)                  
     legend.append("rect")
-        //rect on position (5,5) in SVG with the width and height 20            
+        //rect on position (5,5) in SVG with the width and height 30            
         .attr("x", 5)
         .attr("y", 10)
         .attr("width", 30)
@@ -203,6 +211,39 @@ function drawLegend() {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
         })
+    var legendCircle = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
+        .append('g')
+        .attr('class', 'legendCircle')
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function(d){return yCircle - size(d)})
+        .attr('r', function(d){ console.log(size(d)); return size(d)
+        })
+        .style('fill', 'none')
+        .style('stroke', 'black')
+    
+    var legendSegments = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
+        .append('line')
+        .attr('x1', function(d){ return xCircle})
+        .attr('x2', xLabel)
+        .attr('y1', function(d){ return yCircle -size(d)*2})
+        .attr('y2', function(d){ return yCircle -size(d)*2})
+        .attr('stroke', 'black')
+        .style('stroke-dasharray', ('2,2'))
+    
+    var legendLabels = legendSvg.selectAll('.legend')
+        .data(valuesToShow)
+        .enter()
+        .append('text')
+        .attr('x', xLabel)
+        .attr('y', function(d){ return yCircle -size(d)*2 + 5})
+        .text( function(d){return d})
+        .style('font-size', 17)
+        .attr('alignment-basline', 'middle')
 
     //get and set of color by domain (d) & range (i)
     legend.append("text")
@@ -264,3 +305,4 @@ function getPosition(ele) {
     console.log("left: " + left, ", top: " + top, ", width: " + rectWidth + " ,height: " + rectHeight);
     return boundingClientRect;
 }
+
