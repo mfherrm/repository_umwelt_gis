@@ -17,7 +17,7 @@ var bar_width; //used to position the tooltip, width of a bar
 var bounding_height; // used to position the tooltip, height of the bounding box
 var twidth= 80; // Desired minimum width of tooltip 
 
-postData('../json/africa2019.json'); //uses a json-file to create a population pyramid
+postData('../json/southafrica2019.json'); //uses a json-file to create a population pyramid
 
 async function postData(file) {
   //parses the file and converts it into an array
