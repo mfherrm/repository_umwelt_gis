@@ -44,7 +44,7 @@ var color = d3.scaleThreshold()
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .then(drawMap)
-    .catch(error => {console.log("Ooops, Error: " + error)});
+    .catch(error => {console.log(error)});
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 var tooltip = d3.select(".map")
