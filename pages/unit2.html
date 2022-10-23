@@ -44,10 +44,14 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 
-
+    <script>
+        function show(shown, hidden) {
+            document.getElementById(shown).style.display = 'block';
+            document.getElementById(hidden).style.display = 'none';
+            return false;
+        }
+    </script>
 </head>
-
-<body onload="">
 
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
@@ -61,7 +65,7 @@
     <!--end of Navigation bar-->
 
 
-    <div class="container-fluid" id="content">
+    <div class="container-fluid" id="content_pg1">
         <div class="row">
             <div class="col-2 content">
                 <h5> Unit 2 - Population pyramids</h5>
@@ -101,6 +105,7 @@
                 <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
                 <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
                 <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
+                <button class="btn btn primary" style="background-color: blue" onclick="return show('content_pg2','content_pg1');"> <i class="bi bi-arrow-right" style="color:white">  </i></button>
 
 
 
@@ -110,6 +115,55 @@
         </div>
     </div>
 
+    <div class="container-fluid" id="content_pg2" style="display: none">
+        <div class="row">
+            <div class="col-2 content">
+                <h5> Unit 2 - Population pyramids pg2</h5>
+                <div class="d-flex flex-wrap">
+                    <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
+                        zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
+                        Schriftfeld.</text>
+                        Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
+                </div>
+            </div>
+            <div class="col-8 content" id=middle>
+                <div class="row">
+                    <div class="col-6 chart" id="pyr">
+                        <script defer src="../js/unit2-pyr.js"> </script>
+                    </div>
+                    <div class="col-6 map">
+                        <script src="../js/unit2-map.js"> </script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2 content">
+                <!-- Infobereich -->
+
+
+
+                <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
+                <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
+                    Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
+                <p>Weitere Informationen: <br>
+                    <a
+                        href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
+                    <br>
+                    <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
+                    <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
+                </p>
+                <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
+                <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
+                <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
+                <button class="btn btn primary" style="background-color: blue" onclick="return show('content_pg2','content_pg1');"> <i class="bi bi-arrow-right" style="color:white">  </i></button>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
 
 
     <!-- footer placeholder-->
