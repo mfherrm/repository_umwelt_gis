@@ -47,42 +47,76 @@
     <!--end of Navigation bar-->
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row page">
             <div class="col-2 flex-column">
                 <div class="left-col">
                     <h5>Introduction - Mental Maps</h5>
                     <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
                 </div>
                 <div class="left-col">
-                    <p>No. of selected countries</p>
-                    <div class="progress-check form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" disabled >
+                    <div>
+                        <button class="btn btn-secondary btn-sm " id="check" href="#" role="button"> Check </button>
+                        <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                            </svg> 
+                        </button>
                     </div>
-                    <div class="progress-check form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" disabled>
-                    </div>
-                    <div class="progress-check form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" disabled>
+                    <div>
+                        <p id="result"></p>
                     </div>
                 </div>
-                <!--
-                <div class="legend-title">
-                </div>
-                <div class="legend">
-                </div>
-                <div class="scale"></div>
-                -->
             </div>
             <div class="col-8">
                 <div class="maptitle justify-content-center">
                     <h4>World Map</h4>
                 </div>
-                <div class="worldmap">
+                <div id="worldmap">
                     
                 </div>
             </div>
-            <div class="col-2"></div>
-                           
+            <div class="col-2">
+
+            </div> 
+        </div>
+    </div>
+    <div class="row page">
+        <div class="col-2">
+            <div class="left-col">
+                <h5>Introduction - Mental Maps</h5>
+                <p>What are administrative boundaries. Comparison of Germanys, Kenyas and South African Boundaries</p> 
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="maptitle justify-content-center">
+                <h4>Administrative boundaries</h4>
+            </div>
+            <div class="adm-map">
+                
+            </div>
+        </div>
+        <div class="col-2">
+            
+        </div>
+    </div>
+    <div class="row control-container">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            <div class="row justify-content-between page-control">
+                <button class="btn btn-secondary btn-sm control" id="restart" href="#" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg> Previous </button>       
+
+                <button class="btn btn-secondary btn-sm control" id="restart" href="#" role="button">
+                    Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg></button>      
+            </div>
+        </div>
+        <div class="col-2">
         </div>
     </div>
     <!-- footer placeholder>

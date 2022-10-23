@@ -72,6 +72,12 @@ a:visited {
 .progress-check{
     margin-right:0;
 }
+.page-control{
+    margin-top: 1rem;
+}
+.control {
+    width: 7rem;
+}
 
 /* Styles for Map e.g. Boundaries */   
 .maptitle {
@@ -80,7 +86,7 @@ a:visited {
     text-align: center;
 }
 
-.worldmap {
+#worldmap {
     border: 2px solid grey;
     border-radius: 5px;
     overflow:hidden;

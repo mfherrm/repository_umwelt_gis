@@ -3,7 +3,7 @@ var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 //Create SVG element // viewBox for responsive Map
-var svg = d3.select(".worldmap")
+var svg = d3.select("#worldmap")
             .append("svg")
             //responsive size
             .attr("viewBox", [0, 0, width, height])
@@ -85,17 +85,32 @@ function drawMap(data){
 };
 
 function getCountry(country){
-    console.log(country);
-    if(select.length < 3){
-        country.attr("fill","green")
-        select.push(country.attr("name"));
-    } else {
-        console.log("you already selected three countries")
-    }
     console.log(select)
-    function delCountry(){
-        if(country.attr("fill")=="green"){
-            
-        }
+    if (country.attr("fill")!="#00677F" && select.length < 3){
+        select.push(country);
+        return country.attr("fill","#00677F")
+    } else {
+        select = select.filter(element => element.attr("name") !== country.attr("name"));
+        return country.attr("fill","grey")
     }
 }
+
+d3.select("#check").on("click",function(){
+                console.log(select[0].attr("name").includes("Germany" || "Kenya" || "South Africa"))
+                for (let i in select){
+                    if (select[i].attr("name").includes("Germany") 
+                        || select[i].attr("name").includes("Kenya") 
+                        || select[i].attr("name").includes("South Africa")){
+                            select[i].attr("fill","green");
+                    } else {
+                            select[i].attr("fill","red");
+                    }                              
+                }                                               
+            })
+
+d3.select("#restart").on("click",function(){
+                select = [];
+                d3.selectAll(".country").attr("fill","grey");
+                d3.select("#result").html("");
+})
+
