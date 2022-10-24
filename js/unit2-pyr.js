@@ -21,7 +21,8 @@ let val //used to get the value of a population group
 postData('../json/southafrica2019.json', '#pyr_southafrica');
 postData('../json/europe2019.json', '#pyr_europe');
 postData('../json/africa2019.json', '#pyr_africa');  //uses a json-file to create a population pyramid
-
+postData('../json/germany2019.json', '#pyr_germany'); 
+postData('../json/kenya2019.json', '#pyr_kenya'); 
 
 async function postData(file, target) {
   //parses the file and converts it into an array
@@ -46,11 +47,13 @@ async function postData(file, target) {
       .append('svg')
       .attr('viewBox', '0 0 ' + (margin.left + w + margin.right) + ' ' + (margin.top + h + margin.bottom)) //margins are important so that the ratio of the axes are kept intact
       .attr('preserveAspectRatio', 'xMinYMin')
+      .attr('id', target.replace('#',''))
       .append('g')
       .attr('transform', translation(margin.left, margin.top))
       .style('cursor', 'pointer')
       .on('mouseover', drawTooltip)
       .on('mouseout', eraseTooltip)
+
       ;
 
     // finds the maximum data value on either side since this is shared by both of the x-axes
@@ -215,7 +218,6 @@ function getValue() {
 function getPosition() {
   
   boundingClientRect = document.querySelectorAll(':hover')[len].getBoundingClientRect();
-  console.log(boundingClientRect)
   bar_width = boundingClientRect.width;
   bounding_height = boundingClientRect.y;
   document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right' ? (left = boundingClientRect.left + bar_width) : (left = boundingClientRect.left - twidth) //in case of a right bar, boundingClientRect.left is the point at which the axes meet 

@@ -1,13 +1,12 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var height = 2548;
 
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select("#worldmap")
             .append("svg")
             //responsive size
             .attr("viewBox", [0, 0, width, height])
-            //dunno seems nice
             //.attr("preserveAspectRatio", "xMinYMin")
             ;
 
@@ -19,8 +18,8 @@ var projection =  d3.geoBromley()
             .translate([width / 2, height /2]);
 */
 projection = d3.geoMercator()
-                .translate([(width/2), (height/1.5)])
-                .scale( width / 2 / Math.PI);
+                .translate([(width/3.6), (height*0.73)])
+                .scale( 2*width  / Math.PI);
 
 // Define Zoom
 
@@ -86,7 +85,7 @@ function drawMap(data){
 
 function getCountry(country){
     console.log(select)
-    if (country.attr("fill")!="#00677F" && select.length < 3){
+    if (country.attr("fill")!="#00677F" && select.length < 1){
         select.push(country);
         return country.attr("fill","#00677F")
     } else {
@@ -95,8 +94,9 @@ function getCountry(country){
     }
 }
 
-d3.select("#check").on("click",function(){
-                console.log(select[0].attr("name").includes("Germany" || "Kenya" || "South Africa"))
+d3.select("#pyr_countries").on("mouseup",function(){
+                let elem = (boundingClientRect = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length-1].getAttribute('id'))
+                console.log(elem)
                 for (let i in select){
                     if (select[i].attr("name").includes("Germany") 
                         || select[i].attr("name").includes("Kenya") 
