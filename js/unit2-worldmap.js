@@ -97,45 +97,67 @@ let select = [{
 }] //Array for selected countries
 
 function getCountry(country) {
-    console.log(country)
-    if (country.attr("fill") != "#00677F" && select[0].selected.length < 1) {
+    let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
+    console.log(elemid.toLowerCase())
+    console.log(select[0].germany)
+    if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
+        console.log(select[0].selected[0])
+        select[0].selected.pop();
+    } else if ((elemid.toLowerCase() == 'germany' && select[0].germany == true) || (elemid.toLowerCase() == 'kenya' && select[0].kenya == true) || (elemid.toLowerCase() == 'south africa' && select[0].southafrica == true)) {
+        console.log(select[0].selected[0])
+        select[0].selected.pop();
+    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1) {
         select[0].selected.push(country);
         return country.attr("fill", "#00677F")
+
     } else {
         select[0].selected.pop();
         return country.attr("fill", "grey")
+
+
+
     }
 }
 
+
+
 d3.select("#pyr_countries").on("mouseup", function () {
-    let elem = (boundingClientRect = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('id'))
-    console.log(elem)
+    let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
+    let elemid = elem.getAttribute('id')
+    console.log(elemid)
     let con = select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL
     console.log(con)
-    if ((con.includes("Germany") && elem.includes('pyr_germany'))){
-        console.log('jermans')
-        select[0].germany=true;
-        console.log(select);
+    if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
+        select[0].germany = true;
         select[0].selected[0].attr("fill", "green");
-        //select[0].selected.pop();
-    } else if ((con.includes('Kenya') && elem.includes('pyr_kenya'))){
+        select[0].selected.pop();
+    } else if ((con.includes('Kenya') && elemid.includes('pyr_kenya'))) {
+        select[0].kenya = true;
         select[0].selected[0].attr("fill", "green");
-    } else if(con.includes('South Africa') && elem.includes('pyr_south africa')){
+        select[0].selected.pop();
+    } else if (con.includes('South Africa') && elemid.includes('pyr_southafrica')) {
+        select[0].southafrica = true;
         select[0].selected[0].attr("fill", "green");
-} else {
-    select[0].selected[0].attr("fill", "red");    
-}                          
-            })
+        select[0].selected.pop();
+    } else {
+        select[0].selected[0].attr("fill", "red");
+    }
+}
+
+)
 
 d3.select("#restart").on("click", function () {
-    select = [];
+    select[0].germany=false;
+    select[0].southafrica=false;
+    select[0].kenya=false;
+    select[0].selected.pop();
     d3.selectAll(".country").attr("fill", "grey");
     d3.select("#result").html("");
 })
 
 function checkTrue() {
     if (select[0].germany == true) {
-        
+
     } else if (select[0].kenya == true) {
 
 
