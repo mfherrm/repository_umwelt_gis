@@ -52,9 +52,18 @@ a:visited {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
+
+.show {
+    display: flex;
+}
+
+.hide {
+    /*display: none;*/
+}
+
 .left-col{
     padding-top: 3.2rem;
-    padding-left: .8rem
+    padding-left: .8rem;
 }
 
 .text-left {
@@ -69,6 +78,14 @@ a:visited {
     fill: lightcoral;
 }
 /* Buttons */
+#next {
+    visibility: visible;
+}
+
+#previous {
+    visibility: hidden;
+}
+
 .progress-check{
     margin-right:0;
 }
