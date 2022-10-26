@@ -110,6 +110,13 @@ a:visited {
     background: lightblue;
 }
 
+#worldmapall {
+    border: 2px solid grey;
+    border-radius: 5px;
+    overflow:hidden;
+    background: lightblue;
+}
+
 .province {
     stroke-width: 1.5pt;
     stroke: white;

@@ -227,11 +227,13 @@
                     Schriftfeld.</text>
                     Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
             </div>
-            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
-                </svg> 
+            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                    <path
+                        d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                </svg>
             </button>
             <button class="btn btn primary" style="background-color: blue"
                 onclick="return show('content_pg2','content_pg3');"> <i class="bi bi-arrow-left" style="color:white">
@@ -239,7 +241,7 @@
         </div>
         <div class="col-8 content" id=middle>
             <div class="row">
-                <div class="col-6 chart" id="pyr_countries">
+                <div class="col-6 chart pyr_countries" id="pyr_countries">
                     <div class="chart" id="pyr_southafrica"> </div>
                     <div class="chart" id="pyr_germany"></div>
                     <div class="chart" id="pyr_kenya"></div>
@@ -296,38 +298,39 @@
         </div>
         <div class="col-8 content" id=middle>
             <div class="row">
-                <div class="col-7 chart">
+                <div class="col-6 chart">
                 </div>
-                <div class="col-5">
+                <div class="col-6" id="worldmapall">
+                </div>
 
-                </div>
             </div>
         </div>
-
-        <div class="col-2 content">
-            <!-- Infobereich -->
-
-
-
-            <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-            <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-                Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-            <p>Weitere Informationen: <br>
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-                <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-            </p>
-            <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
-            <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-
-
-
-
-
-        </div>
     </div>
+
+    <div class="col-2 content">
+        <!-- Infobereich -->
+
+
+
+        <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
+        <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
+            Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
+        <p>Weitere Informationen: <br>
+            <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
+            <br>
+            <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
+            <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
+        </p>
+        <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
+        <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
+        <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
+
+
+
+
+
+    </div>
+</div>
 </div>
 
 <!-- End of Content -->

@@ -27,13 +27,11 @@ postData('../json/kenya2019.json', '#pyr_kenya');
 async function postData(file, target) {
   //parses the file and converts it into an array
   const response = await fetch(file).then((response) => response.json()).then(data => data.forEach(function (d) {
-    var i = 0;
     fetchData.push({
       group: d.group,
       male: +d.male,
       female: +d.female
     })
-    i = i + 1;
 
   })).then(function () { //creates a responsive population pyramid with tooltips 
 
@@ -223,3 +221,7 @@ function getPosition() {
   document.querySelectorAll(':hover')[len].getAttribute('class') == 'bar right' ? (left = boundingClientRect.left + bar_width) : (left = boundingClientRect.left - twidth) //in case of a right bar, boundingClientRect.left is the point at which the axes meet 
 
 }
+
+$(".pyr_countries").html($(".pyr_countries .chart").sort(function(){
+  return Math.random()-0.5;
+}));

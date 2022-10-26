@@ -1,14 +1,9 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = 2548;
-
+var i=0
 //Create SVG element // viewBox for responsive Map
-var svg = d3.select("#worldmap")
-    .append("svg")
-    //responsive size
-    .attr("viewBox", [0, 0, width, height])
-    //.attr("preserveAspectRatio", "xMinYMin")
-    ;
+
 
 /*
 var projection =  d3.geoBromley()
@@ -38,12 +33,23 @@ d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
     .catch(error => { console.log(error) });
 //Define vars for unit
+d3.json("../geojson/world_countries2020.geojson")
+    .then(drawMap)
+    .catch(error => { console.log(error) });
 
 
 
 //Build Map
 function drawMap(data) {
-    console.log(data)
+    let target
+    i==0? target='#worldmap' : target="#worldmapall"
+
+    var svg = d3.select(target)
+    .append("svg")
+    //responsive size
+    .attr("viewBox", [0, 0, width, height])
+    //.attr("preserveAspectRatio", "xMinYMin")
+    ;
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     // Update the projection    
     //Bind data and create one path per GeoJSON feature
@@ -82,7 +88,7 @@ function drawMap(data) {
             let country = d3.select(this);
             getCountry(country);
         });
-
+ i++;
 };
 let ger = d3.selectAll('.country').filter(function () {
     return d3.select(this).attr("name") == 'Germany'
@@ -108,18 +114,19 @@ function getCountry(country) {
         select[0].selected.pop();
     } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1) {
         select[0].selected.push(country);
-        return country.attr("fill", "#00677F")
 
+        return country.attr("fill", "#00677F")
     } else {
-        select[0].selected.pop();
-        return country.attr("fill", "grey")
+        if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+            select[0].selected.pop();
+            return country.attr("fill", "grey")
+
+        }
 
 
 
     }
 }
-
-
 
 d3.select("#pyr_countries").on("mouseup", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
@@ -139,6 +146,8 @@ d3.select("#pyr_countries").on("mouseup", function () {
         select[0].southafrica = true;
         select[0].selected[0].attr("fill", "green");
         select[0].selected.pop();
+    } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true){
+        drawAlert();
     } else {
         select[0].selected[0].attr("fill", "red");
     }
@@ -147,9 +156,9 @@ d3.select("#pyr_countries").on("mouseup", function () {
 )
 
 d3.select("#restart").on("click", function () {
-    select[0].germany=false;
-    select[0].southafrica=false;
-    select[0].kenya=false;
+    select[0].germany = false;
+    select[0].southafrica = false;
+    select[0].kenya = false;
     select[0].selected.pop();
     d3.selectAll(".country").attr("fill", "grey");
     d3.select("#result").html("");
@@ -166,6 +175,4 @@ function checkTrue() {
     }
 
 }
-
-
 
