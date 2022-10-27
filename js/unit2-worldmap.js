@@ -14,7 +14,7 @@ var projection =  d3.geoBromley()
 */
 projection = d3.geoMercator()
     .translate([((width / 3.6)-30), (height * 0.73)])
-    .scale((2 * width / Math.PI)-50);
+    .scale(1.25*height /Math.PI);
 
 // Define Zoom
 
@@ -66,7 +66,9 @@ function drawMap(data) {
         .attr("class", "equator")
         .attr("d", path);
 
-    svg.selectAll("path")
+// so that all countries are displayed: https://stackoverflow.com/questions/48569159/d3-js-does-not-draw-all-lines-only-some-of-them
+
+    svg.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")
@@ -83,10 +85,18 @@ function drawMap(data) {
         .attr("name", function (d) {
             return d.properties.NAME_ENGL;
         })
+        .attr('continent', function(d){
+            return d.properties.continent;
+        })
+        .attr('pyramid', function(d){
+            return d.properties.pyramid;
+        })
         //Cursor on mouseover
         .style("cursor", "pointer")
         .on("click", function () {
             let country = d3.select(this);
+            console.log(country.attr('pyramid'));
+            console.log(country.attr('continent'));
             getCountry(country);
         });
  i++;

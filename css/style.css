@@ -274,7 +274,143 @@ a:visited {
   fill: firebrick;
 }
 
+h4{
+    font-size: 17px;
+}
 
 
 
+/* Styles from old MCTs-----------------------------------------------------*/
+#quiz b {
+	font-family: sans-serif;
+	font-size: 20px;
+	margin: 30px;
+}
+
+#quiz h2 {
+	font-family: sans-serif;
+	font-size: 20px;
+	margin-top: 30px;
+	margin-left: 30px;
+	padding: 0px;
+}
+
+#quiz question {
+	font-family: sans-serif;
+	font-size: 20px;
+	margin-left: 50px;
+	padding: 0px;
+}
+
+h1 {
+	background:/*  farbe */ brown none repeat scroll 0 0 !important;
+	padding: 1rem !important;
+}
+
+#intro {
+	font-family: sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px;
+	padding: 5px;
+}
+
+#intro1 {
+	font-family: sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 20px;
+	padding: 3px;
+}
+
+#quiz ul {
+	list-style: none;
+	margin: 5px;
+	padding: 5px;
+}
+
+#quiz li {
+	margin: 5px;
+	padding: 5px;
+	width: 800px;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+#quiz label {
+	display: block;
+	background-color: chocolate;
+	border: 1px solid black;
+	border-radius: 0.2em;
+	margin: 0.1em 0;
+	padding: 1em 2em;
+	text-align: start;
+	max-width: 33em;
+}
+
+#quiz label:hover {
+	background-color: brown;
+}
+
+#quiz input:checked ~ label,
+#quiz input:focus ~ label {
+
+}
+
+#quiz input {
+	left: -9999px;
+	position: absolute;
+	
+}
+
+#quiz button:not(.startBtn) {
+	display: none;
+}
+
+#quiz button {
+	font-family: sans-serif;
+	font-size: 20px;
+	margin-top: 20px;
+	margin-left: 30px;	
+	margin-bottom: 100px;
+}
+
+
+#quiz button,
+
+/* Finger statt Pfeil */
+#quiz label {
+	cursor: pointer;
+}
+/* listing with solutions */
+
+.question {
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 20px;
+}
+
+.correct {
+	color: #0c0;
+}
+
+.wrong {
+	color: #c00;
+}
+
+.correct:before {
+	content: '✓';
+	color: #0d0;
+}
+
+.wrong:before {
+	content: '✗';
+	color: #f00;
+}
+
+.correct:before,
+.wrong:before {
+	font: 2em bold;
+	padding: 0 0.2em;
+}
 
