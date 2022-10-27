@@ -40,6 +40,8 @@ let select = [] //Array for selected countries
 
 //Build Map
 function drawMap(data){
+    console.log(data)
+    console.log(data.features)
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     // Update the projection    
     //Bind data and create one path per GeoJSON feature
