@@ -117,6 +117,22 @@ a:visited {
     background: lightblue;
 }
 
+#continentmap {
+    border: 2px solid grey;
+    border-radius: 5px;
+    overflow:hidden;
+    background: lightblue;
+}
+
+.continent {
+    stroke: white;
+    stroke-width: .5px;
+}
+.continent:hover{
+    stroke:white;
+    stroke-width: 2px;
+}
+
 .province {
     stroke-width: 1.5pt;
     stroke: white;
@@ -133,6 +149,8 @@ a:visited {
     stroke:white;
     stroke-width: 2px;
 }
+
+
 /* Styles for Graticular */
 .graticule {
     fill: none;

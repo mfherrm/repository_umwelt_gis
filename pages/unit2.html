@@ -99,7 +99,6 @@
                 <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
             </p>
 
-            <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
             <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
             <button class="btn btn primary" style="background-color: blue"
                 onclick="return show('content_pg1','content_pg0');"> <i class="bi bi-arrow-right" style="color:white">
@@ -129,9 +128,13 @@
         </div>
         <div class="col-8 content" id=middle>
             <div class="row">
-                <div class="col-6 chart" id="pyr_africa">
+                <div class="col-6" id="pyr_continents"> 
+                    <div class="chart" id="pyr_africa"> </div>
+                    <div class="chart" id="pyr_europe"> </div>
                 </div>
                 <div class="col-6">
+                    <div id="continentmap"></div>
+                   <script src="../js/unit2-continentsMap.js"> </script>
                 </div>
             </div>
         </div>
@@ -151,7 +154,6 @@
                 <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
             </p>
             <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
             <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
             <button class="btn btn primary" style="background-color: blue"
                 onclick="return show('content_pg2','content_pg1');"> <i class="bi bi-arrow-right" style="color:white">
@@ -166,58 +168,6 @@
 </div>
 
 <div class="container-fluid" id="content_pg2" style="display:none">
-    <div class="row">
-        <div class="col-2 content">
-            <h5> Unit 2 - Population pyramids pg2</h5>
-            <div class="d-flex flex-wrap">
-                <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
-                    zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
-                    Schriftfeld.</text>
-                    Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
-            </div>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg1','content_pg2');"> <i class="bi bi-arrow-left" style="color:white">
-                </i></button>
-        </div>
-        <div class="col-8 content" id=middle>
-            <div class="row">
-                <div class="col-7 chart" id="pyr_europe">
-                </div>
-                <div class="col-5">
-                </div>
-            </div>
-        </div>
-
-        <div class="col-2 content">
-            <!-- Infobereich -->
-
-
-
-            <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-            <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-                Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-            <p>Weitere Informationen: <br>
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-                <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-            </p>
-            <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
-            <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg3','content_pg2');"> <i class="bi bi-arrow-right" style="color:white">
-                </i></button>
-
-
-
-
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" id="content_pg3" style="display:none">
     <div class="row">
         <div class="col-2 content">
             <h5> Unit 2 - Population pyramids pg3</h5>
@@ -236,7 +186,7 @@
                 </svg>
             </button>
             <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg2','content_pg3');"> <i class="bi bi-arrow-left" style="color:white">
+                onclick="return show('content_pg1','content_pg2');"> <i class="bi bi-arrow-left" style="color:white">
                 </i></button>
         </div>
         <div class="col-8 content" id=middle>
@@ -248,7 +198,7 @@
                     <script defer src="../js/unit2-pyr.js"> </script>
                 </div>
                 <div class="col-6" id="worldmap">
-                    <script src="../js/unit2-worldmap.js"> </script>
+                    <script src="../js/unit2-worldMap.js"> </script>
                 </div>
             </div>
         </div>
@@ -268,10 +218,9 @@
                 <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
             </p>
             <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
             <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
             <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg4','content_pg3');"> <i class="bi bi-arrow-right" style="color:white">
+                onclick="return show('content_pg3','content_pg2');"> <i class="bi bi-arrow-right" style="color:white">
                 </i></button>
 
 
@@ -282,7 +231,7 @@
     </div>
 </div>
 
-<div class="container-fluid" id="content_pg4" style="display:none">
+<div class="container-fluid" id="content_pg3" style="display:none">
     <div class="row">
         <div class="col-2 content">
             <h5> Unit 2 - Population pyramids pg4</h5>
@@ -293,7 +242,7 @@
                     Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
             </div>
             <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg3','content_pg4');"> <i class="bi bi-arrow-left" style="color:white">
+                onclick="return show('content_pg2','content_pg3');"> <i class="bi bi-arrow-left" style="color:white">
                 </i></button>
         </div>
         <div class="col-8 content" id=middle>

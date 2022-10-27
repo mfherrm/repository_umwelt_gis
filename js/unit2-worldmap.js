@@ -13,8 +13,8 @@ var projection =  d3.geoBromley()
             .translate([width / 2, height /2]);
 */
 projection = d3.geoMercator()
-    .translate([(width / 3.6), (height * 0.73)])
-    .scale(2 * width / Math.PI);
+    .translate([((width / 3.6)-30), (height * 0.73)])
+    .scale((2 * width / Math.PI)-50);
 
 // Define Zoom
 
@@ -36,6 +36,7 @@ d3.json("../geojson/world_countries2020.geojson")
 d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
     .catch(error => { console.log(error) });
+   
 
 
 
@@ -90,9 +91,6 @@ function drawMap(data) {
         });
  i++;
 };
-let ger = d3.selectAll('.country').filter(function () {
-    return d3.select(this).attr("name") == 'Germany'
-})
 
 
 let select = [{
@@ -147,7 +145,7 @@ d3.select("#pyr_countries").on("mouseup", function () {
         select[0].selected[0].attr("fill", "green");
         select[0].selected.pop();
     } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true){
-        drawAlert();
+
     } else {
         select[0].selected[0].attr("fill", "red");
     }
@@ -161,18 +159,5 @@ d3.select("#restart").on("click", function () {
     select[0].kenya = false;
     select[0].selected.pop();
     d3.selectAll(".country").attr("fill", "grey");
-    d3.select("#result").html("");
 })
-
-function checkTrue() {
-    if (select[0].germany == true) {
-
-    } else if (select[0].kenya == true) {
-
-
-    } else if (select[0].southafrica == true) {
-
-    }
-
-}
 
