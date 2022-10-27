@@ -147,7 +147,11 @@ a:visited {
     background: lightblue;
 }
 
+<<<<<<< HEAD
 #adm-map {
+=======
+#worldmapall {
+>>>>>>> 0694d773b250e6d0e7338b27c976861fd0ea5f52
     border: 2px solid grey;
     border-radius: 5px;
     overflow:hidden;
