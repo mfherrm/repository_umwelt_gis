@@ -278,7 +278,9 @@ h4{
     font-size: 17px;
 }
 
-
+.h-25{
+    fill:green;
+}
 
 /* Styles from old MCTs-----------------------------------------------------*/
 #quiz b {

@@ -97,7 +97,7 @@ function drawMap(data) {
             let country = d3.select(this);
             console.log(country.attr('pyramid'));
             console.log(country.attr('continent'));
-            getCountry(country);
+            getCountry(country); //mit parent arbeiten!
         });
  i++;
 };
@@ -113,14 +113,13 @@ let select = [{
 function getCountry(country) {
     let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
     console.log(elemid.toLowerCase())
-    console.log(select[0].germany)
     if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
     } else if ((elemid.toLowerCase() == 'germany' && select[0].germany == true) || (elemid.toLowerCase() == 'kenya' && select[0].kenya == true) || (elemid.toLowerCase() == 'south africa' && select[0].southafrica == true)) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
-    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1) {
+    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1 && country.attr("continent")!=0) {
         select[0].selected.push(country);
 
         return country.attr("fill", "#00677F")
@@ -159,6 +158,12 @@ d3.select("#pyr_countries").on("mouseup", function () {
     } else {
         select[0].selected[0].attr("fill", "red");
     }
+}
+
+)
+
+d3.select("#pyr_imgs").on("mouseup", function () {
+    console.log("pyr pyr")
 }
 
 )
