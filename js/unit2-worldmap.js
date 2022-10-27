@@ -162,7 +162,7 @@ d3.select("#pyr_countries").on("mouseup", function () {
 
 )
 
-d3.select("#pyr_imgs").on("mouseup", function () {
+d3.select("#pyr_stg0").on("mouseup", function () {
     console.log("pyr pyr")
 }
 
