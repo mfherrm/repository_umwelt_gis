@@ -1,3 +1,5 @@
+console.log("dont use me, i am an Artefact")
+
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
