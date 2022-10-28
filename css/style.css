@@ -24,10 +24,14 @@ a:hover {
 li a{
     color: black;
 }
-.content {
-    background-color: #D19595;
-    padding-top: .5rem;
-    padding-bottom: .5rem
+
+.factbook-list {
+    list-style: none;
+    padding: 0;
+}
+
+.container-fluid {
+    margin-bottom: 10rem;
 }
 /* Header styles ----------------------------------------------------------*/
 .header {
@@ -54,13 +58,14 @@ li a{
     padding-left: .6rem;
 }
 
-/*-------------------------------------------------------------------------*/
+/* Footer styles -----------------------------------------------------------*/
 .footer {
     border-radius: 2px;
     background-color: brown;
     margin-right: .5rem;
     margin-left: .5rem;
     height: 3rem;
+    margin-top:3rem;
 }
 .footer-left {
     color: white;
@@ -122,6 +127,9 @@ li a{
     padding-left: .8rem;
 }
 
+.title {
+    text-align: center;
+}
 .text-left {
     padding-left: .6rem
 }
@@ -146,6 +154,7 @@ li a{
 .control-container{
     margin-top: 1rem;
 }
+
 .control {
     width: 7rem;
 }
@@ -293,13 +302,13 @@ h4{
 }
 
 /* Styles from old MCTs-----------------------------------------------------*/
-#quiz b {
+b #quiz  {
 	font-family: sans-serif;
 	font-size: 20px;
 	margin: 30px;
 }
 
-#quiz h2 {
+h2 #quiz  {
 	font-family: sans-serif;
 	font-size: 20px;
 	margin-top: 30px;
