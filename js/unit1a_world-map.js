@@ -40,8 +40,6 @@ let select = [] //Array for selected countries
 
 //Build Map
 function drawMap(data){
-    console.log(data)
-    console.log(data.features)
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     // Update the projection    
     //Bind data and create one path per GeoJSON feature
@@ -57,7 +55,8 @@ function drawMap(data){
         .attr("class", "equator")
         .attr("d", path);
     
-    svg.selectAll("path")
+    //why null? --> https://stackoverflow.com/questions/48569159/d3-js-does-not-draw-all-lines-only-some-of-them
+    svg.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")
@@ -99,6 +98,3 @@ d3.select("#restart").on("click",function(){
                 d3.selectAll(".country").attr("fill","grey");
                 d3.select("#result").html("");
 });
-
-
-control = d3.selectAll(".pages");
