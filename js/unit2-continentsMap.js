@@ -1,6 +1,6 @@
 //Width and height
 var widthC = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var heightC = 2548;
+var heightC = Math.max(document.documentElement.clientWidth, window.innerHeight || 0)
 //Create SVG element // viewBox for responsive Map
 
 
@@ -12,8 +12,8 @@ var projection =  d3.geoBromley()
             .translate([width / 2, height /2]);
 */
 projection = d3.geoMercator()
-    .translate([((widthC / 3.6)-30), (heightC * 0.73)])
-    .scale((widthC / Math.PI)-50);
+    .translate([((widthC / 2)), (heightC/ 2)])
+    .scale((widthC / 2.1 / Math.PI));
 
 // Define Zoom
 
@@ -58,7 +58,7 @@ function drawMap(data) {
         .attr("class", "equator")
         .attr("d", pathC);
 
-    svgC.selectAll("path")
+    svgC.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")

@@ -14,7 +14,7 @@ var projection =  d3.geoBromley()
 */
 projection = d3.geoMercator()
     .translate([((width / 3.6)-30), (height * 0.73)])
-    .scale((2 * width / Math.PI)-50);
+    .scale(1.25*height /Math.PI);
 
 // Define Zoom
 
@@ -66,7 +66,9 @@ function drawMap(data) {
         .attr("class", "equator")
         .attr("d", path);
 
-    svg.selectAll("path")
+// so that all countries are displayed: https://stackoverflow.com/questions/48569159/d3-js-does-not-draw-all-lines-only-some-of-them
+
+    svg.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")
@@ -83,11 +85,19 @@ function drawMap(data) {
         .attr("name", function (d) {
             return d.properties.NAME_ENGL;
         })
+        .attr('continent', function(d){
+            return d.properties.continent;
+        })
+        .attr('pyramid', function(d){
+            return d.properties.pyramid;
+        })
         //Cursor on mouseover
         .style("cursor", "pointer")
         .on("click", function () {
             let country = d3.select(this);
-            getCountry(country);
+            console.log(country.attr('pyramid'));
+            console.log(country.attr('continent'));
+            getCountry(country); //mit parent arbeiten!
         });
  i++;
 };
@@ -103,14 +113,13 @@ let select = [{
 function getCountry(country) {
     let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
     console.log(elemid.toLowerCase())
-    console.log(select[0].germany)
     if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
     } else if ((elemid.toLowerCase() == 'germany' && select[0].germany == true) || (elemid.toLowerCase() == 'kenya' && select[0].kenya == true) || (elemid.toLowerCase() == 'south africa' && select[0].southafrica == true)) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
-    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1) {
+    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1 && country.attr("continent")!=0) {
         select[0].selected.push(country);
 
         return country.attr("fill", "#00677F")
@@ -149,6 +158,12 @@ d3.select("#pyr_countries").on("mouseup", function () {
     } else {
         select[0].selected[0].attr("fill", "red");
     }
+}
+
+)
+
+d3.selectAll("#pyr_imgs").on("click", function () {
+    console.log("pyr pyr")
 }
 
 )

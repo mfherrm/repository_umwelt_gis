@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Unit 2 - Population pyramids</title>
 
@@ -53,248 +56,349 @@
     </script>
 </head>
 
-<!-- navbar placeholder -->
-<div id="nav-placeholder">
+<body>
+
+    <!-- navbar placeholder-->
+    <div id="nav-placeholder">
+
+    </div>
     <script>
         $.get("./nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
-</div>
+    <!--end of Navigation bar-->
 
-<!-- end of Navigation bar -->
+    <!-- Start of Content -->
+    <div class="container-fluid">
+        <div class="row page hide" id="page0">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h4>What are population pyramids?</h4>
+                        <p>Population pyramids are special histograms where values are stacked top to bottom from high to low.
+                           They usually illustrate the distribution of a country's or region's population. <br>
+                           Important information they convey is the population size which is shown on the x-axis and age-groups which are represented on the y-axis. <br>
+                           Another characteristic is that they show both standardized as well as unstandardized values. This way, values are put into proportion and can be evaluated with little effort. <br>
+                           <!--This unit serves as an introduction to working with population pyramids and evaluating a country's demographic transition. -->
+                           Take your time and try to understand what information you can obtain from a population pyramid. As soon as you're ready, move on to the first exercise by pressing the 'next' button in the bottom right corner.
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <img id="pyramide" src="../images/poppyr.svg" class="mw-100" height="700px"></img>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <h4>Stages of demographic transition </h4>
+                            <ul>
+                                <li> 1st Stage - Slow growth </li>
+                                <ul> 
+                                    <li> High death rate </li>
+                                    <li> High birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
 
-<!-- Start of Content -->
+                                <li> 2nd Stage - Rapid growth </li>
+                                <ul> 
+                                    <li> Death rate falling rapidly</li>
+                                    <li> High birth rate </li>
+                                    <li> Rapid population growth</li> 
+                                </ul>
 
-<div class="container-fluid" id="content_pg0">
-    <div class="row">
-        <div class="col-2 content">
-            <h5> Unit 2 - Population pyramids pg0</h5>
-            <div class="d-flex flex-wrap">
-                <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
-                    zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
-                    Schriftfeld.</text>
-                    Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
+                                <li> 3rd Stage - Stagnation </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Declining birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 4th Stage - Contraction </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Very low birth rate </li>
+                                    <li> Slow population decrease</li> 
+                                </ul>
+                            </ul>
+                                <a href="https://populationeducation.org/what-demographic-transition-model/" target="blank">Further information</a>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-8 content" id=middle>
+        <div class="row page hide" id="page1">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h4> How do population pyramids look?</h4>
+                        <p>On the left-hand side of your screen you see two population pyramids. <br>
+                            What stage of the demographic transition do they show? Which continent do they belong to? <br>
+                             Assign each pyramid to their corresponding continent by first selecting the continent and  the pyramid itself afterwards. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="row">
+                        <div class="col-6" id="pyr_continents">
+                            <div class="chart" id="pyr_africa"> </div>
+                            <div class="chart" id="pyr_europe"> </div>
+                        </div>
+                        <div class="col-6">
+                            <div id="continentmap"></div>
+                            <script defer src="../js/unit2-continentsMap.js"> </script>
+                        </div>
+                    </div>
+                </div>
 
-            <img id="pyramide" src="../images/poppyr.svg" class="mw-100"></img>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <h4>Stages of demographic transition </h4>
+                            <ul>
+                                <li> 1st Stage - Slow growth </li>
+                                <ul> 
+                                    <li> High death rate </li>
+                                    <li> High birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 2nd Stage - Rapid growth </li>
+                                <ul> 
+                                    <li> Death rate falling rapidly</li>
+                                    <li> High birth rate </li>
+                                    <li> Rapid population growth</li> 
+                                </ul>
+
+                                <li> 3rd Stage - Stagnation </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Declining birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 4th Stage - Contraction </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Very low birth rate </li>
+                                    <li> Slow population decrease</li> 
+                                </ul>
+                            </ul>
+                                <a href="https://populationeducation.org/what-demographic-transition-model/" target="blank">Further information</a>
 
 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="row page hide" id="page2">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5> How does a country's population pyramid look like?</h5>
+                        <p>The following pyramids belong to three countries on the african and european continent.
+                            They also each  represent a different stage of the demographic transition. <br>
+                            Try to think about the different facets of a country (e.g. the strength of its industry, the structure of its health sector, etc.) as you assign them.
+                        </p>
+                        <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                                <path
+                                    d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
 
-        <div class="col-2 content">
-            <!-- Infobereich -->
+                <div class="col-8-middle">
+                    <div class="row">
+                        <div class="col-6 pyr_countries" id="pyr_countries">
+                            <div class="chart" id="pyr_southafrica"> </div>
+                            <div class="chart" id="pyr_germany"></div>
+                            <div class="chart" id="pyr_kenya"></div>
+                            <script defer src="../js/unit2-pyr.js"> </script>
+                        </div>
+                        <div class="col-6">
+                            <div class="worldmap" id="worldmap"></div>
+                            <script src="../js/unit2-worldMap.js"> </script>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <h4>Stages of demographic transition </h4>
+                            <ul>
+                                <li> 1st Stage - Slow growth </li>
+                                <ul> 
+                                    <li> High death rate </li>
+                                    <li> High birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 2nd Stage - Rapid growth </li>
+                                <ul> 
+                                    <li> Death rate falling rapidly</li>
+                                    <li> High birth rate </li>
+                                    <li> Rapid population growth</li> 
+                                </ul>
+
+                                <li> 3rd Stage - Stagnation </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Declining birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 4th Stage - Contraction </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Very low birth rate </li>
+                                    <li> Slow population decrease</li> 
+                                </ul>
+                            </ul>
+                                <a href="https://populationeducation.org/what-demographic-transition-model/" target="blank">Further information</a>
 
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row page hide" id="page3">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5> Are there regional differences?</h5>
+                        <p>Assign the countries of the african and european continent to the four stages of demographic transition. Try to observe whether there are any spatial patterns. <br>
+                           Think about how a country's population structure has impacted its past and present as well as what consequences, both good and bad it might face in the future.  <br>
+                           When you're done, continue on to the multiple choice test.
+                        </p>
+                        <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                                <path
+                                    d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="row">
+                        <div class="col-6" id="pyr_imgs" onClick="console.log('PYRPYR')">
+                            <div class="h-25" id="pyrstg0"> <img src="../icons/pop_pyr_stg1.svg"> </img> </div>
+                            <div class="h-25" id="pyrstg1"> <img src="../icons/pop_pyr_stg2.svg"> </img> </div>
+                            <div class="h-25" id="pyrstg2"> <img src="../icons/pop_pyr_stg3.svg"> </img> </div>
+                            <div class="h-25" id="pyrstg3"> <img src="../icons/pop_pyr_stg4.svg"> </img> </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="worldmap" id="worldmapall"> </div>
+                        </div>
+                    </div>
+                </div>
 
-            <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-            <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-                Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-            <p>Weitere Informationen: <br>
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-                <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-            </p>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <h4>Stages of demographic transition </h4>
+                            <ul>
+                                <li> 1st Stage - Slow growth </li>
+                                <ul> 
+                                    <li> High death rate </li>
+                                    <li> High birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
 
-            <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg1','content_pg0');"> <i class="bi bi-arrow-right" style="color:white">
-                </i></button>
+                                <li> 2nd Stage - Rapid growth </li>
+                                <ul> 
+                                    <li> Death rate falling rapidly</li>
+                                    <li> High birth rate </li>
+                                    <li> Rapid population growth</li> 
+                                </ul>
+
+                                <li> 3rd Stage - Stagnation </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Declining birth rate </li>
+                                    <li> Slow population growth</li> 
+                                </ul>
+
+                                <li> 4th Stage - Contraction </li>
+                                <ul> 
+                                    <li> Low death rate</li>
+                                    <li> Very low birth rate </li>
+                                    <li> Slow population decrease</li> 
+                                </ul>
+                            </ul>
+                                <a href="https://populationeducation.org/what-demographic-transition-model/" target="blank">Further information</a>
+                                <button class="btn btn-secondary btn-sm " id="mct_unit2"
+                                onclick="window.location.href = './mct_1.html';" role="button">
+                                Multiple Choice Test <i class="bi bi-caret-right-fill"></i>
+                            </button>
 
 
-
-
-
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container-fluid" id="content_pg1" style="display: none">
-    <div class="row">
-        <div class="col-2 content">
-            <h5> Unit 2 - Population pyramids pg1</h5>
-            <div class="d-flex flex-wrap">
-                <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
-                    zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
-                    Schriftfeld.</text>
-                    Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
-            </div>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg0','content_pg1');"> <i class="bi bi-arrow-left" style="color:white">
-                </i></button>
-        </div>
-        <div class="col-8 content" id=middle>
-            <div class="row">
-                <div class="col-6" id="pyr_continents"> 
-                    <div class="chart" id="pyr_africa"> </div>
-                    <div class="chart" id="pyr_europe"> </div>
-                </div>
-                <div class="col-6">
-                    <div id="continentmap"></div>
-                   <script src="../js/unit2-continentsMap.js"> </script>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-2 content">
-            <!-- Infobereich -->
+    <!-- End of Content -->
 
 
-
-            <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-            <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-                Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-            <p>Weitere Informationen: <br>
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-                <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-            </p>
-            <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg2','content_pg1');"> <i class="bi bi-arrow-right" style="color:white">
-                </i></button>
-
-
-
-
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" id="content_pg2" style="display:none">
-    <div class="row">
-        <div class="col-2 content">
-            <h5> Unit 2 - Population pyramids pg3</h5>
-            <div class="d-flex flex-wrap">
-                <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
-                    zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
-                    Schriftfeld.</text>
-                    Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
-            </div>
-            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
-                    <path
-                        d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
-                </svg>
-            </button>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg1','content_pg2');"> <i class="bi bi-arrow-left" style="color:white">
-                </i></button>
-        </div>
-        <div class="col-8 content" id=middle>
-            <div class="row">
-                <div class="col-6 chart pyr_countries" id="pyr_countries">
-                    <div class="chart" id="pyr_southafrica"> </div>
-                    <div class="chart" id="pyr_germany"></div>
-                    <div class="chart" id="pyr_kenya"></div>
-                    <script defer src="../js/unit2-pyr.js"> </script>
-                </div>
-                <div class="col-6" id="worldmap">
-                    <script src="../js/unit2-worldMap.js"> </script>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-2 content">
-            <!-- Infobereich -->
-
-
-
-            <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-            <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-                Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-            <p>Weitere Informationen: <br>
-                <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-                <br>
-                <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-                <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-            </p>
-            <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-            <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg3','content_pg2');"> <i class="bi bi-arrow-right" style="color:white">
-                </i></button>
-
-
-
-
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" id="content_pg3" style="display:none">
-    <div class="row">
-        <div class="col-2 content">
-            <h5> Unit 2 - Population pyramids pg4</h5>
-            <div class="d-flex flex-wrap">
-                <p align="left"> Überlegen Sie sich, welche Bevölkerungspyramide zu Europa und welche Afrika
-                    zugeordnet werden kann. Schreiben Sie den entsprechenden Namen in das jeweilige
-                    Schriftfeld.</text>
-                    Vergleichen Sie Ihr Ergebnis mit den Lösungen, indem Sie auf den Pfeil klicken.</p>
-            </div>
-            <button class="btn btn primary" style="background-color: blue"
-                onclick="return show('content_pg2','content_pg3');"> <i class="bi bi-arrow-left" style="color:white">
-                </i></button>
-        </div>
-        <div class="col-8 content" id=middle>
-            <div class="row">
-                <div class="col-6 chart">
-                </div>
-                <div class="col-6" id="worldmapall">
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="col-2 content">
-        <!-- Infobereich -->
-
-
-
-        <h6>Die vier Grundformen der Bevölkerungspyramiden </h6>
-        <p>1: Pagodenform (stark wachsende Bevölkerung) <br> 2: Dreiecksform (wachsende Bevölkerung) <br> 3:
-            Glockenform (stationäre Bevölkerung)<br> 4: Urnenform (schrumpfende Bevölkerung)</p>
-        <p>Weitere Informationen: <br>
-            <a href="https://www.laenderdaten.de/bevoelkerung/bevoelkerungspyramide.aspx">Bevölkerungspyramiden</a>
-            <br>
-            <a href="https://geodata.lib.utexas.edu/catalog/stanford-jw779yn7344">Quelle der Karten</a> <br>
-            <a href="https://www.populationpyramid.net/africa/2019/">Quelle der Alterspyramiden</a>
-        </p>
-        <img id="pyramide" src="../images/population_pyramids.jpg" class="mw-100"></img>
-        <button onclick="window.location.href = './lec_2_africa_task.html';">Aufgabe Afrika</button>
-        <button onclick="window.location.href = './mct_1.html';">Zum Multiple Choice Test</button>
-
-
-
-
+    <!-- START of control placeholder -->
+    <div id="control-placeholder">
 
     </div>
-</div>
-</div>
-
-<!-- End of Content -->
-
-<!-- footer placeholder-->
-<div id="footer-placeholder">
     <script>
-        $.get("./footer.html", function (data) {
-            $("#footer-placeholder").replaceWith(data);
+        $.get("./unit-control.html", function (data) {
+            $("#control-placeholder").replaceWith(data);
         });
     </script>
-    <!--end of Footer bar-->
-</div>
+    </div>
+
+    <!-- END of control placeholder -->
+
+    <!-- footer placeholder-->
+    <div id="footer-placeholder">
+        <script>
+            $.get("./footer.html", function (data) {
+                $("#footer-placeholder").replaceWith(data);
+            });
+        </script>
+        <!--end of Footer bar-->
+    </div>
 
 
 </body>
+
+
 
 </html>

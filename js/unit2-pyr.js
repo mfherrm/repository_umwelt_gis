@@ -2,7 +2,7 @@ var fetchData = [] //used to convert the json in to an array
 
 let left //used to get the absolute position of an element's bounding box
 let len //used to get the hovered object (last Object of the node)
-let w = 700, h = 300; //desired width and height of the pyramid
+let w = 800, h = 350; //desired width and height of the pyramid
 var margin = { //margins between the axes 
   top: 20,
   right: 20,
@@ -45,7 +45,7 @@ async function postData(file, target) {
       .append('svg')
       .attr('viewBox', '0 0 ' + (margin.left + w + margin.right) + ' ' + (margin.top + h + margin.bottom)) //margins are important so that the ratio of the axes are kept intact
       .attr('preserveAspectRatio', 'xMinYMin')
-      .attr('id', target.replace('#',''))
+      .attr('id', target.replace('#','')+'_id')
       .append('g')
       .attr('transform', translation(margin.left, margin.top))
       .style('cursor', 'pointer')
