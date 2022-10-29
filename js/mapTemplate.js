@@ -63,7 +63,7 @@ function drawMap(data){
         .scale(s)
         .translate(t); 
     //Bind data and create one path per GeoJSON feature
-    svg.selectAll("path")
+    svg.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")

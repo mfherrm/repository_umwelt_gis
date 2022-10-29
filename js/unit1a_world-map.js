@@ -1,6 +1,6 @@
 //Width and height
-var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 1000);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 1000);
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select("#worldmap")
