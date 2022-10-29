@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+   <!-- D3.js import --> 
+   <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+   <!-- D3-geo-scale-bar import-->
+   <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
-    <!-- D3.js import --> 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+   <!-- D3 Projections import -->
+   <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
-    <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+   <!-- Leaflet import-->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
+   <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
-    <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <!-- Bootstrap CSS JS import -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
+   <!-- Bootstrap icons import -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-     <!-- Google Font import-->
-     <link rel="preconnect" href="https://fonts.googleapis.com"> 
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+   <!-- Google Font import-->
+   <link rel="preconnect" href="https://fonts.googleapis.com"> 
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
 
-    <!-- my Script -->
-    <script src="js/index.js"></script>
+   <!-- my CSS -->
+   <link rel="stylesheet" href="../css/style.css">
 
-    <!-- my CSS -->
-    <link rel="stylesheet" href="./css/style.css">
-
-
-    <!-- JQuery for navbar-->
-    <script src="//code.jquery.com/jquery.min.js"></script>
-
-
+   <!-- JQuery for navbar-->
+   <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <body>
 
@@ -46,13 +44,12 @@
         </script>
     <!--end of Navigation bar-->
 
-
     <div class="container-fluid">
-        <div class="row main">
+        <div class="row page" id="">
             <div class="col-2">
             </div>
-            <div class="col-8 content flex-column">
-                <div class="p-2">
+            <div class="col-8">
+                <div class="col-8-middle">
                     <div class="p-2">
                         <h4>Introduction</h4>
                         <ul>
@@ -65,15 +62,16 @@
                         <ul>            
                             <li>"Introduction" - E-Learning + MCT </li>
                                 <ul>
-                                    <li><a href="">First Unit "Mental Maps"</a></li>
+                                    <li><a href="./pages/unit1a-mental_maps.html">First Unit "Mental Maps"</a></li>
                                     <li><a href="./pages/unit1b.html">Second Unit "Population"</a></li>
+                                    <li><a href="./pages/lec_1_germany_overview.html">LEC1 OLD - Germany Overview</a></li>
+                                    <li><a href="./pages/lec_1_south_africa_overview.html">LEC1 OLD - South Africa Overview</a></li>
                                 </ul>                
                             <li>"Statistics" - Face-to-Face unit with rotation learning model </li>
                             <li>"Population pyramids" - Lecture + MCT</li>
                                 <ul>
                                     <li> <a href="./pages/unit2.html"> Unit 2 </a> </li>
                                     <li> <a href="./pages/mct_u2.html"> Multiple choice test about population pyramids </a> </li>
-                                    <li> <a href="./pages/lec_2_continents_task.html"> LEC 2 ALT </a> </li>
                                 </ul>
                             <li>"SDGs" - Face-to-Face unit students teach students</li>
                                 <ul>
@@ -83,11 +81,12 @@
                             <li>"Correlation" - Lecture + MCT</li>
                             <li>"Repetition" - Face-to-Face unit to answer questions</li>
                         </ul>
-                    </div>
+                    </div>    
                 </div>
             </div>
+            <div class="col-2">
+            </div>
         </div>
-        
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder"></div>

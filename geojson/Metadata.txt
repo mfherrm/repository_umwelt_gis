@@ -1,0 +1,28 @@
+World Map
+https://geodata.lib.utexas.edu/catalog/stanford-rx147ws1345
+
+South Africa (all from 2015)
+	local and metropolitan Municipalities
+https://purl.stanford.edu/pg520qm2537
+	District Municipalities
+https://purl.stanford.edu/jc644gp6341
+	Provinces
+https://purl.stanford.edu/js788dt6134
+	Nation
+https://purl.stanford.edu/qt291sw6359
+
+Kenya (2015)
+	sub-counties
+https://purl.stanford.edu/mh373vx6382
+	counties
+https://purl.stanford.edu/fc462cc8966
+	nation
+https://purl.stanford.edu/cf014dv3985
+
+Germany (2015)
+	Kreise
+https://purl.stanford.edu/nz271ny2119
+	bundelaender
+https://purl.stanford.edu/nh891yz3147
+	Nation
+https://purl.stanford.edu/hn022bw9567
