@@ -97,8 +97,10 @@
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
-                    <div clas="h-50"><img id="pyramids" src="../icons/population_pyramids.svg"></img> </div>
-                    <div clas="h-50">
+                    <div class="h-50">
+                        <img id="pyramids" src="../icons/population_pyramids.svg"></img> 
+                    </div>
+                    <div class="h-50">
                         <p> The term demographic transition describes a shift from high birth rates and high death rates
                             to low birth rates and low death rates due to technological and societal advancement.
                             Population pyramids can be used to better illustrate a country's stage in the demographic
@@ -386,7 +388,7 @@
                             <a href="https://populationeducation.org/what-demographic-transition-model/"
                                 target="blank">Further information</a>
                             <button class="btn btn-secondary btn-sm " id="mct_unit2"
-                                onclick="window.location.href = './mct_1.html';" role="button">
+                                onclick="window.location.href = './unit2mct.html';" role="button">
                                 Multiple Choice Test <i class="bi bi-caret-right-fill"></i>
                             </button>
 
@@ -397,6 +399,8 @@
             </div>
         </div>
         <!-- End of Content -->
+
+
         <!-- START of control placeholder -->
         <div id="control-placeholder">
 
@@ -407,21 +411,24 @@
             });
         </script>
          <!-- END of control placeholder -->
+
+        <!-- footer placeholder-->
+        <div id="footer-placeholderU2">
+           
+        </div>
+        <script>
+            $.get("./footer.html", function (data) {
+                $("#footer-placeholderU2").replaceWith(data);
+            });
+        </script>
+        <!--end of Footer bar-->
     </div>
 
-      
 
-    <!-- footer placeholder-->
-    <div id="footer-placeholder">
-        
-    </div>
-    <script>
-        $.get("./footer.html", function (data) {
-            $("#footer-placeholder").replaceWith(data);
-        });
-    </script>
-    <!--end of Footer bar-->
-    
+
+
+
+
 </body>
 
 

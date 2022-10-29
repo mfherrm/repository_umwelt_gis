@@ -81,6 +81,7 @@ function drawMap(data) {
             let continent = d3.select(this);
             getContinent(continent);
         });
+        
 };
 
 let selectC = [{
