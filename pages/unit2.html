@@ -70,16 +70,18 @@
     <!--end of Navigation bar-->
 
     <!-- Start of Content -->
-    <div class="container-fluid">
+    <div class="container-fluid" id="Unit2">
         <div class="row page hide" id="page0">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
                         <h4>What are population pyramids?</h4>
-                        <p>Population pyramids are special histograms where values are stacked top to bottom from high
+                        <p>Population pyramids are special histograms where values are stacked top to bottom
+                            from high
                             to low.
                             They usually illustrate the distribution of a country's or region's population. <br>
                             Important information they convey is the population size which is shown on the x-axis and
+                            the corresponding
                             age-groups which are represented on the y-axis. <br>
                             Another characteristic is that they show both standardized as well as unstandardized values.
                             This way, values are put into proportion and can be evaluated with little effort.
@@ -95,7 +97,33 @@
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
-                    <img id="pyramide" src="../images/poppyr.svg" class="mw-100" height="700px"></img>
+                    <div clas="h-50"><img id="pyramids" src="../images/population_pyramids.svg"></img> </div>
+                    <div clas="h-50">
+                        <p> The term demographic transition describes a shift from high birth rates and high death rates
+                            to low birth rates and low death rates due to technological and societal advancement.
+                            Population pyramids can be used to better illustrate a country's stage in the demographic
+                            transition. There are four main stages which will be described in detail in the following.
+                            <hr>
+                            1st Stage: In stage one there is a balance between high birth and death rates, thus
+                            resulting in little to no population growth. The population size is also constrained by the
+                            available food supply.
+                            This stage depicts pre-industrial society.
+                            <hr>
+                            2nd Stage: In this stage, in which most developing countries are, death
+                            rates drop due to improvement of food supply and sanitation. Thus leading to an increase in
+                            life expectancy and a decrease in disease. This means that childhood mortality is also
+                            lower, leading to a broad pyramid base. After some time, this broad base leads to rapid
+                            population growth as the younger generations will start to have children of their own.
+                            <hr>
+                            3rd Stage: Due to access to contraception, urbanization and an increase in education and
+                            status of women, birth rates fall. This ultimately results in stagnation of population.
+                            <hr>
+                            4th Stage: In the fourth stage, both birth and death rates are low. This leads to an
+                            increase in average age and might even lead to an even further decrease in birth rates.
+                            Lower birth rates in turn mean that the death rate is higher than the birth rate resulting
+                            in a shrinking society.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="col-2">
@@ -223,15 +251,6 @@
                             Try to think about the different facets of a country (e.g. the strength of its industry, the
                             structure of its health sector, etc.) as you assign them.
                         </p>
-                        <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
-                                <path
-                                    d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -309,15 +328,6 @@
                             When you're done, continue on to the multiple choice test.
                             <hr>
                         </p>
-                        <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-arrow-counterclockwise" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
-                                <path
-                                    d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -326,7 +336,7 @@
                 <div class="col-8-middle">
                     <div class="row">
                         <div class="col-4" id="pyr_imgs">
-                            <div class="h-25" > <img src="../icons/pop_pyr_stg1.svg" id="pyrstg0"> </img> </div>
+                            <div class="h-25"> <img src="../icons/pop_pyr_stg1.svg" id="pyrstg0"> </img> </div>
                             <div class="h-25"> <img src="../icons/pop_pyr_stg2.svg" id="pyrstg1"> </img> </div>
                             <div class="h-25"> <img src="../icons/pop_pyr_stg3.svg" id="pyrstg2"> </img> </div>
                             <div class="h-25"> <img src="../icons/pop_pyr_stg4.svg" id="pyrstg3"> </img> </div>
@@ -403,10 +413,10 @@
     <!-- END of control placeholder -->
 
     <!-- footer placeholder-->
-    <div id="footer-placeholder">
+    <div id="footer-placeholderU2">
         <script>
             $.get("./footer.html", function (data) {
-                $("#footer-placeholder").replaceWith(data);
+                $("#footer-placeholderU2").replaceWith(data);
             });
         </script>
         <!--end of Footer bar-->

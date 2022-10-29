@@ -92,7 +92,7 @@ let selectC = [{
 function getContinent(continent) {
     let elemid = continent._groups[0][0].__data__.properties.CONTINENT
     console.log(elemid.toLowerCase())
-    console.log(select[0].germany)
+    console.log(selectC.europe)
     if (select[0].africa == true && select[0].europe == true) {
         select[0].selected.pop();
     } else if ((elemid.toLowerCase() == 'africa' && select[0].africa == true) || (elemid.toLowerCase() == 'europe' && select[0].europe == true)) {

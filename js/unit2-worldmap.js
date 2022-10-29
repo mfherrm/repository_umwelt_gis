@@ -18,7 +18,7 @@ var projection =  d3.geoBromley()
 
 // Define Graticule 
 var graticule = d3.geoGraticule();
-
+let country
 
 
 //Define Ordinal Color scheme
@@ -59,6 +59,13 @@ function drawMap(data) {
                 return [0, 0, width, height]
             }
         })
+        .attr('id', function () {
+            if (i == 0) {
+                return 'wmu3'
+            } else {
+                return 'wmu4'
+            }
+        })
         //.attr("preserveAspectRatio", "xMinYMin")
         ;
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
@@ -85,7 +92,8 @@ function drawMap(data) {
         .attr("d", path)
         .attr("class", "country")
         .attr("fill", "grey")
-        .attr('state', 'false')
+        .attr('state', function () { return false })
+
         /*
         function(d,i){
             let min = Math.ceil(0);
@@ -104,15 +112,10 @@ function drawMap(data) {
         })
         //Cursor on mouseover
         .style("cursor", "pointer")
-        .on("click", function () {
-            let country = d3.select(this);
-            console.log($(svg).click(function(event) {
-                var text = $(event.target);
-            }))
-            console.log(country.attr('pyramid'));
-            console.log(country.attr('continent'));
-            console.log(country.attr('state'));
-            getCountry(country); //mit parent arbeiten!
+        .on("click", function (event) {
+            country = d3.select(this);
+            let src = document.querySelectorAll(':hover')[9].id
+            src == 'wmu3' ? getCountry(country) : getPyramid(country)
         });
     i++;
 };
@@ -150,6 +153,7 @@ function getCountry(country) {
     }
 }
 
+
 d3.select("#pyr_countries").on("mouseup", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
     let elemid = elem.getAttribute('id')
@@ -176,19 +180,24 @@ d3.select("#pyr_countries").on("mouseup", function () {
 }
 );
 
+let select4 = [];
+
 function getPyramid(country) {
-    let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
-    let elempyr = country._groups[0][0].__data__.properties.pyramid
-    let elemstat = country._groups[0][0].__data__.properties.state
-    if (elemstat == true) {
-        console.log(select[0].selected[0])
-        select[0].selected.pop();
-    } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1 && country.attr("continent") != 0) {
-        select[0].selected.push(country);
+    let elemid = country.attr('name');
+    let elempyr = country.attr('pyramid');
+    let elemstat = country.attr('state');
+    console.log(elemid);
+    console.log(elempyr);
+    console.log(elemstat == true);
+    if ((country.attr("fill") == "green")) {
+        console.log('Hallotru')
+        select4.pop();
+    } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
+        select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
-        if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
-            select[0].selected.pop();
+        if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+            select4.pop();
             return country.attr("fill", "grey")
 
         }
@@ -201,35 +210,13 @@ function getPyramid(country) {
 d3.select("#pyr_imgs").on("click", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
     let elemid = elem.getAttribute('id')
-    console.log(elemid)
-    if ((con.includes("Germany") && elemid.includes('pyr_stg0'))) {
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
-    } else if ((con.includes('Kenya') && elemid.includes('pyr_stg1'))) {
-        select[0].kenya = true;
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
-    } else if ((con.includes('Kenya') && elemid.includes('pyr_stg2'))) {
-        select[0].kenya = true;
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
-    } else if (con.includes('South Africa') && elemid.includes('pyr_stg3')) {
-        select[0].southafrica = true;
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
-    } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
-
+    let conid = country.attr('name')
+    let con = select4[0]._groups[0][0].__data__.properties.pyramid
+    if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
+        select4[0].attr("fill", "green");
+        select4.pop();
     } else {
-        select[0].selected[0].attr("fill", "red");
+        select4[0].attr("fill", "red");
     }
 }
 );
-
-d3.select("#restart").on("click", function () {
-    select[0].germany = false;
-    select[0].southafrica = false;
-    select[0].kenya = false;
-    select[0].selected.pop();
-    d3.selectAll(".country").attr("fill", "grey");
-})
-
