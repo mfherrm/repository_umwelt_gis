@@ -182,7 +182,7 @@ li a{
     stroke-width: 2px;
 }
 
-.province {
+.province{
     stroke-width: 1.5pt;
     stroke: white;
 }
@@ -190,11 +190,11 @@ li a{
     stroke-width: 5pt;
     fill: grey
 }
-.country {
+.country, .admin {
     stroke: white;
     stroke-width: .5px;
 }
-.country:hover{
+.country:hover, .admin:hover{
     stroke:white;
     stroke-width: 2px;
 }

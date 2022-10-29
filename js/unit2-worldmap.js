@@ -186,9 +186,6 @@ function getPyramid(country) {
     let elemid = country.attr('name');
     let elempyr = country.attr('pyramid');
     let elemstat = country.attr('state');
-    console.log(elemid);
-    console.log(elempyr);
-    console.log(elemstat == true);
     if ((country.attr("fill") == "green")) {
         select4.pop();
     } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
