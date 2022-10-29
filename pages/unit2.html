@@ -397,8 +397,6 @@
             </div>
         </div>
         <!-- End of Content -->
-
-
         <!-- START of control placeholder -->
         <div id="control-placeholder">
 
@@ -409,24 +407,21 @@
             });
         </script>
          <!-- END of control placeholder -->
-
-        <!-- footer placeholder-->
-        <div id="footer-placeholderU2">
-           
-        </div>
-        <script>
-            $.get("./footer.html", function (data) {
-                $("#footer-placeholderU2").replaceWith(data);
-            });
-        </script>
-        <!--end of Footer bar-->
     </div>
 
+      
 
-
-
-
-
+    <!-- footer placeholder-->
+    <div id="footer-placeholder">
+        
+    </div>
+    <script>
+        $.get("./footer.html", function (data) {
+            $("#footer-placeholder").replaceWith(data);
+        });
+    </script>
+    <!--end of Footer bar-->
+    
 </body>
 
 
