@@ -1,1 +1,0 @@
-console.log("hi lec_2_solutions.js ICH BIN LEEER")
