@@ -165,25 +165,12 @@ li a{
     text-align: center;
 }
 
-#worldmap {
+#worldmap, #worldmapall, #germany-overview, #continentmap {
     border: 2px solid grey;
     border-radius: 5px;
     overflow:hidden;
     background: lightblue;
-}
-
-#worldmapall {
-    border: 2px solid grey;
-    border-radius: 5px;
-    overflow:hidden;
-    background: lightblue;
-}
-
-#continentmap {
-    border: 2px solid grey;
-    border-radius: 5px;
-    overflow:hidden;
-    background: lightblue;
+    padding: 0;
 }
 
 .continent {
