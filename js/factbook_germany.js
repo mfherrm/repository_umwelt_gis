@@ -55,10 +55,60 @@ function drawMap(data){
         .append("path")
         .attr("d", path)
         .attr("class",function(d) {
-            return d.properties.LEVL_CODE == 0 ? "country" : "bundesland";
+            return d.properties.LEVL_CODE == 0 ? "country-overview" : "bundesland";
         })
         .attr("fill", function(d,i){
-            console.log(color(i))
-            return d.properties.LEVL_CODE == 0 ? "lightgrey" : color(i);
+            if(d.properties.NUTS_NAME == "Deutschland"){
+                return "none"
+            }else {
+                return d.properties.LEVL_CODE == 0 ? "lightgrey" : color(i);
+            }
         })
+        .attr("stroke","grey")
+
+    //Link to Map Labels: https://bost.ocks.org/mike/map/
+    svg.selectAll(null)
+        .data(data.features)
+        .enter().append("text")
+        .attr("class", "subunit-label")
+        .attr("transform", function(d) { 
+            //console.log(path.centroid(d))
+            return "translate(" + path.centroid(d) +")"; 
+        })
+        .attr("dy", ".35em")
+        .text(function(d) { 
+            console.log(d)
+            return d.properties.NAME_LATN
+        });
+    
+    drawScalebar();
+};
+
+function drawScalebar(){
+    var scaleBar = d3.geoScaleBar()
+                        .projection(projection)
+                        //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
+                        .size([width, height])
+                        //sets the vertical tick size of the scale bar in pixels
+                        //sets ticks on specified distances OR use distance for automatic specification
+                        .top(.97)
+                        .left(.03)
+                        .distance(200)
+                        .tickValues( [0,200])
+                        .orient(d3.geoScaleTop)
+                        .tickSize(2)
+                        .tickFormat((d, i, e) => i === e.length - 1 ? `${d} km` : d)
+                        .zoomClamp(false)
+                        .tickPadding(8)
+                        .label(null)
+                        ;
+                        // How far the tick text labels are from the line
+
+    var scaleSvg = d3.select(".mapbox")
+                        .append("g")
+                        .attr("class","scalebar");
+    
+    scaleSvg.append("g").call(scaleBar);
+
+    d3.selectAll(".tick").attr("class","scalebartick") 
 };
