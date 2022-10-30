@@ -186,7 +186,6 @@ function drawLegend(){
 //Build Scalebar -- 
 function drawScalebar(){
     let mapbox = getPosition($(".mapbox")[0]);
-    console.log("test2: "+mapbox.width)
 
     var scaleBar = d3.geoScaleBar()
                         .projection(projection)

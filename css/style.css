@@ -165,12 +165,16 @@ li a{
     text-align: center;
 }
 
-#worldmap, #worldmapall, #germany-overview, #continentmap {
+#worldmap, #worldmapall, #germany-overview, #zaf-overview, #kenya-overview, #continentmap {
     border: 2px solid grey;
     border-radius: 5px;
     overflow:hidden;
     background: lightblue;
     padding: 0;
+}
+
+#germany-overview, #zaf-overview, #kenya-overview {
+    margin-top: 1.5rem;
 }
 
 .continent {
@@ -182,15 +186,7 @@ li a{
     stroke-width: 2px;
 }
 
-.province{
-    stroke-width: 1.5pt;
-    stroke: white;
-}
-.province:hover{
-    stroke-width: 5pt;
-    fill: grey
-}
-.country, .admin {
+.country {
     stroke: white;
     stroke-width: .5px;
 }
