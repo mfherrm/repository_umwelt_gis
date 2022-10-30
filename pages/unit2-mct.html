@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1b - Population</title>
+    <title>Unit 2 - Multiple Choice Test</title>
 
     <!-- D3.js import --> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+
+    <!-- D3 Projections import -->
+    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+
     <!-- Leaflet import-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
@@ -18,6 +22,9 @@
     <!-- Bootstrap CSS JS import -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap icons import -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
@@ -30,49 +37,57 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <body>
-
-    <!-- navbar placeholder-->
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("./nav.html", function(data){
+        $.get("../pages/nav.html", function(data){
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
-    <!--end of Navigation bar-->
-
     <div class="container-fluid">
-        <div class="row">
+        <div class="row page" id="">
             <div class="col-2">
-                <!--
-                <div class="legend-title">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5>Unit 2 - Multiple Choice Test</h5>
+                        <p>This multiple choice test will quiz you on your knowledge of population pyramids, of different population pyramids in Africa and Europe, as well as the demographic transition.</p>
+                    </div>
                 </div>
-                <div class="legend">
-                </div>
-                <div class="scale"></div>
-                -->
             </div>
             <div class="col-8">
-                <div class="maptitle justify-content-center">
-                    <h4>Population Density in South Africa per province in 2020</h4>
-                </div>
-                <div class="map" id="zaf">
-                    <script src="../js/mapTemplate.js"></script>
+                <div class="col-8-middle">
+                    <div width = "1000" height = "2000" style="float:left">
+                        <main id="main">
+                        <form id="quiz" action="">
+                            <p id="intro1">This test contains eight questions. Answer each one according to your knowledge and what you learned in the last unit. The test can be repeated as many times as you want. There is no required score to pass this test.</p>
+                        </form>
+                        </main>
+                        </div>
                 </div>
             </div>
-            <div class="col-2"></div>
-
-            
+            <div class="col-2">
+                <div class="col-2-right">
+                    <h5>How it works</h5>
+                    <p>After clicking on 'start the quiz' you will have to pick one of up to five answers. At the end of the quiz you will be able to see your results and compare them with the right answers, as well as restart the test.</p>
+  
+                </div>
+            </div>
         </div>
+       
     </div>
-    <!-- footer placeholder>
-    <div id="footer-placeholder"></div>
-        <script>
-            $.get("../pages/footer.html", function(data){
-                $("#footer-placeholder").replaceWith(data);
-            });
-        </script>
-    <end of Footer bar-->
+    <!-- footer placeholder-->
+    <div id="footer-placeholder">
+        
+    </div>
+    <script>
+        $.get("../pages/footer.html", function(data){
+            $("#footer-placeholder").replaceWith(data);
+        });
+    </script>
+    <!--end of Footer bar-->
+
+    <script src="../js/unit2-mct.js"></script>
+   
 </body>
 </html>
