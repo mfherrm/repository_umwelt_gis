@@ -68,49 +68,45 @@ let select = []
 
 function getAdmin(admin) {
     if ((admin.attr("fill") == "green")) {
-        select4.pop();
     } else if (admin.attr("fill") != "#00677F" && select.length < 3) {
         select.push(admin)
         return admin.attr("fill", "#00677F")
-    } else if (admin.attr('name')){
+
+    } else if (select[0]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN || select[1]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN || select[2]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN) {
+        select = select.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+        console.log(admin._groups[0][0].__data__.properties.NAME_LATN)
+        admin.attr('fill', 'darkgrey');
+    }/*else {
         select = select.filter(element => element.attr("name") !== admin.attr("name"));
         return admin.attr("fill", "darkgrey")
-    }
+    }*/
 };
 
-
-function getPyramid(country) {
-    let elemid = country.attr('name');
-    let elempyr = country.attr('pyramid');
-    let elemstat = country.attr('state');
-    if ((country.attr("fill") == "green")) {
-        select4.pop();
-    } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
-        select4.push(country);
-        return country.attr("fill", "#00677F")
-    } else {
-        if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
-            select4.pop();
-            return country.attr("fill", "grey")
-
+d3.select("#check_ger").on("click", function () {
+    for (let i in select) {
+        if (select[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg" || select[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg" || select[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen") {
+            if (select[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg") {
+                select[0].attr("fill", "green");
+            } else {
+                select[0].attr("fill", "red");
+            }
+            if (select[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg") {
+                select[1].attr("fill", "green");
+            }else {
+                select[1].attr("fill", "red");
+            }
+            if (select[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen") {
+                select[2].attr("fill", "green");
+            } else {
+                select[2].attr("fill", "red");
+            }
+            
+            
         }
-
-
-
     }
-}
-/*d3.select("#check").on("click",function(){
-                for (let i in select){
-                    if (select[i].attr("name").includes("Germany") || select[i].attr("name").includes("Kenya") || select[i].attr("name").includes("South Africa")){
-                            select[i].attr("fill","green");
-                    } else {
-                            select[i].attr("fill","red");
-                    }                              
-                }                                               
-            })
+})
 
-d3.select("#restart").on("click",function(){
-                select = [];
-                d3.selectAll(".country").attr("fill","grey");
-                d3.select("#result").html("");
-});*/
+d3.select("#restart").on("click", function () {
+    select = [];
+    d3.selectAll(".admin").attr("fill", "darkgrey");
+});

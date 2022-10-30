@@ -38,8 +38,6 @@ d3.json("../geojson/world_countries2020.geojson")
 
 //Build Map
 function drawMap(data) {
-
-
     i == 0 ? (projection = d3.geoMercator().translate([((width / 3.3)), (height)]).scale(1.75 * height / Math.PI)) :
         (projection = d3.geoMercator().translate([((width / 2.7)), (height * 0.73)]).scale(1.25 * height / Math.PI))
 
@@ -65,9 +63,7 @@ function drawMap(data) {
             } else {
                 return 'wmu4'
             }
-        })
-        //.attr("preserveAspectRatio", "xMinYMin")
-        ;
+        });
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     // Update the projection    
     //Bind data and create one path per GeoJSON feature

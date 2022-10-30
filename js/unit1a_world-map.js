@@ -79,11 +79,12 @@ function getCountry(country){
         return country.attr("fill","#00677F")
     } else {
         select = select.filter(element => element.attr("name") !== country.attr("name"));
+        console.log(select);
         return country.attr("fill","grey")
     }
 };
 
-d3.select("#check").on("click",function(){
+/*d3.select("#check").on("click",function(){
                 for (let i in select){
                     if (select[i].attr("name").includes("Germany") || select[i].attr("name").includes("Kenya") || select[i].attr("name").includes("South Africa")){
                             select[i].attr("fill","green");
@@ -98,3 +99,4 @@ d3.select("#restart").on("click",function(){
                 d3.selectAll(".country").attr("fill","grey");
                 d3.select("#result").html("");
 });
+*/

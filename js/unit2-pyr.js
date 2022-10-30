@@ -153,7 +153,6 @@ async function postData(file, target) {
 
   );
 
-  var tooltip;
  fetchData = [];
 }
 //creates tooltip for mouseover on body for absolute positions
