@@ -6,7 +6,7 @@ var width = Math.max(document.documentElement.clientHeight, window.innerHeight |
 var svg = d3.select("#worldmap")
             .append("svg")
             //responsive size
-            .attr("viewBox", [0, 0, width, height])
+            .attr("viewBox", [0, 0, width, height/2])
             //dunno seems nice
             //.attr("preserveAspectRatio", "xMinYMin")
             ;
@@ -15,7 +15,7 @@ var projection = d3.geoBromley()
             .scale(width / 1.5 / Math.PI)
             .rotate([0, 0])
             .center([0, 0])
-            .translate([width / 2, height /2]);
+            .translate([width/2, height /4]);
 /*
 var projection = d3.geoMercator()
                 .translate([(width/2), (height/1.5)])
