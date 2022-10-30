@@ -1,0 +1,223 @@
+//Define map projection
+/*
+projection = d3.geoConicEqualArea()
+    .parallels([24, 32])
+    .rotate([15, 10
+            ])
+    .translate([0, 0])
+    .scale(1);
+*/
+let i = 0;
+var projectionM;
+var tooltip;
+//Create colors scheme    
+var colorM = d3.scaleThreshold()
+    //thresholds of data
+    .domain([10, 20, 50, 100, 250, 500])
+    //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
+    .range(d3.schemeReds[6]);
+
+//Load in GeoJSON data //Promise resolve
+d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
+    .then(drawMapSol)
+    .catch(error => { console.log(error) });
+
+d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
+    .then(drawMapSol)
+    .catch(error => { console.log(error) });
+
+//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
+
+
+//Build Map
+function drawMapSol(data) {
+    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1000)) : 
+    (projectionM = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52]));  //1.left/right (lon) 2.up/down (lat)
+    
+    var pathM = d3.geoPath().projection(projectionM);
+
+    let target;
+    i == 0 ? target = '#zaf' : target = '#ger'
+
+    //Create SVG element // viewBox for responsive Map
+    var svgM = d3.select(target)
+        .append("svg")
+        //responsive size
+        .attr("viewBox", [0, 0, width, height])
+        .attr('id', function () {
+            if (i == 0) {
+                return 'solm0'
+            } else {
+                return 'solm1'
+            }
+        })
+        .attr("preserveAspectRatio", "xMinYMin")
+        .append("g")
+        .attr("class", "mapboxSol");
+    //Bind data and create one path per GeoJSON feature
+    svgM.selectAll(null)
+        .data(data.features)
+        .enter()
+        .append("path")
+        .attr("d", pathM)
+        .attr("class", "province")
+        .attr("pop_dense2020", function (d) {
+            return d.properties.pop_dense_2020_adm1;
+        })
+        //get province name  
+        .attr("name", function (d) {
+            return d.properties.ADM1_EN;
+        })
+        //get color for Value of Population Density from "var color"
+        .style("fill", function (d) {
+            return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
+        })
+        //Cursor on mouseover
+        .style("cursor", "pointer")
+        .on("mouseover", drawTooltip)
+        .on("mouseout", eraseTooltip)
+    drawLegend();
+    drawScalebar();
+    i++;
+    tooltip = d3.select(target)
+        .append("div")
+        .attr("class", "tooltip")
+        .attr("opacity", 0);
+};
+
+//Build Tooltip
+function drawTooltip() {
+    window.onresize = this.getBoundingClientRect();
+    let bbox = this.getBoundingClientRect();
+    tooltip.transition()
+        .duration(200)
+        .style("opacity", .7)
+        .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
+        .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
+    tooltip.join(
+        enter =>
+            enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
+        update =>
+            update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("pop_dense2020") + " </p>")
+    )
+};
+
+function eraseTooltip() {
+    tooltip.transition()
+        .duration(200)
+        .style("opacity", 0);
+};
+
+//Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
+function drawLegend() {
+    //set Title
+    d3.select(".legend");
+
+    //create svg for Legend
+    var legendSvg = d3.select(".mapboxSol")
+        .append("g")
+        .attr("class", "legend")
+        //.attr("viewBox", [0, 0, width, height])
+        .attr("width", "100%")
+        //good height --> no. of class*spacing
+        .attr("height", function (d, i) {
+            return 6 * 45
+        })
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(5," + 30 + ")";
+        });
+
+    var legend = legendSvg.selectAll(".legend")
+        .data(color.domain())
+        .enter()
+        .append("g")
+        .attr("class", "entry")
+        .attr("transform", function (d, i) {
+            return "translate(5," + i * 33 + ")";
+        });
+
+    legendSvg.append("g")
+        .append("text")
+        .text(function () {
+            return "Population Density per square km";
+        })
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(0," + -8 + ")";
+        });
+    //fill rects by color domain (d) & range (i)                  
+    legend.append("rect")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("x", 10)
+        .attr("y", 10)
+        .attr("width", 25)
+        .attr("height", 25)
+        .attr("fill", function (d, i) {
+            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
+            return color(d - 1);
+        })
+
+    //get and set of color by domain (d) & range (i)
+    legend.append("text")
+        //play around for nice positonioning
+        //General tip for x--> Rect.X(5)+Rect.Width(20)+buffer(6)
+        //Genral tip for y--> anchor of text is at the bottom
+        .attr("x", 46)
+        .attr("y", 31)
+        .attr("color", "white")
+        .text(function (d, i) {
+            if (i == 0) {
+                return "≤ " + d
+            } else if (i == color.domain().length - 1) {
+                return "≥ " + + d
+            } else {
+                return color.domain()[i - 1] + 1 + " to " + d
+            };
+        })
+};
+
+//Build Scalebar -- 
+function drawScalebar() {
+    let mapbox = getPosition($(".mapbox")[0]);
+    console.log("test2: " + mapbox.width)
+
+    var scaleBar = d3.geoScaleBar()
+        .projection(projection)
+        //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
+        .size([mapbox.width, 180])
+        .zoomClamp(false)
+        //sets the vertical tick size of the scale bar in pixels
+        .tickSize([8])
+        //sets ticks on specified distances OR use distance for automatic specification
+        .tickValues([0, 150, 300])
+        //.distance(200)
+        // How far the tick text labels are from the lines
+        .tickPadding(8)
+
+
+    var scaleSvg = d3.select(".mapbox")
+        .append("g")
+        .attr("class", "scalebar")
+        //move the Scalbar like the legend
+        .attr("transform", function () {
+            return "translate(10," + mapbox.height * 1.5 + ")";
+        });;
+
+    scaleSvg.append("g").call(scaleBar);
+
+    d3.selectAll(".tick").attr("class", "scalebartick")
+};
+
+//Function to get Position of an Element, implement on Event e.g. "click"
+function getPosition(ele) {
+    boundingClientRect = ele.getBoundingClientRect();
+
+    var left = boundingClientRect.left;
+    var top = boundingClientRect.top;
+    var rectHeight = boundingClientRect.height;
+    var rectWidth = boundingClientRect.width;
+
+    console.log("left: " + left, ", top: " + top, ", width: " + rectWidth + " ,height: " + rectHeight);
+    return boundingClientRect;
+}
