@@ -9,7 +9,6 @@ projection = d3.geoConicEqualArea()
 */
 let i = 0;
 var projectionM;
-var tooltip;
 //Create colors scheme    
 var colorM = d3.scaleThreshold()
     //thresholds of data
@@ -21,39 +20,47 @@ var colorM = d3.scaleThreshold()
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .then(drawMapSol)
     .catch(error => { console.log(error) });
-
-d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
+d3.json("../geojson/germany_overview.geojson")
     .then(drawMapSol)
     .catch(error => { console.log(error) });
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-
+var tooltip = d3.select(".mapboxsol")
+    .append("div")
+    .attr("class", "tooltip")
+    .attr("opacity", 0);
 
 //Build Map
 function drawMapSol(data) {
-    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1000)) : 
-    (projectionM = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52]));  //1.left/right (lon) 2.up/down (lat)
-    
-    var pathM = d3.geoPath().projection(projectionM);
-
     let target;
-    i == 0 ? target = '#zaf' : target = '#ger'
+    i == 0 ? (target = "#zaf") : (target = "#ger")
 
     //Create SVG element // viewBox for responsive Map
     var svgM = d3.select(target)
         .append("svg")
         //responsive size
         .attr("viewBox", [0, 0, width, height])
-        .attr('id', function () {
-            if (i == 0) {
-                return 'solm0'
-            } else {
-                return 'solm1'
-            }
-        })
         .attr("preserveAspectRatio", "xMinYMin")
         .append("g")
         .attr("class", "mapboxSol");
+
+    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1)) : (d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52]))  //1.left/right (lon) 2.up/down (lat)
+    
+         
+
+
+    //Define path generator
+    var pathM = d3.geoPath()
+        .projection(projectionM);
+
+    // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
+    var bbox = pathM.bounds(data),
+        s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height),
+        t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    // Update the projection    
+    projectionM
+        .scale(s)
+        .translate(t);
     //Bind data and create one path per GeoJSON feature
     svgM.selectAll(null)
         .data(data.features)
@@ -76,13 +83,12 @@ function drawMapSol(data) {
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
+        .on("click", function () {
+            console.log(this);
+        });
     drawLegend();
     drawScalebar();
     i++;
-    tooltip = d3.select(target)
-        .append("div")
-        .attr("class", "tooltip")
-        .attr("opacity", 0);
 };
 
 //Build Tooltip

@@ -53,7 +53,11 @@ function drawMap(data) {
             return d.properties.LEVL_CODE == 0 ? "country" : "admin";
         })
         .attr("fill", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "lightgrey" : "darkgrey";
+            if (d.properties.NUTS_NAME == "Deutschland") {
+                return "none"
+            } else {
+                return d.properties.LEVL_CODE == 0 ? "lightgrey" : "darkgrey";
+            }
         })
         .on("click", function (d) {
             let admin = d3.select(this);
@@ -92,7 +96,7 @@ d3.select("#check_ger").on("click", function () {
             }
             if (select[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg") {
                 select[1].attr("fill", "green");
-            }else {
+            } else {
                 select[1].attr("fill", "red");
             }
             if (select[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen") {
@@ -100,8 +104,8 @@ d3.select("#check_ger").on("click", function () {
             } else {
                 select[2].attr("fill", "red");
             }
-            
-            
+
+
         }
     }
 })

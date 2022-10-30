@@ -186,7 +186,7 @@ li a{
     stroke-width: 2px;
 }
 
-.country {
+.country, .admin {
     stroke: white;
     stroke-width: .5px;
 }
@@ -194,6 +194,7 @@ li a{
     stroke:white;
     stroke-width: 2px;
 }
+
 /*-------------------------------------------------------------------------*/
 
 /* Styles for Graticular --------------------------------------------------*/
