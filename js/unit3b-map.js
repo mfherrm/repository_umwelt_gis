@@ -1,6 +1,6 @@
 var tooltip;
 //Create colors scheme    
-var colorM = d3.scaleThreshold()
+var color = d3.scaleThreshold()
     //thresholds of data
     .domain([10, 20, 50, 100, 250, 500])
     //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
@@ -8,52 +8,47 @@ var colorM = d3.scaleThreshold()
 
 //Load in GeoJSON data //Promise resolve
 
-Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"),d3.json("../geojson/germany_overview.geojson"),d3.json("../geojson/kenya_overview.geojson")])
-    .then(draw).catch(error => {console.log(error)})
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_nation.geojson")])
+    .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 //Build Map
 
 function draw(data) {
-    let mapProjection;
-    let drawTarget;
-    let mapID;
-    console.log(data[0]);
-    console.log(data[1]);
-    drawTarget='#zaf';
-    mapID="solzaf"
-    mapProjection=d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
+    let drawTarget = '#zaf';
+    let mapID = "solzaf"
+    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
     drawMapSol(data[0], drawTarget, mapID, mapProjection)
-    drawTarget='#ger';
-    mapID="solger"
-    mapProjection=d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]).rotate([-10, -52])
+    drawTarget = '#ger';
+    mapID = "solger"
+    mapProjection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
     drawMapSol(data[1], drawTarget, mapID, mapProjection)
-    drawTarget='#ken';
-    mapID="solken"
-    mapProjection=d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]).rotate([-10, -52])
+    drawTarget = '#ken';
+    mapID = "solken"
+    mapProjection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03,-.01]).rotate([-38,0])
     drawMapSol(data[2], drawTarget, mapID, mapProjection)
 
 
-    
+
 
 }
 
 function drawMapSol(data, drawTarget, mapID, mapProjection) {
 
     //(); //1.left/right (lon) 2.up/down (lat)
-    
+
     var pathM = d3.geoPath().projection(mapProjection);
 
     var bbox = pathM.bounds(data),
-    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
-    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+        s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height),
+        t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     // Update the projection    
     mapProjection
         .scale(s)
-        .translate(t); 
-  
+        .translate(t);
+
 
     //let target;
     //ai == 0 ? target = '#zaf' : target = '#ger'
@@ -74,7 +69,7 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .append("path")
         .attr("d", pathM)
         .attr("class", "province")
-        .attr("pop_dense2020", function (d) {
+        .attr("population", function (d) {
             return d.properties.pop_dense_2020_adm1;
         })
         //get province name  
@@ -90,23 +85,25 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
     drawLegend();
-    drawScalebar();
-    tooltip = d3.select(drawTarget)
-        .append("div")
-        .attr("class", "tooltip")
-        .attr("opacity", 0);
+    drawScalebar(mapProjection);
 
-       
+
+
 };
 
 //Build Tooltip
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    tooltip.transition()
-        .duration(200)
+    tooltip = d3.selectAll('.mapboxSol')
+        .append("div")
+        .attr("class", "tooltip")
+        .attr('id', 'tt')
+        .attr("opacity", 0);
+    tooltip
         .style("opacity", .7)
         .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
+        .attr('id', 'tt')
         .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
     tooltip.join(
         enter =>
@@ -117,9 +114,7 @@ function drawTooltip() {
 };
 
 function eraseTooltip() {
-    tooltip.transition()
-        .duration(200)
-        .style("opacity", 0);
+    d3.selectAll('#tt').remove();
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
@@ -192,7 +187,7 @@ function drawLegend() {
 };
 
 //Build Scalebar -- 
-function drawScalebar() {
+function drawScalebar(projection) {
     let mapbox = getPosition($(".mapbox")[0]);
 
     var scaleBar = d3.geoScaleBar()

@@ -3,37 +3,50 @@ var width = Math.max(document.documentElement.clientHeight, window.innerHeight |
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 
 
-//Create SVG element // viewBox for responsive Map
-var svg = d3.select("#germany")
-    .append("svg")
-    //responsive size
-    .attr("viewBox", [0, 0, width, height])
-    //dunno seems nice
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .append("g")
-    .attr("class", "mapbox")
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_nation.geojson")])
+    .then(draw).catch(error => { console.log(error) })
 
-//Define map projection
-
-var projection = d3.geoAzimuthalEqualArea()
-    .scale(.4)
-    .translate([0.005, -0.02])  //1.left/right (lon) 2.up/down (lat)
-    .rotate([-10, -52]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center            
-//if parallels --> analoge
-
-var color = d3.scaleOrdinal(d3.schemeSet3);
-
-//Define path generator
-var path = d3.geoPath()
-    .projection(projection);
-
-//Load in GeoJSON data //Promise resolve
-d3.json("../geojson/germany_overview.geojson")
-    .then(drawMap)
-    .catch(error => { console.log(error) });
+//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 //Build Map
-function drawMap(data) {
+
+function draw(data) {
+    let target = '#southafrica';
+    let id = "exzaf"
+    let projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]) // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center    
+    drawMap(data[0], target, id, projection)
+    target = '#germany';
+    id = "exger"
+    projection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    drawMap(data[1], target, id, projection)
+    target = '#kenya';
+    id = "exken"
+    projection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03,-.01]).rotate([-38,0]);
+    drawMap(data[2], target, id, projection)
+}
+
+
+
+//Load in GeoJSON data //Promise resolve
+
+//Build Map
+function drawMap(data, target, id, projection) {
+    //Create SVG element // viewBox for responsive Map
+    var svg = d3.select(target)
+        .append("svg")
+        //responsive size
+        .attr("viewBox", [0, 0, width, height])
+        //dunno seems nice
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .append("g")
+        .attr("class", "mapbox")
+
+    //Define map projection     
+
+
+    //Define path generator
+    var path = d3.geoPath()
+        .projection(projection);
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     var bbox = path.bounds(data),
         s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height),
