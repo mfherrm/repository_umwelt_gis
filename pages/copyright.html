@@ -1,47 +1,135 @@
 <!DOCTYPE html>
 <html>
-<head>
 
-	<title>Datenschutz</title>
-	
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Copyright</title>
+
 	<meta charset="utf-8">
-	
-	<script src="https://d3js.org/d3.v4.min.js"></script>
-	
-	<link href="../css/style.css" rel="stylesheet">
-	
+
+	<!-- D3.js import -->
+	<script src="http://d3js.org/d3.v7.min.js"></script>
+	<!-- D3-geo-scale-bar import-->
+	<script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+	<!-- Leaflet import-->
+
+	<!-- Leaflet import-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+		integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+		integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+	<!-- Bootstrap CSS JS import -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap Font Icon CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+	<!-- Google Font import-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+	<!-- my Script -->
+	<script src="../js/index.js"></script>
+
+	<!-- my CSS -->
+	<link rel="stylesheet" href="../css/style.css">
+
+
+	<!-- JQuery for navbar-->
+	<script src="//code.jquery.com/jquery.min.js"></script>
+
 </head>
+
 <body>
 
-	<svg width = "100%" height = "80">
-		<rect x="0" y="0" width="100%" height="80" fill="brown" opacity=""></rect>
-		<text x="30" y="50" fill="white" font-family="sans-serif" font-size="24px"><a href="../index.html" fill="white">Zurück zur Startseite</a></text>
-		<a href="./lec_1_south_africa_overview.html"><image x="1700" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg"></image></a>
-		<a href="./lec_1_germany_overview.html"><image x="1800" y="15" width="80" height="80" xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg"></image></a>
-	</svg>
-	
-	<svg width = "100%" height = "760">
-		<rect x="0" y="0" width="100%" height="760" fill="brown" opacity="0.5"></rect>
-	
-		<text x="50" y="80" fill="black" font-family="sans-serif" font-size="26px">Datenschutz</text>
+	<!-- navbar placeholder-->
+	<div id="nav-placeholder">
 
-		<text x="50" y="150" fill="black" font-family="sans-serif" font-size="18px">Durch die Nutzung unserer Website erklären Sie sich mit der Erhebung, Verarbeitung und Nutzung von Daten gemäß der nachfolgenden Beschreibung einverstanden.</text>
-		<text x="50" y="180" fill="black" font-family="sans-serif" font-size="18px">Unsere Website kann grundsätzlich ohne Registrierung besucht werden. Dabei werden Daten wie beispielsweise aufgerufene Seiten bzw. Namen der abgerufenen Datei, </text>
-		<text x="50" y="210" fill="black" font-family="sans-serif" font-size="18px">Datum und Uhrzeitzu statistischen Zwecken auf dem Server gespeichert, ohne dass diese Daten unmittelbar auf Ihre Person bezogen werden. Personenbezogene Daten,  </text>
-		<text x="50" y="240" fill="black" font-family="sans-serif" font-size="18px">insbesondere Name, Adresse oder E-Mail-Adresse werden soweit möglich auf freiwilliger Basis erhoben. Ohne Ihre Einwilligung erfolgt keine Weitergabe der Daten an Dritte.</text>
-		
-
-
-	</svg>
-	
-	<div id="footer" width = "100%">
-	<svg width = "100%" height = "70">
-		<rect width="100%" height="70" fill="brown" opacity=""></rect>
-		<text x="30" y="45" fill="white" font-family="sans-serif" font-size="20px">Hochschule Karlsruhe | Geoinformationsmanagement | Agnes Jeworrek und Maria Siebert	</text>
-	</svg>
 	</div>
-	
-	 
-	
+	<script>
+		$.get("./nav.html", function (data) {
+			$("#nav-placeholder").replaceWith(data);
+		});
+	</script>
+	<!--end of Navigation bar-->
+
+	<!-- Start of Content -->
+	<div class="container-fluid" id="Unit2">
+		<div class="row page show" id="page0">
+			<div class="col-2">
+				<div class="col-2-left">
+					<div class="p-2">
+					</div>
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="col-8-middle">
+
+					<div>
+
+
+						<h5> Copyright </h5>
+						<hr>
+						<p> By using this website you agree to the gathering, processing and use of your data in
+							accordance with the following: <br>
+							Your data will be saved anonymously and used for statistical purposes. This includes visited
+							sites, as well as date and time.
+							Personal data will only be gathered if explicitly stated and will not be given to others.
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="col-2-right">
+					<div class="p-2">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Content -->
+
+
+		<!-- START of control placeholder -->
+		<!-- <div id="control-placeholder">
+
+        </div>
+        <script>
+            $.get("./unit-control.html", function (data) {
+                $("#control-placeholder").replaceWith(data);
+            });
+        </script>-->
+		<!-- END of control placeholder -->
+
+		<!-- footer placeholder-->
+
+	</div>
+	<div id="footer-placeholderU2">
+
+	</div>
+	<script>
+		$.get("./footer.html", function (data) {
+			$("#footer-placeholderU2").replaceWith(data);
+		});
+	</script>
+	<!--end of Footer bar-->
+
+
+
+
+
+
 </body>
-</html>	
+
+
+
+</html>

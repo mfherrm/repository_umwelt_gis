@@ -1,67 +1,64 @@
-//Define map projection
-/*
-projection = d3.geoConicEqualArea()
-    .parallels([24, 32])
-    .rotate([15, 10
-            ])
-    .translate([0, 0])
-    .scale(1);
-*/
-let i = 0;
-var projectionM;
 var tooltip;
 //Create colors scheme    
-var colorM = d3.scaleThreshold()
+var color = d3.scaleThreshold()
     //thresholds of data
     .domain([10, 20, 50, 100, 250, 500])
     //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
     .range(d3.schemeReds[6]);
 
 //Load in GeoJSON data //Promise resolve
-d3.json("../geojson/germany_overview.geojson")
-    .then(drawMapSol)
-    .catch(error => { console.log(error) });
 
-d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
-.then(drawMapSol)
-.catch(error => { console.log(error) });
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_nation.geojson")])
+    .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 //Build Map
-function drawMapSol(data) {
-    console.log(i)
 
-    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1)): 
-    (projectionM = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]).rotate([-10, -52])); //1.left/right (lon) 2.up/down (lat)
-    
-    var pathM = d3.geoPath().projection(projectionM);
+function draw(data) {
+    let drawTarget = '#zaf';
+    let mapID = "solzaf"
+    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
+    drawMapSol(data[0], drawTarget, mapID, mapProjection)
+    drawTarget = '#ger';
+    mapID = "solger"
+    mapProjection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    drawMapSol(data[1], drawTarget, mapID, mapProjection)
+    drawTarget = '#ken';
+    mapID = "solken"
+    mapProjection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03,-.01]).rotate([-38,0])
+    drawMapSol(data[2], drawTarget, mapID, mapProjection)
+
+
+
+
+}
+
+function drawMapSol(data, drawTarget, mapID, mapProjection) {
+
+    //(); //1.left/right (lon) 2.up/down (lat)
+
+    var pathM = d3.geoPath().projection(mapProjection);
 
     var bbox = pathM.bounds(data),
-    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
-    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+        s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height),
+        t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     // Update the projection    
-    projectionM
+    mapProjection
         .scale(s)
-        .translate(t); 
-  
+        .translate(t);
 
-    let target;
-    i == 0 ? target = '#ger' : target = '#zaf'
+
+    //let target;
+    //ai == 0 ? target = '#zaf' : target = '#ger'
 
     //Create SVG element // viewBox for responsive Map
-    var svgM = d3.select(target)
+    var svgM = d3.select(drawTarget)
         .append("svg")
         //responsive size
         .attr("viewBox", [0, 0, width, height])
-        .attr('id', function () {
-            if (i == 0) {
-                return 'solm0'
-            } else {
-                return 'solm1'
-            }
-        })
+        .attr('id', mapID)
         .attr("preserveAspectRatio", "xMinYMin")
         .append("g")
         .attr("class", "mapboxSol");
@@ -72,7 +69,7 @@ function drawMapSol(data) {
         .append("path")
         .attr("d", pathM)
         .attr("class", "province")
-        .attr("pop_dense2020", function (d) {
+        .attr("population", function (d) {
             return d.properties.pop_dense_2020_adm1;
         })
         //get province name  
@@ -88,25 +85,25 @@ function drawMapSol(data) {
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
     drawLegend();
-    drawScalebar();
-    i++;
-    console.log(i)
-    tooltip = d3.select(target)
-        .append("div")
-        .attr("class", "tooltip")
-        .attr("opacity", 0);
+    drawScalebar(mapProjection);
 
-       
+
+
 };
 
 //Build Tooltip
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    tooltip.transition()
-        .duration(200)
+    tooltip = d3.selectAll('.mapboxSol')
+        .append("div")
+        .attr("class", "tooltip")
+        .attr('id', 'tt')
+        .attr("opacity", 0);
+    tooltip
         .style("opacity", .7)
         .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
+        .attr('id', 'tt')
         .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
     tooltip.join(
         enter =>
@@ -117,9 +114,7 @@ function drawTooltip() {
 };
 
 function eraseTooltip() {
-    tooltip.transition()
-        .duration(200)
-        .style("opacity", 0);
+    d3.selectAll('#tt').remove();
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
@@ -192,7 +187,7 @@ function drawLegend() {
 };
 
 //Build Scalebar -- 
-function drawScalebar() {
+function drawScalebar(projection) {
     let mapbox = getPosition($(".mapbox")[0]);
 
     var scaleBar = d3.geoScaleBar()

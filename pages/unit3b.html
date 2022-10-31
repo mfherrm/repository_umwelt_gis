@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit 3b - SDG 4.2.2.</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
 
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
-    
+
 </head>
+
 <body>
 
     <!-- navbar placeholder-->
@@ -44,7 +52,7 @@
 
     </div>
     <script>
-        $.get("./nav.html", function(data){
+        $.get("./nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -56,7 +64,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -65,7 +74,7 @@
                     <div class="maptitle justify-content-center">
                         <h4>Germany</h4>
                     </div>
-                    <div id="germany">
+                    <div class="mapbox" id="germany">
                     </div>
                 </div>
             </div>
@@ -73,15 +82,17 @@
                 <div class="col-2-right">
                     <div class="p-2">
                         <div>
-                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest </button>
-                            <button class="btn btn-secondary btn-sm " id="check_ger" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="check_ger" href="#" role="button"> Check
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
         <div class="row page hide" id="page1">
@@ -89,7 +100,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -109,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
         <div class="row page hide" id="page2">
@@ -117,7 +129,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -126,7 +139,7 @@
                     <div class="maptitle justify-content-center">
                         <h4>Kenya</h4>
                     </div>
-                    <div id="germany">
+                    <div class="mapbox" id="kenya">
                     </div>
                 </div>
             </div>
@@ -134,16 +147,17 @@
                 <div class="col-2-right">
                     <div class="p-2">
                         <div>
-                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest </button>
+                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest
+                            </button>
                             <button class="btn btn-secondary btn-sm " id="check" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
-                            
+
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
         <div class="row page hide" id="page3">
@@ -151,7 +165,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -171,14 +186,15 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="row page hide" id="page4">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -187,7 +203,7 @@
                     <div class="maptitle justify-content-center">
                         <h4>South Africa</h4>
                     </div>
-                    <div id="germany">
+                    <div class="mapbox" id="southafrica">
                     </div>
                 </div>
             </div>
@@ -195,15 +211,16 @@
                 <div class="col-2-right">
                     <div class="p-2">
                         <div>
-                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest </button>
+                            <button class="btn btn-secondary btn-sm " id="mode" href="#" role="button"> Highest
+                            </button>
                             <button class="btn btn-secondary btn-sm " id="check" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
         <div class="row page hide" id="page5">
@@ -211,7 +228,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>In this Unit you can test your own mental map of the world. Select the three countries
+                            Germany, Kenya and South Africa on the map</p>
                     </div>
                 </div>
             </div>
@@ -231,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
 
@@ -240,12 +258,22 @@
 
         </div>
         <script>
-            $.get("./unit-control.html", function(data){
+            $.get("./unit-control.html", function (data) {
                 $("#control-placeholder").replaceWith(data);
             });
         </script>
     </div>
-    
+    <!-- footer placeholder-->
+    <div id="footer-placeholderU2">
+
+    </div>
+    <script>
+        $.get("./footer.html", function (data) {
+            $("#footer-placeholderU2").replaceWith(data);
+        });
+    </script>
+    <!--end of Footer bar-->
+
     <!-- END of control placeholder -->
 </body>
 
