@@ -18,26 +18,37 @@ var colorM = d3.scaleThreshold()
     .range(d3.schemeReds[6]);
 
 //Load in GeoJSON data //Promise resolve
-d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
+d3.json("../geojson/germany_overview.geojson")
     .then(drawMapSol)
     .catch(error => { console.log(error) });
 
 d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
-    .then(drawMapSol)
-    .catch(error => { console.log(error) });
+.then(drawMapSol)
+.catch(error => { console.log(error) });
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
-
 //Build Map
 function drawMapSol(data) {
-    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1000)) : 
-    (projectionM = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52]));  //1.left/right (lon) 2.up/down (lat)
+    console.log(i)
+
+    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1)): 
+    (projectionM = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]).rotate([-10, -52])); //1.left/right (lon) 2.up/down (lat)
     
     var pathM = d3.geoPath().projection(projectionM);
 
+    var bbox = pathM.bounds(data),
+    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
+    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+
+    // Update the projection    
+    projectionM
+        .scale(s)
+        .translate(t); 
+  
+
     let target;
-    i == 0 ? target = '#zaf' : target = '#ger'
+    i == 0 ? target = '#ger' : target = '#zaf'
 
     //Create SVG element // viewBox for responsive Map
     var svgM = d3.select(target)
@@ -79,10 +90,13 @@ function drawMapSol(data) {
     drawLegend();
     drawScalebar();
     i++;
+    console.log(i)
     tooltip = d3.select(target)
         .append("div")
         .attr("class", "tooltip")
         .attr("opacity", 0);
+
+       
 };
 
 //Build Tooltip
@@ -180,7 +194,6 @@ function drawLegend() {
 //Build Scalebar -- 
 function drawScalebar() {
     let mapbox = getPosition($(".mapbox")[0]);
-    console.log("test2: " + mapbox.width)
 
     var scaleBar = d3.geoScaleBar()
         .projection(projection)

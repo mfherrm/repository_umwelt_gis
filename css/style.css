@@ -2,7 +2,6 @@
 html, body {
     height: 100%;
     min-width: 500px;
-    background-color: lightsteelblue;
 }
 p {
     font-family: 'Open Sans', sans-serif;
@@ -53,10 +52,21 @@ li a{
     size: 1px;
 }
 
-.flag {
-    height: 35px;
+.flag-container {
+    padding: .1rem .5rem .3rem .3rem;
+    height: 100%;
+    background-color: white;
+    border-radius: 5px;
     float: right;
-    padding-left: .6rem;
+}
+
+.flag {
+    height: 20px;
+    padding-left: .3rem;
+}
+
+.flag:hover {
+    transform: scale(1.25);
 }
 
 /* Footer styles -----------------------------------------------------------*/
@@ -186,7 +196,7 @@ li a{
     stroke-width: 2px;
 }
 
-.country {
+.country, .admin {
     stroke: white;
     stroke-width: .5px;
 }
@@ -194,6 +204,7 @@ li a{
     stroke:white;
     stroke-width: 2px;
 }
+
 /*-------------------------------------------------------------------------*/
 
 /* Styles for Graticular --------------------------------------------------*/
