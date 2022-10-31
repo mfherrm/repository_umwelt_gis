@@ -7,7 +7,7 @@ projection = d3.geoConicEqualArea()
     .translate([0, 0])
     .scale(1);
 */
-let i = 0;
+let ai = 0;
 var projectionM;
 var tooltip;
 //Create colors scheme    
@@ -30,9 +30,9 @@ d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
 
 //Build Map
 function drawMapSol(data) {
-    console.log(i)
+    console.log(ai)
 
-    i == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1)): 
+    ai == 0 ? (projectionM = d3.geoMercator().fitSize([width, height]).translate([0, 0]).scale(1)): 
     (projectionM = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]).rotate([-10, -52])); //1.left/right (lon) 2.up/down (lat)
     
     var pathM = d3.geoPath().projection(projectionM);
@@ -48,7 +48,7 @@ function drawMapSol(data) {
   
 
     let target;
-    i == 0 ? target = '#ger' : target = '#zaf'
+    ai == 0 ? target = '#zaf' : target = '#ger'
 
     //Create SVG element // viewBox for responsive Map
     var svgM = d3.select(target)
@@ -56,7 +56,7 @@ function drawMapSol(data) {
         //responsive size
         .attr("viewBox", [0, 0, width, height])
         .attr('id', function () {
-            if (i == 0) {
+            if (ai == 0) {
                 return 'solm0'
             } else {
                 return 'solm1'
@@ -89,7 +89,7 @@ function drawMapSol(data) {
         .on("mouseout", eraseTooltip)
     drawLegend();
     drawScalebar();
-    i++;
+    ai++;
     console.log(i)
     tooltip = d3.select(target)
         .append("div")
