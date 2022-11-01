@@ -3,7 +3,7 @@ var width = Math.max(document.documentElement.clientHeight, window.innerHeight |
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 
 
-Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_provinces.geojson")])
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/ger_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -63,11 +63,11 @@ function drawMap(data, target, id, projection) {
         .append("path")
         .attr("d", path)
         .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "country" : "admin";
+            return d.properties.LEVL_CODE == 0 ? "country" : "adminarea";
         })
         .attr("fill", function (d) {
             if (target == "#kenya") {
-                return d.properties.LEVEL == 1 ? "darkgrey":d.properties.LEVEL == 2? 'none' : "lightgrey";
+                return d.properties.LEVEL == 1 ? 'none':d.properties.LEVEL == 2? "darkgrey" : "lightgrey";
             } else {
                 if (d.properties.NUTS_NAME == "Deutschland") {
                     return "none"

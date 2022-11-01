@@ -196,11 +196,11 @@ li a{
     stroke-width: 2px;
 }
 
-.country, .admin {
+.country, .adminarea {
     stroke: white;
     stroke-width: .5px;
 }
-.country:hover, .admin:hover{
+.country:hover, .adminarea:hover{
     stroke:white;
     stroke-width: 2px;
 }

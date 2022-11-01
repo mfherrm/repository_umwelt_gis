@@ -2,33 +2,36 @@ var tooltip;
 //Create colors scheme    
 var color = d3.scaleThreshold()
     //thresholds of data
-    .domain([10, 20, 50, 100, 250, 500])
+    .domain([75, 80, 85, 90, 95, 100])
     //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
     .range(d3.schemeReds[6]);
 
 //Load in GeoJSON data //Promise resolve
 
-Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_provinces.geojson")])
+Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ger_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 //Build Map
-
+let l = 0;
 function draw(data) {
-        let drawTarget = '#zaf';
-        let mapID = "solzaf"
-        let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
+    let drawTarget = '#zaf';
+    let mapID = "solzaf"
+    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
     drawMapSol(data[0], drawTarget, mapID, mapProjection)
-        drawTarget = '#ger';
-        mapID = "solger"
-        mapProjection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    drawTarget = '#ger';
+    mapID = "solger"
+    mapProjection = projection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    l = 1;
     drawMapSol(data[1], drawTarget, mapID, mapProjection)
-        drawTarget = '#ken';
-        mapID = "solken"
-        mapProjection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03, -.01]).rotate([-38, 0])
+    drawTarget = '#ken';
+    mapID = "solken"
+    mapProjection = d3.geoAzimuthalEqualArea().scale(.25).translate([.03, -.01]).rotate([-38, 0]);
+    l = 2;
     drawMapSol(data[2], drawTarget, mapID, mapProjection)
-
+    drawLegend();
+    
 }
 
 function drawMapSol(data, drawTarget, mapID, mapProjection) {
@@ -59,24 +62,24 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .enter()
         .append("path")
         .attr("d", pathM)
-        .attr("class", "province")
-        .attr("population", function (d) {
-            return d.properties.pop_dense_2020_adm1;
+        .attr("class", "adminarea")
+        .attr("education_rel", function (d) {
+            return d.properties.education_rel;
         })
         //get province name  
         .attr("name", function (d) {
-            return d.properties.ADM1_EN;
+            return d.properties.name_1?d.properties.name_1 : d.properties.ADM2_NAME;
         })
-        //get color for Value of Population Density from "var color"
+        //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return d.properties.pop_dense_2020_adm1 ? color(d.properties.pop_dense_2020_adm1) : undefined;
+            return d.properties.education_rel ? color(d.properties.education_rel) : (d.properties.ADM0_NAME=='Kenya') ? 'darkgrey' : 'lightgrey';
         })
         //Cursor on mouseover
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
-    drawLegend();
-    drawScalebar(mapProjection);
+
+        drawScalebar(mapProjection, mapID);
 
 };
 
@@ -84,21 +87,23 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    tooltip = d3.selectAll('.mapboxSol')
+    let path = this;
+    tooltip = d3.selectAll('.mapboxsol')
         .append("div")
         .attr("class", "tooltip")
         .attr('id', 'tt')
         .attr("opacity", 0);
     tooltip
         .style("opacity", .7)
-        .style("left", bbox.x + bbox.width / 1.8 + 30 + "px")
+        .style("left", bbox.x + bbox.width / 2 + 10 + "px")
         .attr('id', 'tt')
-        .style("top", bbox.y + bbox.height / 1.8 + 30 + "px");
+        .style("top", bbox.y + bbox.height / 2 + "px")
+        ;
     tooltip.join(
         enter =>
             enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
         update =>
-            update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("pop_dense2020") + " </p>")
+            update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
     )
 };
 
@@ -109,10 +114,8 @@ function eraseTooltip() {
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend() {
     //set Title
-    d3.select(".legend");
-
     //create svg for Legend
-    var legendSvg = d3.select(".mapboxSol")
+    var legendSvg = d3.selectAll(".mapboxSol")
         .append("g")
         .attr("class", "legend")
         //.attr("viewBox", [0, 0, width, height])
@@ -126,7 +129,7 @@ function drawLegend() {
             return "translate(5," + 30 + ")";
         });
 
-    var legend = legendSvg.selectAll(".legend")
+    var legend = legendSvg.selectAll(null)
         .data(color.domain())
         .enter()
         .append("g")
@@ -138,7 +141,7 @@ function drawLegend() {
     legendSvg.append("g")
         .append("text")
         .text(function () {
-            return "Population Density per square km";
+            return "Percentage of children taking part in pre-primary education";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -176,9 +179,9 @@ function drawLegend() {
 };
 
 //Build Scalebar -- 
-function drawScalebar(mapProjection) {
+function drawScalebar(mapProjection, mapID) {
     let mapbox = getPosition($(".mapboxSol")[0]);
-
+    console.log(d3.select(this))
     var scaleBar = d3.geoScaleBar()
         .projection(mapProjection)
         //for other projection specify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
@@ -192,14 +195,13 @@ function drawScalebar(mapProjection) {
         // How far the tick text labels are from the lines
         .tickPadding(8)
 
-
-    var scaleSvg = d3.select(".mapboxSol")
+    var scaleSvg = d3.select(('#'+mapID))
         .append("g")
         .attr("class", "scalebar")
-        //move the Scalbar like the legend
+        //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + mapbox.height * 1.5 + ")";
-        });;
+            return "translate(10," + '970' + ")";
+        });
 
     scaleSvg.append("g").call(scaleBar);
 
