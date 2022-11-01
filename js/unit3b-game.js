@@ -3,7 +3,7 @@ var width = Math.max(document.documentElement.clientHeight, window.innerHeight |
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 
 
-Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_nation.geojson")])
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_provinces.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -21,7 +21,7 @@ function draw(data) {
     drawMap(data[1], target, id, projection)
     target = '#kenya';
     id = "exken"
-    projection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03,-.01]).rotate([-38,0]);
+    projection = d3.geoAzimuthalEqualArea().scale(.25).translate([.03, -.01]).rotate([-38, 0]);
     drawMap(data[2], target, id, projection)
 }
 
@@ -66,10 +66,14 @@ function drawMap(data, target, id, projection) {
             return d.properties.LEVL_CODE == 0 ? "country" : "admin";
         })
         .attr("fill", function (d) {
-            if (d.properties.NUTS_NAME == "Deutschland") {
-                return "none"
+            if (target == "#kenya") {
+                return d.properties.LEVEL == 1 ? "darkgrey":d.properties.LEVEL == 2? 'none' : "lightgrey";
             } else {
-                return d.properties.LEVL_CODE == 0 ? "lightgrey" : "darkgrey";
+                if (d.properties.NUTS_NAME == "Deutschland") {
+                    return "none"
+                } else {
+                    return d.properties.LEVL_CODE == 0 ? "lightgrey" : "darkgrey";
+                }
             }
         })
         .on("click", function (d) {

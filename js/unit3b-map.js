@@ -8,7 +8,7 @@ var color = d3.scaleThreshold()
 
 //Load in GeoJSON data //Promise resolve
 
-Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_nation.geojson")])
+Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_provinces.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -16,27 +16,22 @@ Promise.all([d3.json("../geojson/zaf_adm1-pop_dense2020.geojson"), d3.json("../g
 //Build Map
 
 function draw(data) {
-    let drawTarget = '#zaf';
-    let mapID = "solzaf"
-    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
+        let drawTarget = '#zaf';
+        let mapID = "solzaf"
+        let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
     drawMapSol(data[0], drawTarget, mapID, mapProjection)
-    drawTarget = '#ger';
-    mapID = "solger"
-    mapProjection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+        drawTarget = '#ger';
+        mapID = "solger"
+        mapProjection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
     drawMapSol(data[1], drawTarget, mapID, mapProjection)
-    drawTarget = '#ken';
-    mapID = "solken"
-    mapProjection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03,-.01]).rotate([-38,0])
+        drawTarget = '#ken';
+        mapID = "solken"
+        mapProjection = d3.geoAzimuthalEqualArea().scale(1.1).translate([.03, -.01]).rotate([-38, 0])
     drawMapSol(data[2], drawTarget, mapID, mapProjection)
-
-
-
 
 }
 
 function drawMapSol(data, drawTarget, mapID, mapProjection) {
-
-    //(); //1.left/right (lon) 2.up/down (lat)
 
     var pathM = d3.geoPath().projection(mapProjection);
 
@@ -48,10 +43,6 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
     mapProjection
         .scale(s)
         .translate(t);
-
-
-    //let target;
-    //ai == 0 ? target = '#zaf' : target = '#ger'
 
     //Create SVG element // viewBox for responsive Map
     var svgM = d3.select(drawTarget)
@@ -86,8 +77,6 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .on("mouseout", eraseTooltip)
     drawLegend();
     drawScalebar(mapProjection);
-
-
 
 };
 
@@ -187,12 +176,12 @@ function drawLegend() {
 };
 
 //Build Scalebar -- 
-function drawScalebar(projection) {
-    let mapbox = getPosition($(".mapbox")[0]);
+function drawScalebar(mapProjection) {
+    let mapbox = getPosition($(".mapboxSol")[0]);
 
     var scaleBar = d3.geoScaleBar()
-        .projection(projection)
-        //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
+        .projection(mapProjection)
+        //for other projection specify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
         .size([mapbox.width, 180])
         .zoomClamp(false)
         //sets the vertical tick size of the scale bar in pixels
@@ -204,7 +193,7 @@ function drawScalebar(projection) {
         .tickPadding(8)
 
 
-    var scaleSvg = d3.select(".mapbox")
+    var scaleSvg = d3.select(".mapboxSol")
         .append("g")
         .attr("class", "scalebar")
         //move the Scalbar like the legend
@@ -226,6 +215,5 @@ function getPosition(ele) {
     var rectHeight = boundingClientRect.height;
     var rectWidth = boundingClientRect.width;
 
-    console.log("left: " + left, ", top: " + top, ", width: " + rectWidth + " ,height: " + rectHeight);
     return boundingClientRect;
 }
