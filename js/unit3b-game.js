@@ -67,7 +67,7 @@ function drawMap(data, target, id, projection) {
         })
         .attr("fill", function (d) {
             if (target == "#kenya") {
-                return d.properties.LEVEL == 1 ? 'none':d.properties.LEVEL == 2? "darkgrey" : "lightgrey";
+                return d.properties.LEVEL == 1 ? 'none' : d.properties.LEVEL == 2 ? "darkgrey" : "lightgrey";
             } else {
                 if (d.properties.NUTS_NAME == "Deutschland") {
                     return "none"
@@ -78,56 +78,140 @@ function drawMap(data, target, id, projection) {
         })
         .on("click", function (d) {
             let admin = d3.select(this);
-            getAdmin(admin)
+            let id= document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4].id
+            
+            getAdmin(admin, id)
         })
         .style("cursor", function (d) {
             return d.properties.LEVL_CODE == 0 ? '' : "pointer";
         })
 };
 
-let select = []
+let selectger = []
+let boolger = []
+let selectken = []
+let selectzaf = []
 
-function getAdmin(admin) {
+function getAdmin(admin, id) {
+    let target;
+    let bool;
+    id=='germany'? target=selectger : id=='kenya'? target=selectken : id=='southafrica'? target=selectzaf : console.log('error')
+    id=='germany'? bool=boolger : id=='kenya'? bool=boolken : id=='southafrica'? bool=boolzaf : console.log('error')
     if ((admin.attr("fill") == "green")) {
-    } else if (admin.attr("fill") != "#00677F" && select.length < 3) {
-        select.push(admin)
-        return admin.attr("fill", "#00677F")
-
-    } else if (select[0]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN || select[1]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN || select[2]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN) {
-        select = select.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+    } else if (admin.attr("fill") == "red" && target.length < 3) {
+        target = target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
         console.log(admin._groups[0][0].__data__.properties.NAME_LATN)
         admin.attr('fill', 'darkgrey');
-    }/*else {
-        select = select.filter(element => element.attr("name") !== admin.attr("name"));
-        return admin.attr("fill", "darkgrey")
-    }*/
+    }else if (admin.attr("fill") != "#00677F" && target.length < 3) {
+        target.push(admin)
+        
+        return admin.attr("fill", "#00677F")
+
+    } else if (target[0]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
+
+    }
+    else if ( target[1]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
+        if (bool[2]==true){
+            target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+            console.log(target)
+            [target[1], target[2]] = [target[2], target[1]]
+            console.log(target)
+
+        } else {
+            target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+        }
+        admin.attr('fill', 'darkgrey');
+    } else if (target[2]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN) {
+        target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+        admin.attr('fill', 'darkgrey');
+    }
+    id=='germany'? selectger=target : id=='kenya'? selectken=target : id=='southafrica'? selectzaf=target : console.log('error')
+    
 };
 
-d3.select("#check_ger").on("click", function () {
-    for (let i in select) {
-        if (select[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg" || select[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg" || select[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen") {
-            if (select[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg") {
-                select[0].attr("fill", "green");
+d3.select("#checkger").on("click", function () {
+    for (let i in selectger) {
+            if (selectger[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg" || selectger[0].attr("fill")=='green') {
+                selectger[0].attr("fill", "green");
+                boolger[0]=true;
             } else {
-                select[0].attr("fill", "red");
+                selectger[0].attr("fill", "red");
             }
-            if (select[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg") {
-                select[1].attr("fill", "green");
+            if (selectger[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg" || selectger[1].attr("fill")=='green') {
+                selectger[1].attr("fill", "green");
+                boolger[1]=true;
             } else {
-                select[1].attr("fill", "red");
+                selectger[1].attr("fill", "red");
             }
-            if (select[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen") {
-                select[2].attr("fill", "green");
+            if (selectger[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen" || selectger[2].attr("fill")=='green') {
+                selectger[2].attr("fill", "green");
+                boolger[2]=true;
             } else {
-                select[2].attr("fill", "red");
+                selectger[2].attr("fill", "red");
             }
-
-
-        }
+        
     }
 })
 
-d3.select("#restart").on("click", function () {
-    select = [];
-    d3.selectAll(".admin").attr("fill", "darkgrey");
+d3.select("#checkzaf").on("click", function () {
+    for (let i in selectzaf) {
+        
+            if (selectzaf[0]._groups[0][0].__data__.properties.NAME_LATN == "Free State") {
+                selectzaf[0].attr("fill", "green");
+            } else {
+                selectzaf[0].attr("fill", "red");
+            }
+            if (selectzaf[1]._groups[0][0].__data__.properties.NAME_LATN == "Limpopo") {
+                selectzaf[1].attr("fill", "green");
+            } else {
+                selectzaf[1].attr("fill", "red");
+            }
+            if (selectzaf[2]._groups[0][0].__data__.properties.NAME_LATN == "Eastern Cape") {
+                selectzaf[2].attr("fill", "green");
+            } else {
+                selectzaf[2].attr("fill", "red");
+            }
+        
+    }
+})
+
+d3.select("#checkken").on("click", function () {
+    for (let i in selectger) {
+        
+            if (selectger[0]._groups[0][0].__data__.properties.NAME_LATN == "") {
+                selectger[0].attr("fill", "green");
+            } else {
+                selectger[0].attr("fill", "red");
+            }
+            if (selectger[1]._groups[0][0].__data__.properties.NAME_LATN == "") {
+                selectger[1].attr("fill", "green");
+            } else {
+                selectger[1].attr("fill", "red");
+            }
+            if (selectger[2]._groups[0][0].__data__.properties.NAME_LATN == "") {
+                selectger[2].attr("fill", "green");
+            } else {
+                selectger[2].attr("fill", "red");
+            }
+        
+    }
+})
+
+function findFirst(target){
+    for (let i=0; i< target.length; i++){
+        return target[i]==null? i : ''
+    }
+}
+
+d3.select("#restartger").on("click", function () {
+    selectger = [];
+    d3.selectAll('#germany').selectAll(".adminarea").attr("fill", "darkgrey");
+});
+d3.select("#restartken").on("click", function () {
+    selectken = [];
+    d3.selectAll('#kenya').selectAll(".adminarea").attr("fill", "darkgrey");
+});
+d3.select("#restartzaf").on("click", function () {
+    selectzaf = [];
+    d3.selectAll('#southafrica').selectAll(".adminarea").attr("fill", "darkgrey");
 });
