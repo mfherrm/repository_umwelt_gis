@@ -62,7 +62,9 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .enter()
         .append("path")
         .attr("d", pathM)
-        .attr("class", "adminarea")
+        .attr("class", function (d) {
+            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
+        })
         .attr("education_rel", function (d) {
             return d.properties.education_rel;
         })
@@ -72,10 +74,12 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return d.properties.education_rel ? color(d.properties.education_rel) : (d.properties.ADM0_NAME=='Kenya') ? 'darkgrey' : 'lightgrey';
+            return d.properties.education_rel? color(d.properties.education_rel) : d.properties.ADM0_NAME=='Kenya'? d.properties.LEVEL==1? 'none': 'darkgrey':'lightgrey'
         })
         //Cursor on mouseover
-        .style("cursor", "pointer")
+        .style("cursor", function (d) {
+            return d.properties.education_rel? "pointer": '';
+        })
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
 
@@ -93,7 +97,8 @@ function drawTooltip() {
         .attr("class", "tooltip")
         .attr('id', 'tt')
         .attr("opacity", 0);
-    tooltip
+    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class')=='adminarea'){
+        tooltip
         .style("opacity", .7)
         .style("left", bbox.x + bbox.width / 2 + 10 + "px")
         .attr('id', 'tt')
@@ -105,6 +110,7 @@ function drawTooltip() {
         update =>
             update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
     )
+}
 };
 
 function eraseTooltip() {

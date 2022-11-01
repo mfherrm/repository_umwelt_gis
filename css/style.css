@@ -196,7 +196,7 @@ li a{
     stroke-width: 2px;
 }
 
-.country, .adminarea {
+.country, .countryU3, .adminarea {
     stroke: white;
     stroke-width: .5px;
 }

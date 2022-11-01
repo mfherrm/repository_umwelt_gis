@@ -63,7 +63,7 @@ function drawMap(data, target, id, projection) {
         .append("path")
         .attr("d", path)
         .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "country" : "adminarea";
+            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
         })
         .attr("fill", function (d) {
             if (target == "#kenya") {
