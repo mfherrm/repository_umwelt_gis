@@ -87,43 +87,28 @@ function drawMap(data, target, id, projection) {
         })
 };
 
-let selectger = []
-let boolger = []
-let selectken = []
-let selectzaf = []
+let selectger =['X','X','X']
+let selectken =['X','X','X']
+let selectzaf =['X','X','X']
 
 function getAdmin(admin, id) {
     let target;
     let bool;
     id=='germany'? target=selectger : id=='kenya'? target=selectken : id=='southafrica'? target=selectzaf : console.log('error')
-    id=='germany'? bool=boolger : id=='kenya'? bool=boolken : id=='southafrica'? bool=boolzaf : console.log('error')
     if ((admin.attr("fill") == "green")) {
-    } else if (admin.attr("fill") == "red" && target.length < 3) {
-        target = target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
-        console.log(admin._groups[0][0].__data__.properties.NAME_LATN)
-        admin.attr('fill', 'darkgrey');
-    }else if (admin.attr("fill") != "#00677F" && target.length < 3) {
-        target.push(admin)
-        
+    } else if (admin.attr("fill") != "#00677F" && admin.attr("fill") != "red" && target.includes('X') ) {
+        addSelected(target, admin)
         return admin.attr("fill", "#00677F")
-
-    } else if (target[0]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
-
-    }
-    else if ( target[1]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
-        if (bool[2]==true){
-            target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
-            console.log(target)
-            [target[1], target[2]] = [target[2], target[1]]
-            console.log(target)
-
-        } else {
-            target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
-        }
+    } else if (target[0]!='X'&& target[0]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
         admin.attr('fill', 'darkgrey');
-    } else if (target[2]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN) {
-        target= target.filter(element => element._groups[0][0].__data__.properties.NAME_LATN !== (admin._groups[0][0].__data__.properties.NAME_LATN));
+        delSelected(target, target[0])
+    } else if ( target[1]!='X'&& target[1]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN){
         admin.attr('fill', 'darkgrey');
+        delSelected(target, target[1])
+    } else if (target[2]!='X'&& target[2]._groups[0][0].__data__.properties.NAME_LATN == admin._groups[0][0].__data__.properties.NAME_LATN) {
+        admin.attr('fill', 'darkgrey');
+        delSelected(target, target[2])
+        
     }
     id=='germany'? selectger=target : id=='kenya'? selectken=target : id=='southafrica'? selectzaf=target : console.log('error')
     
@@ -133,19 +118,17 @@ d3.select("#checkger").on("click", function () {
     for (let i in selectger) {
             if (selectger[0]._groups[0][0].__data__.properties.NAME_LATN == "Brandenburg" || selectger[0].attr("fill")=='green') {
                 selectger[0].attr("fill", "green");
-                boolger[0]=true;
+                
             } else {
                 selectger[0].attr("fill", "red");
             }
             if (selectger[1]._groups[0][0].__data__.properties.NAME_LATN == "Hamburg" || selectger[1].attr("fill")=='green') {
                 selectger[1].attr("fill", "green");
-                boolger[1]=true;
             } else {
                 selectger[1].attr("fill", "red");
             }
             if (selectger[2]._groups[0][0].__data__.properties.NAME_LATN == "Thüringen" || selectger[2].attr("fill")=='green') {
                 selectger[2].attr("fill", "green");
-                boolger[2]=true;
             } else {
                 selectger[2].attr("fill", "red");
             }
@@ -197,10 +180,19 @@ d3.select("#checkken").on("click", function () {
     }
 })
 
-function findFirst(target){
-    for (let i=0; i< target.length; i++){
-        return target[i]==null? i : ''
-    }
+function addSelected(target, selection){
+    //find first empty entry
+    let idx = target.indexOf('X')
+    //add element to first empty entry
+    target.splice(idx, 1, selection);
+    console.log(target)
+}
+
+function delSelected(target, selection){
+    let idx = target.indexOf(selection)
+    console.log(idx)
+    target.splice(idx, 1, 'X')
+    console.log(target)
 }
 
 d3.select("#restartger").on("click", function () {
