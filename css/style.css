@@ -12,12 +12,10 @@ p {
 }
 
 a {
-    color: white;
     text-decoration: none;
 }
 
 a:hover {
-    color: white;
     text-decoration: none;
 }
 
@@ -46,15 +44,16 @@ li a{
 #mainpage-link {
     text-decoration: none;
     font-size: 16pt;
+    color: white;
 }
 
-.bi-caret-left-fill {
-    size: 1px;
+#mainpage-link i{
+    color: white;
 }
 
 .flag-container {
-    padding: .1rem .5rem .3rem .3rem;
-    height: 100%;
+    margin-top: .2rem;
+    padding: 0 .3rem .3rem 0rem;    
     background-color: white;
     border-radius: 5px;
     float: right;
@@ -68,25 +67,31 @@ li a{
 .flag:hover {
     transform: scale(1.25);
 }
+/*---------------------------------------------------------------------------*/
+.footer .row, .header .row{
+    padding-right: 0;
+}
 
 /* Footer styles -----------------------------------------------------------*/
 .footer {
     border-radius: 2px;
-    background-color: brown;
     margin-right: .5rem;
     margin-left: .5rem;
-    height: 3rem;
 }
-.footer-left {
-    color: white;
-    padding-left: .6rem;
+
+a .bi {
+    color: brown;
+    font-size: 14pt;
 }
 
 .footer-right {
     float: right;
-    color: white;
     text-decoration: none;
     padding-left: .6rem;
+}
+
+.footer-right:hover {
+    transform: scale(1.25);
 }
 
 .container-footer {
@@ -94,12 +99,13 @@ li a{
     position: fixed;
     bottom: 0;
 }
+/*---------------------------------------------------------------------------*/
 
+/* Content styles -----------------------------------------------------------*/
 .col-2 {
     padding-left: 0;
     padding-right: .5rem;
 }
-
 
 .col-2-left {
     background-color: #D29494;
@@ -143,9 +149,6 @@ li a{
 .text-left {
     padding-left: .6rem
 }
-.text-right {
-
-}
 
 .selected{
     stroke: white;
@@ -168,6 +171,7 @@ li a{
 .control {
     width: 7rem;
 }
+/*-----------------------------------------------------------------------------*/
 
 /* Styles for Map e.g. Boundaries ---------------------------------------------*/   
 .maptitle {
@@ -286,6 +290,7 @@ li a{
 .bar.right {
   fill: firebrick;
 }
+/*------------------------------------------------------------------------*/
 
 /* MCT styles-------------------------------------------------------------*/
 #quiz ul {
