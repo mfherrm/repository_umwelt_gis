@@ -40,49 +40,81 @@
 
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
-        <script>
-            $.get("./nav.html", function(data){
-                $("#nav-placeholder").replaceWith(data);
-            });
-            </script>
+
     </div>
-    
+    <script>
+        $.get("./nav.html", function (data) {
+            $("#nav-placeholder").replaceWith(data);
+        });
+    </script>
     <!--end of Navigation bar-->
 
-
-    <div class="container-fluid" id="content">
-        <div class="row">
-            <div class="col-2 content">
-                <h5> SDG Indicator 1.2.1. </h5>
-                <div class="d-flex flex-wrap">
-                    <p align="left"> Schauen Sie sich die beiden Karten genau an. Arbeiten Sie die relativen Werte heraus, die dem Anteil der absoluten Bevölkerung und der unter der nationalen Armutsgrenze lebenden Menschen entsprechen.
-                        Mit hilfe der Pfeile können Sie zwischen den Karten switchen.</p>
-                </div>        
+    <div class="container-fluid">
+        <div class="row page hide" id="page0">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5>Unit 3a - SDG 1.2.1.</h5>
+                        <p> Choose which mode you want to play by pressing the left-most button in the right divider.
+                            Afterwards, select the three administrative areas you think have the highest or lowest
+                            participation in pre-primary education according to which mode you have chosen.
+                            <br>
+                            To verify whether you were right, press the button that labeled 'Check results'.
+                            <br>
+                            The game can be restarted by pressing the right-most button.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-8 content" id = middle>
-                
-                <div class="map"> <script  src="../js/mapDiagram.js"> </script></div>
-                
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="maptitle justify-content-center">
+                        <h4>Germany</h4>
+                            <div class="map" id="germany"> </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-2 content">
-            
-                <!-- Infobereich -->
-                <h6>Bevölkerung unterhalb der nationalen Armutsgrenze</h6>
-                <p>Definition: Indikator 1.2.1 ist der Anteil der Bevölkerung, der unterhalb der nationalen Armutsgrenze lebt. Die Armutsrate ist seit 1990 um mehr als die Hälfte gesunken. 
-                    Dennoch lebt immer noch jeder fünfte Mensch in den Entwicklungsregionen von weniger als 1,90 Dollar pro Tag. Millionen weitere Menschen verdienen kaum mehr als diesen...
-                    Im Übungsteil 2 wird zum Einen die absoulte Bevölkerungsgröße dargestellt, zum anderen die absoulte Anzahl an Menschen, die unter der nationalen Armutsgrenze leben.
-                    Die nationale Armutsgrenze liegt in Deutschland bei einem 1-Personen Haushalt bei 781€ im Monat und in Südafrika bei 992 Rand pro Person. <br> Weitere Informationen: <br> </p>
-                    
-                    <a href="https://de.statista.com/statistik/daten/studie/510/umfrage/einstufung-in-arm-und-reich-fuer-singles-und-paare/">Nationale Armutsgrenze Deutschland</a> <br>
-                    <a href="https://www.suedafrika.net/suedafrika/gesellschaft/armut.html">nationale Armutsgrenze Südafrika</a>
-
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <h5> SDG 1.2.1. - Participation in pre-primary education</h5>
+                            <p> <b>Definition: </b> Indicator 4.2.2 is the participation rate in organized learning (one
+                                year before the official primary entry age), by sex.
+                                <b>Goal:</b> By 2030 ensure that all girls and boys have access to quality early
+                                childhood development, care and pre-primary education.
+                                <br>
+                                "Education is the most powerful weapon you can use to change the world." - Nelson
+                                Mandela.
+                                <br> <br>
+                            </p>
+                            <a href="https://sdg-tracker.org/quality-education#4.2.2" target="blank">Click here for
+                                further Information on this topic</a>
+                            <hr>
+                            <button class="btn btn-secondary btn-sm mode" id="modeger" href="#" role="button"
+                                onClick="setMode()"> <i class="bi bi-caret-up-fill"></i> Highest
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="checkger" href="#" role="button"> Check
+                                results
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="restartger" href="#" role="button">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- START of control placeholder -->
+        <div id="control-placeholder">
+
         </div>
-    </div>    
-        
+        <script>
+            $.get("./unit-control.html", function (data) {
+                $("#control-placeholder").replaceWith(data);
+            });
+        </script>
 
-            
+        </div>         
     <!-- footer placeholder-->
     <div id="footer-placeholder">
         <script>
@@ -92,7 +124,7 @@
         </script>
     <!--end of Footer bar-->
     </div>
-    
-
+</div>
+    <script  src="../js/unit3a.js"> </script>
 </body>
 </html>
