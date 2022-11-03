@@ -3,7 +3,7 @@ var width = Math.max(document.documentElement.clientHeight, window.innerHeight |
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 let mode = false;
 
-Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ger_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
+Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -113,18 +113,18 @@ function getAdmin(admin, id) {
 d3.select("#checkger").on("click", function () {
     if (mode == false) {
         for (let i in selectger) {
-            if (selectger[0]._groups[0][0].__data__.properties.name_1 == "Brandenburg" || selectger[0].attr("fill") == 'green') {
+            if (selectger[0]._groups[0][0].__data__.properties.name_1 == "Thüringen" || selectger[0].attr("fill") == 'green') {
                 selectger[0].attr("fill", "green");
 
             } else {
                 selectger[0].attr("fill", "red");
             }
-            if (selectger[1]._groups[0][0].__data__.properties.name_1 == "Hamburg" || selectger[1].attr("fill") == 'green') {
+            if (selectger[1]._groups[0][0].__data__.properties.name_1 == "Mecklenburg-Vorpommern" || selectger[1].attr("fill") == 'green') {
                 selectger[1].attr("fill", "green");
             } else {
                 selectger[1].attr("fill", "red");
             }
-            if (selectger[2]._groups[0][0].__data__.properties.name_1 == "Thüringen" || selectger[2].attr("fill") == 'green') {
+            if (selectger[2]._groups[0][0].__data__.properties.name_1 == "Brandenburg" || selectger[2].attr("fill") == 'green') {
                 selectger[2].attr("fill", "green");
             } else {
                 selectger[2].attr("fill", "red");

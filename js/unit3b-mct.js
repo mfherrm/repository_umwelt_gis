@@ -144,52 +144,40 @@ var myQuiz = {
 	// data could be filled from an external source (JSON)
 	data: [{
 		
-		question: 'Which of the following countries is in stage one of the demographic transition?',
-		solution: 'Chad',
-		falses: ['Namibia', 'Algeria'],
+		question: 'By which year shall all girls and boys having access to quality early childhood development, care and pre-primary education be ensured ?',
+		solution: '2030',
+		falses: ['2035', '2025'],
 		explanation: ''
 	}, {
 		/* category: 'HTML', */
-		question: 'Which of the following countries is in stage two of the demographic transition?',
-		solution: 'Eritrea',
-		falses: ['Lybia', 'Central African Republic', 'Iceland'],
+		question: 'Which administrative areas rank the highest in their respective countries?',
+		solution: 'Free State, Placeholder, Thüringen',
+		falses: ['Free State, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Thüringen'],
 		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
-		question: 'Which of the following countries is in stage three of the demographic transition?',
-		solution: 'Morocco',
-		falses: ['Belarus', 'Portugal', 'Kazakhstan'],
+		question: 'Which administrative areas rank the second lowest in their respective countries?',
+		solution: 'Bremen, Western Cape, Placeholder',
+		falses: ['Western Cape, Placeholder, Bremen', 'Schleswig-Holstein, Western Cape, Placeholder', 'Placeholder, Schleswig-Holstein, Northern Cape'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'Which of the following countries is in stage four of the demographic transition?',
-		solution: 'Latvia',
-		falses: ['Denmark', 'United Kingdom'],
+		question: 'Areas with high population density generally tend to have a higher rate of participation in pre-primary education',
+		solution: 'False',
+		falses: ['True'],
+		explanation: ''
+	},{
+		/* category: 'Kategorie?', */
+		question: 'How do you think the level of detail influences the ranking in South Africa?',
+		solution: 'In areas with high disparities in population density scores vary a lot more than shown',
+		falses: ['The level of detail only marginally influences what is shown on the map', 'Scores tend to be stable across the same area but vary a lot between neighbouring areas'],
 		explanation: ''
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "What is a disadvantage of the four stage approach to the demographic transition?",
-		solution: 'Countries on the precipice of another stage do not fit into any stage',
-		falses: ['It shows societal development in too much detail', "A country's population pyramid differs from those of the four stages most of the time"],
-		explanation: ''
-	},{
-		/* category: 'Kategorie?', */
-		question: "What is the main driving factor behind a country's population stagnating?",
-		solution: 'A balance between birth and death rate',
-		falses: ['Societal norms', 'Urbanization'],
-		explanation: ''
-	},{
-		/* category: 'Kategorie?', */
-		question: "What is something that can easily be achieved visually using a population pyramid?",
-		solution: "A simple prediction of a country's total population in a specific amount of time",
-		falses: ['Differentiation between different demographic factors', 'Telling the exact total population number of a country'],
-		explanation: ''
-	},{
-		/* category: 'Kategorie?', */
-		question: 'What is an advantage of population pyramids?',
-		solution: 'They offer a higher level of detail due to breaking down the population into age groups',
-		falses: ['It is possible to distinguish between the contributions of multiple demographic processes', 'They represent large numbers'],
+		question: "Areas with low poverty tend to have a higher rate of participation in pre-primary education",
+		solution: 'False',
+		falses: ['True'],
 		explanation: ''
 	}],
 	emptyContainer: function () {
