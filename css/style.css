@@ -207,6 +207,7 @@ a .bi {
 .country:hover, .adminarea:hover{
     stroke:white;
     stroke-width: 2px;
+    cursor: pointer;
 }
 
 /*-------------------------------------------------------------------------*/

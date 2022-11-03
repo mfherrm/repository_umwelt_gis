@@ -63,7 +63,7 @@ function drawMap(data, target, id, projection) {
         .append("path")
         .attr("d", path)
         .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
+            return d.properties.LEVEL == 0 ? "countryU3" : d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
         })
         .attr("fill", function (d) {
             if (target == "#kenya") {
@@ -79,11 +79,8 @@ function drawMap(data, target, id, projection) {
         .on("click", function (d) {
             let admin = d3.select(this);
             let id = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4].id
-
-            getAdmin(admin, id)
-        })
-        .style("cursor", function (d) {
-            return d.properties.LEVL_CODE == 0 ? '' : "pointer";
+            d3.select(this).attr('class')=='adminarea'? getAdmin(admin, id) : ''
+            
         })
 };
 
