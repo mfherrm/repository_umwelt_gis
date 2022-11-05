@@ -1,9 +1,9 @@
 //Width and height
-var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var width = Math.max(document.documentElement.clientWidth, window.innerHeight || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 let mode = false;
 
-Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
+Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -13,15 +13,15 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 function draw(data) {
     let target = '#southafrica';
     let id = "exzaf"
-    let projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02]) // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center    
+    let projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]) // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center    
     drawMap(data[0], target, id, projection)
     target = '#germany';
     id = "exger"
-    projection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
     drawMap(data[1], target, id, projection)
     target = '#kenya';
     id = "exken"
-    projection = d3.geoAzimuthalEqualArea().scale(.25).translate([.03, -.01]).rotate([-38, 0]);
+    projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
     drawMap(data[2], target, id, projection)
 }
 
@@ -67,7 +67,7 @@ function drawMap(data, target, id, projection) {
         })
         .attr("fill", function (d) {
             if (target == "#kenya") {
-                return d.properties.LEVEL == 1 ? 'none' : d.properties.LEVEL == 2 ? "darkgrey" : "lightgrey";
+                return d.properties.LEVEL == 1 ? 'none' : d.properties.LEVEL == 2 ?  "lightgrey" : "darkgrey";
             } else {
                 if (d.properties.NUTS_NAME == "Deutschland") {
                     return "none"

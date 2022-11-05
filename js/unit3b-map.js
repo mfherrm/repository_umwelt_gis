@@ -8,7 +8,7 @@ var color = d3.scaleThreshold()
 
 //Load in GeoJSON data //Promise resolve
 
-Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_overview.geojson"), d3.json("../geojson/kenya_overview.geojson")])
+Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -18,16 +18,16 @@ let l = 0;
 function draw(data) {
     let drawTarget = '#zaf';
     let mapID = "solzaf"
-    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, -0.02])
+    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])
     drawMapSol(data[0], drawTarget, mapID, mapProjection)
     drawTarget = '#ger';
     mapID = "solger"
-    mapProjection = projection = d3.geoAzimuthalEqualArea().scale(.4).translate([0.005, -0.02]).rotate([-10, -52])
+    mapProjection = projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
     l = 1;
     drawMapSol(data[1], drawTarget, mapID, mapProjection)
     drawTarget = '#ken';
     mapID = "solken"
-    mapProjection = d3.geoAzimuthalEqualArea().scale(.25).translate([.03, -.01]).rotate([-38, 0]);
+    mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
     l = 2;
     drawMapSol(data[2], drawTarget, mapID, mapProjection)
     drawLegend();
@@ -74,7 +74,7 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return d.properties.education_rel? color(d.properties.education_rel) : d.properties.ADM0_NAME=='Kenya'? d.properties.LEVEL==1? 'none': 'darkgrey':'lightgrey'
+            return d.properties.education_rel? color(d.properties.education_rel) : d.properties.ADM0_NAME=='Kenya'? d.properties.LEVEL==1? 'none': 'lightgrey' : 'darkgrey'
         })
         //Cursor on mouseover
         .style("cursor", function (d) {
@@ -187,7 +187,6 @@ function drawLegend() {
 //Build Scalebar -- 
 function drawScalebar(mapProjection, mapID) {
     let mapbox = getPosition($(".mapboxSol")[0]);
-    console.log(d3.select(this))
     var scaleBar = d3.geoScaleBar()
         .projection(mapProjection)
         //for other projection specify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
