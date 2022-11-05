@@ -11,6 +11,7 @@ var svg = d3.select("#worldmap")
             //.attr("preserveAspectRatio", "xMinYMin")
             ;
 
+//Define Projection
 var projection = d3.geoBromley()
             .scale(width / 1.5 / Math.PI)
             .rotate([0, 0])
@@ -84,7 +85,7 @@ function getCountry(country){
     }
 };
 
-d3.select("#check").on("click",function(){
+d3.select("#check-world").on("click",function(){
                 for (let i in select){
                     if (select[i].attr("name").includes("Germany") || select[i].attr("name").includes("Kenya") || select[i].attr("name").includes("South Africa")){
                             select[i].attr("fill","green");
@@ -94,7 +95,7 @@ d3.select("#check").on("click",function(){
                 }                                               
             })
 
-d3.select("#restart").on("click",function(){
+d3.select("#restart-world").on("click",function(){
                 select = [];
                 d3.selectAll(".country").attr("fill","grey");
                 d3.select("#result").html("");

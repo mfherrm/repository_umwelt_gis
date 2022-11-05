@@ -17,7 +17,7 @@ var svg = d3.select("#kenya-overview")
 var projection = d3.geoAzimuthalEqualArea()
             .scale(.3)
             .translate([.03,-.01])  //1.left/right (lon) 2.up/down (lat)
-            .rotate([-38,0]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center            
+            .rotate([-39,0]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center            
             //if parallels --> analoge
 
 var color = d3.scaleOrdinal(d3.schemeSet3);

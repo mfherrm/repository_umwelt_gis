@@ -1,62 +1,12 @@
-//Width and height
-var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+let width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-//Create SVG element // viewBox for responsive Map
-var svgBoundaries = d3.select("#adm-map")
-            .append("svg")
-            //responsive size
-            .attr("viewBox", [0, 0, width, height])
-            //dunno seems nice
-            .attr("preserveAspectRatio", "xMinYMin");
+let svgAdm = d3.select(".map")
+    .append("svg")
+    //responsive size
+    .attr("viewBox", [0, 0, width, height])
+    //dunno seems nice
+    .attr("preserveAspectRatio", "xMinYMin")
+    .append("g")
+    .attr("class", "mapbox");
 
-var projectionGermany = d3.geoConicEqualArea()
-            .translate([0,0])
-            .scale(1);
-
-var pathBoundaries = d3.geoPath()
-            .projection(projectionGermany);
-
-Promise.all([d3.json("../geojson/kenya_nation.geojson"),d3.json("../geojson/germany_nation.geojson"),d3.json("../geojson/zaf_nation.geojson")])
-    .then(drawKenya)
-    .catch(error => {console.log("Ooops, Error: " + error)});
-
-function drawKenya(data){
-    // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
-    var bbox = pathBoundaries.bounds(data[0]),
-    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
-    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
-    // Update the projection   
-    console.log(s)
-    console.log(t)
-    
-    projectionGermany
-        .scale(s)
-        .translate(t); 
-
-    var kenya = svgBoundaries.selectAll(null)
-                    .data(data[0].features)
-                    .enter()
-                    .append("path")
-                    .attr("d", pathBoundaries)
-                    .attr("class", "country")
-                    .attr("id","Kenya")
-                    .attr("fill", "grey")
-                    .attr("lol",function(d){
-                        console.log(d.geometry)
-                    });
-
-    var germany = svgBoundaries.selectAll("null")
-                    .data(data[1].features)
-                    .enter()
-                    .append("path")
-                    .attr("d", pathBoundaries)
-                    .attr("class", "country")
-                    .attr("id","Germany")
-                    .attr("fill", "yellow")
-                    .attr("transform", function(d){
-                        console.log(d.geometry)
-                        return "translate("+projection(d.geometry.coordinates)+")"
-                        });
-                    ;
-}

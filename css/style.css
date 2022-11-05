@@ -1,11 +1,10 @@
 /* Styles for HTML-Tags and Layout --------------------------------------------*/
 html, body {
     height: 100%;
-    min-width: 500px;
+    min-width: 992px;
 }
 p {
     font-family: 'Open Sans', sans-serif;
-    text-align: justify;
     text-justify: inter-word;
     padding: 0;
     margin: 0;
@@ -31,6 +30,7 @@ li a{
 .container-fluid {
     padding-bottom: 5rem;
 }
+
 /* Header styles ----------------------------------------------------------*/
 .header {
     margin-left: .5rem;
@@ -155,6 +155,17 @@ a .bi {
     fill: lightcoral;
 }
 /* Buttons  -------------------------------------------------------------------*/   
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb {
+    /* fix for FF unable to apply focus style bug  */
+    background: darkslategrey;
+}
+
+.form-label {
+    margin-top: .3rem;
+    margin-bottom: 0;
+}
+
 #next {
     visibility: visible;
     float: right;
@@ -290,6 +301,37 @@ a .bi {
 
 .bar.right {
   fill: firebrick;
+}
+/*------------------------------------------------------------------------*/
+
+/*Drag n Drop styles -----------------------------------------------------*/
+/* (A) LIST STYLES */
+.sortlist {
+    background-color: lightgrey;
+    border-radius: 3px;
+}
+
+.slist {
+    list-style: none;
+    padding: 3px;
+    margin: 0;
+}
+.slist li {
+    margin: 10px;
+    padding: 8px;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+    background: #f5f5f5;
+}
+
+/* (B) DRAG-AND-DROP HINT */
+.slist li.hint {
+    border: 1px solid #ffc49a;
+    background: #feffb4;
+}
+.slist li.active {
+    border: 1px solid #ffa5a5;
+    background: #ffe7e7;
 }
 /*------------------------------------------------------------------------*/
 

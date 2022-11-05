@@ -37,7 +37,6 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 <body>
-
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
 
@@ -54,8 +53,10 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Introduction - Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. Select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <h5>Mental Maps</h5>
+                        <p>In this Unit you can test your own mental map of the world. </p>
+                        <p>Please select the three countries Germany, Kenya and South Africa on the map</p> 
+                        <p>You can check your input with the 'Check' button on the right.</p>
                     </div>
                 </div>
             </div>
@@ -72,8 +73,8 @@
                 <div class="col-2-right">
                     <div class="p-2">
                         <div>
-                            <button class="btn btn-secondary btn-sm " id="check" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="check-world" href="#" role="button"> Check </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-world" href="#" role="button"> 
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
@@ -82,19 +83,84 @@
             </div> 
 
         </div>
-        <div class="row page hide" id="page1">
+        <div class="row page" id="page1">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Introduction - Mental Maps</h5>
-                        <p>What are administrative boundaries. Comparison of Germanys, Kenyas and South African Boundaries</p> 
+                        <h5>Mental Maps</h5>
+                         <p>Before we go over to the administrative boundaries, let's check your mental map of Kenya, Germany and South Africa in regard to their area and total population</p>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Administrative boundaries</h4>
+                        <h4>Area & Population</h4>
+                    </div>
+                    <p>Please order both lists from highest to lowest.</p>
+                   
+                    <div class="row justify-content-center">
+                        <div class="col-4 sortlist" id="area">
+                            <p>By Area</p>
+                            <ul class="slist">
+                                <li draggable="true">South Africa</li>
+                                <li draggable="true">Germany</li>
+                                <li draggable="true">Kenya</li>
+                            </ul>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-4 sortlist" id="population">
+                            <p>By Population:</p>
+                            <ul class="slist">
+                                <li draggable="true">Kenya</li>
+                                <li draggable="true">South Africa</li>
+                                <li draggable="true">Germany</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">
+                    <div class="p-2">
+                        <div>
+                            <button class="btn btn-secondary btn-sm " id="check-area" href="#" role="button"> Check </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-area" href="#" role="button"> 
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row page " id="page2">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5></h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 p-2">
+                            <p>Display</p>
+                            <label for="zafRange" class="form-label">South Africa</label>
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="80" id="zafRange">
+                            <label for="kenRange" class="form-label">Kenya</label>
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="70" id="kenRange">
+                            <label for="gerRange" class="form-label">Germany</label>
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="50" id="gerRange">
+                        </div>
+                        <div class="col-5 p-2">
+                            <p>Color change?</p>
+                            </br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="maptitle justify-content-center">
+                        <h4>Area & Population Solution</h4>
                     </div>
                     <div id="adm-map">
                         
@@ -102,13 +168,58 @@
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">
-
+                <div class="col-2-right">   
+                    <div class="p-2">
+                        <h5>Mental Maps</h5>
+                    </div>
+                    <div class="p-2">
+                        <p><strong>South Africa</strong></p>
+                        <ul class="factbook-list">
+                            <li>Area: 1,219,090 sq km</li>
+                            <li>Total Population: 57,516,665 (2022 est.)</li>
+                            <li style="padding-top: .4rem">The Population is concentrated along southern and southesterns coast and aroung Pretoria; The west is less densly populated than the east.</li>
+                        </ul>
+                        <p><strong>Kenya</strong></p>
+                        <ul class="factbook-list">
+                            <li>Area: 580,367 sq km </li>
+                            <li>Total Population: 55,864,655 (2022 est.)</li>
+                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake Victoria, the capital Nairobi and southeast along the Indian Ocean.</li>
+                        </ul>
+                        <p><strong>Germany</strong></p>
+                        <ul class="factbook-list">
+                            <li>Area: 357,022 sq km</li>
+                            <li>Total Population: 84,316,622 (2022 est.)</li>
+                            <li style="padding-top: .4rem">Fairly even population distribution throughout most of the country, with urban areas attracting larger and denser populations, particularly in the far western part of the industrial state of North Rhine-Westphalia.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="row page hide" id="page2">
+        <div class="row page " id="page3">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5>Mental Maps</h5>
+                        <p>For our last section we'll look at the administrative boundaries of our beloved countries.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="maptitle justify-content-center">
+                        <h4>Administrative Boundaries</h4>
+                    </div>
+                    <div class="adm-map">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">   
+                </div>
+            </div>
+        </div>
+        <div class="row page " id="page4">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
@@ -147,5 +258,6 @@
     <!-- END of control placeholder -->
 </body>
 <script src="../js/unit1a_world-map.js"></script>
+<script src="../js/unit1a_area-comparison-map.js"></script>
 <script src="../js/unit1a_adm-map.js"></script>
 </html>
