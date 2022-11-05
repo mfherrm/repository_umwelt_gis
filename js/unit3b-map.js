@@ -31,7 +31,7 @@ function draw(data) {
     l = 2;
     drawMapSol(data[2], drawTarget, mapID, mapProjection)
     drawLegend();
-    
+
 }
 
 function drawMapSol(data, drawTarget, mapID, mapProjection) {
@@ -70,20 +70,20 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         })
         //get province name  
         .attr("name", function (d) {
-            return d.properties.name_1?d.properties.name_1 : d.properties.ADM2_NAME;
+            return d.properties.name_1 ? d.properties.name_1 : d.properties.ADM2_NAME;
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return d.properties.education_rel? color(d.properties.education_rel) : d.properties.ADM0_NAME=='Kenya'? d.properties.LEVEL==1? 'none': 'lightgrey' : 'darkgrey'
+            return d.properties.education_rel ? color(d.properties.education_rel) : d.properties.ADM0_NAME == 'Kenya' ? d.properties.LEVEL == 1 ? 'none' : 'lightgrey' : 'darkgrey'
         })
         //Cursor on mouseover
         .style("cursor", function (d) {
-            return d.properties.education_rel? "pointer": '';
+            return d.properties.education_rel ? "pointer" : '';
         })
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
 
-        drawScalebar(mapProjection, mapID);
+    drawScalebar(mapProjection, mapID);
 
 };
 
@@ -91,26 +91,25 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    let path = this;
-    tooltip = d3.selectAll('.mapboxsol')
+    tooltip = d3.select('.mapboxsol')
         .append("div")
         .attr("class", "tooltip")
         .attr('id', 'tt')
         .attr("opacity", 0);
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class')=='adminarea'){
+    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'adminarea') {
         tooltip
-        .style("opacity", .7)
-        .style("left", bbox.x + bbox.width / 2 + 10 + "px")
-        .attr('id', 'tt')
-        .style("top", bbox.y + bbox.height / 2 + "px")
-        ;
-    tooltip.join(
-        enter =>
-            enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
-        update =>
-            update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
-    )
-}
+            .style("opacity", .7)
+            .style("left", bbox.x + bbox.width / 2 + 10 + "px")
+            .attr('id', 'tt')
+            .style("top", bbox.y + bbox.height / 2 + "px")
+            ;
+        tooltip.join(
+            enter =>
+                enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
+            update =>
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
+        )
+    }
 };
 
 function eraseTooltip() {
@@ -200,7 +199,7 @@ function drawScalebar(mapProjection, mapID) {
         // How far the tick text labels are from the lines
         .tickPadding(8)
 
-    var scaleSvg = d3.select(('#'+mapID))
+    var scaleSvg = d3.select(('#' + mapID))
         .append("g")
         .attr("class", "scalebar")
         //move the Scalebar like the legend
