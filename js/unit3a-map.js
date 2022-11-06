@@ -2,13 +2,9 @@
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
 let prov
-let size
 let max
-let projection
 let tooltip
 let circles
-let color
-let csize
 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(draw).catch(error => { console.log(error) })
@@ -18,27 +14,10 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    let target = '#southafrica';
-    let id = "mzaf"
-    projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center 
-    color = d3.scaleThreshold().domain([0.59, 0.61, 0.63, 0.64, 0.65]).range(d3.schemeReds[7]);
-    csize= 50;
-    drawMap(data[0], target, id, projection, color, csize)
-    target = '#germany';
-    id = "mger"
-    projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
-    color = d3.scaleThreshold().domain([0.25,0.26, 0.27, 0.29, 0.31]).range(d3.schemeReds[7]);
-    csize= 80;
-    drawMap(data[1], target, id, projection, color, csize)
-    target = '#kenya';
-    id = "mken"
-    projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
-    color = d3.scaleThreshold().domain([0.24, 0.32, 0.40, 0.48, 0.56]).range(d3.schemeReds[7]);
-    csize= 50;
-    drawMap(data[2], target, id, projection, color, csize)
-
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([0.59, 0.61, 0.63, 0.64, 0.65]).range(d3.schemeReds[7]), 50)
+    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([0.25,0.26, 0.27, 0.29, 0.31]).range(d3.schemeReds[7]), 80)
+    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([0.24, 0.32, 0.40, 0.48, 0.56]).range(d3.schemeReds[7]), 50)
 }
-
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
@@ -73,9 +52,7 @@ function drawMap(data, target, id, projection, color, csize) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea3a";
-        })
+        .attr("class", "adminarea3a")
         .attr("gini", function (d) {
             return d.properties.gini_t;
         })
@@ -88,18 +65,17 @@ function drawMap(data, target, id, projection, color, csize) {
         })
         //get color for Value of Population Density from "var color"
         .style("fill", function (d) {
-            return d.properties.gini_t ? color(d.properties.gini_t) : 'lightgray';
+            return color(d.properties.gini_t)
         })
 
     drawDiagram();
     drawScalebar(projection, id);
-    drawLegend(id);
+    drawLegend(id, csize, color);
 
     function drawDiagram(d) {
         let popTot = []
         for (let i = 0; i < data.features.length; i++) {
             popTot.push(data.features[i].properties.population)
-
         }
         circles = svg.selectAll(null)
             .data(data.features)
@@ -170,7 +146,7 @@ function eraseTooltip() {
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
-function drawLegend(id) {
+function drawLegend(id, csize, color) {
     let size = d3.scaleSqrt()
         .domain([1, max])
         .range([1, csize]);
