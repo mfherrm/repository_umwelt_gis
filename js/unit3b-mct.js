@@ -144,7 +144,7 @@ var myQuiz = {
 	// data could be filled from an external source (JSON)
 	data: [{
 		
-		question: 'By which year shall all girls and boys having access to quality early childhood development, care and pre-primary education be ensured ?',
+		question: 'By which year shall all girls and boys having access to quality early childhood development, care and pre-primary education be ensured?',
 		solution: '2030',
 		falses: ['2035', '2025'],
 		explanation: ''
@@ -175,7 +175,7 @@ var myQuiz = {
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "Areas with low poverty tend to have a higher rate of participation in pre-primary education",
+		question: "Areas with little poverty tend to have a higher rate of participation in pre-primary education",
 		solution: 'False',
 		falses: ['True'],
 		explanation: ''

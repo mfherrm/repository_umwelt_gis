@@ -41,10 +41,9 @@ d3.json("../geojson/zaf_adm1-pop_dense2020.geojson")
     .catch(error => { console.log(error) });
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-var tooltip = d3.select(".map")
+var tooltip = d3.select(".mapbox")
     .append("div")
     .attr("class", "tooltip")
-    .attr("opacity", 0);
 var circles = d3.select(".mapbox")
     .append("g")
     .attr("class", "circles");
