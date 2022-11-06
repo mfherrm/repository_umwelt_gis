@@ -17,12 +17,6 @@ var projection = d3.geoBromley()
             .rotate([0, 0])
             .center([0, 0])
             .translate([width/2, height /4]);
-/*
-var projection = d3.geoMercator()
-                .translate([(width/2), (height/1.5)])
-                .scale( width / 2 / Math.PI);
-*/
-// Define Zoom
 
 // Define Graticule 
 var graticule = d3.geoGraticule();
@@ -46,15 +40,46 @@ function drawMap(data){
     //Bind data and create one path per GeoJSON feature
 
     //Add Graticular
+    svg.append("defs").append("path")
+        .datum({type: "Sphere"})
+        .attr("id", "sphere")
+        .attr("d", path);
+
+    svg.append("use")
+        .attr("class", "stroke")
+        .attr("xlink:href", "#sphere");
+
+    svg.append("use")
+        .attr("class", "fill")
+        .attr("xlink:href", "#sphere");
+
+    svg.append("path")
+        .datum(graticule)
+        .attr("class", "graticule")
+        .attr("d", path);
+
+    svg.insert("path", ".graticule")
+        .datum(data.features)
+        .attr("class", "land")
+        .attr("d", path);
+  
+    svg.insert("path", ".graticule")
+        .datum(data.features)
+        .attr("class", "boundary")
+        .attr("d", path);
+    
+    /*
     svg.append("path")
         .datum(graticule)
         .attr("class", "graticule")
         .attr("d", path);
     
+        
     svg.append("g").append("path")
         .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
         .attr("class", "equator")
         .attr("d", path);
+    */
     
     //why null? --> https://stackoverflow.com/questions/48569159/d3-js-does-not-draw-all-lines-only-some-of-them
     svg.selectAll(null)
@@ -88,9 +113,9 @@ function getCountry(country){
 d3.select("#check-world").on("click",function(){
                 for (let i in select){
                     if (select[i].attr("name").includes("Germany") || select[i].attr("name").includes("Kenya") || select[i].attr("name").includes("South Africa")){
-                            select[i].attr("fill","green");
+                            select[i].attr("fill","#4FE34F");
                     } else {
-                            select[i].attr("fill","red");
+                            select[i].attr("fill","#EC5B5B");
                     }                              
                 }                                               
             })

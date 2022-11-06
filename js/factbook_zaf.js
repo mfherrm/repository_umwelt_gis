@@ -1,10 +1,10 @@
 //Width and height
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+let width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 
 //Create SVG element // viewBox for responsive Map
-var svg = d3.select("#zaf-overview")
+let svg = d3.select("#zaf-overview")
             .append("svg")
             //responsive size
             .attr("viewBox", [0, 0, width, height])
@@ -15,16 +15,16 @@ var svg = d3.select("#zaf-overview")
 
 //Define map projection
 
-var projection = d3.geoAzimuthalEqualArea()
+let projection = d3.geoAzimuthalEqualArea()
             .scale(.45)
             .translate([-.013,.56])  //1.left/right (lon) 2.up/down (lat)
             .rotate([-24,-28]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center            
             //if parallels --> analoge
 
-var color = d3.scaleOrdinal(d3.schemeSet3);
+let color = d3.scaleOrdinal(d3.schemeSet3);
 
 //Define path generator
-var path = d3.geoPath()
+let path = d3.geoPath()
             .projection(projection);
             
 //Load in GeoJSON data //Promise resolve
@@ -35,7 +35,7 @@ d3.json("../geojson/zaf_overview.geojson")
 //Build Map
 function drawMap(data){
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
-    var bbox = path.bounds(data),
+    let bbox = path.bounds(data),
         s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
         t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
     // Update the projection    
@@ -69,7 +69,7 @@ function drawMap(data){
 };
 
 function drawScalebar(){
-    var scaleBar = d3.geoScaleBar()
+    let scaleBar = d3.geoScaleBar()
                         .projection(projection)
                         //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
                         .size([width, height])
@@ -88,7 +88,7 @@ function drawScalebar(){
                         ;
                         // How far the tick text labels are from the line
 
-    var scaleSvg = d3.select(".mapbox")
+    let scaleSvg = d3.select(".mapbox")
                         .append("g")
                         .attr("class","scalebar");
     

@@ -2,7 +2,6 @@
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-
 //Create SVG element // viewBox for responsive Map
 var svg = d3.select("#germany-overview")
             .append("svg")
@@ -14,7 +13,6 @@ var svg = d3.select("#germany-overview")
             .attr("class","mapbox");
 
 //Define map projection
-
 var projection = d3.geoAzimuthalEqualArea()
             .scale(.4)
             .translate([0.005,-0.02])  //1.left/right (lon) 2.up/down (lat)
