@@ -1,8 +1,8 @@
 var tooltipG;
 //Create colors scheme    
-let gerC = [(d3.scaleThreshold().domain([0.25, 0.26, 0.27, 0.29, 0.31]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([0.27, 0.34, 0.36, 0.4, 0.42]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([0.30, 0.32, 0.35, 0.37, 0.40]).range(d3.schemeReds[6]))];
-let kenC = [(d3.scaleThreshold().domain([0.24, 0.32, 0.40, 0.48, 0.56]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([0.15, 0.19, 0.23, 0.29, 0.37]).range(d3.schemeReds[6]))/**5/4*/ , (d3.scaleThreshold().domain([0.2, 0.24, 0.29, 0.35, 0.42]).range(d3.schemeReds[6]))]; // *6/5
-let zafC = [(d3.scaleThreshold().domain([0.6, 0.61, 0.62, 0.63, 0.64, 0.65]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([0.39, 0.4, 0.41, 0.42, 0.43]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([0.19, 0.2, 0.21, 0.22, 0,23]).range(d3.schemeReds[6]))];
+let gerC = [(d3.scaleThreshold().domain([11, 15, 17, 19, 24]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([20, 29, 38, 47, 55]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([17, 22, 25, 27, 29]).range(d3.schemeReds[6]))];
+let kenC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
+let zafC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
 let b = 1, z=1;
 let g,k;
 let colorG = zafC[b]
@@ -17,26 +17,29 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 function draw(data) {
     let drawTarget = '#zaf';
-    let mapID = "ginizaf"
+    let pID = "ginizaf"
+    let mapID ='pzaf'
     let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])
-    drawMapG(data[0], drawTarget, mapID, mapProjection, colorG)
+    drawMapG(data[0], drawTarget, mapID, mapProjection, colorG, pID)
     drawTarget = '#ger';
-    mapID = "giniger"
+    mapID='pger'
+    pID = "giniger"
     mapProjection = projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
     b=1, g=1;
     colorG = gerC[b]
-    drawMapG(data[1], drawTarget, mapID, mapProjection, colorG)
+    drawMapG(data[1], drawTarget, mapID, mapProjection, colorG, pID)
     drawTarget = '#ken';
-    mapID = "giniken"
+    pID = "giniken"
+    mapID='pken'
     mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
     b=2, k=2;
     colorG = kenC[b]
-    drawMapG(data[2], drawTarget, mapID, mapProjection, colorG)
+    drawMapG(data[2], drawTarget, mapID, mapProjection, colorG, pID)
 
 
 }
 
-function drawMapG(data, drawTarget, mapID, mapProjection, colorG) {
+function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
 
     var pathG = d3.geoPath().projection(mapProjection);
 
@@ -57,25 +60,26 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG) {
 
         .attr("preserveAspectRatio", "xMinYMin")
         .append("g")
-        .attr("class", "mapboxG");
+        .attr("class", "mapboxG")
+        .attr('id', mapID);
     //Bind data and create one path per GeoJSON feature
     svgG.selectAll(null)
         .data(data.features)
         .enter()
         .append("path")
         .attr("d", pathG)
-        .attr('id', mapID)
+        .attr('id', pID)
         .attr("class", function (d) {
             return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
         })
-        .attr("gini_t", function (d) {
-            return d.properties.gini_t;
+        .attr("poverty_rel", function (d) {
+            return d.properties.poverty_rel;
         })
-        .attr("gini_f1", function (d) {
-            return d.properties.gini_f1;
+        .attr("poverty_rel_f1", function (d) {
+            return d.properties.poverty_rel_f1;
         })
-        .attr("gini_f2", function (d) {
-            return d.properties.gini_f2;
+        .attr("poverty_rel_f2", function (d) {
+            return d.properties.poverty_rel_f2;
         })
         //get province name  
         .attr("name", function (d) {
@@ -83,13 +87,13 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG) {
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return b==2? colorG(d.properties.gini_f2) : b==1? colorG(d.properties.gini_f1) : colorG(d.properties.gini_t)
+            return b==2? colorG(d.properties.poverty_rel_f2) : b==1? colorG(d.properties.poverty_rel_f1) : colorG(d.properties.poverty_rel)
         })
         //Cursor on mouseover
         .style("cursor", function (d) {
-            return d.properties.education_rel ? "pointer" : '';
+            return d.properties.poverty_rel ? "pointer" : '';
         })
-        .on("mouseover", drawTooltipG)
+        .on("mouseover", drawTooltipG)//Hier überprüfen woher tooltip kommt und g,z,k nehmen
         .on("mouseout", eraseTooltipG)
 
     drawScalebar(mapProjection, mapID);
@@ -117,7 +121,7 @@ function drawTooltipG() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.format(".0f")(d3.select(this).attr("gini_t") * 100) + "% </p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.format(".1f")(d3.select(this).attr("poverty_rel")) + "% </p>")
         )
     }
 };
@@ -130,6 +134,7 @@ function eraseTooltipG() {
 function drawLegendG(mapID) {
     //set Title
     //create svg for Legend
+    console.log('#' + mapID)
     var legendSvgG = d3.selectAll('#' + mapID)
         .append("g")
         .attr("class", "legend")
@@ -156,7 +161,7 @@ function drawLegendG(mapID) {
     legendSvgG.append("g")
         .append("text")
         .text(function () {
-            return "Percentage of children taking part in pre-primary education";
+            return "Population in poverty [%]";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -215,7 +220,7 @@ function changeColor(id) {
             console.log(tar)
         }
         console.log(b, tar)
-        b==0? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.gini_t)) : b==1? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.gini_f1)) : (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.gini_f2));
+        b==0? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel)) : b==1? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel_f1)) : (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel_f2));
         d3.selectAll(tar)._groups[0][a].style.fill = colorl
 
     }

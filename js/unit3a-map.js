@@ -21,19 +21,19 @@ function draw(data) {
     let target = '#southafrica';
     let id = "mzaf"
     projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center 
-    color = d3.scaleThreshold().domain([75, 80, 85, 90, 95, 100]).range(d3.schemeReds[6]);
+    color = d3.scaleThreshold().domain([0.59, 0.61, 0.63, 0.64, 0.65]).range(d3.schemeReds[7]);
     csize= 50;
     drawMap(data[0], target, id, projection, color, csize)
     target = '#germany';
     id = "mger"
     projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
-    color = d3.scaleThreshold().domain([5, 7, 10, 13, 15, 17, 20]).range(d3.schemeReds[7]);
+    color = d3.scaleThreshold().domain([0.25,0.26, 0.27, 0.29, 0.31]).range(d3.schemeReds[7]);
     csize= 80;
     drawMap(data[1], target, id, projection, color, csize)
     target = '#kenya';
     id = "mken"
     projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
-    color = d3.scaleThreshold().domain([75, 80, 85, 90, 95, 100]).range(d3.schemeReds[6]);
+    color = d3.scaleThreshold().domain([0.24, 0.32, 0.40, 0.48, 0.56]).range(d3.schemeReds[7]);
     csize= 50;
     drawMap(data[2], target, id, projection, color, csize)
 
@@ -76,8 +76,8 @@ function drawMap(data, target, id, projection, color, csize) {
         .attr("class", function (d) {
             return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea3a";
         })
-        .attr("poverty", function (d) {
-            return d.properties.poverty_rel;
+        .attr("gini", function (d) {
+            return d.properties.gini_t;
         })
         .attr("population", function (d) {
             return d.properties.population;
@@ -88,7 +88,7 @@ function drawMap(data, target, id, projection, color, csize) {
         })
         //get color for Value of Population Density from "var color"
         .style("fill", function (d) {
-            return d.properties.poverty_rel ? color(d.properties.poverty_rel) : 'lightgray';
+            return d.properties.gini_t ? color(d.properties.gini_t) : 'lightgray';
         })
 
     drawDiagram();
@@ -205,7 +205,7 @@ function drawLegend(id) {
     legendSvg.append("g")
         .append("text")
         .text(function () {
-            return "Population in poverty [%]";
+            return "Gini-Coefficient [%]";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -219,8 +219,7 @@ function drawLegend(id) {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
-            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
-            return color(d - 1);
+            return color(d);
         })
 
 
@@ -275,11 +274,11 @@ function drawLegend(id) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                return "≤ " + d
+                return "≤ " + d3.format(".0f")(d*100)
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d
+                return "≥ " + + d3.format(".0f")(d*100)
             } else {
-                return color.domain()[i - 1] + 1 + " to " + d
+                return color.domain()[i - 1]* 100 + " to " + d3.format(".0f")(d*100)
             };
         })
 };
