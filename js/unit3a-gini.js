@@ -3,9 +3,7 @@ var tooltipG;
 let gerC = [(d3.scaleThreshold().domain([11, 15, 17, 19, 24]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([20, 29, 38, 47, 55]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([17, 22, 25, 27, 29]).range(d3.schemeReds[6]))];
 let kenC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
 let zafC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
-let b = 1, z = 1;
-let g, k;
-let colorG = zafC[b]
+let b = 1, z = 1, g=1, k=2;
 let gin = 0;
 //Load in GeoJSON data //Promise resolve
 
@@ -16,32 +14,15 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function draw(data) {
-    let drawTarget = '#zaf';
-    let pID = "ginizaf"
-    let mapID = 'pzaf'
-    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])
-    drawMapG(data[0], drawTarget, mapID, mapProjection, colorG, pID)
-    drawTarget = '#ger';
-    mapID = 'pger'
-    pID = "giniger"
-    mapProjection = projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
-    b = 1, g = 1;
-    colorG = gerC[b]
-    drawMapG(data[1], drawTarget, mapID, mapProjection, colorG, pID)
-    drawTarget = '#ken';
-    pID = "giniken"
-    mapID = 'pken'
-    mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
-    b = 2, k = 2;
-    colorG = kenC[b]
-    drawMapG(data[2], drawTarget, mapID, mapProjection, colorG, pID)
-
+    drawMapG(data[0], '#zaf', 'pzaf', d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), zafC[b],"ginizaf")
+    drawMapG(data[1], '#ger', 'pger', d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), gerC[b], "giniger")
+    b=2;
+    drawMapG(data[2], '#ken', 'pken', d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), kenC[b], "giniken")
 }
 
 function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
-
+    
     var pathG = d3.geoPath().projection(mapProjection);
-
     var bboxG = pathG.bounds(data),
         s = .92 / Math.max((bboxG[1][0] - bboxG[0][0]) / width, (bboxG[1][1] - bboxG[0][1]) / height),
         t = [(width - s * (bboxG[1][0] + bboxG[0][0])) / 2, (height - s * (bboxG[1][1] + bboxG[0][1])) / 2];
@@ -56,7 +37,6 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
         .append("svg")
         //responsive size
         .attr("viewBox", [0, 0, width, height])
-
         .attr("preserveAspectRatio", "xMinYMin")
         .append("g")
         .attr("class", "mapboxG")
@@ -68,9 +48,7 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
         .append("path")
         .attr("d", pathG)
         .attr('id', pID)
-        .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
-        })
+        .attr("class", "adminarea")
         .attr("poverty_rel", function (d) {
             return d.properties.poverty_rel;
         })
@@ -82,22 +60,19 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
         })
         //get province name  
         .attr("name", function (d) {
-            return d.properties.name_1 ? d.properties.name_1 : d.properties.ADM2_NAME;
+            return d.properties.name_1
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
             return b == 2 ? colorG(d.properties.poverty_rel_f2) : b == 1 ? colorG(d.properties.poverty_rel_f1) : colorG(d.properties.poverty_rel)
         })
         //Cursor on mouseover
-        .style("cursor", function (d) {
-            return d.properties.poverty_rel ? "pointer" : '';
-        })
-        .on("mouseover", drawTooltipG)//Hier überprüfen woher tooltip kommt und g,z,k nehmen
+        .style("cursor", "pointer")
+        .on("mouseover", drawTooltipG)
         .on("mouseout", eraseTooltipG)
 
     drawScalebar(mapProjection, mapID);
-    drawLegendG(mapID);
-
+    drawLegendG(mapID, colorG);
 };
 
 //Build Tooltip
@@ -117,7 +92,6 @@ function drawTooltipG() {
         .attr("class", "tooltip")
         .attr('id', 'tt')
         .attr("opacity", 0);
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'adminarea') {
         tooltipG
             .style("opacity", .7)
             .style("left", bboxG.x + bboxG.width / 2 + 10 + "px")
@@ -130,7 +104,7 @@ function drawTooltipG() {
             update =>
                 update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + (tttar==0? d3.format(".1f")(d3.select(this).attr("poverty_rel")): tttar==1? d3.format(".1f")(d3.select(this).attr("poverty_rel_f1")): d3.format(".1f")(d3.select(this).attr("poverty_rel_f2"))) + "% </p>")
         )
-    }
+
 };
 
 function eraseTooltipG() {
@@ -138,7 +112,7 @@ function eraseTooltipG() {
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
-function drawLegendG(mapID) {
+function drawLegendG(mapID, colorG) {
     //set Title
     //create svg for Legend
     console.log('#' + mapID)
