@@ -3,8 +3,11 @@
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
+//rgb2hex use as method rgb2hex(COLOR IN RGB) -- https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value 
+const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
+
 //Create SVG element // viewBox for responsive Map
-var svgBoundaries = d3.select("#adm-map")
+var svgBoundaries = d3.select("#area-map")
             .append("svg")
             //responsive size
             .attr("viewBox", [0, 0, width, height])
@@ -22,6 +25,7 @@ function drawZaf(data){
                 .translate([0,0])
                 .scale(1)
                 .rotate([-24,-28]);
+
     //Define path generator
     let pathZaf = d3.geoPath()
             .projection(projectionZaf);
@@ -108,14 +112,14 @@ function drawGermany(data, s) {
      //set value of range slider for opacity
      d3.select("#gerRange").attr("value",function(){return d3.select("#Germany").style("opacity")*100})
 }
-
-d3.selectAll(".sortlist").on("mousedown", function(d){
-    slist(this.id)
+//Drag n Drop trigger
+d3.selectAll(".sortlist").on("mousedown", function(){
+    slistArea(this.id);
+    checkBackground();
 })
 
-function slist(target) {
-    d3.selectAll("#"+target+" li").style("background-color","#f5f5f5");
-    d3.selectAll("#"+target+" li").style("background-color","#f5f5f5");
+//Drag n Drop
+function slistArea(target) {
     // (A) SET CSS + GET ALL LIST ITEMS
     let items = d3.selectAll("#"+target+" li").nodes(), current = null;
 
@@ -172,22 +176,25 @@ function slist(target) {
   }
 }
 
+function checkBackground(){
+   rgb2hex(d3.select(".page2 .slist li").style("background")) == '#60E660'||'#f08080' ? d3.selectAll(".slist li").style("background-color","") : console.log() ;
+}
+
 d3.select("#check-area").on("click",function(){
     let areas_right = ["South Africa","Kenya","Germany"]
     let populations_right = ["Germany","South Africa","Kenya"]
     let areas = d3.selectAll("#area li").nodes()
     let populations = d3.selectAll("#population li").nodes();
     for(i in areas){
-        areas[i].outerText == areas_right[i] ? d3.select(areas[i]).style("background-color","lightgreen") : d3.select(areas[i]).style("background-color","lightcoral")
+        areas[i].outerText == areas_right[i] ? d3.select(areas[i]).style("background-color","#60E660") : d3.select(areas[i]).style("background-color","lightcoral")
     }
     for(i in populations){
-        populations[i].outerText == populations_right[i] ? d3.select(populations[i]).style("background-color","lightgreen") : d3.select(populations[i]).style("background-color","lightcoral")
+        populations[i].outerText == populations_right[i] ? d3.select(populations[i]).style("background-color","#60E660") : d3.select(populations[i]).style("background-color","lightcoral")
     }
 });
 
 d3.select("#restart-area").on("click",function(){
-    d3.selectAll("#area li").style("background-color","#f5f5f5");
-    d3.selectAll("#population li").style("background-color","#f5f5f5");
+    d3.selectAll(".slist li").style("background-color","") 
 });
 
 

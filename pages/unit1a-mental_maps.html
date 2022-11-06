@@ -63,7 +63,7 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>World Map</h4>
+                        <h5>World Map</h5>
                     </div>
                     <div class="worldmap" id="worldmap">
                     </div>
@@ -83,7 +83,7 @@
             </div> 
 
         </div>
-        <div class="row page" id="page1">
+        <div class="row page hide" id="page1">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
@@ -95,7 +95,7 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Area & Population</h4>
+                        <h5>Area & Population</h5>
                     </div>
                     <p>Please order both lists from highest to lowest.</p>
                    
@@ -133,15 +133,15 @@
                 </div>
             </div>
         </div>
-
-        <div class="row page " id="page2">
+        <div class="row page hide" id="page2">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5></h5>
+                        <h5>Mental Maps</h5>
+                        <p>You can change the displayed style below.</p>
                     </div>
-                    <div class="row">
-                        <div class="col-6 p-2">
+                    <div class="row p-2">
+                        <div class="col-6">
                             <p>Display</p>
                             <label for="zafRange" class="form-label">South Africa</label>
                             <input type="range" class="form-range" min="0" max="100" step="10" data-value="80" id="zafRange">
@@ -150,7 +150,7 @@
                             <label for="gerRange" class="form-label">Germany</label>
                             <input type="range" class="form-range" min="0" max="100" step="10" data-value="50" id="gerRange">
                         </div>
-                        <div class="col-5 p-2">
+                        <div class="col-5">
                             <p>Color change?</p>
                             </br>
                         </div>
@@ -160,9 +160,9 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Area & Population Solution</h4>
+                        <h5>Area & Population Solution</h5>
                     </div>
-                    <div id="adm-map">
+                    <div id="area-map">
                         
                     </div>
                 </div>
@@ -170,7 +170,7 @@
             <div class="col-2">
                 <div class="col-2-right">   
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
+                        <h5></h5>
                     </div>
                     <div class="p-2">
                         <p><strong>South Africa</strong></p>
@@ -195,12 +195,13 @@
                 </div>
             </div>
         </div>
-        <div class="row page " id="page3">
+        <div class="row page hide" id="page3">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Mental Maps</h5>
-                        <p>For our last section we'll look at the administrative boundaries of our beloved countries.</p>
+                        <p>Now you are familiar with the national boundaries of our beloved countries.</p>
+                        <p>For our final exercise please order the administrative divisions of each country (right) to the corresponding level (left). The description in the right column or the map below might help you.</p>
                     </div>
                 </div>
             </div>
@@ -209,32 +210,127 @@
                     <div class="maptitle justify-content-center">
                         <h4>Administrative Boundaries</h4>
                     </div>
-                    <div class="adm-map">
-                        
+                   <div class="row">
+                    
+                        <div class="col-3">
+                            <div class="sortlist sortlistcolor">
+                                <p>Level 1</p>
+                                <ul class="slist-assign" id="level1">
+                                    <li draggable="true"></li>
+                                </ul>
+                            </div>
+                            <div class="sortlist sortlistcolor">
+                                <p>Level 2</p>
+                                <ul class="slist-assign" id="level2">
+                                    <li draggable="true"></li>
+                                </ul>
+                            </div>
+                            <div class="sortlist sortlistcolor">
+                                <p>Level 3</p>
+                                <ul class="slist-assign" if="level3">
+                                    <li draggable="true"></li>
+                                </ul>
+                            </div> 
+                        </div>
+                        <div class="col-3">
+                            <div class="sortlist">
+                                <p>Germany</p>
+                                <ul class="slist" id="slist-germany">
+                                    <li draggable="true">Federal state (German.: 'Bundesland')</li>
+                                    <li draggable="true">Urban or rural district (German: 'kreisfreie Stadt und Landkreis')</li>
+                                    <li draggable="true">Governmental district (German: 'Regierungsbezirk')</li>
+                                </ul>
+                                <hr>
+                            </div>
+                            <div class="sortlist">
+                                <p>Kenya</p>
+                                <ul class="slist" id="slist-kenya">
+                                    <li draggable="true">County</li>
+                                    <li draggable="true">Sub-County</li>
+                                </ul>
+                                <hr>
+                            </div>
+                            <div class="sortlist">
+                                <p>South Africa</p>
+                                <ul class="slist" id="slist-zaf">
+                                    <li draggable="true">Province</li>
+                                    <li draggable="true">District or metropoltian municipalty</li>
+                                    <li draggable="true">Local municipality</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="adm-radio">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="germany" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Germany
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="kenya">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Kenya
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="zaf">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        South Africa
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="adm-map">
+                              
+                            </div>
+                        </div>
                     </div>
+                  
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">   
+                    <div class="p-2">
+                        <h5></h5>
+                        <p>A politcal Border or administrative boundary is an imaginary line that separates areas of land. Some boundaries might follow a river or other natural features but that does not automatically define one. 
+                           Usually countries have multiple levels of divisions. </p>
+                           <p>For example:</p>
+                        <ul class="factbook-list">
+                            <li><strong>'Level 0'</strong> – National-level</li>
+                            <li><strong>'Level 0.5'</strong> – Inferior to to the sub-national divisions but superior to the national level. Often 'super-regions' that to not correspond to the common political divisions (e.g. west and east germany)</li>
+                            <li><strong>'Level 1'</strong> – First sub-national level</li>
+                            <li><strong>'Level 2'</strong> – Second sub-national level</li>
+                            <li><strong>'Level 3'</strong> – Third sub-national level</li>
+                            <li>...And so on</li>
+                        </ul>
+                        <p>To understand the administrative division of a country can bring a better understanding of statistical numbers. Statistics are often recorded in higher level and then aggregated to a smaller level.</p>
+                        <div>
+                            <button class="btn btn-secondary btn-sm " id="check-adm" href="#" role="button"> Check </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-adm" href="#" role="button"> 
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="row page " id="page4">
+        <div class="row page hide" id="page4">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>DUMMY</h5>
-                        <p>THIS IS DUMMY</p>
+                        <h5>Mental Maps</h5>
+                        <p>Nice, you did it!</p>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>TITLE</h4>
+                        <h4>Administrative Boundaries</h4>
                     </div>
                     <div class="xxmap">
-                        
+                        <p>We are going to concentrate our next units on the first level of each country!</p>
                     </div>
                 </div>
             </div>
@@ -243,7 +339,6 @@
                 </div>
             </div>
         </div>
-
         <!-- START of control placeholder -->
         <div id="control-placeholder">
 
@@ -256,6 +351,14 @@
     </div>
     
     <!-- END of control placeholder -->
+        <!-- footer placeholder-->
+        <div id="footer-placeholder"></div>
+        <script>
+            $.get("../pages/footer.html", function(data){
+                $("#footer-placeholder").replaceWith(data);
+            });
+        </script>
+    <!--end of Footer bar-->
 </body>
 <script src="../js/unit1a_world-map.js"></script>
 <script src="../js/unit1a_area-comparison-map.js"></script>
