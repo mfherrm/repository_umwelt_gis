@@ -144,40 +144,54 @@ var myQuiz = {
 	// data could be filled from an external source (JSON)
 	data: [{
 		
-		question: 'By which year shall all girls and boys having access to quality early childhood development, care and pre-primary education be ensured?',
+		question: 'By which year shall the proportion of men, women and children of all ages living in poverty be cut in half?',
 		solution: '2030',
 		falses: ['2035', '2025'],
 		explanation: ''
 	}, {
 		/* category: 'HTML', */
-		question: 'Which administrative areas rank the highest in their respective countries?',
-		solution: 'Free State, Placeholder, Thüringen',
-		falses: ['Free State, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Thüringen'],
+		question: 'What is the Gini coefficient?',
+		solution: 'A measure of statistical dispersion',
+		falses: ['A measure of the amount of people living in poverty', 'A development index'],
 		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
-		question: 'Which administrative areas rank the second lowest in their respective countries?',
-		solution: 'Bremen, Western Cape, Placeholder',
-		falses: ['Western Cape, Placeholder, Bremen', 'Schleswig-Holstein, Western Cape, Placeholder', 'Placeholder, Schleswig-Holstein, Northern Cape'],
+		question: 'What correlation is there between SDG 1.2.1. and the population density?',
+		solution: 'Income is usually lower in rural areas',
+		falses: ['There is none', 'Income is usually lower in urban areas'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'Areas with high population density generally tend to have a higher rate of participation in pre-primary education',
-		solution: 'False',
-		falses: ['True'],
+		question: 'What correlation is there between SDG 1.2.1. and the population size?',
+		solution: 'A single dataset influences the result a lot more when there is a smaller sample size',
+		falses: ['There is none', 'A large population means that there is a lot of poverty', 'A large population means that there is little poverty'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'How do you think the level of detail influences the ranking in South Africa?',
-		solution: 'In areas with high disparities in population density scores vary a lot more than shown',
-		falses: ['The level of detail only marginally influences what is shown on the map', 'Scores tend to be stable across the same area but vary a lot between neighbouring areas'],
+		question: 'How do you think the level of detail influences the Gini coefficient?',
+		solution: 'Disparities between urban and rural areas are highlighted better',
+		falses: ['There are no differences between levels of detail', 'A high level of detail means a higher Gini coefficient'],
 		explanation: ''
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "Areas with little poverty tend to have a higher rate of participation in pre-primary education",
-		solution: 'False',
-		falses: ['True'],
+		question: "Which intervall describes poverty in Germany the best (in %)?",
+		solution: '[10, 25]',
+		falses: ['[15, 40]', '[20, 55]'],
+		explanation: ''
+	},
+    {
+		/* category: 'Kategorie?', */
+		question: "Which intervall describes poverty in Kenya the best (in %)?",
+		solution: '[10, 25]',
+		falses: ['[15, 40]', '[20, 55]'],
+		explanation: ''
+	},
+    {
+		/* category: 'Kategorie?', */
+		question: "Which intervall describes poverty in South Africa the best (in %)?",
+		solution: '[10, 25]',
+		falses: ['[15, 40]', '[20, 55]'],
 		explanation: ''
 	}],
 	emptyContainer: function () {
