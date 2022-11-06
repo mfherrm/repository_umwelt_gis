@@ -11,21 +11,10 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    let target = '#southafrica';
-    let id = "exzaf"
-    let projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]) // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center    
-    drawMap(data[0], target, id, projection)
-    target = '#germany';
-    id = "exger"
-    projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
-    drawMap(data[1], target, id, projection)
-    target = '#kenya';
-    id = "exken"
-    projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
-    drawMap(data[2], target, id, projection)
+    drawMap(data[0], '#southafrica', "exzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]))
+    drawMap(data[1], '#germany', "exger", projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]))
+    drawMap(data[2], '#kenya', "exken", projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]))
 }
-
-
 
 //Load in GeoJSON data //Promise resolve
 
@@ -62,20 +51,8 @@ function drawMap(data, target, id, projection) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", function (d) {
-            return d.properties.LEVEL == 0 ? "countryU3" : d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
-        })
-        .attr("fill", function (d) {
-            if (target == "#kenya") {
-                return d.properties.LEVEL == 1 ? 'none' : d.properties.LEVEL == 2 ?  "lightgrey" : "darkgrey";
-            } else {
-                if (d.properties.NUTS_NAME == "Deutschland") {
-                    return "none"
-                } else {
-                    return d.properties.LEVL_CODE == 0 ? "lightgrey" : "darkgrey";
-                }
-            }
-        })
+        .attr("class", "adminarea")
+        .attr("fill", "darkgrey")
         .on("click", function (d) {
             let admin = d3.select(this);
             let id = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4].id
@@ -115,7 +92,6 @@ d3.select("#checkger").on("click", function () {
         for (let i in selectger) {
             if (selectger[0]._groups[0][0].__data__.properties.name_1 == "Thüringen" || selectger[0].attr("fill") == 'green') {
                 selectger[0].attr("fill", "green");
-
             } else {
                 selectger[0].attr("fill", "red");
             }

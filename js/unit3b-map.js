@@ -14,22 +14,10 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
 
 //Build Map
-let l = 0;
 function draw(data) {
-    let drawTarget = '#zaf';
-    let mapID = "solzaf"
-    let mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])
-    drawMapSol(data[0], drawTarget, mapID, mapProjection)
-    drawTarget = '#ger';
-    mapID = "solger"
-    mapProjection = projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52])
-    l = 1;
-    drawMapSol(data[1], drawTarget, mapID, mapProjection)
-    drawTarget = '#ken';
-    mapID = "solken"
-    mapProjection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]);
-    l = 2;
-    drawMapSol(data[2], drawTarget, mapID, mapProjection)
+    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])) 
+    drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]))
+    drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]))
     drawLegend();
 
 }
@@ -62,24 +50,20 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .enter()
         .append("path")
         .attr("d", pathM)
-        .attr("class", function (d) {
-            return d.properties.LEVL_CODE == 0 ? "countryU3" : "adminarea";
-        })
+        .attr("class","adminarea")
         .attr("education_rel", function (d) {
             return d.properties.education_rel;
         })
         //get province name  
         .attr("name", function (d) {
-            return d.properties.name_1 ? d.properties.name_1 : d.properties.ADM2_NAME;
+            return d.properties.name_1;
         })
         //get color for Value of education from "var color"
         .style("fill", function (d) {
-            return d.properties.education_rel ? color(d.properties.education_rel) : d.properties.ADM0_NAME == 'Kenya' ? d.properties.LEVEL == 1 ? 'none' : 'lightgrey' : 'darkgrey'
+            return color(d.properties.education_rel);
         })
         //Cursor on mouseover
-        .style("cursor", function (d) {
-            return d.properties.education_rel ? "pointer" : '';
-        })
+        .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
 
@@ -91,12 +75,11 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
-    tooltip = d3.select('.mapboxsol')
+    tooltip = d3.selectAll('.mapboxsol')
         .append("div")
         .attr("class", "tooltip")
         .attr('id', 'tt')
         .attr("opacity", 0);
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'adminarea') {
         tooltip
             .style("opacity", .7)
             .style("left", bbox.x + bbox.width / 2 + 10 + "px")
@@ -109,7 +92,6 @@ function drawTooltip() {
             update =>
                 update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
         )
-    }
 };
 
 function eraseTooltip() {
@@ -146,7 +128,7 @@ function drawLegend() {
     legendSvg.append("g")
         .append("text")
         .text(function () {
-            return "Percentage of children taking part in pre-primary education";
+            return "Children taking part in pre-primary education [%]";
         })
         .attr("transform", function (d, i) {
             //set spacing
