@@ -353,6 +353,9 @@ input[type=range]::-moz-range-thumb {
     border-radius: 5px;
     background-color: lightgrey;
 }
+.slist:hover{
+    cursor: grab;
+}
 
 .slist, .slist-assign {
     list-style: none;

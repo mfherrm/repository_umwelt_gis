@@ -1,7 +1,7 @@
 
 //Width and height
-var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var widthArea = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+var heightArea = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 //rgb2hex use as method rgb2hex(COLOR IN RGB) -- https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
@@ -10,8 +10,11 @@ const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice
 var svgBoundaries = d3.select("#area-map")
             .append("svg")
             //responsive size
-            .attr("viewBox", [0, 0, width, height])
+            .attr("viewBox", [0, 0, widthArea, heightArea])
             //dunno seems nice
+            .attr("preserveAspectRatio", "xMinYMin")
+            .append("g")
+            .attr("class", "mapbox");
 
 
 Promise.all([d3.json("../geojson/zaf_nation.geojson"),d3.json("../geojson/germany_nation.geojson"),d3.json("../geojson/kenya_nation.geojson")])
@@ -31,8 +34,8 @@ function drawZaf(data){
             .projection(projectionZaf);
 
     let bbox = pathZaf.bounds(data[0]),
-    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
-    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ widthArea, (bbox[1][1] - bbox[0][1]) / heightArea),
+    t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     projectionZaf
         .scale(s)
@@ -44,8 +47,10 @@ function drawZaf(data){
                     .append("path")
                     .attr("d", pathZaf)
                     .attr("id","Zaf")
-                    .attr("fill", "blue")
-                    .attr("opacity",".8")
+                    .attr("fill", "#B2D06C")
+                    .attr("stroke","grey")
+                    .attr("stroke-width","1.5px")
+                    .attr("opacity","1")
 
    //set value of range slider for opacity
    d3.select("#zafRange").attr("value",function(){return d3.select("#Zaf").style("opacity")*100})
@@ -57,7 +62,7 @@ function drawZaf(data){
 
 function drawKenya(data, s){
     let projectionKenya = d3.geoAzimuthalEqualArea()
-            .translate([0,-.025])
+            .translate([-0.01,-.02])
             .scale(1)
             .rotate([-39,0]); 
 
@@ -65,7 +70,7 @@ function drawKenya(data, s){
                 .projection(projectionKenya);
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     let bbox = pathKenya.bounds(data)
-    let t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
     // Update the projection  
     projectionKenya
         .scale(s)
@@ -77,8 +82,10 @@ function drawKenya(data, s){
         .append("path")
         .attr("d", pathKenya)
         .attr("id","Kenya")
-        .attr("fill", "grey")
-        .attr("opacity",".7");
+        .attr("fill", "#F8B365")
+        .attr("stroke","grey")
+        .attr("stroke-width","1.5px")
+        .attr("opacity","1");
 
         //set value of range slider for opacity
         d3.select("#kenRange").attr("value",function(){return d3.select("#Kenya").style("opacity")*100})
@@ -86,7 +93,7 @@ function drawKenya(data, s){
 
 function drawGermany(data, s) {
     let projectionGermany = d3.geoAzimuthalEqualArea()
-                    .translate([0,-.02])
+                    .translate([-0.005,-.015])
                     .scale(1)
                     .rotate([-10,-52]); 
 
@@ -94,7 +101,7 @@ function drawGermany(data, s) {
             .projection(projectionGermany);
 
     let bbox = pathGermany.bounds(data);
-    let t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     projectionGermany
         .scale(s)
@@ -106,8 +113,10 @@ function drawGermany(data, s) {
                     .append("path")
                     .attr("d", pathGermany)
                     .attr("id","Germany")
-                    .attr("fill", "yellow")
-                    .attr("opacity",".6")
+                    .attr("fill", "#BEBADA")
+                    .attr("stroke","grey")
+                    .attr("stroke-width","1.5px")
+                    .attr("opacity","1")
 
      //set value of range slider for opacity
      d3.select("#gerRange").attr("value",function(){return d3.select("#Germany").style("opacity")*100})

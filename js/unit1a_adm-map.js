@@ -1,4 +1,7 @@
 
+//Width and height
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 //Create SVG element // viewBox for responsive Map
 let svgAdm = d3.select("#adm-map")
@@ -42,7 +45,7 @@ Promise.all([d3.json("../geojson/germany_bundeslaender.geojson"),d3.json("../geo
 function drawGermanyAdm(data){
     let projectionGermany = d3.geoAzimuthalEqualArea()
                           .translate([0,0])
-                          .scale(.5)
+                          .scale(1)
                           .rotate([-10,-52]);
 
     //Define path generator
@@ -195,9 +198,14 @@ function drawKenyaAdm(data){
 
 
 /* drag and drop */
+d3.selectAll('#slist-germany li').style("background-color",function(){
+  console.log(d3.select('#Germany'))
+  return d3.select('#Germany').style("background-color");
+})
+
 //Drag n Drop trigger
 d3.selectAll("#page3 .sortlist").on("mousedown", function(){
-    slistAdm()
+    slistAdm();
 })
 
 //Drag n Drop
