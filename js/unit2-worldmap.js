@@ -184,7 +184,7 @@ function getPyramid(country) {
     let elemid = country.attr('name');
     let elempyr = country.attr('pyramid');
     let elemstat = country.attr('state');
-    if ((country.attr("fill") == "green")) {
+    if ((country.attr("fill") == "#90CEC4" || country.attr("fill") == "#BEBADA" || country.attr("fill") ==  "#F8CDE2" || country.attr("fill") == "#F8B365")) {
         select4.pop();
     } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
         select4.push(country);
@@ -193,7 +193,6 @@ function getPyramid(country) {
         if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select4.pop();
             return country.attr("fill", "grey")
-
         }
 
 
@@ -206,8 +205,9 @@ d3.select("#pyr_imgs").on("click", function () {
     let elemid = elem.getAttribute('id')
     let conid = country.attr('name')
     let con = select4[0]._groups[0][0].__data__.properties.pyramid
+    console.log(con)
     if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
-        select4[0].attr("fill", "green");
+        con==1? select4[0].attr("fill", "#F8B365") :  con==2? select4[0].attr("fill", "#F8CDE2") : con==3? select4[0].attr("fill", "#BEBADA") : con==4? select4[0].attr("fill", "#90CEC4"): ''
         select4.pop();
     } else {
         select4[0].attr("fill", "red");
