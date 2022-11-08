@@ -174,26 +174,44 @@ d3.select("#checkzaf").on("click", function () {
 
 d3.select("#checkken").on("click", function () {
     if (mode == false) {
-        for (let i in selectger) {
+        for (let i in selectken) {
 
-            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Samburu") {
                 selectken[0].attr("fill", "green");
             } else {
                 selectken[0].attr("fill", "red");
             }
-            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Turkana") {
                 selectken[1].attr("fill", "green");
             } else {
                 selectken[1].attr("fill", "red");
             }
-            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "West Pokot") {
                 selectken[2].attr("fill", "green");
             } else {
                 selectken[2].attr("fill", "red");
             }
 
         }
-    } else { }
+    } else { 
+        for (let i in selectken) {
+            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Nairobi") {
+                selectken[0].attr("fill", "green");
+            } else {
+                selectken[0].attr("fill", "red");
+            }
+            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Mombasa") {
+                selectken[1].attr("fill", "green");
+            } else {
+                selectken[1].attr("fill", "red");
+            }
+            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "Garissa") {
+                selectken[2].attr("fill", "green");
+            } else {
+                selectken[2].attr("fill", "red");
+            }
+        }
+    }
 })
 
 function addSelected(target, selection) {

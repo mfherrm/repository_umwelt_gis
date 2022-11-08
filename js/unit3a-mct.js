@@ -241,7 +241,7 @@ var myQuiz = {
 				// we want to only support clicks on start buttons...
 				var go = ev.target.tagName.match(/^button$/i);
 				// ... and labels for radio buttons when in a game
-				if (ev.target.tagName.match(/^label$/i) && t.currentQuestion) {
+				if (ev.target.tagName.match(/^button$/i) && t.currentQuestion) {
 					go = true;
 				}
 				if (go) {

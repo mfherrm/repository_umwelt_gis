@@ -45,7 +45,7 @@ function drawMap(data) {
     var path = d3.geoPath().projection(projection);
 
     let target
-    i == 0 ? target = '#worldmap' : target = "#worldmapall"
+    i == 0 ? target = '#worldmapu2' : target = "#worldmapall"
 
     var svg = d3.select(target)
         .append("svg")
@@ -113,7 +113,12 @@ function drawMap(data) {
         .on("click", function (event) {
             country = d3.select(this);
             let src = document.querySelectorAll(':hover')[9].id
-            src == 'wmu3' ? getCountry(country) : getPyramid(country)
+            console.log(src)
+            if (src=='wmu3'){
+                country.attr("fill") == 'green'? '': getCountry(country)
+            } else if (src=='wmu4'){
+                (country.attr("fill") == "#90CEC4" || country.attr("fill") == "#BEBADA" || country.attr("fill") == "#F8CDE2" || country.attr("fill") == "#F8B365")?'':getPyramid(country)
+                }
         });
     i++;
 };
@@ -184,9 +189,7 @@ function getPyramid(country) {
     let elemid = country.attr('name');
     let elempyr = country.attr('pyramid');
     let elemstat = country.attr('state');
-    if ((country.attr("fill") == "#90CEC4" || country.attr("fill") == "#BEBADA" || country.attr("fill") ==  "#F8CDE2" || country.attr("fill") == "#F8B365")) {
-        select4.pop();
-    } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
+    if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
         select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
@@ -207,7 +210,7 @@ d3.select("#pyr_imgs").on("click", function () {
     let con = select4[0]._groups[0][0].__data__.properties.pyramid
     console.log(con)
     if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
-        con==1? select4[0].attr("fill", "#F8B365") :  con==2? select4[0].attr("fill", "#F8CDE2") : con==3? select4[0].attr("fill", "#BEBADA") : con==4? select4[0].attr("fill", "#90CEC4"): ''
+        con == 1 ? select4[0].attr("fill", "#F8B365") : con == 2 ? select4[0].attr("fill", "#F8CDE2") : con == 3 ? select4[0].attr("fill", "#BEBADA") : con == 4 ? select4[0].attr("fill", "#90CEC4") : ''
         select4.pop();
     } else {
         select4[0].attr("fill", "red");

@@ -207,7 +207,11 @@ input[type=range]::-moz-range-thumb {
 #germany-overview, #zaf-overview, #kenya-overview {
     margin-top: 1.5rem;
 }
-/* world map first unit page0*/
+/* world map first unit*/
+#worldmapu2{
+    border: 1px solid grey;
+    background: lightblue;
+}
 #worldmap{
     border: 1px solid grey;
 }
@@ -455,12 +459,14 @@ input[type=range]::-moz-range-thumb {
 	background-color: darkgray;
 }
 
-#quiz input {
-    display:none	
+#quiz input:checked ~ label,
+#quiz input:focus ~ label {
+    background-color: lightsteelblue;
 }
 
-#quiz button:not(.startBtn) {
-	display: none;
+
+#quiz input {
+    display:none	
 }
 
 #quiz button {
