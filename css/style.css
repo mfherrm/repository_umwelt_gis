@@ -423,12 +423,14 @@ input[type=range]::-moz-range-thumb {
 	background-color: darkgray;
 }
 
-#quiz input {
-    display:none	
+#quiz input:checked ~ label,
+#quiz input:focus ~ label {
+    background-color: lightsteelblue;
 }
 
-#quiz button:not(.startBtn) {
-	display: none;
+
+#quiz input {
+    display:none	
 }
 
 #quiz button {
