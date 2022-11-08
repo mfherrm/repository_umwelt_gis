@@ -14,9 +14,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([0.59, 0.61, 0.63, 0.64, 0.65]).range(d3.schemeReds[7]), 50)
-    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([0.25,0.26, 0.27, 0.29, 0.31]).range(d3.schemeReds[7]), 80)
-    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([0.24, 0.32, 0.40, 0.48, 0.52]).range(d3.schemeReds[7]), 50)
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(d3.schemeReds[7]), 50)
+    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(d3.schemeReds[7]), 80)
+    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(d3.schemeReds[7]), 50)
 }
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -254,11 +254,11 @@ function drawLegend(id, csize, color) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                return "≤ " + d3.format(".0f")(d*100)
+                return "≤ " + d3.format(".0f")(d)
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d3.format(".0f")(d*100)
+                return "≥ " + + d3.format(".0f")(d)
             } else {
-                return color.domain()[i - 1]* 100 + " to " + d3.format(".0f")(d*100)
+                return color.domain()[i - 1]+ " to " + d3.format(".0f")(d)
             };
         })
 };
