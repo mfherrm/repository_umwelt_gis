@@ -156,6 +156,10 @@ a .bi {
     stroke: white;
     fill: lightcoral;
 }
+
+.unit-check {
+    padding-top: .8rem;
+}
 /* Buttons  -------------------------------------------------------------------*/   
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
@@ -203,13 +207,13 @@ input[type=range]::-moz-range-thumb {
 #germany-overview, #zaf-overview, #kenya-overview {
     margin-top: 1.5rem;
 }
-/* world map first unit*/
+/* world map first unit page0*/
 #worldmap{
     border: 1px solid grey;
 }
 .stroke {
     fill: none;
-    stroke: #000;
+    stroke: grey;
     stroke-width: 3px;
   }
 
@@ -233,6 +237,17 @@ input[type=range]::-moz-range-thumb {
     stroke: #fff;
     stroke-width: .5px;
 }
+/*------*/
+/* adm map first unit page4*/
+#adm-map {
+    opacity: .9;
+}
+#adm-germany, #adm-kenya, #adm-zaf {
+    margin-top: 1.5rem;
+    border-left: 1px solid lightgrey;
+    text-align: center;
+}
+
 /*------*/
 .continent {
     stroke: white;
@@ -379,6 +394,27 @@ input[type=range]::-moz-range-thumb {
     border: 1px solid #ffa5a5;
     background: #ffe7e7;
 }
+
+.slist-wrong {
+	color: #c00;
+}
+
+.slist-correct:before {
+	content: '✓';
+	color: darkgreen;
+}
+
+.slist-wrong:before {
+	content: '✗';
+	color: #f00;
+}
+
+.slist-correct:before,
+.slist-wrong:before {
+	font: 1em bold;
+	padding: 0 0.2em;
+}
+
 /*------------------------------------------------------------------------*/
 
 /* MCT styles-------------------------------------------------------------*/

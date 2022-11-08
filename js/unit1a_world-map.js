@@ -118,7 +118,7 @@ d3.select("#check-world").on("click",function(){
                             select[i].attr("fill","#EC5B5B");
                     }                              
                 }                                               
-            })
+});
 
 d3.select("#restart-world").on("click",function(){
                 select = [];

@@ -46,15 +46,19 @@ function drawZaf(data){
                     .enter()
                     .append("path")
                     .attr("d", pathZaf)
-                    .attr("id","Zaf")
+                    .attr("id","zaf-area")
                     .attr("fill", "#B2D06C")
                     .attr("stroke","grey")
                     .attr("stroke-width","1.5px")
                     .attr("opacity","1")
 
-   //set value of range slider for opacity
-   d3.select("#zafRange").attr("value",function(){return d3.select("#Zaf").style("opacity")*100})
-    
+  //set value of range slider for opacity
+  d3.select("#zafRange").attr("value",function(){return d3.select("#zaf-area").style("opacity")*100})
+
+  //get fill for next unit list
+  d3.selectAll("#slist-zaf li").style("background",function(){
+    return d3.select("#zaf-area").attr("fill")
+  });
     //Trigger other Build Map
     drawKenya(data[2], s);
     drawGermany(data[1], s);
@@ -81,14 +85,19 @@ function drawKenya(data, s){
         .enter()
         .append("path")
         .attr("d", pathKenya)
-        .attr("id","Kenya")
+        .attr("id","kenya-area")
         .attr("fill", "#F8B365")
         .attr("stroke","grey")
         .attr("stroke-width","1.5px")
         .attr("opacity","1");
 
-        //set value of range slider for opacity
-        d3.select("#kenRange").attr("value",function(){return d3.select("#Kenya").style("opacity")*100})
+    //set value of range slider for opacity
+    d3.select("#kenRange").attr("value",function(){return d3.select("#kenya-area").style("opacity")*100})
+
+     //get fill for next unit list
+    d3.selectAll("#slist-kenya li").style("background",function(){
+      return d3.select("#kenya-area").attr("fill")
+    });
 }
 
 function drawGermany(data, s) {
@@ -112,20 +121,42 @@ function drawGermany(data, s) {
                     .enter()
                     .append("path")
                     .attr("d", pathGermany)
-                    .attr("id","Germany")
+                    .attr("id","germany-area")
                     .attr("fill", "#BEBADA")
                     .attr("stroke","grey")
                     .attr("stroke-width","1.5px")
                     .attr("opacity","1")
 
-     //set value of range slider for opacity
-     d3.select("#gerRange").attr("value",function(){return d3.select("#Germany").style("opacity")*100})
+    //set value of range slider for opacity
+    d3.select("#gerRange").attr("value",function(){return d3.select("#germany-area").style("opacity")*100})
+
+    //get fill for next unit list
+    d3.selectAll("#slist-germany li").style("background",function(){
+      return d3.select("#germany-area").attr("fill")
+    });
 }
 //Drag n Drop trigger
 d3.selectAll(".sortlist").on("mousedown", function(){
     slistArea(this.id);
-    checkBackground();
-})
+    
+});
+
+//reset classes correct wrong on mousedown
+d3.selectAll("#area li").on("mousedown", function(){
+  let items = d3.selectAll("#area li").nodes()
+  for (let i of items){
+    i.classList.remove("slist-wrong")
+    i.classList.remove("slist-correct")
+  }
+});
+
+d3.selectAll("#population li").on("mousedown", function(){
+  let items = d3.selectAll("#population li").nodes()
+  for (let i of items){
+    i.classList.remove("slist-wrong")
+    i.classList.remove("slist-correct")
+  }
+});
 
 //Drag n Drop
 function slistArea(target) {
@@ -194,31 +225,39 @@ d3.select("#check-area").on("click",function(){
     let populations_right = ["Germany","South Africa","Kenya"]
     let areas = d3.selectAll("#area li").nodes()
     let populations = d3.selectAll("#population li").nodes();
-    for(i in areas){
-        areas[i].outerText == areas_right[i] ? d3.select(areas[i]).style("background-color","#60E660") : d3.select(areas[i]).style("background-color","lightcoral")
+    let j = 0;
+    let k = 0;
+    for(let i of areas){
+      i.outerText == areas_right[j] ? i.classList.add("slist-correct") : i.classList.add("slist-wrong");
+      j++;
     }
-    for(i in populations){
-        populations[i].outerText == populations_right[i] ? d3.select(populations[i]).style("background-color","#60E660") : d3.select(populations[i]).style("background-color","lightcoral")
+    for(let i of populations){
+      i.outerText == populations_right[k] ? i.classList.add("slist-correct") : i.classList.add("slist-wrong");
+      k++;
     }
 });
 
 d3.select("#restart-area").on("click",function(){
-    d3.selectAll(".slist li").style("background-color","") 
+    let items = d3.selectAll(".slist li").nodes()
+    for (let i of items){
+      i.classList.remove("slist-wrong")
+      i.classList.remove("slist-correct")
+    }
 });
 
 
 //Range slider functions
 d3.select("#zafRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Zaf").style("opacity",function(){return opacity})
+  d3.select("#zaf-area").style("opacity",function(){return opacity})
 });
 
 d3.select("#gerRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Germany").style("opacity",function(){return opacity})
+  d3.select("#germany-area").style("opacity",function(){return opacity})
 });
 
 d3.select("#kenRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Kenya").style("opacity",function(){return opacity})
+  d3.select("#kenya-area").style("opacity",function(){return opacity})
 });

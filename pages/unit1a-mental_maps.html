@@ -177,13 +177,13 @@
                         <ul class="factbook-list">
                             <li>Area: 1,219,090 sq km</li>
                             <li>Total Population: 57,516,665 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The Population is concentrated along southern and southesterns coast and aroung Pretoria; The west is less densly populated than the east.</li>
+                            <li style="padding-top: .4rem">The Population is concentrated along southern and southeastern coast and in Gautend, which includes Pretoria; The west is less densly populated than the east.</li>
                         </ul>
                         <p><strong>Kenya</strong></p>
                         <ul class="factbook-list">
                             <li>Area: 580,367 sq km </li>
                             <li>Total Population: 55,864,655 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake Victoria, the capital Nairobi and southeast along the Indian Ocean.</li>
+                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake Victoria, and around the capital Nairobi and southeast along the Indian Ocean.</li>
                         </ul>
                         <p><strong>Germany</strong></p>
                         <ul class="factbook-list">
@@ -200,8 +200,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Mental Maps</h5>
-                        <p>Now you are familiar with the national boundaries of our beloved countries.</p>
-                        <p>For our final exercise please order the administrative divisions of each country (right) to the corresponding level (left). The description in the right column or the map below might help you.</p>
+                        <p>Now you are familiar with the national boundaries of our countries.</p>
+                        <p>For our final exercise please order the administrative divisions of each country (right) to the corresponding level (left). The description in the right column or the maps on the right might help you.</p>
                     </div>
                 </div>
             </div>
@@ -211,7 +211,6 @@
                         <h4>Administrative Boundaries</h4>
                     </div>
                    <div class="row">
-                    
                         <div class="col-3">
                             <div class="sortlist sortlistcolor">
                                 <p>Level 1</p>
@@ -227,7 +226,7 @@
                             </div>
                             <div class="sortlist sortlistcolor">
                                 <p>Level 3</p>
-                                <ul class="slist-assign" if="level3">
+                                <ul class="slist-assign" id="level3">
                                     <li draggable="true"></li>
                                 </ul>
                             </div> 
@@ -236,9 +235,9 @@
                             <div class="sortlist">
                                 <p>Germany</p>
                                 <ul class="slist" id="slist-germany">
-                                    <li draggable="true">Federal state (German.: 'Bundesland')</li>
-                                    <li draggable="true">Urban or rural district (German: 'kreisfreie Stadt und Landkreis')</li>
-                                    <li draggable="true">Governmental district (German: 'Regierungsbezirk')</li>
+                                    <li draggable="true">Federal state</li>
+                                    <li draggable="true">Urban or rural district</li>
+                                    <li draggable="true">Governmental district</li>
                                 </ul>
                                 <hr>
                             </div>
@@ -254,12 +253,15 @@
                                 <p>South Africa</p>
                                 <ul class="slist" id="slist-zaf">
                                     <li draggable="true">Province</li>
-                                    <li draggable="true">District or metropoltian municipalty</li>
+                                    <li draggable="true">District or metropolitian municipalty</li>
                                     <li draggable="true">Local municipality</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" style="border-left: 2px solid lightgrey">
+                            <div id="adm-map">
+
+                            </div>
                             <div class="adm-radio">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="germany" checked>
@@ -280,9 +282,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <div id="adm-map">
-                              
-                            </div>
                         </div>
                     </div>
                   
@@ -297,14 +296,13 @@
                            <p>For example:</p>
                         <ul class="factbook-list">
                             <li><strong>'Level 0'</strong> – National-level</li>
-                            <li><strong>'Level 0.5'</strong> – Inferior to to the sub-national divisions but superior to the national level. Often 'super-regions' that to not correspond to the common political divisions (e.g. west and east germany)</li>
+                            <!--li><strong>'Level 0.5'</strong> – Inferior to to the sub-national divisions but superior to the national level. Often 'super-regions' that to not correspond to the common political divisions (e.g. west and east germany)</li-->
                             <li><strong>'Level 1'</strong> – First sub-national level</li>
                             <li><strong>'Level 2'</strong> – Second sub-national level</li>
                             <li><strong>'Level 3'</strong> – Third sub-national level</li>
                             <li>...And so on</li>
                         </ul>
-                        <p>To understand the administrative division of a country can bring a better understanding of statistical numbers. Statistics are often recorded in higher level and then aggregated to a smaller level.</p>
-                        <div>
+                        <div class="unit-check">
                             <button class="btn btn-secondary btn-sm " id="check-adm" href="#" role="button"> Check </button>
                             <button class="btn btn-secondary btn-sm " id="restart-adm" href="#" role="button"> 
                                 <i class="bi bi-arrow-counterclockwise"></i>
@@ -329,19 +327,34 @@
                     <div class="maptitle justify-content-center">
                         <h4>Administrative Boundaries</h4>
                     </div>
-                    <div class="xxmap">
-                        <p>We are going to concentrate our next units on the first level of each country!</p>
+                    <div class="row">
+                            <p>We are going to concentrate our next units on the first level of each country.</p>
+                            <p>
+                                To understand the administrative division of a country can bring a better understanding of statistical numbers. Statistics are often recorded in higher levels and then aggregated to a smaller levels.
+                                The representation of data in smaller levels brings the advantage of being able to see patterns. But with increasing numbers of levels there is some need of aggregation so a viewer doesn't get to confused with the amount of presented information.
+                            </p>
+                    <div class="row">
+                        <div class="col-4" id="adm-germany">
+                            <p>Germany's level 1 – Federal states<p>
+                        </div>
+                        <div class="col-4" id="adm-kenya">
+                            <p>Kenya's level 1 – Counties</p>
+                        </div>
+                        <div class="col-4" id="adm-zaf">
+                            <p>South Africa's level 1 – Provinces</p>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
+
                 </div>
             </div>
         </div>
         <!-- START of control placeholder -->
         <div id="control-placeholder">
-
         </div>
         <script>
             $.get("./unit-control.html", function(data){
@@ -362,5 +375,7 @@
 </body>
 <script src="../js/unit1a_world-map.js"></script>
 <script src="../js/unit1a_area-comparison-map.js"></script>
+
 <script src="../js/unit1a_adm-map.js"></script>
+
 </html>
