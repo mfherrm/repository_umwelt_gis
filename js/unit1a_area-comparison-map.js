@@ -138,7 +138,6 @@ function drawGermany(data, s) {
 //Drag n Drop trigger
 d3.selectAll(".sortlist").on("mousedown", function(){
     slistArea(this.id);
-    
 });
 
 //reset classes correct wrong on mousedown
@@ -171,7 +170,7 @@ function slistArea(target) {
     i.ondragstart = (ev) => {
       current = i;
       for (let it of items) {
-        if (it != current) { it.classList.add("hint"); }
+        if (it != current) { it.classList.add("hint");}
       }
     };
     

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Unit 1b – Statistics Basics</title>
 
     <!-- D3.js import --> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -46,11 +46,12 @@
         });
     </script>
     <div class="container-fluid">
-        <div class="row page" id="">
+        <div class="row page" id="page0">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>DUMMY</h5>
+                        <h5>Statistics – Basics</h5>
+                        <p>abs,rel || Diagrammarten || Kartendarstellung || Häufigkeit? || Klasseneinteilung?</p>
                         <p>THIS IS DUMMY</p>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
                         <h4>TITLE</h4>
                     </div>
                     <div class="xxmap" id="">
-                 
+                        
                     </div>
                 </div>
             </div>
@@ -70,6 +71,15 @@
                 </div>
             </div>
         </div>
+         <!-- START of control placeholder -->
+         <div id="control-placeholder">
+        </div>
+        <script>
+            $.get("./unit-control.html", function(data){
+                $("#control-placeholder").replaceWith(data);
+            });
+        </script>
+        <!-- END of control placeholder -->
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
