@@ -12,7 +12,6 @@ let svgAdm = d3.select("#adm-map")
     .attr("preserveAspectRatio", "xMinYMin")
     .append("g")
     .attr("class", "mapbox");
-    
 
 let color = d3.scaleOrdinal(d3.schemeSet3);
 
@@ -65,6 +64,7 @@ function drawGermanyAdm(data){
         .translate(t); 
 
     //Bind data and create one path per GeoJSON feature
+    //Draw Order important!!
     //level 1 Bundeslaender
     svgAdm.selectAll(null)
         .data(data[0].features)
@@ -72,34 +72,53 @@ function drawGermanyAdm(data){
         .append("path")
         .attr("d", pathGermany)
         .attr("class","germany")
-        .attr("fill", function(d,i){
-            if(d.properties.NUTS_NAME == "Deutschland"){
-                return "none"
-            }else {
-                return d.properties.LEVL_CODE == 0 ? "lightgrey" : color(i);
-            }
+        .attr("fill", function(i){
+                return  color(i);  
         })
-        .attr("stroke","grey");
+        .attr("stroke","grey")
+        .attr("stroke-width","1px");
+
+    //level 3 kreise
+    svgAdm.selectAll(null)
+      .data(data[2].features)
+      .enter()
+      .append("path")
+      .attr("d", pathGermany)
+      .attr("class","germany")
+      .attr("fill","none")
+      .attr("stroke","#858587")
+      .attr("stroke-width",".6px");
 
     //level 2 Regierungsbezrike
     svgAdm.selectAll(null)
-        .data(data[1].features)
-        .enter()
-        .append("path")
-        .attr("d", pathGermany)
-        .attr("class","germany")
-        .attr("fill","none")
-        .attr("stroke","black");
+      .data(data[1].features)
+      .enter()
+      .append("path")
+      .attr("d", pathGermany)
+      .attr("class","germany")
+      .attr("fill","none")
+      .attr("stroke","#666666")
+      .attr("stroke-width","1.5px")
 
-    //level 3 kreise
-      svgAdm.selectAll(null)
-        .data(data[2].features)
-        .enter()
-        .append("path")
-        .attr("d", pathGermany)
-        .attr("class","germany")
-        .attr("fill","none")
-        .attr("stroke","lightgrey");
+        
+    //Boundaries solution page4
+    let svg = d3.select("#adm-germany")
+          .append("svg")
+          //responsive size
+          .attr("viewBox", [0, 0, width, height])
+          //dunno seems nice
+          .attr("preserveAspectRatio", "xMinYMin")
+          .append("g")
+          .attr("class", "mapbox");
+
+    svg.selectAll(null)
+          .data(data[0].features)
+          .enter()
+          .append("path")
+          .attr("d", pathGermany)
+          .attr("fill", "lightgrey") 
+          .attr("stroke","grey")
+          .attr("stroke-width","1px");
 };
 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"),d3.json("../geojson/zaf_district_metropolitan_municipalities.geojson"),d3.json("../geojson/zaf_local_municipalities.geojson")])
@@ -108,9 +127,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"),d3.json("../geojson/zaf
 
 function drawZafAdm(data){
     let projectionZaf = d3.geoAzimuthalEqualArea()
-              .scale(1)
-              .translate([0,0])  //1.left/right (lon) 2.up/down (lat)
-              .rotate([-24,-28]);
+            .translate([0,0])
+            .scale(1)
+            .rotate([-24,-28]);
 
     let pathZaf = d3.geoPath().projection(projectionZaf);
 
@@ -129,17 +148,12 @@ function drawZafAdm(data){
         .append("path")
         .attr("d", pathZaf)
         .attr("class","zaf")
-        .attr("stroke","grey");
+        .attr("fill",function(i){
+          return color(i)
+        })
+        .attr("stroke","#666688")
+        .attr("stroke-width","1.5px");
 
-    //level 2 district metro municipal
-    svgAdm.selectAll(null)
-        .data(data[1].features)
-        .enter()
-        .append("path")
-        .attr("d", pathZaf)
-        .attr("fill","none")
-        .attr("class","zaf")
-        .attr("stroke","black");
 
     //level 3 local municipal
     svgAdm.selectAll(null)
@@ -149,9 +163,41 @@ function drawZafAdm(data){
       .attr("d", pathZaf)
       .attr("fill","none")
       .attr("class","zaf")
-      .attr("stroke","lightgrey");
+      .attr("stroke","#858587")
+      .attr("stroke-width",".6px");
+      
+    
+    //level 2 district metro municipal
+    svgAdm.selectAll(null)
+        .data(data[1].features)
+        .enter()
+        .append("path")
+        .attr("d", pathZaf)
+        .attr("fill","none")
+        .attr("class","zaf")
+        .attr("stroke","#666688")
+        .attr("stroke-width","1.5px")
 
     d3.selectAll(".zaf").attr("opacity","0")
+
+    //Boundaries solution page4
+    let svg = d3.select("#adm-zaf")
+          .append("svg")
+          //responsive size
+          .attr("viewBox", [0, 0, width, height])
+          //dunno seems nice
+          .attr("preserveAspectRatio", "xMinYMin")
+          .append("g")
+          .attr("class", "mapbox");
+
+    svg.selectAll(null)
+          .data(data[0].features)
+          .enter()
+          .append("path")
+          .attr("d", pathZaf)
+          .attr("fill", "lightgrey") 
+          .attr("stroke","grey")
+          .attr("stroke-width","1px");
 };
 
 Promise.all([d3.json("../geojson/kenya_counties.geojson"),d3.json("../geojson/kenya_sub-counties.geojson")])
@@ -174,35 +220,54 @@ function drawKenyaAdm(data){
         .scale(s)
         .translate(t); 
 
-    //level 1 provinces
+    //level 1 counties
     svgAdm.selectAll(null)
         .data(data[0].features)
         .enter()
         .append("path")
         .attr("d", pathKenya)
         .attr("class","kenya")
-        .attr("stroke","grey");
+        .attr("fill", function(i){
+          return  color(i);  
+        })
+        .attr("stroke","#666688")
+        .attr("stroke-width","1.6px");
+    
 
-    //level 2 district metro municipal
+    //level 2 sub counties
     svgAdm.selectAll(null)
         .data(data[1].features)
         .enter()
         .append("path")
         .attr("d", pathKenya)
-        .attr("fill","none")
         .attr("class","kenya")
-        .attr("stroke","black");
+        .attr("fill","none")
+        .attr("stroke","#747474")
+        .attr("stroke-width",".6px");
 
     d3.selectAll(".kenya").attr("opacity","0")
+
+    let svg = d3.select("#adm-kenya")
+    .append("svg")
+    //responsive size
+    .attr("viewBox", [0, 0, width, height])
+    //dunno seems nice
+    .attr("preserveAspectRatio", "xMinYMin")
+    .append("g")
+    .attr("class", "mapbox");
+
+    svg.selectAll(null)
+        .data(data[0].features)
+        .enter()
+        .append("path")
+        .attr("d", pathKenya)
+        .attr("fill", "lightgrey") 
+        .attr("stroke","grey")
+        .attr("stroke-width","1px");
 };
 
 
 /* drag and drop */
-d3.selectAll('#slist-germany li').style("background-color",function(){
-  console.log(d3.select('#Germany'))
-  return d3.select('#Germany').style("background-color");
-})
-
 //Drag n Drop trigger
 d3.selectAll("#page3 .sortlist").on("mousedown", function(){
     slistAdm();
@@ -245,6 +310,8 @@ function slistAdm() {
       for (let it of allItems) {
         it.classList.remove("hint");
         it.classList.remove("active");
+        i.classList.remove("slist-wrong")
+        i.classList.remove("slist-correct")
       }
     };
     
@@ -255,6 +322,7 @@ function slistAdm() {
       evt.preventDefault();
        //All List Items in page
       assign = d3.selectAll("#page3 .sortlist li").nodes();
+    
       if (current != i) {
         let currentpos = 0, droppedpos = 0;
         for (let it=0; it<assign.length; it++) {
@@ -279,9 +347,59 @@ function slistAdm() {
 
 /* checker */
 d3.select("#check-adm").on("click",function(){
-  console.log("hi")
+  let level1 = d3.selectAll("#level1 li").nodes()
+  let level2 = d3.selectAll("#level2 li").nodes()
+  let level3 = d3.selectAll("#level3 li").nodes()
+
+  for (let i of level1){
+    if(i.outerText == "Federal state" || i.outerText == "County" || i.outerText == "Province"){
+      i.classList.add("slist-correct")
+    } else if (i.outerText == ""){
+
+    } else {
+      i.classList.add("slist-wrong")
+    }
+  };
+
+  for (let i of level2){
+    if(i.outerText == "Sub-County" || i.outerText == "Governmental district" || i.outerText == "District or metropolitian municipalty"){
+      i.classList.add("slist-correct")
+    } else if (i.outerText == ""){
+      
+    } else {
+      i.classList.add("slist-wrong")
+    }
+  };
+
+  for (let i of level3){
+    if(i.outerText == "Urban or rural district" || i.outerText == "Local municipality"){
+      i.classList.add("slist-correct");
+    } else if (i.outerText == ""){
+
+    } else {
+      i.classList.add("slist-wrong")
+    }
+  };
 });
 
 d3.select("#restart-adm").on("click",function(){
-  console.log("hi2")
+  d3.select("#slist-kenya").html('<li draggable="true">County</li><li draggable="true">Sub-County</li>');
+  d3.select("#slist-germany").html('<li draggable="true">Federal state</li><li draggable="true">Urban or rural district</li><li draggable="true">Governmental district</li>');
+  d3.select("#slist-zaf").html('<li draggable="true">Province</li><li draggable="true">District or metropolitian municipalty</li><li draggable="true">Local municipality</li>')
+  d3.select("#level1").html('<li draggable="true"></li>');
+  d3.select("#level2").html('<li draggable="true"></li>');
+  d3.select("#level3").html('<li draggable="true"></li>');
+
+  //get fill from area maps
+  d3.selectAll("#slist-germany li").style("background",function(){
+    return d3.select("#germany-area").attr("fill")
+  });
+
+  d3.selectAll("#slist-kenya li").style("background",function(){
+    return d3.select("#kenya-area").attr("fill")
+  });
+
+  d3.selectAll("#slist-zaf li").style("background",function(){
+    return d3.select("#zaf-area").attr("fill")
+  });
 });
