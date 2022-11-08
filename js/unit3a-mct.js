@@ -183,15 +183,15 @@ var myQuiz = {
     {
 		/* category: 'Kategorie?', */
 		question: "Which intervall describes poverty in Kenya the best (in %)?",
-		solution: '[10, 25]',
-		falses: ['[15, 40]', '[20, 55]'],
+		solution: '[17, 80]',
+		falses: ['[3, 70]', '[37, 57]'],
 		explanation: ''
 	},
     {
 		/* category: 'Kategorie?', */
 		question: "Which intervall describes poverty in South Africa the best (in %)?",
-		solution: '[10, 25]',
-		falses: ['[15, 40]', '[20, 55]'],
+		solution: '[19, 59]',
+		falses: ['[3, 35]', '[12, 39]'],
 		explanation: ''
 	}],
 	emptyContainer: function () {
