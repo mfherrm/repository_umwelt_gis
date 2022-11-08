@@ -204,6 +204,10 @@ input[type=range]::-moz-range-thumb {
     margin-top: 1.5rem;
 }
 /* world map first unit*/
+#worldmapu2{
+    border: 1px solid grey;
+    background: lightblue;
+}
 #worldmap{
     border: 1px solid grey;
 }

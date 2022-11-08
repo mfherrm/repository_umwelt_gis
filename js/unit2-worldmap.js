@@ -45,7 +45,7 @@ function drawMap(data) {
     var path = d3.geoPath().projection(projection);
 
     let target
-    i == 0 ? target = '#worldmap' : target = "#worldmapall"
+    i == 0 ? target = '#worldmapu2' : target = "#worldmapall"
 
     var svg = d3.select(target)
         .append("svg")
