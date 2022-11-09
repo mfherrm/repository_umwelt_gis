@@ -127,13 +127,16 @@ function drawDots(data, selection, color) {
     const regressionLine= regression(data.features)
     console.log(regressionLine)
 
-   
-    const line =d3.line()
-    .x(regressionLine.map(point => point[0]))
-    .y(regressionLine.map(point => point[1]))
-
-    d3.select('#dotlayer')
-    .append(line)
+    svgSc
+    .append("line")
+    .datum(data.features)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr('x1', (function(d) { return x(regressionLine[0][0]) }))
+    .attr('y1', (function(d) { return x(regressionLine[0][1]) }))
+    .attr('x2', (function(d) { return x(regressionLine[1][0]) }))
+    .attr('y2', (function(d) { return x(regressionLine[1][1]) }))
 
     /*    console.log(a,b)
     x = d3.scaleLinear()
