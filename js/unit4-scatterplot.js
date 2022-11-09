@@ -1,10 +1,12 @@
+// TO-DO: R-Squared
+
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 30, bottom: 30, left: 60 },
     width = 360 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
 let sel = [];
-let dat
+let dat = []
 var x
 var y
 // append the svg object to the body of the page
@@ -16,8 +18,14 @@ var svgSc = d3.select("#scatterplot")
         "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.json("../json/germany_bundeslaender.json").then(function (data) {
-    dat = data
+Promise.all([d3.json("../json/zaf_provinces.json"), d3.json("../json/germany_bundeslaender.json"), d3.json("../json/kenya_counties.json")])
+    .then(drawAxis).catch(error => { console.log(error) })
+
+function drawAxis(data) {
+    for (d in data) {
+        dat[d] = data[d]
+    }
+
     // Add X axis
     x = d3.scaleLinear()
         .domain([0, 100])
@@ -35,20 +43,17 @@ d3.json("../json/germany_bundeslaender.json").then(function (data) {
         .attr('id', 'left')
         .call(d3.axisLeft(y));
 
+};
 
-
-
-
-});
-
-function drawDots(data, selection) {
+function drawDots(data, selection, color) {
     let a = selection[0];
     let b = selection[1];
     let aval;
     let bval;
+    let xval = []
+    let yval = []
+    console.log('Drawing')
 
-    svgSc.selectAll('#dotlayer')
-        .remove();
 
     //svgSc.selectAll('#bottom').remove()
     //svgSc.selectAll('#left').remove()
@@ -71,14 +76,15 @@ function drawDots(data, selection) {
                     aval = d.properties.population_density
                     break;
                 case "Population size":
-                    aval= d.properties.population
+                    aval = d.properties.population
                     break;
                 case "Gini coefficient":
                     aval = d.properties.gini_t
                     break;
             }
+            xval.push(x(aval))
             return x(aval)
-            
+
         })
         .attr("cy", function (d) {
             switch (b) {
@@ -98,6 +104,7 @@ function drawDots(data, selection) {
                     bval = d.properties.gini_t
                     break;
             }
+            yval.push(y(bval))
             return y(bval)
         })
         .attr("r", 2)
@@ -110,7 +117,23 @@ function drawDots(data, selection) {
         .style("cursor", "pointer")
         .on("mouseover", drawTooltip)
         .on("mouseout", eraseTooltip)
-        .style("fill", "#69b3a2")
+        .style("fill", color)
+
+    const regression = d3.regressionLinear()
+        .x(d => d.properties.education_rel)
+        .y(d => d.properties.poverty_rel)
+        console.log(regression)
+
+    const regressionLine= regression(data.features)
+    console.log(regressionLine)
+
+   
+    const line =d3.line()
+    .x(regressionLine.map(point => point[0]))
+    .y(regressionLine.map(point => point[1]))
+
+    d3.select('#dotlayer')
+    .append(line)
 
     /*    console.log(a,b)
     x = d3.scaleLinear()
@@ -204,7 +227,15 @@ function slistScp() {
 
             }
             sel.push(current.innerText)
-            sel.length == 2 ? drawDots(dat, sel) : ''
+            if (sel.length == 2) {
+                console.log('drawdraw')
+                svgSc.selectAll('#dotlayer')
+                    .remove();
+                drawDots(dat[0], sel, "yellow");
+                drawDots(dat[1], sel, 'red');
+                drawDots(dat[2], sel, 'green')
+            }
+
             console.log(sel)
         };
 
