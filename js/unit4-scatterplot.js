@@ -50,13 +50,14 @@ function drawDots(data, selection, color) {
     let b = selection[1];
     let aval;
     let bval;
-    let xval = []
-    let yval = []
     console.log('Drawing')
 
 
     //svgSc.selectAll('#bottom').remove()
     //svgSc.selectAll('#left').remove()
+
+    const regression = d3.regressionLinear()
+        .domain([0, 105])
 
     svgSc.append('g')
         .attr('id', 'dotlayer')
@@ -68,21 +69,25 @@ function drawDots(data, selection, color) {
             switch (a) {
                 case "Poverty":
                     aval = d.properties.poverty_rel
+                    regression.x(d => d.properties.poverty_rel)
                     break;
                 case "Pre-primary education":
                     aval = d.properties.education_rel
+                    regression.x(d => d.properties.education_rel)
                     break;
                 case "Population density":
                     aval = d.properties.population_density
+                    regression.x(d => d.properties.population_density)
                     break;
                 case "Population size":
                     aval = d.properties.population
+                    regression.x(d => d.properties.population)
                     break;
                 case "Gini coefficient":
                     aval = d.properties.gini_t
+                    regression.x(d => d.properties.gini_t)
                     break;
             }
-            xval.push(x(aval))
             return x(aval)
 
         })
@@ -90,21 +95,25 @@ function drawDots(data, selection, color) {
             switch (b) {
                 case "Poverty":
                     bval = d.properties.poverty_rel
+                    regression.y(d=>d.properties.poverty_rel)
                     break;
                 case "Pre-primary education":
                     bval = d.properties.education_rel
+                    regression.y(d.properties.education_rel)
                     break;
                 case "Population density":
                     bval = d.properties.population_density
+                    regression.y(d.properties.population_density)
                     break;
                 case "Population size":
                     bval = d.properties.population
+                    regression.y(d.properties.population)
                     break;
                 case "Gini coefficient":
                     bval = d.properties.gini_t
+                    regression.y(d => d.properties.gini_t)
                     break;
             }
-            yval.push(y(bval))
             return y(bval)
         })
         .attr("r", 2)
@@ -119,27 +128,24 @@ function drawDots(data, selection, color) {
         .on("mouseout", eraseTooltip)
         .style("fill", color)
 
-    const regression = d3.regressionLinear()
-        .x(d => d.properties.education_rel)
-        .y(d => d.properties.poverty_rel)
-        .domain([0,100])
-        console.log(regression)
+    
+    console.log(regression)
 
-    const regressionLine= regression(data.features)
-    console.log(regressionLine)
-    console.log(regressionLine.rSquared, regressionLine[0][1])
+    const regressionLine = regression(data.features)
+
+    console.log(regressionLine.rSquared, x(regressionLine[0][1]))
 
     svgSc
-    .append("line")
-    .datum(data.features)
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 1.5)
-    .attr('x1', (function(d) { return x(regressionLine[0][0]) }))
-    .attr('y1', (function(d) { return x(regressionLine[0][1]) }))
-    .attr('x2', (function(d) { return x(regressionLine[1][0]) }))
-    .attr('y2', (function(d) { return x(regressionLine[1][1]) }))
+        .append("line")
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5)
+        .attr('x1', (function (d) { return x(regressionLine[0][0]) }))
+        .attr('y1', (function (d) { return y(regressionLine[0][1]) }))
+        .attr('x2', (function (d) { return x(regressionLine[1][0]) }))
+        .attr('y2', (function (d) { return y(regressionLine[1][1]) }))
 
+    console.log(d3.select('line'))
     /*    console.log(a,b)
     x = d3.scaleLinear()
         .domain([0, Math.max(a)])
