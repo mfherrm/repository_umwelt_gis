@@ -1,7 +1,7 @@
 
 //Width and height
 var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var width = Math.max(document.documentElement.clientWidth/2, window.innerWidth/2 || 0);
 
 //Create SVG element // viewBox for responsive Map
 let svgAdm = d3.select("#adm-map")

@@ -389,7 +389,6 @@ input[type=range]::-moz-range-thumb {
     background: #f5f5f5;
 }
 
-/* (B) DRAG-AND-DROP HINT */
 .slist li.hint, .slist-assign li.hint  {
     border: 1px solid #ffc49a;
     background: #feffb4;
@@ -420,7 +419,31 @@ input[type=range]::-moz-range-thumb {
 }
 
 /*------------------------------------------------------------------------*/
+/* Styles for tables --------------------------------------------------*/
+.table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+.table td, th {
+  border-bottom: 1px solid darkgrey;
+  text-align: left;
+  padding: .5rem;  
+}
+.table th:nth-child(even),
+.table td:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.table td:nth-child(2),
+.table td:nth-child(3),
+.table th:nth-child(2),
+.table th:nth-child(3){
+    font-weight: 300;
+    font-size: 12pt;
+    text-align: center;
+}
 /* MCT styles-------------------------------------------------------------*/
 #quiz ul {
 	list-style: none;

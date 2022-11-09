@@ -105,7 +105,6 @@ function getCountry(country){
         return country.attr("fill","#00677F")
     } else {
         select = select.filter(element => element.attr("name") !== country.attr("name"));
-        console.log(select);
         return country.attr("fill","grey")
     }
 };
