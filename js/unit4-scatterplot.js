@@ -95,19 +95,19 @@ function drawDots(data, selection, color) {
             switch (b) {
                 case "Poverty":
                     bval = d.properties.poverty_rel
-                    regression.y(d=>d.properties.poverty_rel)
+                    regression.y(d => d.properties.poverty_rel)
                     break;
                 case "Pre-primary education":
                     bval = d.properties.education_rel
-                    regression.y(d.properties.education_rel)
+                    regression.y(d => d.properties.education_rel)
                     break;
                 case "Population density":
                     bval = d.properties.population_density
-                    regression.y(d.properties.population_density)
+                    regression.y(d => d.properties.population_density)
                     break;
                 case "Population size":
                     bval = d.properties.population
-                    regression.y(d.properties.population)
+                    regression.y(d => d.properties.population)
                     break;
                 case "Gini coefficient":
                     bval = d.properties.gini_t
@@ -118,9 +118,9 @@ function drawDots(data, selection, color) {
         })
         .attr("r", 2)
         .attr('name', function (d) { return d.properties.name_1 })
-        .attr('poverty', function (d) { return d.properties.poverty_rel })
-        .attr('education', function (d) { return d.properties.education_rel })
-        .attr('gini', function (d) { return d.properties.gini_t })
+        .attr('Poverty', function (d) { return d.properties.poverty_rel })
+        .attr('Pre-primary_education', function (d) { return d.properties.education_rel })
+        .attr('Gini_coefficient', function (d) { return d.properties.gini_t })
         .attr('class', 'dots')
         //Cursor on mouseover
         .style("cursor", "pointer")
@@ -128,16 +128,17 @@ function drawDots(data, selection, color) {
         .on("mouseout", eraseTooltip)
         .style("fill", color)
 
-    
+
     console.log(regression)
 
     const regressionLine = regression(data.features)
-
+    console.log(regressionLine)
     console.log(regressionLine.rSquared, x(regressionLine[0][1]))
 
     svgSc
         .append("line")
         .attr("fill", "none")
+        .attr("class", "regression")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr('x1', (function (d) { return x(regressionLine[0][0]) }))
@@ -145,7 +146,6 @@ function drawDots(data, selection, color) {
         .attr('x2', (function (d) { return x(regressionLine[1][0]) }))
         .attr('y2', (function (d) { return y(regressionLine[1][1]) }))
 
-    console.log(d3.select('line'))
     /*    console.log(a,b)
     x = d3.scaleLinear()
         .domain([0, Math.max(a)])
@@ -178,12 +178,11 @@ function drawTooltip() {
             .attr('id', 'tt')
             .style("top", bbox.y + bbox.height / 2 + "px")
             ;
-
         tooltip.join(
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p> Poverty: " + d3.select(this).attr("poverty") + "</p>" + "<p> Education: " + d3.select(this).attr("education") + "</p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ','_')) + "</p>" + "<p>" + sel[1] + ': '  + d3.select(this).attr(sel[1].replace(' ','_')) + "</p>")
         )
     }
 };
@@ -209,12 +208,14 @@ function slistScp() {
 
     //(B) MAKE ITEMS DRAGGABLE + SORTABLE
     for (let i of allItems) {
+
         // (B2) DRAG START - YELLOW HIGHLIGHT DROPZONES (left)
         i.ondragstart = (ev) => {
+
             current = i;
             for (let it of assign) {
                 it.classList.add("listitem")
-                if (it != current) { it.classList.add("hint"); }
+                if (it != current && sel.length != 2) { it.classList.add("hint"); }
             }
         };
 
@@ -234,27 +235,44 @@ function slistScp() {
             for (let it of allItems) {
                 it.classList.remove("hint");
                 it.classList.remove("active");
-
-
             }
-            sel.push(current.innerText)
-            if (sel.length == 2) {
-                console.log('drawdraw')
-                svgSc.selectAll('#dotlayer')
-                    .remove();
-                drawDots(dat[0], sel, "yellow");
-                drawDots(dat[1], sel, 'red');
-                drawDots(dat[2], sel, 'green')
-            }
-
-            console.log(sel)
         };
 
         // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
         i.ondragover = (evt) => { evt.preventDefault(); };
 
         i.ondrop = (evt) => {
+            // Idee: Schaut on Drop wie viele Items im Array sind und, ob das current Item bereits drinnen ist. Wenn n==2, dann dragable false für alle items in sliststart
+            // Wenn currentitem == sel[0], dann tue nichts
+            console.log(current.innerText)
+            console.log(evt.target.parentNode)
             evt.preventDefault();
+            if (sel.length != 2) {
+                svgSc.selectAll('#dotlayer')
+                    .remove();
+            }
+            if (evt.target.parentNode == sliststart) {
+                svgSc.selectAll('.regression')
+                    .remove();
+                if (sel.length == 2) {
+                    console.log(current.innerText, sel[0], sel[1])
+                    current.innerText == sel[0] ? sel = sel.splice(1, 1) : current.innerText == sel[1] ? sel = sel.splice(0, 1) : '';
+                } else {
+                    sel.pop()
+                }
+
+            } else {
+                if (sel.length == 2) {
+                    evt.preventDrop()
+                }
+                current.innerText == sel[0] ? '' : current.innerText == sel[1] ? '' : sel.push(current.innerText)
+                if (sel.length == 2) {
+                    drawDots(dat[0], sel, "yellow");
+                    drawDots(dat[1], sel, 'red');
+                    drawDots(dat[2], sel, 'green')
+                }
+            }
+
             //All List Items in page
             assign = d3.selectAll("#solist .sortlist li").nodes();
 
