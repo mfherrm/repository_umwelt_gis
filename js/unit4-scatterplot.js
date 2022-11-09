@@ -122,10 +122,12 @@ function drawDots(data, selection, color) {
     const regression = d3.regressionLinear()
         .x(d => d.properties.education_rel)
         .y(d => d.properties.poverty_rel)
+        .domain([0,100])
         console.log(regression)
 
     const regressionLine= regression(data.features)
     console.log(regressionLine)
+    console.log(regressionLine.rSquared, regressionLine[0][1])
 
     svgSc
     .append("line")
