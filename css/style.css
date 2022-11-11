@@ -252,6 +252,10 @@ input[type=range]::-moz-range-thumb {
     text-align: center;
 }
 
+.mapboxGER, .mapboxKEN{
+    display: none;
+}
+
 /*------*/
 .continent {
     stroke: white;
@@ -326,7 +330,6 @@ input[type=range]::-moz-range-thumb {
 }
 
 .axis line, .axis path {
-  shape-rendering: crispEdges;
   fill: transparent;
   stroke: #555;
 }
