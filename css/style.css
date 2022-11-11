@@ -432,8 +432,13 @@ input[type=range]::-moz-range-thumb {
   padding: .5rem;  
 }
 .table th:nth-child(even),
-.table td:nth-child(even) {
+.table td:nth-child(2) {
   background-color: #dddddd;
+}
+
+.table td:nth-child(4){
+    border-top: 1px solid darkgrey;
+    border-left: 1px solid darkgrey;
 }
 
 .table td:nth-child(2),

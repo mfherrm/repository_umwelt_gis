@@ -4,7 +4,7 @@ var heightC = Math.max(document.documentElement.clientWidth, window.innerHeight 
 //Create SVG element // viewBox for responsive Map
 
 
-/*
+/*Definde Projection
 var projection =  d3.geoBromley()
             .scale(width / 2 / Math.PI)
             .rotate([0, 0])
@@ -65,13 +65,6 @@ function drawMap(data) {
         .attr("d", pathC)
         .attr("class", "continent")
         .attr("fill", "grey")
-        /*
-        function(d,i){
-            let min = Math.ceil(0);
-            let max = Math.floor(27)
-            return color(Math.floor(Math.random()*(max-min)+min))
-        })
-        */
         .attr("name", function (d) {
             return d.properties.CONTINENT;
         })

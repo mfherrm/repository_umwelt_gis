@@ -2,14 +2,13 @@
 //create table with questions in array "questions" --> its numberrrrd and i am too lazy to hardcode
 console.log("d3 let's go");
 
-let header = ["Question","Absolute","Relative"]
+let header = ["Statement","Absolute","Relative"]
 
 let questions = [
                 {question: "Germany has a total population of ca. 83 million",answer:"absolute"},
                 {question:"9.2% of Kenyas total population live in the county 'Nairobi'",answer:"relative"},
                 {question:"South Africa is approximately 3.4 times bigger than Germany",answer:"relative"}
                 ]
-
 
 createTable()
 
@@ -63,24 +62,53 @@ function createTable(){
             return "question"+i;
         })
 }
+//remove Error-Msg on click
+d3.select("#page0 .table").on("click",function(){
+    d3.select("#page0 .unit-check p").remove();
+});
+
+d3.selectAll("#page0 .table tr").on("change", function(){
+    let correction = this
+    console.log(correction)
+    console.log(correction.childNodes.length)
+    if(correction.childNodes.length == 4){
+        correction.lastChild.classList.remove("wrong");
+        correction.lastChild.classList.remove("correct")
+
+    }    
+});
 
 d3.select("#check-tabletest").on("click",function(){
-    let answers_given = d3.selectAll(".table .col-6 tr")
-    
-    answers_given.append("td").attr("class",function(d,i){
-        d3.selectAll(".table .col-6 tr input:checked").attr("value") == [questions[i].answer] ? "correct" : "wrong"; 
-        i++;
-    })
-    /*
-    for(let i = 0; i < questions.length; i++){
-        console.log(answers_given[i])
-        console.log(answers_given[i])
-        console.log([questions[i].answer])
-        d3.select(".table .col-6 tr input:checked").attr("value") == [questions[i].answer] ? answers_given.nodes()[i].append("td").attr("class","correct") : answers_given.nodes()[i].append("td").attr("class","correct"); 
+    let answers_given = d3.selectAll(".table .col-6 tr");
+    let answer = d3.selectAll(".table .col-6 tr input:checked").nodes();
+
+    d3.select("#page0 .error").remove();
+
+    if (answer.length !== questions.length ){
+        d3.select("#page0 .unit-check").append("p").attr("class","error").text("Please select an answer for every question").style("color","red")
+        return
+    } else {
+        for(let i of answers_given.nodes()){
+            if(i.childElementCount >= 4){
+                d3.selectAll(".table .col-6 .result").remove();
+            }
+        }
+        answers_given.append("td").attr("class",function(d,i){
+            if(d.answer == answer[i].value){
+                return "correct result"
+            } else {
+                return "wrong result"
+            }
+        });
     }
-    */
 });
 
 d3.select("#restart-tabletest").on("click",function(){
-
+    let answers_given = d3.selectAll(".table .col-6 tr");
+    d3.selectAll(".table .col-6 tr input").property("checked",false)
+    for(let i of answers_given.nodes()){
+        if(i.childElementCount >= 4){
+            d3.selectAll(".table .col-6 .result").remove();
+        }
+    }
 });
