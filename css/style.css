@@ -252,8 +252,8 @@ input[type=range]::-moz-range-thumb {
     text-align: center;
 }
 
-.mapboxZAF, .mapboxKEN{
-    opacity: 0;
+.mapboxGER, .mapboxKEN{
+    display: none;
 }
 
 /*------*/

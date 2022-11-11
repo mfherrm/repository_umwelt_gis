@@ -191,13 +191,10 @@ d3.selectAll(".sortlist").on("mousedown", function () {
 d3.select("#sdgRange").on("input", function () {
     let opacity = this.valueAsNumber / 100
     let selected = d3.select("input[type=radio]:checked").property("value");
-    if (selected == "germany") {
-        d3.selectAll("#germany-4").style("opacity", function () { return opacity })
-    } else if (selected == "zaf") {
-        d3.selectAll("#zaf-4").style("opacity", function () { return opacity })
-    } else {
-        d3.selectAll("#kenya-4").style("opacity", function () { return opacity })
-    }
+
+    d3.selectAll("#germany-4").style("opacity", function () { return opacity })
+    d3.selectAll("#zaf-4").style("opacity", function () { return opacity })
+    d3.selectAll("#kenya-4").style("opacity", function () { return opacity })
 });
 
 
@@ -208,16 +205,16 @@ function drawMapTrigger() {
     let selected = d3.select("input[type=radio]:checked").property("value");
     if (selected == "germany") {
         //Load in GeoJSON data //Promise resolve
-        d3.selectAll(".mapboxGER").transition().duration(500).style("opacity", "1");
-        d3.selectAll(".mapboxZAF").transition().duration(500).style("opacity", "0");
-        d3.selectAll(".mapboxKEN").transition().duration(500).style("opacity", "0");
+        d3.selectAll(".mapboxGER").transition().duration(500).style("display", "flex");
+        d3.selectAll(".mapboxZAF").transition().duration(500).style("display", "none");
+        d3.selectAll(".mapboxKEN").transition().duration(500).style("display", "none");
     } else if (selected == "zaf") {
-        d3.selectAll(".mapboxGER").transition().duration(500).style("opacity", "0");
-        d3.selectAll(".mapboxZAF").transition().duration(500).style("opacity", "1");
-        d3.selectAll(".mapboxKEN").transition().duration(500).style("opacity", "0");
+        d3.selectAll(".mapboxGER").transition().duration(500).style("display", "none");
+        d3.selectAll(".mapboxZAF").transition().duration(500).style("display", "flex");
+        d3.selectAll(".mapboxKEN").transition().duration(500).style("display", "none");
     } else {
-        d3.selectAll(".mapboxGER").transition().duration(500).style("opacity", "0");
-        d3.selectAll(".mapboxZAF").transition().duration(500).style("opacity", "0");
-        d3.selectAll(".mapboxKEN").transition().duration(500).style("opacity", "1");
+        d3.selectAll(".mapboxGER").transition().duration(500).style("display", "none");
+        d3.selectAll(".mapboxZAF").transition().duration(500).style("display", "none");
+        d3.selectAll(".mapboxKEN").transition().duration(500).style("display", "flex");
     };
 };
