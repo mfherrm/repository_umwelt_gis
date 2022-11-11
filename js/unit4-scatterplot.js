@@ -26,14 +26,17 @@ function drawAxis(data) {
         dat[d] = data[d]
     }
 
+    
+
     // Add X axis
     x = d3.scaleLinear()
         .domain([0, 100])
         .range([0, width]);
+    x.ticks(50)
     svgSc.append("g")
         .attr('id', 'bottom')
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).ticks(20));
 
     // Add Y axis
     y = d3.scaleLinear()
@@ -41,7 +44,7 @@ function drawAxis(data) {
         .range([height, 0]);
     svgSc.append("g")
         .attr('id', 'left')
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).ticks(20));
 
 };
 
@@ -51,10 +54,6 @@ function drawDots(data, selection, color) {
     let aval;
     let bval;
     console.log('Drawing')
-
-
-    //svgSc.selectAll('#bottom').remove()
-    //svgSc.selectAll('#left').remove()
 
     const regression = d3.regressionLinear()
         .domain([0, 105])
@@ -121,6 +120,8 @@ function drawDots(data, selection, color) {
         .attr('Poverty', function (d) { return d.properties.poverty_rel })
         .attr('Pre-primary_education', function (d) { return d.properties.education_rel })
         .attr('Gini_coefficient', function (d) { return d.properties.gini_t })
+        .attr('Population_density', function (d) {return d.properties.population_density})
+        .attr('Population', function(d){return d.properties.population})
         .attr('class', 'dots')
         //Cursor on mouseover
         .style("cursor", "pointer")
@@ -146,21 +147,6 @@ function drawDots(data, selection, color) {
         .attr('x2', (function (d) { return x(regressionLine[1][0]) }))
         .attr('y2', (function (d) { return y(regressionLine[1][1]) }))
 
-    /*    console.log(a,b)
-    x = d3.scaleLinear()
-        .domain([0, Math.max(a)])
-        .range([0, width]);
-    svgSc.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-
-    // Add Y axis
-    y = d3.scaleLinear()
-        .domain([0, Math.max(b)])
-        .range([height, 0]);
-    svgSc.append("g")
-        .call(d3.axisLeft(y));
-*/
 }
 
 function drawTooltip() {
@@ -247,10 +233,7 @@ function slistScp() {
             console.log(current.innerText)
             console.log(evt.target.parentNode)
             evt.preventDefault();
-            if (sel.length != 2) {
-                svgSc.selectAll('#dotlayer')
-                    .remove();
-            }
+            
             if (evt.target.parentNode == sliststart) {
                 svgSc.selectAll('.regression')
                     .remove();
@@ -271,6 +254,11 @@ function slistScp() {
                     drawDots(dat[1], sel, 'red');
                     drawDots(dat[2], sel, 'green')
                 }
+            }
+
+            if (sel.length != 2) {
+                svgSc.selectAll('#dotlayer')
+                    .remove();
             }
 
             //All List Items in page
