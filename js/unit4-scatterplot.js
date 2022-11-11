@@ -1,7 +1,7 @@
 // TO-DO: R-Squared
 
 // set the dimensions and margins of the graph
-var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+var margin = { top: 30, right: 30, bottom: 50, left: 60 },
     width = 360 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -9,6 +9,8 @@ let sel = [];
 let dat = []
 var x
 var y
+let tempa = []
+let tempb = []
 // append the svg object to the body of the page
 var svgSc = d3.select("#scatterplot")
     .append("svg")
@@ -26,8 +28,6 @@ function drawAxis(data) {
         dat[d] = data[d]
     }
 
-    
-
     // Add X axis
     x = d3.scaleLinear()
         .domain([0, 100])
@@ -44,13 +44,16 @@ function drawAxis(data) {
         .range([height, 0]);
     svgSc.append("g")
         .attr('id', 'left')
-        .call(d3.axisLeft(y).ticks(20));
+        .call(d3.axisLeft(y).ticks(20))
 
+    createYLabel();
+    createXLabel();
 };
 
 function drawDots(data, selection, color) {
     let a = selection[0];
     let b = selection[1];
+    let c;
     let aval;
     let bval;
     console.log('Drawing')
@@ -65,28 +68,40 @@ function drawDots(data, selection, color) {
         .enter()
         .append("circle")
         .attr("cx", function (d) {
+            if (a == 'Population size' || a == 'Population density') {
+                c = a
+                a = b
+                b = c
+            }
             switch (a) {
                 case "Poverty":
                     aval = d.properties.poverty_rel
+                    tempa.push(aval);
                     regression.x(d => d.properties.poverty_rel)
                     break;
                 case "Pre-primary education":
                     aval = d.properties.education_rel
+                    tempa.push(aval);
                     regression.x(d => d.properties.education_rel)
-                    break;
-                case "Population density":
-                    aval = d.properties.population_density
-                    regression.x(d => d.properties.population_density)
-                    break;
-                case "Population size":
-                    aval = d.properties.population
-                    regression.x(d => d.properties.population)
                     break;
                 case "Gini coefficient":
                     aval = d.properties.gini_t
+                    tempa.push(aval);
                     regression.x(d => d.properties.gini_t)
                     break;
             }
+            x.domain([0, (d3.max(tempa))])// change the xScale
+            d3.select('#bottom') // redraw the xAxis
+                .transition().duration(1000)
+                .call(d3.axisBottom(x).ticks(20))
+            svgSc.append("g")
+                .attr('id', 'ylabel')
+                .append("text")
+                .text(a)
+                .attr('y', '250px')
+                .attr('x', '75px')
+
+
             return x(aval)
 
         })
@@ -94,25 +109,43 @@ function drawDots(data, selection, color) {
             switch (b) {
                 case "Poverty":
                     bval = d.properties.poverty_rel
+                    tempb.push(bval);
                     regression.y(d => d.properties.poverty_rel)
                     break;
                 case "Pre-primary education":
                     bval = d.properties.education_rel
+                    tempb.push(bval);
                     regression.y(d => d.properties.education_rel)
                     break;
                 case "Population density":
                     bval = d.properties.population_density
+                    tempb.push(bval);
                     regression.y(d => d.properties.population_density)
                     break;
                 case "Population size":
                     bval = d.properties.population
+                    tempb.push(bval);
                     regression.y(d => d.properties.population)
                     break;
                 case "Gini coefficient":
                     bval = d.properties.gini_t
+                    tempb.push(bval);
                     regression.y(d => d.properties.gini_t)
                     break;
             }
+            y.domain([0, (d3.max(tempb))])// change the xScale
+            d3.select('#left') // redraw the xAxis
+                .transition().duration(1000)
+                .call(d3.axisLeft(y).ticks(20))
+
+
+            svgSc.append("g")
+                .attr('id', 'xlabel')
+                .append("text")
+                .text(b)
+                .attr('y', '-30px')
+                .attr('x', '-150px')
+                .attr('transform', 'rotate(-90)')
             return y(bval)
         })
         .attr("r", 2)
@@ -120,8 +153,8 @@ function drawDots(data, selection, color) {
         .attr('Poverty', function (d) { return d.properties.poverty_rel })
         .attr('Pre-primary_education', function (d) { return d.properties.education_rel })
         .attr('Gini_coefficient', function (d) { return d.properties.gini_t })
-        .attr('Population_density', function (d) {return d.properties.population_density})
-        .attr('Population', function(d){return d.properties.population})
+        .attr('Population_density', function (d) { return d.properties.population_density })
+        .attr('Population_size', function (d) { return d.properties.population })
         .attr('class', 'dots')
         //Cursor on mouseover
         .style("cursor", "pointer")
@@ -168,7 +201,7 @@ function drawTooltip() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ','_')) + "</p>" + "<p>" + sel[1] + ': '  + d3.select(this).attr(sel[1].replace(' ','_')) + "</p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>")
         )
     }
 };
@@ -225,7 +258,17 @@ function slistScp() {
         };
 
         // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
-        i.ondragover = (evt) => { evt.preventDefault(); };
+        i.ondragover = (evt) => {
+            if ((current.innerText == 'Population size' && sel[0] == 'Population density') || (current.innerText == 'Population density' && sel[0] == 'Population size')) {
+
+            } else if (sel.length == 2 && evt.target.parentNode == sliststart) {
+                evt.preventDefault();
+            } else if (sel.length == 2) {
+
+            } else {
+                evt.preventDefault();
+            }
+        };
 
         i.ondrop = (evt) => {
             // Idee: Schaut on Drop wie viele Items im Array sind und, ob das current Item bereits drinnen ist. Wenn n==2, dann dragable false für alle items in sliststart
@@ -233,10 +276,16 @@ function slistScp() {
             console.log(current.innerText)
             console.log(evt.target.parentNode)
             evt.preventDefault();
-            
+
             if (evt.target.parentNode == sliststart) {
                 svgSc.selectAll('.regression')
                     .remove();
+                svgSc.selectAll('#ylabel')
+                    .remove();
+                createYLabel();
+                svgSc.selectAll('#xlabel')
+                    .remove();
+                createXLabel();
                 if (sel.length == 2) {
                     console.log(current.innerText, sel[0], sel[1])
                     current.innerText == sel[0] ? sel = sel.splice(1, 1) : current.innerText == sel[1] ? sel = sel.splice(0, 1) : '';
@@ -245,14 +294,19 @@ function slistScp() {
                 }
 
             } else {
-                if (sel.length == 2) {
-                    evt.preventDrop()
-                }
+
                 current.innerText == sel[0] ? '' : current.innerText == sel[1] ? '' : sel.push(current.innerText)
                 if (sel.length == 2) {
+                    svgSc.selectAll('#ylabel')
+                        .remove();
+                    svgSc.selectAll('#xlabel')
+                        .remove();
+
                     drawDots(dat[0], sel, "yellow");
                     drawDots(dat[1], sel, 'red');
                     drawDots(dat[2], sel, 'green')
+                    tempa = []
+                    tempb = []
                 }
             }
 
@@ -285,3 +339,21 @@ function slistScp() {
         }
     }
 };
+
+function createYLabel() {
+    svgSc.append("g")
+        .attr('id', 'ylabel')
+        .append("text")
+        .text('Y-Axis')
+        .attr('y', '-30px')
+        .attr('x', '-125px')
+        .attr('transform', 'rotate(-90)')
+}
+function createXLabel() {
+    svgSc.append("g")
+        .attr('id', 'xlabel')
+        .append("text")
+        .text('X-Axis')
+        .attr('y', '250px')
+        .attr('x', '125px')
+}
