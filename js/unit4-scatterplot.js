@@ -6,11 +6,13 @@ var margin = { top: 30, right: 30, bottom: 50, left: 60 },
     height = 300 - margin.top - margin.bottom;
 
 let sel = [];
-let dat = []
-var x
-var y
-let tempa = []
-let tempb = []
+let dat = [];
+var x;
+var y;
+let tempa = [];
+let tempb = [];
+let rKen, rGer, rZaf;
+let ii = 0;
 // append the svg object to the body of the page
 var svgSc = d3.select("#scatterplot")
     .append("svg")
@@ -21,7 +23,7 @@ var svgSc = d3.select("#scatterplot")
 
 //Read the data
 Promise.all([d3.json("../json/zaf_provinces.json"), d3.json("../json/germany_bundeslaender.json"), d3.json("../json/kenya_counties.json")])
-    .then(drawAxis).catch(error => { console.log(error) })
+    .then(drawAxis).catch(error => { console.log(error) });
 
 function drawAxis(data) {
     for (d in data) {
@@ -56,10 +58,9 @@ function drawDots(data, selection, color) {
     let c;
     let aval;
     let bval;
-    console.log('Drawing')
 
     const regression = d3.regressionLinear()
-        .domain([0, 105])
+        .domain([0, 105]);
 
     svgSc.append('g')
         .attr('id', 'dotlayer')
@@ -149,6 +150,7 @@ function drawDots(data, selection, color) {
             return y(bval)
         })
         .attr("r", 2)
+        .attr('cname', function (d) { return d.properties.name_0 })
         .attr('name', function (d) { return d.properties.name_1 })
         .attr('Poverty', function (d) { return d.properties.poverty_rel })
         .attr('Pre-primary_education', function (d) { return d.properties.education_rel })
@@ -165,10 +167,9 @@ function drawDots(data, selection, color) {
 
     console.log(regression)
 
-    const regressionLine = regression(data.features)
-    console.log(regressionLine)
-    console.log(regressionLine.rSquared, x(regressionLine[0][1]))
 
+    const regressionLine = regression(data.features)
+    ii == 0 ? (rZaf = regressionLine.rSquared) : ii == 1 ? (rGer = regressionLine.rSquared) : ii == 2 ? (rKen = regressionLine.rSquared) : ''
     svgSc
         .append("line")
         .attr("fill", "none")
@@ -179,10 +180,12 @@ function drawDots(data, selection, color) {
         .attr('y1', (function (d) { return y(regressionLine[0][1]) }))
         .attr('x2', (function (d) { return x(regressionLine[1][0]) }))
         .attr('y2', (function (d) { return y(regressionLine[1][1]) }))
-
+    ii++;
 }
 
 function drawTooltip() {
+    let r2
+    d3.select(this).attr('cname').includes('South')? r2=rZaf : d3.select(this).attr('cname').includes('Germany')? r2=rGer : d3.select(this).attr('cname').includes('Kenya')? r2=rKen :''
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
     tooltip = d3.select('#scatterplot')
@@ -201,7 +204,7 @@ function drawTooltip() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>"+ "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
         )
     }
 };
@@ -307,6 +310,7 @@ function slistScp() {
                     drawDots(dat[2], sel, 'green')
                     tempa = []
                     tempb = []
+                    ii = 0;
                 }
             }
 

@@ -67,6 +67,11 @@ function drawZaf(data) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
+    drawLegend(color1, 'mapboxZAF', "Population in poverty [%]", 10)
+
+    drawLegend(color4, 'mapboxZAF', "Children taking part in pre-primary education [%]", 235)
+    drawScalebar(projectionZaf, 'mapboxZAF')
+
     //set value of range slider for opacity
     d3.select("#sdgRange").attr("value", function () { return d3.select("#zaf-4").style("opacity") * 100 })
 
@@ -97,6 +102,8 @@ function drawKenya(data, s) {
         .scale(s)
         .translate(t);
 
+
+
     svgBoundaries.selectAll(null)
         .data(data.features)
         .enter()
@@ -108,6 +115,10 @@ function drawKenya(data, s) {
         .attr("stroke", "grey")
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1");
+
+    drawLegend(color1, 'mapboxKEN', "Population in poverty [%]", 10)
+
+
 
     svgBoundaries.selectAll(null)
         .data(data.features)
@@ -121,6 +132,8 @@ function drawKenya(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1");
 
+    drawLegend(color4, 'mapboxKEN', "Children taking part in pre-primary education [%]", 235)
+    drawScalebar(projectionKenya, 'mapboxKEN')
     //set value of range slider for opacity
     d3.select("#sdgRange").attr("value", function () { return d3.select("#kenya-4").style("opacity") * 100 })
 
@@ -161,6 +174,8 @@ function drawGermany(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
+    drawLegend(color1, 'mapboxGER', "Population in poverty [%]", 10)
+
     svgBoundaries.selectAll("null")
         .data(data.features)
         .enter()
@@ -173,6 +188,8 @@ function drawGermany(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
+    drawLegend(color4, 'mapboxGER', "Children taking part in pre-primary education [%]", 235)
+    drawScalebar(projectionGermany, 'mapboxGER')
     //set value of range slider for opacity
     d3.select("#sdgRange").attr("value", function () { return d3.select("#germany-4").style("opacity") * 100 })
 
@@ -181,11 +198,110 @@ function drawGermany(data, s) {
         return d3.select("#map").attr("fill")
     });
 }
-//Drag n Drop trigger
-d3.selectAll(".sortlist").on("mousedown", function () {
-    slistArea(this.id);
-});
 
+function drawLegend(color, mclass, txt, pos) {
+    //set Title
+    //create svg for Legend
+    var legendSvg = d3.selectAll('.mapbox')
+        .append("g")
+        .attr("class", mclass)
+        //.attr("viewBox", [0, 0, width, height])
+        .attr("width", "100%")
+        //good height --> no. of class*spacing
+        .attr("height", function (d, i) {
+            return 6 * 45
+        })
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(5," + (30 + pos) + ")";
+        });
+    console.log(legendSvg)
+    var legend = legendSvg.selectAll(null)
+        .data(color.domain())
+        .enter()
+        .append("g")
+        .attr("class", "entry")
+        .attr("transform", function (d, i) {
+            return "translate(5," + i * 33 + ")";
+        });
+
+    legendSvg.append("g")
+        .append("text")
+        .text(txt)
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(0," + -8 + ")";
+        });
+    //fill rects by color domain (d) & range (i)                  
+    legend.append("rect")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("x", 10)
+        .attr("y", 10) //10
+        .attr("width", 25)
+        .attr("height", 25)
+        .attr("fill", function (d, i) {
+            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
+            return color(d - 1);
+        })
+
+    //get and set of color by domain (d) & range (i)
+    legend.append("text")
+        //play around for nice positonioning
+        //General tip for x--> Rect.X(5)+Rect.Width(20)+buffer(6)
+        //Genral tip for y--> anchor of text is at the bottom
+        .attr("x", 46)
+        .attr("y", 31)
+        .attr("color", "white")
+        .text(function (d, i) {
+            if (i == 0) {
+                return "≤ " + d
+            } else if (i == color.domain().length - 1) {
+                return "≥ " + + d
+            } else {
+                return color.domain()[i - 1] + 1 + " to " + d
+            };
+        })
+};
+
+//Build Scalebar -- 
+function drawScalebar(mapProjection, mclass) {
+    let mapbox = getPosition($(".mapbox")[0]);
+    var scaleBar = d3.geoScaleBar()
+        .projection(mapProjection)
+        //for other projection specify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
+        .size([mapbox.width, 180])
+        .zoomClamp(false)
+        //sets the vertical tick size of the scale bar in pixels
+        .tickSize([8])
+        //sets ticks on specified distances OR use distance for automatic specification
+        .tickValues([0, 150, 300])
+        //.distance(200)
+        // How far the tick text labels are from the lines
+        .tickPadding(8)
+
+    var scaleSvg = d3.select(('.mapbox'))
+        .append("g")
+        .attr("class", mclass)
+        //move the Scalebar like the legend
+        .attr("transform", function () {
+            return "translate(10," + '650' + ")";
+        });
+
+    scaleSvg.append("g").call(scaleBar);
+    d3.selectAll("#page1 .tick").attr("class", "legendtick")
+};
+
+//Function to get Position of an Element, implement on Event e.g. "click"
+function getPosition(ele) {
+    boundingClientRect = ele.getBoundingClientRect();
+
+    var left = boundingClientRect.left;
+    var top = boundingClientRect.top;
+    var rectHeight = boundingClientRect.height;
+    var rectWidth = boundingClientRect.width;
+
+    return boundingClientRect;
+}
 
 //Range slider functions
 d3.select("#sdgRange").on("input", function () {
@@ -218,3 +334,4 @@ function drawMapTrigger() {
         d3.selectAll(".mapboxKEN").transition().duration(500).style("display", "flex");
     };
 };
+
