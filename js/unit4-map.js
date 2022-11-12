@@ -26,10 +26,7 @@ function drawZaf(data) {
     color1 = d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(d3.schemeBlues[6])
     color4 = d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(d3.schemeReds[6])
     //Define Projection
-    let projectionZaf = d3.geoAzimuthalEqualArea()
-        .translate([0, 0])
-        .scale(1)
-        .rotate([-24, -28]);
+    let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]);
 
     //Define path generator
     let pathZaf = d3.geoPath()
@@ -87,10 +84,7 @@ function drawZaf(data) {
 function drawKenya(data, s) {
     color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(d3.schemeBlues[6])
     color4 = d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(d3.schemeReds[6])
-    let projectionKenya = d3.geoAzimuthalEqualArea()
-        .translate([-0.01, -.02])
-        .scale(1)
-        .rotate([-39, 0]);
+    let projectionKenya = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]);
 
     let pathKenya = d3.geoPath()
         .projection(projectionKenya);
@@ -147,10 +141,7 @@ function drawGermany(data, s) {
     color1 = d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(d3.schemeBlues[6])
     color4 = d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(d3.schemeReds[6])
 
-    let projectionGermany = d3.geoAzimuthalEqualArea()
-        .translate([-0.005, -.015])
-        .scale(1)
-        .rotate([-10, -52]);
+    let projectionGermany = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
 
     let pathGermany = d3.geoPath()
         .projection(projectionGermany);

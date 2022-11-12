@@ -1,6 +1,6 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerHeight || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548)+30;
 let mode = false;
 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
@@ -13,7 +13,7 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 function draw(data) {
     drawMap(data[0], '#southafrica', "exzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]))
     drawMap(data[1], '#germany', "exger", projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]))
-    drawMap(data[2], '#kenya', "exken", projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]))
+    drawMap(data[2], '#kenya', "exken", projection = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]))
 }
 
 //Load in GeoJSON data //Promise resolve
