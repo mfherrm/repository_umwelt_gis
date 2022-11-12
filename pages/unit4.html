@@ -102,33 +102,39 @@
                     <div class="row">
                         <div id="solist">
                             <div class="row">
-                                <div class="col-3">
-                                    <div class="sortlist">
-                                        <p>Available Parameters</p>
-                                        <ul class="slist-assign" id="sliststart">
-                                            <li draggable="true">Poverty</li>
-                                            <li draggable="true">Pre-primary education</li>
-                                            <li draggable="true">Population density</li>
-                                            <li draggable="true">Population size</li>
-                                            <li draggable="true">Gini coefficient</li>
-                                            <li draggable="false" id="ignl" onselectstart="return false"></li>
-                                        </ul>
-                                        <hr>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="sortlist">
+                                                <p>Available Parameters</p>
+                                                <ul class="slist-assign" id="sliststart">
+                                                    <li draggable="true">Poverty</li>
+                                                    <li draggable="true">Pre-primary education</li>
+                                                    <li draggable="true">Population density</li>
+                                                    <li draggable="true">Population size</li>
+                                                    <li draggable="true">Gini coefficient</li>
+                                                    <li draggable="false" id="ignl" onselectstart="return false"></li>
+                                                </ul>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="sortlist sortlistcolor">
+                                                <p>Used parameters</p>
+                                                <ul class="slist-assign" id="slistparam">
+                                                    <li draggable="false" id="ignr"></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
-                                    <div class="sortlist sortlistcolor">
-                                        <p>Parameters in use</p>
-                                        <ul class="slist-assign" id="slistparam">
-                                            <li draggable="false" id="ignr"></li>
-                                        </ul>
-                                    </div>
+                                <div class="col-8">
+                                    <div id="scatterplot"></div>
                                 </div>
-
                             </div>
 
                         </div>
-                        <div id="scatterplot"></div>
+
                     </div>
 
                 </div>
@@ -167,7 +173,7 @@
                                     <li> Slow population decrease</li>
                                 </ul>
                             </ul>
-                            <a href="https://populationeducation.org/what-demographic-transition-model/"
+                            <a href="https://www.abs.gov.au/websitedbs/D3310114.nsf/home/statistical+language+-+correlation+and+causation"
                                 target="blank">Click here for further Information on this topic</a>
 
 
@@ -183,30 +189,34 @@
                         <h5>Mental Maps</h5>
                         <p>You can change the displayed style below.</p>
                     </div>
-                        <div class="col-6">
-                            <label for="sdgRange" class="form-label">SDG 1.2.1 - SDG 4.2.2</label>
-                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="100" id="sdgRange">
+                    <div class="col-6">
+                        <label for="sdgRange" class="form-label">SDG 1.2.1 - SDG 4.2.2</label>
+                        <input type="range" class="form-range" min="0" max="100" step="10" data-value="100"
+                            id="sdgRange">
+                    </div>
+                    <div class="adm-radio">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                value="germany">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Germany
+                            </label>
                         </div>
-                        <div class="adm-radio">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="germany">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Germany
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="kenya">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Kenya
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="zaf" checked>
-                                <label class="form-check-label" for="flexRadioDefault3">
-                                    South Africa
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                value="kenya">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Kenya
+                            </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
+                                value="zaf" checked>
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                South Africa
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-8">
@@ -215,12 +225,12 @@
                         <h5>Area & Population Solution</h5>
                     </div>
                     <div id="map">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                     <div class="p-2">
                         <h5></h5>
                     </div>
@@ -229,19 +239,24 @@
                         <ul class="factbook-list">
                             <li>Area: 1,219,090 sq km</li>
                             <li>Total Population: 57,516,665 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The Population is concentrated along southern and southeastern coast and in Gautend, which includes Pretoria; The west is less densly populated than the east.</li>
+                            <li style="padding-top: .4rem">The Population is concentrated along southern and
+                                southeastern coast and in Gautend, which includes Pretoria; The west is less densly
+                                populated than the east.</li>
                         </ul>
                         <p><strong>Kenya</strong></p>
                         <ul class="factbook-list">
                             <li>Area: 580,367 sq km </li>
                             <li>Total Population: 55,864,655 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake Victoria, and around the capital Nairobi and southeast along the Indian Ocean.</li>
+                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake
+                                Victoria, and around the capital Nairobi and southeast along the Indian Ocean.</li>
                         </ul>
                         <p><strong>Germany</strong></p>
                         <ul class="factbook-list">
                             <li>Area: 357,022 sq km</li>
                             <li>Total Population: 84,316,622 (2022 est.)</li>
-                            <li style="padding-top: .4rem">Fairly even population distribution throughout most of the country, with urban areas attracting larger and denser populations, particularly in the far western part of the industrial state of North Rhine-Westphalia.</li>
+                            <li style="padding-top: .4rem">Fairly even population distribution throughout most of the
+                                country, with urban areas attracting larger and denser populations, particularly in the
+                                far western part of the industrial state of North Rhine-Westphalia.</li>
                         </ul>
                     </div>
                 </div>
@@ -250,7 +265,7 @@
 
 
 
-        
+
         <!-- End of Content -->
 
 

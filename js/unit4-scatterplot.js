@@ -1,7 +1,7 @@
 // TO-DO: R-Squared
 
 // set the dimensions and margins of the graph
-var margin = { top: 30, right: 30, bottom: 50, left: 60 },
+var margin = { top: 30, right: 30, bottom: 50, left: 40 },
     width = 360 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -32,7 +32,6 @@ function drawAxis(data) {
 
     // Add X axis
     x = d3.scaleLinear()
-        .domain([0, 100])
         .range([0, width]);
     x.ticks(50)
     svgSc.append("g")
@@ -42,7 +41,6 @@ function drawAxis(data) {
 
     // Add Y axis
     y = d3.scaleLinear()
-        .domain([0, 100])
         .range([height, 0]);
     svgSc.append("g")
         .attr('id', 'left')
@@ -59,8 +57,7 @@ function drawDots(data, selection, color) {
     let aval;
     let bval;
 
-    const regression = d3.regressionLinear()
-        .domain([0, 105]);
+    const regression = d3.regressionLinear();
 
     svgSc.append('g')
         .attr('id', 'dotlayer')
@@ -91,10 +88,12 @@ function drawDots(data, selection, color) {
                     regression.x(d => d.properties.gini_t)
                     break;
             }
-            x.domain([0, (d3.max(tempa))])// change the xScale
+            x.domain([0, d3.max(tempa)])// change the xScale
             d3.select('#bottom') // redraw the xAxis
                 .transition().duration(1000)
                 .call(d3.axisBottom(x).ticks(20))
+            svgSc.selectAll('#ylabel')
+                .remove();
             svgSc.append("g")
                 .attr('id', 'ylabel')
                 .append("text")
@@ -134,12 +133,12 @@ function drawDots(data, selection, color) {
                     regression.y(d => d.properties.gini_t)
                     break;
             }
-            y.domain([0, (d3.max(tempb))])// change the xScale
+            y.domain([0, (d3.max(tempb) + 1)])// change the xScale
             d3.select('#left') // redraw the xAxis
                 .transition().duration(1000)
-                .call(d3.axisLeft(y).ticks(20))
-
-
+                .call(d3.axisLeft(y).ticks(20).tickFormat(d3.format(".2s")))
+            svgSc.selectAll('#xlabel')
+                .remove();
             svgSc.append("g")
                 .attr('id', 'xlabel')
                 .append("text")
@@ -172,9 +171,10 @@ function drawDots(data, selection, color) {
     ii == 0 ? (rZaf = regressionLine.rSquared) : ii == 1 ? (rGer = regressionLine.rSquared) : ii == 2 ? (rKen = regressionLine.rSquared) : ''
     svgSc
         .append("line")
+        .data(regressionLine)
         .attr("fill", "none")
         .attr("class", "regression")
-        .attr("stroke", "steelblue")
+        .attr("stroke", color)
         .attr("stroke-width", 1.5)
         .attr('x1', (function (d) { return x(regressionLine[0][0]) }))
         .attr('y1', (function (d) { return y(regressionLine[0][1]) }))
@@ -184,10 +184,13 @@ function drawDots(data, selection, color) {
 }
 
 function drawTooltip() {
+
     let r2
-    d3.select(this).attr('cname').includes('South')? r2=rZaf : d3.select(this).attr('cname').includes('Germany')? r2=rGer : d3.select(this).attr('cname').includes('Kenya')? r2=rKen :''
+    d3.select(this).attr('cname').includes('South') ? r2 = rZaf : d3.select(this).attr('cname').includes('Germany') ? r2 = rGer : d3.select(this).attr('cname').includes('Kenya') ? r2 = rKen : ''
+
     window.onresize = this.getBoundingClientRect();
-    let bbox = this.getBoundingClientRect();
+    let bboxSc = this.getBoundingClientRect();
+
     tooltip = d3.select('#scatterplot')
         .append("div")
         .attr("class", "tooltip")
@@ -196,15 +199,15 @@ function drawTooltip() {
     if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'dots') {
         tooltip
             .style("opacity", .7)
-            .style("left", bbox.x + bbox.width / 2 + 10 + "px")
+            .style("left", bboxSc.x + bboxSc.width / 2 - 50 + "px")
             .attr('id', 'tt')
-            .style("top", bbox.y + bbox.height / 2 + "px")
+            .style("top", bboxSc.y + bboxSc.height + 20 + "px")
             ;
         tooltip.join(
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>"+ "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>" + "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
         )
     }
 };
@@ -300,10 +303,6 @@ function slistScp() {
 
                 current.innerText == sel[0] ? '' : current.innerText == sel[1] ? '' : sel.push(current.innerText)
                 if (sel.length == 2) {
-                    svgSc.selectAll('#ylabel')
-                        .remove();
-                    svgSc.selectAll('#xlabel')
-                        .remove();
 
                     drawDots(dat[0], sel, "yellow");
                     drawDots(dat[1], sel, 'red');

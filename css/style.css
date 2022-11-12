@@ -356,6 +356,16 @@ input[type=range]::-moz-range-thumb {
 .bar.right {
   fill: firebrick;
 }
+
+.tick{
+    font-size: 6px;
+}
+#ylabel,#xlabel{
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
 /*------------------------------------------------------------------------*/
 
 /*Drag n Drop styles -----------------------------------------------------*/
