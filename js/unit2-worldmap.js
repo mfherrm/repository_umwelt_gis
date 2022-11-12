@@ -4,18 +4,6 @@ var height = Math.max(document.documentElement.clientWidth, window.innerWidth ||
 var i = 0
 //Create SVG element // viewBox for responsive Map
 
-
-/*
-var projection =  d3.geoBromley()
-            .scale(width / 2 / Math.PI)
-            .rotate([0, 0])
-            .center([0, 0])
-            .translate([width / 2, height /2]);
-*/
-
-
-// Define Zoom
-
 // Define Graticule 
 var graticule = d3.geoGraticule();
 let country
@@ -88,7 +76,9 @@ function drawMap(data) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", "country")
+        .attr("class", function(d){
+                return d.properties.pyramid==null? 'nonCountry' : "country"
+        })
         .attr("fill", "grey")
         .attr('state', function () { return false })
 
@@ -109,7 +99,11 @@ function drawMap(data) {
             return d.properties.pyramid;
         })
         //Cursor on mouseover
-        .style("cursor", "pointer")
+        .style("cursor", function(d){
+          return d.properties.pyramid? "pointer": '' 
+
+        }
+        )
         .on("click", function (event) {
             country = d3.select(this);
             let src = document.querySelectorAll(':hover')[9].id
@@ -145,7 +139,9 @@ function getCountry(country) {
 
         return country.attr("fill", "#00677F")
     } else {
-        if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        if (select[0].selected[0] == undefined){
+            console.log('undefined')
+        }else if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select[0].selected.pop();
             return country.attr("fill", "grey")
 
@@ -193,7 +189,9 @@ function getPyramid(country) {
         select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
-        if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        if (select4[0]== undefined){
+            console.log('undefined')
+        }else if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select4.pop();
             return country.attr("fill", "grey")
         }

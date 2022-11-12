@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Factbook Germany</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -36,12 +43,13 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("../pages/nav.html", function(data){
+        $.get("../pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -50,11 +58,12 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <p>Overview</p>
-                        <p>Geography</p>
-                        <p>Demography</p>
-                        <p>Education</p>
-                        <p>Cost of Living</p>
+                        <h4> Table of contents</h4>
+                        <a href="#overview">Overview</a> <br>
+                        <a href="#geography">Geography</a> <br>
+                        <a href="#demography">Demography</a> <br>
+                        <a href="#education">Education</a> <br>
+                        <a href="#cost">Cost of living</a> <br>
                     </div>
                 </div>
             </div>
@@ -63,11 +72,14 @@
                     <div class="title justify-content-center">
                         <h2>Factbook: Germany</h2>
                     </div>
-                    <div class="Overview">
-                        <p>Germany (German: 'Deutschland') is Europe's largest economy and second most populous state after Russia. The official language is German and the capital is Berlin.
-                            As the official name 'Federal Republic of Germany' implies, the nation is a federation consisting of sixteen constituent states. 
-                            Besides Germany's national constituation, each state has its own. This makes makes them mostly autonomous in regard to their internal organisation (e.g. police, education). 
-                        </p> 
+                    <div id="overview" class="Overview">
+                        <p>Germany (German: 'Deutschland') is Europe's largest economy and second most populous state
+                            after Russia. The official language is German and the capital is Berlin.
+                            As the official name 'Federal Republic of Germany' implies, the nation is a federation
+                            consisting of sixteen constituent states.
+                            Besides Germany's national constitution, each state has its own. This makes makes them
+                            mostly autonomous in regard to their internal organisation (e.g. police, education).
+                        </p>
                     </div>
                     <div class="row">
                         <div class="col-3"></div>
@@ -75,13 +87,16 @@
                         </div>
                         <div class="col-2"></div>
                     </div>
-                   
-                    <div class="geography">
+
+                    <div id="geography" class="geography">
                         </br>
                         <h3>Geography</h3>
                         <h5>Location</h5>
                         <ul class="factbook-list">
-                            <li>Central Europe, situated between the Baltic and the North Sea in the North and the Alps to the south. Border countries: Denmark to the north, Poland and Czech Republic to the east, Austria and Switzerland to the south and France, Luxembourg, Belgium and the Netherlands to the west.  </li>
+                            <li>Germany is situated in Central Europe, between the Baltic and the North Sea in the North
+                                and the Alps in the south. It shares borders with Denmark to the north, Poland and the
+                                Czech Republic to the east, Austria and Switzerland to the south and France, Luxembourg,
+                                Belgium and the Netherlands to the west. </li>
                         </ul>
                         <h5>Area</h5>
                         <ul class="factbook-list">
@@ -91,14 +106,18 @@
                         </ul>
                         <h5>Terrain</h5>
                         <ul class="factbook-list">
-                            <li>Mountains of the Alps in the south (highest point: 'Zugspitze' 2.963 m), lowlands in north (lowest point: 'Neuendorf bei Wilster' -3.5 m) and uplands in center.</li>
+                            <li> Down south is where Germany's highest point (Zugspitze, 2.963m) is situated. It is part
+                                of the Alps. Its lowest point is up north in the lowlands ('Neuendorf bei
+                                Wilster', -3.5 m). Central Germany is known for its uplands.</li>
                         </ul>
                         <h5>Climate</h5>
                         <ul class="factbook-list">
-                            <li>mostly temperate; cool, wet winters; summers vary from hot and dry to cool and rainy</li>
+                            <li>German climate is mostly temperate. While winters are usually cool and wet, summers vary
+                                from hot and dry to cool and rainy.
+                            </li>
                         </ul>
                     </div>
-                    <div class="demography">
+                    <div id="demography" class="demography">
                         </br>
                         <h3>Demography</h3>
                         <h5>Population</h5>
@@ -107,26 +126,47 @@
                         </ul>
                         <h5>Population distribution</h5>
                         <ul class="factbook-list">
-                            <li>Fairly even distribution throughout most of the country, with urban areas attracting larger and denser populations, particularly in the far western part of the industrial state of North Rhine-Westphalia.</li>
+                            <li>German population is distributed fairly evenly throughout most of the country, with
+                                urban areas attracting
+                                larger and denser populations, particularly in the far western part of the industrial
+                                state of North Rhine-Westphalia.</li>
                         </ul>
                         <h5>Ethnic Groups</h5>
                         <ul class="factbook-list">
-                            <li>German 86.3%, Turkish 1.8%, Polish 1%, Syrian 1%, Romanian 1% and other/stateless/unspecified 8.9% (2020 est.)</li>
+                            <li>German population is made up of the following nationalities (2020 est.):
+                                <ul>
+                                    <li>German 86.3%</li>
+                                    <li>Turkish 1.8%</li>
+                                    <li>Polish 1%</li>
+                                    <li>Syrian 1%</li>
+                                    <li>Romanian 1%</li>
+                                    <li>Other/stateless/unspecified 8.9%</li>
+                                </ul>
+                            </li>
                         </ul>
                         <h5>Religions</h5>
                         <ul class="factbook-list">
-                            <li>none 40.7%, Roman Catholic 26.7%, Protestant 24.3%, Muslim 3.5%, other 4.8% (2020 est.)</li>
+                            <li> The most popular religions in Germany are the following (2020 est.):
+                            </li>
+                            <ul>
+                                <li>none 40.7%</li>
+                                <li>Roman Catholic 26.7%</li>
+                                <li>Protestant 24.3%</li>
+                                <li>Muslim 3.5%</li>
+                                <li>other 4.8% </li>
+                            </ul>
                         </ul>
-                        
+
                         <h5>Age</h5>
                         <ul class="factbook-list">
-                            <li><strong>Median Age:</strong> 47.8 years total, 46.5 years male, 49.1 years female (2020 est.)</li>
+                            <li><strong>Median Age:</strong> 47.8 years total, 46.5 years male, 49.1 years female (2020
+                                est.)</li>
                             <li><strong>Population pyramid:</strong></li>
                         </ul>
                         <div class="row">
                             <div class="col-8">
                                 <div class="chart" id="pyr_germany">
-                
+
                                 </div>
                             </div>
                         </div>
@@ -136,57 +176,76 @@
                             <li>9.08 births/1,000 population (2022 est.)</li>
                             <li>11.98 deaths/1,000 population (2022 est.)</li>
                             <li>-0.11% (2022 est.)</li>
-                        </ul> 
-                        <h5>Life expectancy at birth</h5>  
+                        </ul>
+                        <h5>Life expectancy at birth</h5>
                         <ul class="factbook-list">
                             <li><strong>total:</strong> 81.51 years (2022 est.)</li>
                             <li><strong>male:</strong> 79.15 years (2022 est.)</li>
                             <li><strong>female:</strong> 84 years (2022 est.)</li>
-                        </ul>     
+                        </ul>
 
                     </div>
                     </br>
-                    <div class="government">
+                    <div id="education" class="government">
                         <h3>Education</h3>
                         <ul class="factbook-list">
-                            <li>Due to Germany's federal structure, education is primarily the responsibilty of each constituent state. Pre-primary education is optional. 
-                                Altough the care rates for up to three year olds is 35.5% and for three to six year olds is 91.7% (2022)
-                                Primary education and secondary education is mandatory and besides private schools, free. Usually every child in Germany visits a primary school from the age of six to nine. 
-                                After that they choose one of three school forms for their secondary education. The general school (German: 'Hauptschule') offers lower education and emphasizes vocational training. 
-                                The 'Realschule'(German) offers intermediate education. The Gymnasium offers higher education. 
-                                Tertiary education is also optional. Pupils who finish lower or intermediate education can choose a apprenticeship. Pupils who graduated at a Gymnasium can also go to an university. Besides private ones, universities are free. 
-                                Germanies education is not as static as it might seem. With good grades there is a high possibilty to switch from lower education to a higher one. One that started in a general school, can still achieve going to an university with the fullfillment of some requirements. 
+                            <li>Due to Germany's federal structure, education is primarily the responsibilty of each
+                                constituent state. While pre-primary education is optional, the care rates for children
+                                up to
+                                three years old is 35.5% and 91.7% for those aged three to six (2022). <br>
+                                Primary education and secondary education is mandatory and apart from private schools,
+                                free of charge. German children usually go to primary school from the age of six to
+                                nine. <br>
+                                After primary education, they are, in accordance with their grades, able to choose one
+                                of three school types for their secondary education. <br>
+                                The general school (German: 'Hauptschule') offers lower education and emphasizes
+                                vocational
+                                training. <br>
+                                The "Realschule" (German) offers intermediate education. <br>
+                                The "Gymnasium" (German) offers an even higher level of education. <br>
+                                Germany's education system is not as static as it might seem. Students with good grades
+                                in lower education can always switch to the next highest one. This means, that it is
+                                possible to start in lower education and attend a university later on. <br>
+
+                                Tertiary education is optional.Students that finished lower or intermediate education
+                                can apply for an apprenticeship. Students that graduated at a "Gymnasium" can also
+                                attend higher education.
+                                All universities are, except for private ones, free.
                             </li>
                         </ul>
                     </div>
-                    <div class="cost-living">
+                    <div id="cost" class="cost-living">
                         <h3>Cost of Living</h3>
                         <ul class="factbook-list">
-                            <li></li>
+                            <li> The cost of living in Germany differs between regions. Southern Germany is usually the
+                                most expensive while eastern Germany is usually the cheapest. This is especially visible  
+
+                            </li>
                         </ul>
 
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
-        
+
     </div>
     <script>
-        $.get("../pages/footer.html", function(data){
+        $.get("../pages/footer.html", function (data) {
             $("#footer-placeholder").replaceWith(data);
         });
     </script>
     <!--end of Footer bar-->
-   
+
 </body>
 <script src="../js/unit2-pyr.js"></script>
 <script src="../js/factbook_germany.js"></script>
+
 </html>

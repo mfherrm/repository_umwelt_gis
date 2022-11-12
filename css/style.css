@@ -287,7 +287,7 @@ input[type=range]::-moz-range-thumb {
 } 
 
 /*Styles for Legend */
-.legend text {
+.legend text, #legendu4 text {
     font-size: 18pt;
     font-weight: 400;
     font-family: 'Open Sans', sans-serif;
@@ -300,7 +300,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 /*Styles for Scale */
-.scalebartick text, .label{
+.scalebartick text, .label, .legendtick text{ 
     font-size: 16pt;
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
@@ -356,6 +356,16 @@ input[type=range]::-moz-range-thumb {
 .bar.right {
   fill: firebrick;
 }
+
+.tick{
+    font-size: 6px;
+}
+#ylabel,#xlabel{
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
 
 .card{
     border: 1px solid #dfdfdf;

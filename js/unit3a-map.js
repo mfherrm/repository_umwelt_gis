@@ -1,6 +1,6 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548)+30;
 let prov
 let max
 let tooltip
@@ -14,9 +14,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(d3.schemeReds[7]), 50)
-    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(d3.schemeReds[7]), 80)
-    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(d3.schemeReds[7]), 50)
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(d3.schemeReds[6]), 50)
+    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(d3.schemeReds[6]), 80)
+    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(d3.schemeReds[6]), 50)
 }
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -258,7 +258,7 @@ function drawLegend(id, csize, color) {
             } else if (i == color.domain().length - 1) {
                 return "≥ " + + d3.format(".0f")(d)
             } else {
-                return color.domain()[i - 1]+ " to " + d3.format(".0f")(d)
+                return color.domain()[i - 1]+ " to < " + d3.format(".0f")(d)
             };
         })
 };
