@@ -7,11 +7,10 @@ var margin = { top: 30, right: 30, bottom: 50, left: 40 },
 
 let sel = [];
 let dat = [];
-var x;
-var y;
+var x, y;
 let tempa = [];
 let tempb = [];
-let rKen, rGer, rZaf;
+let rKen, rGer, rZaf, sKen, sGer, sZaf;
 let ii = 0;
 // append the svg object to the body of the page
 var svgSc = d3.select("#scatterplot")
@@ -164,11 +163,14 @@ function drawDots(data, selection, color) {
         .style("fill", color)
 
 
-    console.log(regression)
+    
 
 
     const regressionLine = regression(data.features)
     ii == 0 ? (rZaf = regressionLine.rSquared) : ii == 1 ? (rGer = regressionLine.rSquared) : ii == 2 ? (rKen = regressionLine.rSquared) : ''
+    ii == 0 ? (sZaf = regressionLine.a) : ii == 1 ? (sGer = regressionLine.a) : ii == 2 ? (sKen = regressionLine.a) : ''
+    console.log(regressionLine)
+
     svgSc
         .append("line")
         .data(regressionLine)
@@ -187,7 +189,7 @@ function drawTooltip() {
 
     let r2
     d3.select(this).attr('cname').includes('South') ? r2 = rZaf : d3.select(this).attr('cname').includes('Germany') ? r2 = rGer : d3.select(this).attr('cname').includes('Kenya') ? r2 = rKen : ''
-
+    d3.select(this).attr('cname').includes('South') ? s = sZaf : d3.select(this).attr('cname').includes('Germany') ? s = sGer : d3.select(this).attr('cname').includes('Kenya') ? s = sKen : ''
     window.onresize = this.getBoundingClientRect();
     let bboxSc = this.getBoundingClientRect();
 
@@ -207,7 +209,7 @@ function drawTooltip() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>" + "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
+                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>" +  "<p> slope: " + d3.format('.5f')(s) + "</p>"+"<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
         )
     }
 };
