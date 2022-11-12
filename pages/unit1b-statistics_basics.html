@@ -153,35 +153,87 @@
                     <div class="maptitle justify-content-center">
                         <h4>Charts</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="row chart-row">
-                                <div class="col-6" id="chart1">
-                                </div>  
-                            </div>
-                            <div class="row chart-row">
-                                <div class="col-6" id="chart2">
-                                    hi
-                                </div>  
-                            </div>
-                        </div>
-                        <div class="col-3" style="background-color: yellow">
-                                
-                        </div>
+                    <div class="row chart-game-container">
+                        
                     </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
                     <p>There are different types of charts. They are a good way to get a better understanding for the data behind them. It gives you an overview and it is easier to detect patterns, trends or clusters in the values. The same data might presented in different charts can lead to another insight.</p>
+                    <div class="unit-check">
+                        <button class="btn btn-secondary btn-sm " id="check-chartgame" href="#" role="button"> Check </button>
+                        <button class="btn btn-secondary btn-sm " id="restart-chartgame" href="#" role="button"> 
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </button>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="row page " id="page3">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5>Statistics – Basics</h5>
+                        <p>THIS IS DUMMY</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="maptitle justify-content-center">
+                        <h4>Charts Solution</h4>
+                        <p>Watch out for Scaling, where does x and y axis start?</p>
+                        <p>relative or absolute values?</p>
+                        <p>whats the realation of the numbers?</p>
+                        <p>Continues data? --> Tipp</p>
+                        <p>Max and min values?</p>
+                        <p>Where does the data come from? Who made the graphic? What's his interest?</p>
+                    </div>
+
+                    <div class="map" id="">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">   
+    
                 </div>
             </div>
         </div>
+        <div class="row page " id="page3">
+            <div class="col-2">
+                <div class="col-2-left">
+                    <div class="p-2">
+                        <h5>Statistics – Basics</h5>
+                        <p>For our last exercise we look at charts in maps. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-8-middle">
+                    <div class="maptitle justify-content-center">
+                        <h4>Charts in Maps</h4>
+                    </div>
+                    <div class="map" id="">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-2-right">   
+                    
+                </div>
+            </div>
+        </div>
+
          <!-- START of control placeholder -->
          <div id="control-placeholder">
         </div>
         <script>
-            $.get("./unit-control.html", function(data){
+            $.get("../pages/unit-control.html", function(data){
                 $("#control-placeholder").replaceWith(data);
             });
         </script>

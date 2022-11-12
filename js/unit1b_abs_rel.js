@@ -1,13 +1,15 @@
 
 //create table with questions in array "questions" --> its numberrrrd and i am too lazy to hardcode
-console.log("d3 let's go");
-
 let header = ["Statement","Absolute","Relative"]
 
 let questions = [
-                {question: "Germany has a total population of ca. 83 million",answer:"absolute"},
+                {question:"Germany has a total population of approximately 83 million",answer:"absolute"},
                 {question:"9.2% of Kenyas total population live in the county 'Nairobi'",answer:"relative"},
-                {question:"South Africa is approximately 3.4 times bigger than Germany",answer:"relative"}
+                {question:"South Africa is approximately 3.4 times bigger than Germany",answer:"relative"},
+                {question:"South Africas province 'Gauteng' has a population density of approximately 870/km²",answer:"relative"},
+                {question:"Kenya has an area of 580,367 sq km",answer:"absolute"},
+                {question:"Germanys total male population from the ages of 50 to 54 is approximately 3.4 million ",answer:"absolute"},
+                {question:"Kenya has 47 counties",answer:"absolute"}
                 ]
 
 createTable()
@@ -61,21 +63,19 @@ function createTable(){
             i++;
             return "question"+i;
         })
+
+    d3.selectAll("#page0 .table tr").on("change", function(){
+        console.log(this)
+        let correction = this;
+        if(correction.childNodes.length == 4){
+            correction.lastChild.classList.remove("slist-wrong");
+            correction.lastChild.classList.remove("slist-correct")
+        }    
+    });
 }
 //remove Error-Msg on click
 d3.select("#page0 .table").on("click",function(){
     d3.select("#page0 .unit-check p").remove();
-});
-
-d3.selectAll("#page0 .table tr").on("change", function(){
-    let correction = this
-    console.log(correction)
-    console.log(correction.childNodes.length)
-    if(correction.childNodes.length == 4){
-        correction.lastChild.classList.remove("wrong");
-        correction.lastChild.classList.remove("correct")
-
-    }    
 });
 
 d3.select("#check-tabletest").on("click",function(){
@@ -95,9 +95,9 @@ d3.select("#check-tabletest").on("click",function(){
         }
         answers_given.append("td").attr("class",function(d,i){
             if(d.answer == answer[i].value){
-                return "correct result"
+                return "slist-correct result"
             } else {
-                return "wrong result"
+                return "slist-wrong result"
             }
         });
     }

@@ -356,6 +356,64 @@ input[type=range]::-moz-range-thumb {
 .bar.right {
   fill: firebrick;
 }
+
+.card{
+    border: 1px solid #dfdfdf;
+    text-align: center;
+    background: #f5f5f5;
+    margin-bottom: 1rem;
+    height: 95%;
+}
+
+.card-body {
+    border-top: 1px solid #dfdfdf;
+    padding: .5rem;
+}
+
+.card .card-highlight {
+    border-radius: 5px;
+    height: 24px;
+}
+
+.card-highlight.hint{
+    border: 1px solid #ffc49a;
+    background: #feffb4;
+}
+
+.card-highlight.active {
+    border: 1px solid #ffa5a5;
+    background: #ffe7e7;
+}
+
+.card img{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    padding: 0rem;
+    border-radius: 5px;
+    height: 80%;
+}
+
+
+.chart-text {
+    margin: 0 0 .5rem 0;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+.chart-text:hover{
+    cursor: grab;
+}
+
+#switch {
+    border-radius: 5px;
+    min-height: 40px;
+}
 /*------------------------------------------------------------------------*/
 
 /*Drag n Drop styles -----------------------------------------------------*/
