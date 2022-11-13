@@ -144,7 +144,6 @@ function getCountry(country) {
         }else if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select[0].selected.pop();
             return country.attr("fill", "grey")
-
         }
 
 

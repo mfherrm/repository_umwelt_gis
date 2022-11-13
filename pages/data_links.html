@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Data Sources</title>
+
+	<meta charset="utf-8">
+
+	<!-- D3.js import -->
+	<script src="http://d3js.org/d3.v7.min.js"></script>
+	<!-- D3-geo-scale-bar import-->
+	<script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+	<!-- Leaflet import-->
+
+	<!-- Leaflet import-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+		integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+		integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+	<!-- Bootstrap CSS JS import -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap icons import -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+
+	<!-- Google Font import-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+	<!-- my Script -->
+	<script src="../js/index.js"></script>
+
+	<!-- my CSS -->
+	<link rel="stylesheet" href="../css/style.css">
+
+
+	<!-- JQuery for navbar-->
+	<script src="//code.jquery.com/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+	<!-- navbar placeholder-->
+	<div id="nav-placeholder">
+
+	</div>
+	<script>
+		$.get("./nav.html", function (data) {
+			$("#nav-placeholder").replaceWith(data);
+		});
+	</script>
+	<!--end of Navigation bar-->
+
+	<!-- Start of Content -->
+	<div class="container-fluid" id="Unit2">
+		<div class="row page show" id="page0">
+			<div class="col-2">
+				<div class="col-2-left">
+					<div class="p-2">
+					</div>
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="col-8-middle">
+                    <div>
+
+
+						<h5> <b>Data Sources </b></h5>
+						<hr>
+                        <p>Find used data below. Statements of date are related to the published year of the data.</p>
+
+					</div>
+                    <div class="row">
+                        <div class="col-1">
+
+                        </div>
+                        <div class="col-10">
+                        
+                        <ul class="factbook-list data-links">
+                            <li><strong>Geodata (e.g. Administrative Units)</strong>
+                                <ul class="factbook-list">
+                                    <li>
+                                        <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/countries">World Map [Eurostat]<i class="bi bi-box-arrow-up-right"></i></a>
+                
+                                    </li>
+                                    <li>
+                                        <a href="https://hub.arcgis.com/datasets/esri::world-continents/explore?location=18.689123%2C9.667963%2C3.00">Continents [ESRI]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                    </li>
+                                    <li>
+                                        <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/nuts">Germany Administrative Units and Countries of Europe [Eurostat]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                    </li>
+                                    <li>
+                                        <a href="https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_0">Kenya Level 0, South Africa Level 0 & Countries of Africa [ICPAC Geoportal]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                    </li>
+                                    <li>
+                                        <a href="https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_1">Kenya Level 1, South Africa Level 1 [ICPAC Geoportal]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                    </li>
+                                    <li>
+                                        <a href="https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_2">Kenya Level 2, South Africa Level 2 [ICPAC Geoportal]<i class="bi bi-box-arrow-up-right"></i></a>
+ 
+                                    </li>
+                                    <li>
+                                        <a href="https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_3">South Africa Level 3 [ICPAC Geoportal]<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li style="padding-top:2rem;"><strong>Statistical Data</strong>
+                                <ul class="factbook-list">
+                                    <li>
+                                      Germany 
+                                        <ul class="factbook-list">
+                                            <li>
+                                                <a href="https://www.populationpyramid.net/">Population Pyramids by country and continent 2019 [populationpyramid.net]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <p></p>
+                                                <a href="https://www.populationpyramid.net/">Population Pyramids by country and continent 2019 [populationpyramid.net]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.cia.gov/the-world-factbook/countries/germany/">Germany Population and Area 2022 [CIA Factbook]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.bpb.de/kurz-knapp/zahlen-und-fakten/soziale-situation-in-deutschland/61535/bevoelkerung-nach-bundeslaendern/">Germany Population by Federal States 2020 [bpb.de]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <a href="https://www.statistikportal.de/de/nachhaltigkeit/ergebnisse/ziel-10-weniger-ungleichheiten/gini-koeffizient-zur-einkommensverteilung">Germany GINI-Index per Federal State 2020 [statistikportal.de]<i class="bi bi-box-arrow-up-right"></i></a>
+
+                                            </li>
+                                            <li>
+                                                <p>Germany Pre-primary education from last year's ('21) project members<p>
+                                            </li>
+                                        </ul>   
+                                    </li>
+                                    <li>
+                                        Kenya
+                            
+                                      
+                                        <ul class="factbook-list">
+                                            <li>
+                                                <a href="https://www.cia.gov/the-world-factbook/countries/kenya/">Kenya Population and Area 2022 [CIA Factbook]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://data.humdata.org/dataset/cod-ps-ken">Kenya Population by Counties 2020 [humdata.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://data.humdata.org/dataset/kenya-income-gini-coefficient-per-county?">Kenya GINI-Index per County 2015 [humdata.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <p>'Basic Report on well-being in Kenya – Based on the 2015/16 KIHBS' (March 2018)
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p>'Kenya Basic Education Statistical Booklet 2019' (Ministry of Education)
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        South Africa
+                                     
+                                        <ul class="factbook-list">
+                                            <li>
+                                                <a href="https://www.cia.gov/the-world-factbook/countries/south-africa/">South Africa Population and Area 2022 [CIA Factbook]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://data.humdata.org/dataset/cod-ps-zaf">South Africa Population by Provinces 2020 [humdata.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.statssa.gov.za/publications/Report-03-10-19/Report-03-10-192017.pdf">South Africa GINI-Index per Province 2017 [stats sa]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="http://childrencount.uct.ac.za/indicator.php?domain=6&indicator=60">South Africa Pre-primary education 2019 [childrencount.uct.ac.za]<i class="bi bi-box-arrow-up-right"></i></a>
+                                            </li>
+                                            <li>
+                                                <p>South Africa Poverty from last year's ('21) project members </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li style="padding-top:2rem;"><strong>Other Data</strong>
+                                <ul class="factbook-list">
+                                    <li>
+                                        <a href="https://www.abs.gov.au/websitedbs/D3310114.nsf/home/statistical+language+-+correlation+and+causation">Correlation and Causation [abs.gov.au]<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://sdg-tracker.org/no-poverty#1.2.2">SDG 1.2.2 – Poverty [sdg-tracker.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://sdg-tracker.org/quality-education#4.2.2">SDG 4.2.2 – Pre-primary education [sdg-tracker.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://stats.oecd.org/glossary/detail.asp?ID=4842">GINI-Index 2006 [oecd.org]<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://populationeducation.org/what-demographic-transition-model/">Demographic Transition Model 2014<i class="bi bi-box-arrow-up-right"></i></a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="col-1">
+
+                        </div>
+                    </div>
+					
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="col-2-right">
+					<div class="p-2">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Content -->
+
+
+		<!-- START of control placeholder -->
+		<!-- <div id="control-placeholder">
+
+        </div>
+        <script>
+            $.get("./unit-control.html", function (data) {
+                $("#control-placeholder").replaceWith(data);
+            });
+        </script>-->
+		<!-- END of control placeholder -->
+
+		<!-- footer placeholder-->
+
+	</div>
+	<div id="footer-placeholderU2">
+
+	</div>
+	<script>
+		$.get("./footer.html", function (data) {
+			$("#footer-placeholderU2").replaceWith(data);
+		});
+	</script>
+	<!--end of Footer bar-->
+
+
+
+
+
+
+</body>
+</html>
