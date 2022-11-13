@@ -21,7 +21,7 @@ let projection = d3.geoAzimuthalEqualArea()
     .rotate([-24, -28]); // 1.right/left (lon) 2.up/down (lat) e.g. negative lon/lat at center            
 //if parallels --> analoge
 
-let color = d3.scaleOrdinal(d3.schemeSet3);
+let color = d3.scaleOrdinal(['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#bc80bd','#ccebc5','#ffed6f','#62B0E4']);
 
 //Define path generator
 let path = d3.geoPath()

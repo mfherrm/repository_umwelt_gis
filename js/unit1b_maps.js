@@ -31,9 +31,8 @@ let csize = 50;
 //Create colors scheme    
 let color = d3.scaleThreshold()
     //thresholds of data
-    .domain([10, 20, 50, 100, 250, 500])
-    //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
-    .range(d3.schemeReds[6]);
+    .domain([10, 20, 40, 100,200, 500])
+    .range(['#fef0d9','#fdd49e','#fdbb84','#fc8d59','#e34a33','#b30000']);
 
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/zaf_provinces.geojson")
@@ -291,7 +290,7 @@ function drawLegend() {
             if (i == 0) {
                 return "≤ " + d
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d
+                return "≥" +  d
             } else {
                 return color.domain()[i - 1] + 1 + " to " + d
             };

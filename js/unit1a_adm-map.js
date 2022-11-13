@@ -13,7 +13,7 @@ let svgAdm = d3.select("#adm-map")
     .append("g")
     .attr("class", "mapbox");
 
-let color = d3.scaleOrdinal(d3.schemeSet3);
+let color = d3.scaleOrdinal(['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#bc80bd','#ccebc5','#ffed6f']);
 
 //Trigger Map Functions on radio
 d3.select(".adm-radio").on("change", drawMapTrigger);

@@ -24,7 +24,7 @@ var projection = d3.geoMercator()
     .translate([.1,-.66])
     .scale(.4)
 */
-var color = d3.scaleOrdinal(d3.schemeSet3);
+var color = d3.scaleOrdinal(['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#bc80bd','#ccebc5','#ffed6f','#62B0E4']);
 
 //Define path generator
 var path = d3.geoPath()
