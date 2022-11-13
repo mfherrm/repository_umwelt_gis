@@ -135,7 +135,7 @@ var myQuiz = {
 		// Hinweis für Tastatur-User
 		t.intoContainer(t.createElement({
 			tag: "button",
-			text: "confirm choice",
+			text: "Confirm choice",
 			type: "submit",
 			id: "confirm"
 		}));
@@ -359,7 +359,7 @@ var myQuiz = {
 		// show message
 		t.intoContainer(t.createElement({
 			tag: "b",
-			text: "Restart the quiz?"
+			text: "Restart quiz?"
 		}));
 	},
 	// helper function: shuffle array (adapted from http://javascript.jstruebig.de/javascript/69)
@@ -389,7 +389,7 @@ var myQuiz = {
 		t.intoContainer(t.createElement({
 			className: "startBtn",
 			tag: "button",
-			text: "Start the quiz"
+			text: "Start quiz"
 		}), "p");
 	}
 	
