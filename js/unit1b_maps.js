@@ -31,7 +31,7 @@ let csize = 50;
 //Create colors scheme    
 let color = d3.scaleThreshold()
     //thresholds of data
-    .domain([10, 20, 40, 100,200, 500])
+    .domain([10, 20, 40, 100,200, 500]) 
     .range(['#fef0d9','#fdd49e','#fdbb84','#fc8d59','#e34a33','#b30000']);
 
 //Load in GeoJSON data //Promise resolve
@@ -220,6 +220,7 @@ function drawLegend() {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
+            console.log(d)
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
         })
@@ -274,7 +275,8 @@ function drawLegend() {
         })
         .attr('x', xLabel)
         .attr('y', function(d){ return yCircle -size(d)*2 + 5})
-        .text( function(d){return d})
+        .text( function(d,i,e){
+            return d})
         .style('font-size', 17)
         .attr('alignment-basline', 'middle')
 
@@ -287,10 +289,12 @@ function drawLegend() {
         .attr("y", 36)
         .attr("color", "white")
         .text(function (d, i) {
+            color.domain()
+
             if (i == 0) {
-                return "≤ " + d
+                return 3 +" to "+ d
             } else if (i == color.domain().length - 1) {
-                return "≥" +  d
+                return d +" to 853"
             } else {
                 return color.domain()[i - 1] + 1 + " to " + d
             };
