@@ -418,7 +418,6 @@ input[type=range]::-moz-range-thumb {
     height: 80%;
 }
 
-
 .chart-text {
     margin: 0 0 .5rem 0;
     border: 1px solid #dfdfdf;
@@ -435,6 +434,25 @@ input[type=range]::-moz-range-thumb {
     border-radius: 5px;
     min-height: 40px;
 }
+
+#pyrstg0, #pyrstg1, #pyrstg2, #pyrstg3{
+    width: 25%;
+    margin: 5px;
+    
+}
+#pyrstg0 {
+    border: solid #F8B365 3px;
+}
+#pyrstg1{
+    border: solid #F8CDE2 3px;
+}
+#pyrstg2{
+    border: solid #BEBADA 3px;
+}
+#pyrstg3{
+    border: solid #90CEC4 3px;
+}
+
 /*------------------------------------------------------------------------*/
 
 /*Drag n Drop styles -----------------------------------------------------*/

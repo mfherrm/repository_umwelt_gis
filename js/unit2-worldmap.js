@@ -42,7 +42,7 @@ function drawMap(data) {
             if (i == 0) {
                 return [0, 0, width, 2548]
             } else {
-                return [0, 0, width, height]
+                return [0, 0, width, 2548]
             }
         })
         .attr('id', function () {
