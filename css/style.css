@@ -165,6 +165,7 @@ a .bi {
     font-size:12px
 }
 
+
 /* Buttons  -------------------------------------------------------------------*/   
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
@@ -220,6 +221,11 @@ input[type=range]::-moz-range-thumb {
 #worldmap{
     border: 1px solid grey;
 }
+.subcounty{
+    fill:white;
+    fill-opacity: 0.01;
+}
+
 .stroke {
     fill: none;
     stroke: grey;
