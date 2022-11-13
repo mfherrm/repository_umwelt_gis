@@ -160,6 +160,11 @@ a .bi {
 .unit-check {
     padding-top: .8rem;
 }
+
+.subunit-label{
+    font-size:12px
+}
+
 /* Buttons  -------------------------------------------------------------------*/   
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
