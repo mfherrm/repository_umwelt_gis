@@ -136,7 +136,7 @@ function drawLegendG(mapID, colorG) {
     legendSvgG.append("g")
         .append("text")
         .text(function () {
-            return "Population in poverty [%]";
+            return "Population in poverty";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -180,9 +180,9 @@ function drawLegendG(mapID, colorG) {
         .attr("fill", function (d, i) {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return colorG(d - 1);
-        })
-
+        })   
 };
+
 d3.selectAll(".colbut").on("click", function () { changeColor(this.id) });
 d3.selectAll(".check").on("click", function () { getResult(this.id) });
 

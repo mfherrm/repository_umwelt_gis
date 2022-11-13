@@ -265,6 +265,15 @@ input[type=range]::-moz-range-thumb {
     stroke:white;
     stroke-width: 2px;
 }
+#zaf-popdense .country {
+    stroke: white;
+    stroke-width: 2px;
+}
+
+#zaf-popdense .country:hover {
+    stroke: white;
+    stroke-width: 4px;
+}
 
 .country, .countryU3, .adminarea, .adminarea3a {
     stroke: white;
@@ -487,6 +496,13 @@ input[type=range]::-moz-range-thumb {
 .slist-wrong:before {
 	font: 1em bold;
 	padding: 0 0.2em;
+}
+/* Styles for Map-Quiz --------------------------------------------------*/
+#map-quiz .map-question {
+    padding-top: 1rem;
+}
+#map-quiz .form-check{
+    padding-left: 3rem;
 }
 
 /*------------------------------------------------------------------------*/

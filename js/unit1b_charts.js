@@ -2,19 +2,17 @@
 //paths to data
 let dataLine =  "../json/TotalPopulation_Ger_Ken_Zaf_2011to2021.json";
 
-//get your lets, text and chart is for radnomizing
+//get your lets; texts and charts is for radnomizing order
 let data = [
                 {text:"Line chart",value:"line",chart: "../icons/lineChart.svg"},
                 {text:"Bar chart",value:"bar",chart: "../icons/barChart.svg"},
                 {text:"Scatter plot",value:"scatter",chart: "../icons/chart3.svg"},
                 {text:"Pie chart",value:"pie",chart: "../icons/pieChart.svg"},
-                {text:"Histogram",value:"histogram"},
+                {text:"Histogram",value:"histogram",chart:""},
                 {text:"Stacked bar",value:"stacked",chart:"../icons/stackedChart.svg"},
                 {text:"Area chart",value:"area",chart:"../icons/areaChart.svg"}
             ]
-/*
-     
-*/
+
 let texts = [];
 let charts = [];
 
@@ -59,8 +57,7 @@ function drawChartLayout(){
                   .attr("draggable",true)
                   .append("p")
                   .attr("class","")
-                  .text(function(d,i){
-                    console.log(texts)                   
+                  .text(function(d,i){                  
                     return texts[i]
                   })
 

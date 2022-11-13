@@ -3,13 +3,14 @@
 let header = ["Statement","Absolute","Relative"]
 
 let questions = [
-                {question:"Germany has a total population of approximately 83 million",answer:"absolute"},
+                {question:"Approximately 83 million people live in Germany",answer:"absolute"},
                 {question:"9.2% of Kenyas total population live in the county 'Nairobi'",answer:"relative"},
                 {question:"South Africa is approximately 3.4 times bigger than Germany",answer:"relative"},
                 {question:"South Africas province 'Gauteng' has a population density of approximately 870/km²",answer:"relative"},
                 {question:"Kenya has an area of 580,367 sq km",answer:"absolute"},
                 {question:"Germanys total male population from the ages of 50 to 54 is approximately 3.4 million ",answer:"absolute"},
-                {question:"Kenya has 47 counties",answer:"absolute"}
+                {question:"Kenya first level administrative boundary has 47 counties",answer:"absolute"},
+                {question:"South Africa has a GINI index is roughly 0.55",answer:"relative"}
                 ]
 
 createTable()
