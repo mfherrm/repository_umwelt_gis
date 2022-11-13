@@ -116,16 +116,16 @@ d3.select("#pyr_continents").on("mouseup", function () {
     console.log(con)
     if ((con.includes("Africa") && elemid.includes('pyr_africa'))) {
         selectC[0].africa = true;
-        selectC[0].selected[0].attr("fill", "green");
+        selectC[0].selected[0].attr("fill", "#4FE34F");
         selectC[0].selected.pop();
     } else if ((con.includes('Europe') && elemid.includes('pyr_europe'))) {
         selectC[0].europe = true;
-        selectC[0].selected[0].attr("fill", "green");
+        selectC[0].selected[0].attr("fill", "#4FE34F");
         selectC[0].selected.pop();
     } else if (selectC[0].africa == true && selectC[0].europe == true ){
         
     } else {
-        selectC[0].selected[0].attr("fill", "red");
+        selectC[0].selected[0].attr("fill", "#EC5B5B");
     }
 }
 

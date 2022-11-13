@@ -160,20 +160,20 @@ d3.select("#pyr_countries").on("mouseup", function () {
     console.log(con)
     if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
         select[0].germany = true;
-        select[0].selected[0].attr("fill", "green");
+        select[0].selected[0].attr("fill", "#4FE34F");
         select[0].selected.pop();
     } else if ((con.includes('Kenya') && elemid.includes('pyr_kenya'))) {
         select[0].kenya = true;
-        select[0].selected[0].attr("fill", "green");
+        select[0].selected[0].attr("fill", "#4FE34F");
         select[0].selected.pop();
     } else if (con.includes('South Africa') && elemid.includes('pyr_southafrica')) {
         select[0].southafrica = true;
-        select[0].selected[0].attr("fill", "green");
+        select[0].selected[0].attr("fill", "#4FE34F");
         select[0].selected.pop();
     } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
 
     } else {
-        select[0].selected[0].attr("fill", "red");
+        select[0].selected[0].attr("fill", "#EC5B5B");
     }
 }
 );
@@ -210,7 +210,7 @@ d3.select("#pyr_imgs").on("click", function () {
         con == 1 ? select4[0].attr("fill", "#F8B365") : con == 2 ? select4[0].attr("fill", "#F8CDE2") : con == 3 ? select4[0].attr("fill", "#BEBADA") : con == 4 ? select4[0].attr("fill", "#90CEC4") : ''
         select4.pop();
     } else {
-        select4[0].attr("fill", "red");
+        select4[0].attr("fill", "#EC5B5B");
     }
 }
 );

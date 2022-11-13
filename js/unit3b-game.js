@@ -68,8 +68,8 @@ let selectzaf = ['X', 'X', 'X']
 function getAdmin(admin, id) {
     let target;
     id == 'germany' ? target = selectger : id == 'kenya' ? target = selectken : id == 'southafrica' ? target = selectzaf : console.log('error')
-    if ((admin.attr("fill") == "green")) {
-    } else if (admin.attr("fill") != "#00677F" && admin.attr("fill") != "red" && target.includes('X')) {
+    if ((admin.attr("fill") == "#4FE34F")) {
+    } else if (admin.attr("fill") != "#00677F" && admin.attr("fill") != "#EC5B5B" && target.includes('X')) {
         addSelected(target, admin)
         return admin.attr("fill", "#00677F")
     } else if (target[0] != 'X' && target[0]._groups[0][0].__data__.properties.name_1 == admin._groups[0][0].__data__.properties.name_1) {
@@ -91,39 +91,39 @@ d3.select("#checkger").on("click", function () {
     if (mode == false) {
         for (let i in selectger) {
             if (selectger[0]._groups[0][0].__data__.properties.name_1 == "Thüringen" || selectger[0].attr("fill") == 'green') {
-                selectger[0].attr("fill", "green");
+                selectger[0].attr("fill", "#4FE34F");
             } else {
-                selectger[0].attr("fill", "red");
+                selectger[0].attr("fill", "#EC5B5B");
             }
             if (selectger[1]._groups[0][0].__data__.properties.name_1 == "Mecklenburg-Vorpommern" || selectger[1].attr("fill") == 'green') {
-                selectger[1].attr("fill", "green");
+                selectger[1].attr("fill", "#4FE34F");
             } else {
-                selectger[1].attr("fill", "red");
+                selectger[1].attr("fill", "#EC5B5B");
             }
             if (selectger[2]._groups[0][0].__data__.properties.name_1 == "Brandenburg" || selectger[2].attr("fill") == 'green') {
-                selectger[2].attr("fill", "green");
+                selectger[2].attr("fill", "#4FE34F");
             } else {
-                selectger[2].attr("fill", "red");
+                selectger[2].attr("fill", "#EC5B5B");
             }
 
         }
     } else {
         for (let i in selectger) {
             if (selectger[0]._groups[0][0].__data__.properties.name_1 == "Bremen" || selectger[0].attr("fill") == 'green') {
-                selectger[0].attr("fill", "green");
+                selectger[0].attr("fill", "#4FE34F");
 
             } else {
-                selectger[0].attr("fill", "red");
+                selectger[0].attr("fill", "#EC5B5B");
             }
             if (selectger[1]._groups[0][0].__data__.properties.name_1 == "Schleswig-Holstein" || selectger[1].attr("fill") == 'green') {
-                selectger[1].attr("fill", "green");
+                selectger[1].attr("fill", "#4FE34F");
             } else {
-                selectger[1].attr("fill", "red");
+                selectger[1].attr("fill", "#EC5B5B");
             }
             if (selectger[2]._groups[0][0].__data__.properties.name_1 == "Nordrhein-Westfalen" || selectger[2].attr("fill") == 'green') {
-                selectger[2].attr("fill", "green");
+                selectger[2].attr("fill", "#4FE34F");
             } else {
-                selectger[2].attr("fill", "red");
+                selectger[2].attr("fill", "#EC5B5B");
             }
         }
     }
@@ -133,37 +133,37 @@ d3.select("#checkzaf").on("click", function () {
     if (mode == false) {
         for (let i in selectzaf) {
             if (selectzaf[0]._groups[0][0].__data__.properties.name_1 == "Free State") {
-                selectzaf[0].attr("fill", "green");
+                selectzaf[0].attr("fill", "#4FE34F");
             } else {
-                selectzaf[0].attr("fill", "red");
+                selectzaf[0].attr("fill", "#EC5B5B");
             }
             if (selectzaf[1]._groups[0][0].__data__.properties.name_1 == "Limpopo") {
-                selectzaf[1].attr("fill", "green");
+                selectzaf[1].attr("fill", "#4FE34F");
             } else {
-                selectzaf[1].attr("fill", "red");
+                selectzaf[1].attr("fill", "#EC5B5B");
             }
             if (selectzaf[2]._groups[0][0].__data__.properties.name_1 == "Eastern Cape") {
-                selectzaf[2].attr("fill", "green");
+                selectzaf[2].attr("fill", "#4FE34F");
             } else {
-                selectzaf[2].attr("fill", "red");
+                selectzaf[2].attr("fill", "#EC5B5B");
             }
         }
     } else {
         for (let i in selectzaf) {
             if (selectzaf[0]._groups[0][0].__data__.properties.name_1 == "Western Cape") {
-                selectzaf[0].attr("fill", "green");
+                selectzaf[0].attr("fill", "#4FE34F");
             } else {
-                selectzaf[0].attr("fill", "red");
+                selectzaf[0].attr("fill", "#EC5B5B");
             }
             if (selectzaf[1]._groups[0][0].__data__.properties.name_1 == "Northern Cape") {
-                selectzaf[1].attr("fill", "green");
+                selectzaf[1].attr("fill", "#4FE34F");
             } else {
-                selectzaf[1].attr("fill", "red");
+                selectzaf[1].attr("fill", "#EC5B5B");
             }
             if (selectzaf[2]._groups[0][0].__data__.properties.name_1 == "KwaZulu-Natal") {
-                selectzaf[2].attr("fill", "green");
+                selectzaf[2].attr("fill", "#4FE34F");
             } else {
-                selectzaf[2].attr("fill", "red");
+                selectzaf[2].attr("fill", "#EC5B5B");
             }
         }
 
@@ -177,38 +177,38 @@ d3.select("#checkken").on("click", function () {
         for (let i in selectken) {
 
             if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Samburu") {
-                selectken[0].attr("fill", "green");
+                selectken[0].attr("fill", "#4FE34F");
             } else {
-                selectken[0].attr("fill", "red");
+                selectken[0].attr("fill", "#EC5B5B");
             }
             if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Turkana") {
-                selectken[1].attr("fill", "green");
+                selectken[1].attr("fill", "#4FE34F");
             } else {
-                selectken[1].attr("fill", "red");
+                selectken[1].attr("fill", "#EC5B5B");
             }
             if (selectken[2]._groups[0][0].__data__.properties.name_1 == "West Pokot") {
-                selectken[2].attr("fill", "green");
+                selectken[2].attr("fill", "#4FE34F");
             } else {
-                selectken[2].attr("fill", "red");
+                selectken[2].attr("fill", "#EC5B5B");
             }
 
         }
     } else { 
         for (let i in selectken) {
             if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Nairobi") {
-                selectken[0].attr("fill", "green");
+                selectken[0].attr("fill", "#4FE34F");
             } else {
-                selectken[0].attr("fill", "red");
+                selectken[0].attr("fill", "#EC5B5B");
             }
             if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Mombasa") {
-                selectken[1].attr("fill", "green");
+                selectken[1].attr("fill", "#4FE34F");
             } else {
-                selectken[1].attr("fill", "red");
+                selectken[1].attr("fill", "#EC5B5B");
             }
             if (selectken[2]._groups[0][0].__data__.properties.name_1 == "Garissa") {
-                selectken[2].attr("fill", "green");
+                selectken[2].attr("fill", "#4FE34F");
             } else {
-                selectken[2].attr("fill", "red");
+                selectken[2].attr("fill", "#EC5B5B");
             }
         }
     }
