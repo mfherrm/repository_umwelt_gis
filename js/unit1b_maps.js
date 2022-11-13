@@ -53,7 +53,7 @@ let mapQuestions = [
     {question:"What is this administrative level called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
     {question:"Is the population density a relative or absolute value?",answer:"relative",labels:["absolute","relative","none of them"]},
     {question:"How is the population density calculated?",answer:"total population divided by area",labels:["total population divided by area","total population divided by no. of admin levels","area divided by total population","total population times area"]},
-    {question:"Why is the circle of 'North Cape' so small?",answer:"area",labels:["Only 1000 people live there","area"]}
+    {question:"Why is the circle of 'North Cape' so small?",answer:"area",labels:["Only 1000 people live there","Large area and relatively small population","Large area"]}
 ]
 
 d3.shuffle(mapQuestions)

@@ -11,7 +11,7 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function draw(data) {
-    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)) //nat breaks
+    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)) //nat breaks
     drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(colorScaleReds5)) //geom int
     drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]), d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(colorScaleReds5)) //geom int
     
@@ -173,7 +173,7 @@ function drawScalebar(mapProjection, mapID) {
         //sets the vertical tick size of the scale bar in pixels
         .tickSize([8])
         //sets ticks on specified distances OR use distance for automatic specification
-        .tickValues([0, 150, 300])
+        .tickValues([0, 200])
         //.distance(200)
         // How far the tick text labels are from the lines
         .tickPadding(8)
@@ -183,7 +183,7 @@ function drawScalebar(mapProjection, mapID) {
         .attr("class", "scalebar")
         //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + '970' + ")";
+            return "translate(10," + height*.9 + ")";
         });
 
     scaleSvg.append("g").call(scaleBar);

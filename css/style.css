@@ -336,14 +336,21 @@ input[type=range]::-moz-range-thumb {
     stroke: white;
     stroke-width: 4px;
 }
+.country {
+    stroke: white;
+    stroke-width: .7px;
+}
 
-.country, .countryU3, .adminarea, .adminarea3a {
-    stroke: grey;
+.country:hover {
+    stroke-width: 2.5px;
+}
+
+.countryU3, .adminarea, .adminarea3a {
+    stroke: #333333;
     stroke-width: 1.5px;
 }
-.country:hover, .adminarea:hover, .adminarea3a:hover {
-    stroke:grey;
-    stroke-width: 2.5px;
+.adminarea:hover{
+    stroke-width: 2px;
     cursor: pointer;
 }
 
@@ -502,7 +509,7 @@ input[type=range]::-moz-range-thumb {
     
 }
 #pyrstg0 {
-    background-color: solid #bebada 3px;
+    border: solid #bebada 3px;
 }
 #pyrstg1{
     border: solid #fb8072 3px;
@@ -590,6 +597,8 @@ input[type=range]::-moz-range-thumb {
 #map-quiz .form-check{
     padding-left: 3rem;
 }
+
+
 
 /*------------------------------------------------------------------------*/
 /* Styles for tables --------------------------------------------------*/

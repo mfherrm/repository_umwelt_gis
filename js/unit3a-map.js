@@ -14,7 +14,7 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(colorScaleBlues5), 50)
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(colorScaleBlues5), 50)
     drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(colorScaleBlues5), 80)
     drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(colorScaleBlues5), 50)
 }
@@ -274,7 +274,7 @@ function drawScalebar(mapProjection, mapID) {
         //sets the vertical tick size of the scale bar in pixels
         .tickSize([8])
         //sets ticks on specified distances OR use distance for automatic specification
-        .tickValues([0, 150, 300])
+        .tickValues([0, 200])
         //.distance(200)
         // How far the tick text labels are from the lines
         .tickPadding(8)
@@ -284,7 +284,7 @@ function drawScalebar(mapProjection, mapID) {
         .attr("class", "scalebar")
         //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + '970' + ")";
+            return "translate(10," + height*.9 + ")";
         });
 
     scaleSvg.append("g").call(scaleBar);
