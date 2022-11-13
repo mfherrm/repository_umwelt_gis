@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit 1b – Statistics Basics</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -36,12 +43,13 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("../pages/nav.html", function(data){
+        $.get("../pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -52,12 +60,13 @@
                     <div class="p-2">
                         <h5>Statistics – Basics</h5>
                         <p>
-                            Now that you are familiar with the administrative divisions. Let's look at statistical values. In this unit we are going to focus on population numbers and area.
+                           This unit is going to focus on statistical values. The countries' population numbers and area to be exact.
                         </p>
+                        <hr>
                         <p>
-                            Please select whether you think the statement references an absolute or realtive number.
+                            Select whether you think the statement references an absolute or relative number.
                         </p>
-                        
+
                         </br>
                     </div>
                 </div>
@@ -70,7 +79,7 @@
                     <div class="row table">
                         <div class="col-3"></div>
                         <div class="col-6">
-                            
+
                         </div>
                         <div class="col-3"></div>
                     </div>
@@ -80,23 +89,25 @@
                         </div>
                         <div class="col-8">
                             <p style="font-size: 8pt">*all data from the year 2021</p>
-                        </div>    
+                        </div>
                     </div>
                     <div class="xxmap" id="">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                     <h5></h5>
                     <p>
-                        In Statistics there are two types of values. You might encounter or even know different names for them but they all mean the same.
-                        Like 'unstandardized' for 'absolute' values or 'standardized' for 'relative' values. 
+                        In Statistics there are two types of values. You might encounter or even know different names
+                        for them but they all mean the same.
+                        Like 'unstandardized' for 'absolute' values or 'standardized' for 'relative' values.
                     </p>
                     <div class="unit-check">
-                        <button class="btn btn-secondary btn-sm " id="check-tabletest" href="#" role="button"> Check </button>
-                        <button class="btn btn-secondary btn-sm " id="restart-tabletest" href="#" role="button"> 
+                        <button class="btn btn-secondary btn-sm " id="check-tabletest" href="#" role="button"> Check
+                        </button>
+                        <button class="btn btn-secondary btn-sm " id="restart-tabletest" href="#" role="button">
                             <i class="bi bi-arrow-counterclockwise"></i>
                         </button>
                     </div>
@@ -118,25 +129,27 @@
                         <h5>Absolute & relative Solution</h5>
                     </div>
                     <div class="row">
-                        <p>Absolute values describe the total number of something e.g. a count, the total population/total area of Germany or Kenyas county 'Nairobi'. 
-                            Whereas relative values describe a number in relation to another 
+                        <p>Absolute values describe the total number of something e.g. a count, the total
+                            population/total area of Germany or Kenyas county 'Nairobi'.
+                            Whereas relative values describe a number in relation to another
                             e.g. a proportion like South Africa is 2.1 times larger than Kenya or a percentage.
-                            Relative numbers are easier to compare than absolute numbers. Always keep in mind how a relative is calculated.
+                            Relative numbers are easier to compare than absolute numbers. Always keep in mind how a
+                            relative is calculated.
                         </p>
 
                     </div>
                     <div class="row">
-                        
+
                     </div>
-                    
+
                     <div class="xxmap" id="">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
-                     
+
                 </div>
             </div>
         </div>
@@ -145,7 +158,8 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Statistics – Basics</h5>
-                        <p>Please order the names on the right of the middle box to the charts on the left. You can check your input with the 'Check' button in the right column.</p>
+                        <p>Please order the names on the right of the middle box to the charts on the left. You can
+                            check your input with the 'Check' button in the right column.</p>
                         </br>
                     </div>
                 </div>
@@ -156,21 +170,25 @@
                         <h5>Charts</h5>
                     </div>
                     <div class="row chart-game-container">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
-                    <p>There are different types of charts. They are a good way to get a better understanding for the data behind them. It gives you an overview and it is easier to detect patterns, trends or clusters in the values. The same data might presented in different charts can lead to another insight.</p>
+                    <p>There are different types of charts. They are a good way to get a better understanding for the
+                        data behind them. It gives you an overview and it is easier to detect patterns, trends or
+                        clusters in the values. The same data might presented in different charts can lead to another
+                        insight.</p>
                     <div class="unit-check">
-                        <button class="btn btn-secondary btn-sm " id="check-chartgame" href="#" role="button"> Check </button>
-                        <button class="btn btn-secondary btn-sm " id="restart-chartgame" href="#" role="button"> 
+                        <button class="btn btn-secondary btn-sm " id="check-chartgame" href="#" role="button"> Check
+                        </button>
+                        <button class="btn btn-secondary btn-sm " id="restart-chartgame" href="#" role="button">
                             <i class="bi bi-arrow-counterclockwise"></i>
                         </button>
                     </div>
                 </div>
-               
+
             </div>
         </div>
         <div class="row page hide" id="page3">
@@ -197,13 +215,13 @@
                         <p>Where does the data come from? Who made the graphic? What's his/her interest?</p>
                     </div>
                     <div class="map" id="">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
-    
+                <div class="col-2-right">
+
                 </div>
             </div>
         </div>
@@ -212,9 +230,10 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Statistics – Basics</h5>
-                        <p>After we looked at administrative boundaries, relative and absolute values, and charts. We will look how these come together in maps.
+                        <p>After we looked at administrative boundaries, relative and absolute values, and charts. We
+                            will look how these come together in maps.
                             Please answer the questions below.
-                         </p>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -229,7 +248,7 @@
                                 <h5>Population Density in South Africa (2020)</h5>
                             </div>
                             <div class="map" id="zaf-popdense">
-                        
+
                             </div>
                         </div>
                         <div class="col-3">
@@ -237,16 +256,17 @@
                             <div class="row" id="map-quiz">
                             </div>
                         </div>
-                            
+
                     </div>
-                  
+
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                     <div class="unit-check">
-                        <button class="btn btn-secondary btn-sm " id="check-mapquiz" href="#" role="button"> Check </button>
-                        <button class="btn btn-secondary btn-sm " id="restart-mapquiz" href="#" role="button"> 
+                        <button class="btn btn-secondary btn-sm " id="check-mapquiz" href="#" role="button"> Check
+                        </button>
+                        <button class="btn btn-secondary btn-sm " id="restart-mapquiz" href="#" role="button">
                             <i class="bi bi-arrow-counterclockwise"></i>
                         </button>
                     </div>
@@ -254,11 +274,11 @@
             </div>
         </div>
 
-         <!-- START of control placeholder -->
-         <div id="control-placeholder">
+        <!-- START of control placeholder -->
+        <div id="control-placeholder">
         </div>
         <script>
-            $.get("../pages/unit-control.html", function(data){
+            $.get("../pages/unit-control.html", function (data) {
                 $("#control-placeholder").replaceWith(data);
             });
         </script>
@@ -266,17 +286,18 @@
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
-        
+
     </div>
     <script>
-        $.get("../pages/footer.html", function(data){
+        $.get("../pages/footer.html", function (data) {
             $("#footer-placeholder").replaceWith(data);
         });
     </script>
     <!--end of Footer bar-->
-   
+
 </body>
 <script src="../js/unit1b_abs_rel.js"></script>
 <script src="../js/unit1b_charts.js"></script>
 <script src="../js/unit1b_maps.js"></script>
+
 </html>
