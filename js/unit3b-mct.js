@@ -136,7 +136,8 @@ var myQuiz = {
 		t.intoContainer(t.createElement({
 			tag: "button",
 			text: "confirm choice",
-			type: "submit"
+			type: "submit",
+			id: "confirm"
 		}));
 	},
 	currentChoices: [],
@@ -151,14 +152,14 @@ var myQuiz = {
 	}, {
 		/* category: 'HTML', */
 		question: 'Which administrative areas rank the highest in their respective countries?',
-		solution: 'Free State, Placeholder, Thüringen',
-		falses: ['Free State, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Mecklenburg-Vorpommern', 'Limpopo, Placeholder, Thüringen'],
+		solution: 'Free State, Samburu, Thüringen',
+		falses: ['Free State, Kitui, Mecklenburg-Vorpommern', 'Limpopo, Bomet, Mecklenburg-Vorpommern', 'Limpopo, Turkana, Thüringen'],
 		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
 		question: 'Which administrative areas rank the second lowest in their respective countries?',
-		solution: 'Bremen, Western Cape, Placeholder',
-		falses: ['Western Cape, Placeholder, Bremen', 'Schleswig-Holstein, Western Cape, Placeholder', 'Placeholder, Schleswig-Holstein, Northern Cape'],
+		solution: 'Bremen, Western Cape, Mombasa',
+		falses: ['Western Cape, Nairobi, Bremen', 'Schleswig-Holstein, Western Cape, Samburu', 'Lamu, Schleswig-Holstein, Northern Cape'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
@@ -227,7 +228,7 @@ var myQuiz = {
 				// we want to only support clicks on start buttons...
 				var go = ev.target.tagName.match(/^button$/i);
 				// ... and labels for radio buttons when in a game
-				if (ev.target.tagName.match(/^label$/i) && t.currentQuestion) {
+				if (ev.target.tagName.match(/^button$/i) && t.currentQuestion) {
 					go = true;
 				}
 				if (go) {

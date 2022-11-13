@@ -175,23 +175,23 @@ var myQuiz = {
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "Which intervall describes poverty in Germany the best (in %)?",
+		question: "Which intervall describes poverty in Germany best (in %)?",
 		solution: '[10, 25]',
 		falses: ['[15, 40]', '[20, 55]'],
 		explanation: ''
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "Which intervall describes poverty in Kenya the best (in %)?",
-		solution: '[10, 25]',
-		falses: ['[15, 40]', '[20, 55]'],
+		question: "Which intervall describes poverty in Kenya best (in %)?",
+		solution: '[17, 80]',
+		falses: ['[3, 70]', '[37, 57]'],
 		explanation: ''
 	},
     {
 		/* category: 'Kategorie?', */
-		question: "Which intervall describes poverty in South Africa the best (in %)?",
-		solution: '[10, 25]',
-		falses: ['[15, 40]', '[20, 55]'],
+		question: "Which intervall describes poverty in South Africa best (in %)?",
+		solution: '[19, 59]',
+		falses: ['[3, 35]', '[12, 39]'],
 		explanation: ''
 	}],
 	emptyContainer: function () {
@@ -241,7 +241,7 @@ var myQuiz = {
 				// we want to only support clicks on start buttons...
 				var go = ev.target.tagName.match(/^button$/i);
 				// ... and labels for radio buttons when in a game
-				if (ev.target.tagName.match(/^label$/i) && t.currentQuestion) {
+				if (ev.target.tagName.match(/^button$/i) && t.currentQuestion) {
 					go = true;
 				}
 				if (go) {

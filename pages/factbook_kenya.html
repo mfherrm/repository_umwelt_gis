@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Factbook Kenya</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -36,12 +43,13 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("../pages/nav.html", function(data){
+        $.get("../pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -50,11 +58,12 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <p>Overview</p>
-                        <p>Geography</p>
-                        <p>Demography</p>
-                        <p>Education</p>
-                        <p>Cost of Living</p>
+                        <h4> Table of contents</h4>
+                        <a href="#overview">Overview</a> <br>
+                        <a href="#geography">Geography</a> <br>
+                        <a href="#demography">Demography</a> <br>
+                        <a href="#education">Education</a> <br>
+                        <a href="#cost">Cost of living</a> <br>
                     </div>
                 </div>
             </div>
@@ -63,8 +72,12 @@
                     <div class="title justify-content-center">
                         <h2>Factbook: Kenya</h2>
                     </div>
-                    <div class="Overview">
-                        <p>??? </p> 
+                    <div id="overview" class="Overview">
+                        <p>Kenya (Swahili: Jamhuri ya Kenya) is the third-largest economy in sub-Saharan Africa and the
+                            eighth most populous state in Africa. Kenya's official languages are Swahili and English and
+                            its
+                            capital is Nairobi. The Republic of Kenya (Official name) is a presidential representative
+                            democratic republic and divided into 47 semi-autonomous counties headed by governors. </p>
                     </div>
                     <div class="row">
                         <div class="col-3"></div>
@@ -72,12 +85,14 @@
                         </div>
                         <div class="col-2"></div>
                     </div>
-                    <div class="geography">
+                    <div id="geography" class="geography">
                         </br>
                         <h3>Geography</h3>
                         <h5>Location</h5>
                         <ul class="factbook-list">
-                            <li>Eastern Africa, bordering the Indian Ocean to the southeast; Bordering countries: Ethopia to the north, Somalia to the east, Tanzania to the south, Uganda to the west and South Sudan to the northwest</li>
+                            <li>Kenya is situated in Eastern Africa, bordering the Indian Ocean to the southeast. It
+                                shares borders with Ethopia to the north, Somalia to the east, Tanzania to the south,
+                                Uganda to the west and South Sudan to the northwest</li>
                         </ul>
                         <h5>Area</h5>
                         <ul class="factbook-list">
@@ -87,14 +102,18 @@
                         </ul>
                         <h5>Terrain</h5>
                         <ul class="factbook-list">
-                            <li>low plains rise to central highlands bisected by Great Rift Valley; fertile plateau in west.</li>
+                            <li>Kenya has a coastline on the Indian Ocean which contains swamps of mangroves. Inland are
+                                broad plains and the highlands in central Kenya. These are bisected by the Great Rift
+                                Valley. To its west there is a fertile plateau. Kenya's highest point is Mount Kenya,
+                                standing at 4985m. This is also where Kenya's permanent glaciers are located.</li>
                         </ul>
                         <h5>Climate</h5>
                         <ul class="factbook-list">
-                            <li>varies from tropical along coast to arid in interior</li>
+                            <li>The climate of Kenya varies from tropical along the coast to more and more arid the
+                                further inland.</li>
                         </ul>
                     </div>
-                    <div class="demography">
+                    <div id="demography" class="demography">
                         </br>
                         <h3>Demography</h3>
                         <h5>Population</h5>
@@ -103,26 +122,57 @@
                         </ul>
                         <h5>Population distribution</h5>
                         <ul class="factbook-list">
-                            <li>population heavily concentrated in the west along the shore of Lake Victoria; other areas of high density include the capital of Nairobi, and in the southeast along the Indian Ocean coast.</li>
+                            <li>Kenyan population is heavily concentrated in the west along the shore of Lake Victoria.
+                                Other
+                                areas of high density include the capital of Nairobi, and the south-eastern cities along
+                                the
+                                Indian Ocean coast.</li>
                         </ul>
                         <h5>Ethnic Groups</h5>
                         <ul class="factbook-list">
-                            <li>Kikuyu 17.1%, Luhya 14.3%, Kalenjin 13.4%, Luo 10.7%, Kamba 9.8%, Somali 5.8%, Kisii 5.7%, Mijikenda 5.2%, Meru 4.2%, Maasai 2.5%, Turkana 2.1%, non-Kenyan 1%, other 8.2% (2019 est.)</li>
+                            <li>Kenyan population is made up of the following ethnicities (2019 est.):
+                                <ul>
+                                    <li>Kikuyu 17.1%</li>
+                                    <li>Luhya 14.3%</li>
+                                    <li>Kalenjin 13.4%</li>
+                                    <li>Luo 10.7%</li>
+                                    <li>Kamba 9.8%</li>
+                                    <li>Somali 5.8%</li>
+                                    <li>Kisii 5.7%</li>
+                                    <li>Mijikenda 5.2%</li>
+                                    <li>Meru 4.2%</li>
+                                    <li>Maasai 2.5%</li>
+                                    <li>Turkana 2.1%</li>
+                                    <li>non-Kenyan 1%</li>
+                                    <li>Other/stateless/unspecified 8.2%</li>
+                                </ul>
+                            </li>
+
                         </ul>
                         <h5>Religions</h5>
                         <ul class="factbook-list">
-                            <li>Christian 85.5% (Protestant 33.4%, Catholic 20.6%, Evangelical 20.4%, African Instituted Churches 7%, other Christian 4.1%), Muslim 10.9%, other 1.8%, none 1.6%, don't know/no answer 0.2% (2019 est.)</li>
+                            <li> The most popular religions in Kenya are the following (2019 est.):</li>
+                            <ul>
+                                <li>Protestant 53.8%</li>
+                                <li>Catholic 20.6%</li>
+                                <li>Muslim 10.9%</li>
+                                <li>African Instituted Churches 7%</li>
+                                <li>Other Christian 4.1%</li>
+                                <li>Other 1.8% </li>
+                                <li>None 1.8% </li>
+                            </ul>
                         </ul>
-                        
+
                         <h5>Age</h5>
                         <ul class="factbook-list">
-                            <li><strong>Median Age:</strong> 20 years total, 19.9 years male, 20.1 years female (2020 est,)</li>
+                            <li><strong>Median Age:</strong> 20 years total, 19.9 years male, 20.1 years female (2020
+                                est,)</li>
                             <li><strong>Population pyramid:</strong></li>
                         </ul>
                         <div class="row">
                             <div class="col-8">
                                 <div class="chart" id="pyr_kenya">
-                
+
                                 </div>
                             </div>
                         </div>
@@ -132,50 +182,88 @@
                             <li>26.39 births/1,000 population (2022 est.)</li>
                             <li>5.01 deaths/1,000 population (2022 est.)</li>
                             <li>2.12% (2022 est.)</li>
-                        </ul> 
-                        <h5>Life expectancy at birth</h5>  
+                        </ul>
+                        <h5>Life expectancy at birth</h5>
                         <ul class="factbook-list">
                             <li><strong>total:</strong> 69.69 years (2022 est.)</li>
                             <li><strong>male:</strong> 67.98 years (2022 est.)</li>
                             <li><strong>female:</strong> 71.43 years (2022 est.)</li>
-                        </ul>     
+                        </ul>
 
                     </div>
                     </br>
-                    <div class="government">
+                    <div id="education" class="government">
                         <h3>Education</h3>
                         <ul class="factbook-list">
-                            <li></li>
+                            <li>Kenya's national educational system consists of three levels.
+                                <ul>
+                                    <li>Eight years of compulsory primary education, beginning at age six and running
+                                        through to the age of 14.</li>
+                                    <li>Four years of secondary education.</li>
+                                    <li>Four years of higher education.
+                                    </li>
+                                </ul>
+                                Primary and secondary education is free of charge nowadays. However, before 2008 when
+                                free secondary education was introduced, a large number of students
+                                has been unable to attend school beyond the primary level due to the cost being too high
+                                for them.
+                                <br>To move on to secondary education students need to pass a national exam and obtain
+                                the "Kenyan Certificate of Primary
+                                Education".
+                                Education is highly valued in Kenya with many students taking part in after-school and
+                                weekend tutoring.
+
+                            </li>
                         </ul>
                     </div>
                     <div class="cost-living">
                         <h3>Cost of Living</h3>
                         <ul class="factbook-list">
-                            <li></li>
+                            <li>The cost of living in Kenya differs greatly between rural and urban regions. This is
+                                especially visible
+                                when taking a look at rent. While the average rent for a one bedroom apartment in
+                                Nairobi's (Nairobi County) city centre is about KSh48770 (~ $403, 2022 est.), living in
+                                the same
+                                kind of apartment in Bungoma (Bungoma County) is about 60% cheaper (KSh15000 / ~ $124,
+                                2022 est.).
+                                <br>
+                                Using the same two cities from before, one can see, that this, for most cases, also
+                                holds true for
+                                sustenance. While water is cheaper in Nairobi, a 1.5l bottle of water can be bought for
+                                KSh89 or KSh100 respectively (Nairobi, ~ $0.74,
+                                2022 est. /
+                                Bungoma, ~ $0.83, 2022 est.), most food items are cheaper in Bungoma. This goes for a
+                                loaf of white bread (500g) where
+                                Bungoma edges out Nairobi by 9 Kenyan Shilling (KSh53 / ~ $0.43, 2022 est. / KSh62 / ~
+                                $0.51, 2022
+                                est.) but also for example for a kilogram of white rice (KSh121 / ~ $1, 2022 est.
+                                (Bungoma), KSh188 / ~ $1.55, 2022 est. (Nairobi)).
+                            </li>
                         </ul>
 
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
-        
+
     </div>
     <script>
-        $.get("../pages/footer.html", function(data){
+        $.get("../pages/footer.html", function (data) {
             $("#footer-placeholder").replaceWith(data);
         });
     </script>
     <!--end of Footer bar-->
-   
+
 </body>
 <script src="../js/unit2-pyr.js"></script>
 <script src="../js/factbook_kenya.js"></script>
+
 </html>

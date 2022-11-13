@@ -1,6 +1,6 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerHeight || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548);
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548)+30;
 let mode = false;
 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
@@ -13,7 +13,7 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 function draw(data) {
     drawMap(data[0], '#southafrica', "exzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]))
     drawMap(data[1], '#germany', "exger", projection = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]))
-    drawMap(data[2], '#kenya', "exken", projection = d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]))
+    drawMap(data[2], '#kenya', "exken", projection = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]))
 }
 
 //Load in GeoJSON data //Promise resolve
@@ -174,26 +174,44 @@ d3.select("#checkzaf").on("click", function () {
 
 d3.select("#checkken").on("click", function () {
     if (mode == false) {
-        for (let i in selectger) {
+        for (let i in selectken) {
 
-            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Samburu") {
                 selectken[0].attr("fill", "green");
             } else {
                 selectken[0].attr("fill", "red");
             }
-            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Turkana") {
                 selectken[1].attr("fill", "green");
             } else {
                 selectken[1].attr("fill", "red");
             }
-            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "") {
+            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "West Pokot") {
                 selectken[2].attr("fill", "green");
             } else {
                 selectken[2].attr("fill", "red");
             }
 
         }
-    } else { }
+    } else { 
+        for (let i in selectken) {
+            if (selectken[0]._groups[0][0].__data__.properties.name_1 == "Nairobi") {
+                selectken[0].attr("fill", "green");
+            } else {
+                selectken[0].attr("fill", "red");
+            }
+            if (selectken[1]._groups[0][0].__data__.properties.name_1 == "Mombasa") {
+                selectken[1].attr("fill", "green");
+            } else {
+                selectken[1].attr("fill", "red");
+            }
+            if (selectken[2]._groups[0][0].__data__.properties.name_1 == "Garissa") {
+                selectken[2].attr("fill", "green");
+            } else {
+                selectken[2].attr("fill", "red");
+            }
+        }
+    }
 })
 
 function addSelected(target, selection) {

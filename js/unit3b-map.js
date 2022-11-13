@@ -1,10 +1,5 @@
 var tooltip;
 //Create colors scheme    
-var color = d3.scaleThreshold()
-    //thresholds of data
-    .domain([75, 80, 85, 90, 95, 100])
-    //either d3.schemeCOLOR or own range e.g. ['#fee5d9','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15']
-    .range(d3.schemeReds[6]);
 
 //Load in GeoJSON data //Promise resolve
 
@@ -15,14 +10,14 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function draw(data) {
-    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0])) 
-    drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]))
-    drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]))
-    drawLegend();
+    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(d3.schemeReds[5])) //nat breaks
+    drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(d3.schemeReds[5])) //geom int
+    drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]), d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(d3.schemeReds[5])) //geom int
+    
 
 }
 
-function drawMapSol(data, drawTarget, mapID, mapProjection) {
+function drawMapSol(data, drawTarget, mapID, mapProjection, color) {
 
     var pathM = d3.geoPath().projection(mapProjection);
 
@@ -68,6 +63,7 @@ function drawMapSol(data, drawTarget, mapID, mapProjection) {
         .on("mouseout", eraseTooltip)
 
     drawScalebar(mapProjection, mapID);
+    drawLegend(color, mapID);
 
 };
 
@@ -99,10 +95,10 @@ function eraseTooltip() {
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
-function drawLegend() {
+function drawLegend(color, mapID) {
     //set Title
     //create svg for Legend
-    var legendSvg = d3.selectAll(".mapboxSol")
+    var legendSvg = d3.selectAll('#'+mapID)
         .append("g")
         .attr("class", "legend")
         //.attr("viewBox", [0, 0, width, height])
@@ -160,7 +156,7 @@ function drawLegend() {
             } else if (i == color.domain().length - 1) {
                 return "≥ " + + d
             } else {
-                return color.domain()[i - 1] + 1 + " to " + d
+                return color.domain()[i - 1] + " to <" + d
             };
         })
 };

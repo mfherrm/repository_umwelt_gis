@@ -1,5 +1,3 @@
-console.log("hi mct_2.js");
-
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill
 // Production steps of ECMA-262, Edition 6, 22.1.2.1
 if (!Array.from) {
@@ -138,7 +136,8 @@ var myQuiz = {
 		t.intoContainer(t.createElement({
 			tag: "button",
 			text: "confirm choice",
-			type: "submit"
+			type: "submit",
+			id: "confirm"
 		}));
 	},
 	currentChoices: [],
@@ -146,33 +145,60 @@ var myQuiz = {
 	// data could be filled from an external source (JSON)
 	data: [{
 		
-		question: 'Wie lautet der SDG Indikator 1.2.2?',
-		solution: 'Anteil der Bevölkerung, der unter der nationalen Armutsgrenze lebt',
-		falses: ['Anteil der Bevölkerung, der unter der Armutsgrenze lebt', 'Anteil der Bevölkerung, der weniger als 1,90 Dollar am Tag zur Verfügung hat'],
-		
+		question: 'The closer R is to 1...',
+		solution: '... the higher the correlation between the variables',
+		falses: ['...the lower the correlation between the variables', '...the higher the anti-correlation between the variables'],
+		explanation: ''
 	}, {
 		/* category: 'HTML', */
-		question: 'In welcher Provinz ist der prozentuale Anteil der Menschen, die unter der nationalen Armutsgrenze leben am höchsten?',
-		solution: 'Eastern Cape',
-		falses: ['Limpopo', 'North West'],
-		explanation: 'In Eastern Cape ist der Anteil der Bevölkerung, der unter der nationalen Armutsgrenze lebt, mit 59% am höchsten.'
+		question: 'What is a scatterplot?',
+		solution: 'A visualisation of the relationship between two variables',
+		falses: ['A diagram illustrating temporal differences between variables', 'A graph showing only standardized values'],
+		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
-		question: 'In welcher Provinz ist der prozentuale Anteil der Menschen, die unter der nationalen Armutsgrenze lebt am niedrigsten?',
-		solution: 'Gauteng',
-		falses: ['Western Cape', 'Free State'],
-		explanation: 'In Gauteng ist der Anteil der Bevölkerung, der unter der nationalen Armutsgrenze lebt, mit 19% am niedrigsten'
+		question: 'How can a scatterplot be intepreted?',
+		solution: 'The closer the observations lie to an imaginary 45° line, the higher their correlation',
+		falses: ['Clustering indicates high correlation', 'The higher the y-value the higher the correlation'],
+		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'Wie viel Rand beträgt die nationale Armutsgrenze in Südafrika?',
-		solution: '992 Rand',
-		falses: ['500 Rand', '350 Rand'],
-		explanation: 'Die nationale Armutsgrenze beträgt 992 Rand pro Person in Südafrika. '
+		question: 'Why is R² important when testing hypotheses?',
+		solution: 'It evaluates whether predictions fit the actual data',
+		falses: ["It indicates an observation's covariance", 'It indicates the reason for correlation'],
+		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'In welcher Provinz wird am deutlichsten, dass die absoluten Werte immer im Bezug zur absoluten Bevölkerung betrachtet werden müssen?',
-		solution: 'Gauteng',
-		falses: ['Northern Cape', 'KwaZulu-Natal'],
+		question: 'How can the correlation coefficient be obtained?',
+		solution: 'Division of the covariance of the two variables by the product of their standard deviations',
+		falses: ['Division of the variance of the two variables by the product of their standard deviations', 'Division of the product of the standard deviation of the two variables by their covariance'],
+		explanation: ''
+	},
+    {
+		/* category: 'Kategorie?', */
+		question: "What is the assumption linear regression makes use of?",
+		solution: 'It assumes that observations deviate from an underlying relationship between a dependent variable y and an independent variable x',
+		falses: ['It assumes that observations deviate from an underlying relationship between two dependent variables x and y'],
+		explanation: ''
+	},
+    {
+		/* category: 'Kategorie?', */
+		question: "There is a clear correlation between SDGs 1.2.1 and 4.2.2 in Kenya",
+		solution: 'False',
+		falses: ['True'],
+		explanation: ''
+	},{
+		/* category: 'Kategorie?', */
+		question: "There is a clear correlation between SDGs 1.2.1 and 4.2.2 in Germany",
+		solution: 'False',
+		falses: ['True'],
+		explanation: ''
+	},
+    {
+		/* category: 'Kategorie?', */
+		question: "There is a clear correlation between SDGs 1.2.1 and 4.2.2 in South Africa",
+		solution: 'False',
+		falses: ['True'],
 		explanation: ''
 	}],
 	emptyContainer: function () {
@@ -222,7 +248,7 @@ var myQuiz = {
 				// we want to only support clicks on start buttons...
 				var go = ev.target.tagName.match(/^button$/i);
 				// ... and labels for radio buttons when in a game
-				if (ev.target.tagName.match(/^label$/i) && t.currentQuestion) {
+				if (ev.target.tagName.match(/^button$/i) && t.currentQuestion) {
 					go = true;
 				}
 				if (go) {
@@ -279,7 +305,7 @@ var myQuiz = {
 		// show message
 		t.intoContainer(t.createElement({
 			tag: "b",
-			text: "Sie haben alle Fragen beantwortet. Hier die Auswertung Ihrer Antworten:"
+			text: "You have answered all of the questions. Your results are as follows:"
 		}));
 		// list questions and given answers
 		ol = t.intoContainer(t.createElement({
@@ -299,7 +325,7 @@ var myQuiz = {
 			// list given answer
 			p = li.appendChild(t.createElement({
 				tag: "p",
-				text: "Ihre Antwort: "
+				text: "You answered: "
 			}));
 			p.appendChild(t.createElement({
 				className: (o.q.solution == o.a ? "correct" : "wrong"),
@@ -310,7 +336,7 @@ var myQuiz = {
 			if (o.q.solution != o.a) {
 				p = li.appendChild(t.createElement({
 					tag: "p",
-					text: "Die richtige Antwort wäre gewesen: "
+					text: "The right answer would have been: "
 				}));
 				p.appendChild(t.createElement({
 					tag: "em",
@@ -321,7 +347,7 @@ var myQuiz = {
 			if (o.q.explanation) {
 				p = li.appendChild(t.createElement({
 					tag: "p",
-					text: "Erläuterung: "
+					text: "Explanation: "
 				}));
 				p.appendChild(t.createElement({
 					tag: "em",
@@ -333,7 +359,7 @@ var myQuiz = {
 		// show message
 		t.intoContainer(t.createElement({
 			tag: "b",
-			text: "Möchten Sie den Test wiederholen?"
+			text: "Restart the quiz?"
 		}));
 	},
 	// helper function: shuffle array (adapted from http://javascript.jstruebig.de/javascript/69)
@@ -363,7 +389,7 @@ var myQuiz = {
 		t.intoContainer(t.createElement({
 			className: "startBtn",
 			tag: "button",
-			text: "Multiple Choice Test starten!"
+			text: "Start the quiz"
 		}), "p");
 	}
 	

@@ -4,7 +4,7 @@ var heightC = Math.max(document.documentElement.clientWidth, window.innerHeight 
 //Create SVG element // viewBox for responsive Map
 
 
-/*
+/*Definde Projection
 var projection =  d3.geoBromley()
             .scale(width / 2 / Math.PI)
             .rotate([0, 0])
@@ -65,13 +65,6 @@ function drawMap(data) {
         .attr("d", pathC)
         .attr("class", "continent")
         .attr("fill", "grey")
-        /*
-        function(d,i){
-            let min = Math.ceil(0);
-            let max = Math.floor(27)
-            return color(Math.floor(Math.random()*(max-min)+min))
-        })
-        */
         .attr("name", function (d) {
             return d.properties.CONTINENT;
         })
@@ -79,7 +72,9 @@ function drawMap(data) {
         .style("cursor", "pointer")
         .on("click", function () {
             let continent = d3.select(this);
+           if (continent.attr("fill")!='green'){
             getContinent(continent);
+           }
         });
         
 };
@@ -94,16 +89,16 @@ function getContinent(continent) {
     let elemid = continent._groups[0][0].__data__.properties.CONTINENT
     console.log(elemid.toLowerCase())
     console.log(selectC.europe)
-    if (select[0].africa == true && select[0].europe == true) {
-        select[0].selected.pop();
-    } else if ((elemid.toLowerCase() == 'africa' && select[0].africa == true) || (elemid.toLowerCase() == 'europe' && select[0].europe == true)) {
-        select[0].selected.pop();
-    } else if (continent.attr("fill") != "#00677F" && select[0].selected.length < 1) {
-        select[0].selected.push(continent);
+    if (selectC[0].africa == true && selectC[0].europe == true) {
+        selectC[0].selected.pop();
+    } else if ((elemid.toLowerCase() == 'africa' && selectC[0].africa == true) || (elemid.toLowerCase() == 'europe' && selectC[0].europe == true)) {
+        selectC[0].selected.pop();
+    } else if (continent.attr("fill") != "#00677F" && selectC[0].selected.length < 1) {
+        selectC[0].selected.push(continent);
         return continent.attr("fill", "#00677F")
     } else {
-        if (select[0].selected[0]._groups[0][0].__data__.properties.CONTINENT == elemid) {
-            select[0].selected.pop();
+        if (selectC[0].selected[0]._groups[0][0].__data__.properties.CONTINENT == elemid) {
+            selectC[0].selected.pop();
             return continent.attr("fill", "grey")
 
         }
@@ -117,20 +112,20 @@ d3.select("#pyr_continents").on("mouseup", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
     let elemid = elem.getAttribute('id')
     console.log(elemid)
-    let con = select[0].selected[0]._groups[0][0].__data__.properties.CONTINENT
+    let con = selectC[0].selected[0]._groups[0][0].__data__.properties.CONTINENT
     console.log(con)
     if ((con.includes("Africa") && elemid.includes('pyr_africa'))) {
-        select[0].africa = true;
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
+        selectC[0].africa = true;
+        selectC[0].selected[0].attr("fill", "green");
+        selectC[0].selected.pop();
     } else if ((con.includes('Europe') && elemid.includes('pyr_europe'))) {
-        select[0].europe = true;
-        select[0].selected[0].attr("fill", "green");
-        select[0].selected.pop();
-    } else if (select[0].africa == true && select[0].europe == true ){
+        selectC[0].europe = true;
+        selectC[0].selected[0].attr("fill", "green");
+        selectC[0].selected.pop();
+    } else if (selectC[0].africa == true && selectC[0].europe == true ){
         
     } else {
-        select[0].selected[0].attr("fill", "red");
+        selectC[0].selected[0].attr("fill", "red");
     }
 }
 

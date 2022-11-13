@@ -105,7 +105,6 @@ function getCountry(country){
         return country.attr("fill","#00677F")
     } else {
         select = select.filter(element => element.attr("name") !== country.attr("name"));
-        console.log(select);
         return country.attr("fill","grey")
     }
 };
@@ -118,7 +117,7 @@ d3.select("#check-world").on("click",function(){
                             select[i].attr("fill","#EC5B5B");
                     }                              
                 }                                               
-            })
+});
 
 d3.select("#restart-world").on("click",function(){
                 select = [];

@@ -22,8 +22,8 @@ btnPrev.on("click", function(){
 })
 
 function buttonShowHide(){
-    pageIndex == pages ? btnNext.css("visibility","hidden") : btnNext.css("visibility","visible");
-    pageIndex == 0 ? btnPrev.css("visibility","hidden"): btnPrev.css("visibility","visible");
+    pageIndex == pages ? btnNext.css({"visibility":"hidden"}) : btnNext.css({"visibility":"visible"});
+    pageIndex == 0 ? btnPrev.css({"visibility":"hidden"}) : btnPrev.css({"visibility":"visible"});
 }
 
 function showPage(){

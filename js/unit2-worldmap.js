@@ -4,18 +4,6 @@ var height = Math.max(document.documentElement.clientWidth, window.innerWidth ||
 var i = 0
 //Create SVG element // viewBox for responsive Map
 
-
-/*
-var projection =  d3.geoBromley()
-            .scale(width / 2 / Math.PI)
-            .rotate([0, 0])
-            .center([0, 0])
-            .translate([width / 2, height /2]);
-*/
-
-
-// Define Zoom
-
 // Define Graticule 
 var graticule = d3.geoGraticule();
 let country
@@ -45,7 +33,7 @@ function drawMap(data) {
     var path = d3.geoPath().projection(projection);
 
     let target
-    i == 0 ? target = '#worldmap' : target = "#worldmapall"
+    i == 0 ? target = '#worldmapu2' : target = "#worldmapall"
 
     var svg = d3.select(target)
         .append("svg")
@@ -54,7 +42,7 @@ function drawMap(data) {
             if (i == 0) {
                 return [0, 0, width, 2548]
             } else {
-                return [0, 0, width, height]
+                return [0, 0, width, 2548]
             }
         })
         .attr('id', function () {
@@ -88,7 +76,9 @@ function drawMap(data) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", "country")
+        .attr("class", function(d){
+                return d.properties.pyramid==null? 'nonCountry' : "country"
+        })
         .attr("fill", "grey")
         .attr('state', function () { return false })
 
@@ -109,11 +99,20 @@ function drawMap(data) {
             return d.properties.pyramid;
         })
         //Cursor on mouseover
-        .style("cursor", "pointer")
+        .style("cursor", function(d){
+          return d.properties.pyramid? "pointer": '' 
+
+        }
+        )
         .on("click", function (event) {
             country = d3.select(this);
             let src = document.querySelectorAll(':hover')[9].id
-            src == 'wmu3' ? getCountry(country) : getPyramid(country)
+            console.log(src)
+            if (src=='wmu3'){
+                country.attr("fill") == 'green'? '': getCountry(country)
+            } else if (src=='wmu4'){
+                (country.attr("fill") == "#90CEC4" || country.attr("fill") == "#BEBADA" || country.attr("fill") == "#F8CDE2" || country.attr("fill") == "#F8B365")?'':getPyramid(country)
+                }
         });
     i++;
 };
@@ -140,7 +139,9 @@ function getCountry(country) {
 
         return country.attr("fill", "#00677F")
     } else {
-        if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        if (select[0].selected[0] == undefined){
+            console.log('undefined')
+        }else if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select[0].selected.pop();
             return country.attr("fill", "grey")
 
@@ -184,16 +185,15 @@ function getPyramid(country) {
     let elemid = country.attr('name');
     let elempyr = country.attr('pyramid');
     let elemstat = country.attr('state');
-    if ((country.attr("fill") == "green")) {
-        select4.pop();
-    } else if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
+    if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
         select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
-        if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        if (select4[0]== undefined){
+            console.log('undefined')
+        }else if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select4.pop();
             return country.attr("fill", "grey")
-
         }
 
 
@@ -206,8 +206,9 @@ d3.select("#pyr_imgs").on("click", function () {
     let elemid = elem.getAttribute('id')
     let conid = country.attr('name')
     let con = select4[0]._groups[0][0].__data__.properties.pyramid
+    console.log(con)
     if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
-        select4[0].attr("fill", "green");
+        con == 1 ? select4[0].attr("fill", "#F8B365") : con == 2 ? select4[0].attr("fill", "#F8CDE2") : con == 3 ? select4[0].attr("fill", "#BEBADA") : con == 4 ? select4[0].attr("fill", "#90CEC4") : ''
         select4.pop();
     } else {
         select4[0].attr("fill", "red");

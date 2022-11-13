@@ -1,7 +1,7 @@
 
 //Width and height
-var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var widthArea = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+var heightArea = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 //rgb2hex use as method rgb2hex(COLOR IN RGB) -- https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
@@ -10,8 +10,11 @@ const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice
 var svgBoundaries = d3.select("#area-map")
             .append("svg")
             //responsive size
-            .attr("viewBox", [0, 0, width, height])
+            .attr("viewBox", [0, 0, widthArea, heightArea])
             //dunno seems nice
+            .attr("preserveAspectRatio", "xMinYMin")
+            .append("g")
+            .attr("class", "mapbox");
 
 
 Promise.all([d3.json("../geojson/zaf_nation.geojson"),d3.json("../geojson/germany_nation.geojson"),d3.json("../geojson/kenya_nation.geojson")])
@@ -31,8 +34,8 @@ function drawZaf(data){
             .projection(projectionZaf);
 
     let bbox = pathZaf.bounds(data[0]),
-    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ width, (bbox[1][1] - bbox[0][1]) / height),
-    t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    s = .92 / Math.max((bbox[1][0]-bbox[0][0])/ widthArea, (bbox[1][1] - bbox[0][1]) / heightArea),
+    t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     projectionZaf
         .scale(s)
@@ -43,13 +46,19 @@ function drawZaf(data){
                     .enter()
                     .append("path")
                     .attr("d", pathZaf)
-                    .attr("id","Zaf")
-                    .attr("fill", "blue")
-                    .attr("opacity",".8")
+                    .attr("id","zaf-area")
+                    .attr("fill", "#B2D06C")
+                    .attr("stroke","grey")
+                    .attr("stroke-width","1.5px")
+                    .attr("opacity","1")
 
-   //set value of range slider for opacity
-   d3.select("#zafRange").attr("value",function(){return d3.select("#Zaf").style("opacity")*100})
-    
+  //set value of range slider for opacity
+  d3.select("#zafRange").attr("value",function(){return d3.select("#zaf-area").style("opacity")*100})
+
+  //get fill for next unit list
+  d3.selectAll("#slist-zaf li").style("background",function(){
+    return d3.select("#zaf-area").attr("fill")
+  });
     //Trigger other Build Map
     drawKenya(data[2], s);
     drawGermany(data[1], s);
@@ -57,7 +66,7 @@ function drawZaf(data){
 
 function drawKenya(data, s){
     let projectionKenya = d3.geoAzimuthalEqualArea()
-            .translate([0,-.025])
+            .translate([-0.01,-.02])
             .scale(1)
             .rotate([-39,0]); 
 
@@ -65,7 +74,7 @@ function drawKenya(data, s){
                 .projection(projectionKenya);
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
     let bbox = pathKenya.bounds(data)
-    let t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
     // Update the projection  
     projectionKenya
         .scale(s)
@@ -76,17 +85,24 @@ function drawKenya(data, s){
         .enter()
         .append("path")
         .attr("d", pathKenya)
-        .attr("id","Kenya")
-        .attr("fill", "grey")
-        .attr("opacity",".7");
+        .attr("id","kenya-area")
+        .attr("fill", "#F8B365")
+        .attr("stroke","grey")
+        .attr("stroke-width","1.5px")
+        .attr("opacity","1");
 
-        //set value of range slider for opacity
-        d3.select("#kenRange").attr("value",function(){return d3.select("#Kenya").style("opacity")*100})
+    //set value of range slider for opacity
+    d3.select("#kenRange").attr("value",function(){return d3.select("#kenya-area").style("opacity")*100})
+
+     //get fill for next unit list
+    d3.selectAll("#slist-kenya li").style("background",function(){
+      return d3.select("#kenya-area").attr("fill")
+    });
 }
 
 function drawGermany(data, s) {
     let projectionGermany = d3.geoAzimuthalEqualArea()
-                    .translate([0,-.02])
+                    .translate([-0.005,-.015])
                     .scale(1)
                     .rotate([-10,-52]); 
 
@@ -94,7 +110,7 @@ function drawGermany(data, s) {
             .projection(projectionGermany);
 
     let bbox = pathGermany.bounds(data);
-    let t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
 
     projectionGermany
         .scale(s)
@@ -105,18 +121,41 @@ function drawGermany(data, s) {
                     .enter()
                     .append("path")
                     .attr("d", pathGermany)
-                    .attr("id","Germany")
-                    .attr("fill", "yellow")
-                    .attr("opacity",".6")
+                    .attr("id","germany-area")
+                    .attr("fill", "#BEBADA")
+                    .attr("stroke","grey")
+                    .attr("stroke-width","1.5px")
+                    .attr("opacity","1")
 
-     //set value of range slider for opacity
-     d3.select("#gerRange").attr("value",function(){return d3.select("#Germany").style("opacity")*100})
+    //set value of range slider for opacity
+    d3.select("#gerRange").attr("value",function(){return d3.select("#germany-area").style("opacity")*100})
+
+    //get fill for next unit list
+    d3.selectAll("#slist-germany li").style("background",function(){
+      return d3.select("#germany-area").attr("fill")
+    });
 }
 //Drag n Drop trigger
 d3.selectAll(".sortlist").on("mousedown", function(){
     slistArea(this.id);
-    checkBackground();
-})
+});
+
+//reset classes correct wrong on mousedown
+d3.selectAll("#area li").on("mousedown", function(){
+  let items = d3.selectAll("#area li").nodes()
+  for (let i of items){
+    i.classList.remove("slist-wrong")
+    i.classList.remove("slist-correct")
+  }
+});
+
+d3.selectAll("#population li").on("mousedown", function(){
+  let items = d3.selectAll("#population li").nodes()
+  for (let i of items){
+    i.classList.remove("slist-wrong")
+    i.classList.remove("slist-correct")
+  }
+});
 
 //Drag n Drop
 function slistArea(target) {
@@ -131,7 +170,7 @@ function slistArea(target) {
     i.ondragstart = (ev) => {
       current = i;
       for (let it of items) {
-        if (it != current) { it.classList.add("hint"); }
+        if (it != current) { it.classList.add("hint");}
       }
     };
     
@@ -185,31 +224,39 @@ d3.select("#check-area").on("click",function(){
     let populations_right = ["Germany","South Africa","Kenya"]
     let areas = d3.selectAll("#area li").nodes()
     let populations = d3.selectAll("#population li").nodes();
-    for(i in areas){
-        areas[i].outerText == areas_right[i] ? d3.select(areas[i]).style("background-color","#60E660") : d3.select(areas[i]).style("background-color","lightcoral")
+    let j = 0;
+    let k = 0;
+    for(let i of areas){
+      i.outerText == areas_right[j] ? i.classList.add("slist-correct") : i.classList.add("slist-wrong");
+      j++;
     }
-    for(i in populations){
-        populations[i].outerText == populations_right[i] ? d3.select(populations[i]).style("background-color","#60E660") : d3.select(populations[i]).style("background-color","lightcoral")
+    for(let i of populations){
+      i.outerText == populations_right[k] ? i.classList.add("slist-correct") : i.classList.add("slist-wrong");
+      k++;
     }
 });
 
 d3.select("#restart-area").on("click",function(){
-    d3.selectAll(".slist li").style("background-color","") 
+    let items = d3.selectAll(".slist li").nodes()
+    for (let i of items){
+      i.classList.remove("slist-wrong")
+      i.classList.remove("slist-correct")
+    }
 });
 
 
 //Range slider functions
 d3.select("#zafRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Zaf").style("opacity",function(){return opacity})
+  d3.select("#zaf-area").style("opacity",function(){return opacity})
 });
 
 d3.select("#gerRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Germany").style("opacity",function(){return opacity})
+  d3.select("#germany-area").style("opacity",function(){return opacity})
 });
 
 d3.select("#kenRange").on("input",function(){
   let opacity = this.valueAsNumber/100
-  d3.select("#Kenya").style("opacity",function(){return opacity})
+  d3.select("#kenya-area").style("opacity",function(){return opacity})
 });

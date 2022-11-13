@@ -156,6 +156,16 @@ a .bi {
     stroke: white;
     fill: lightcoral;
 }
+
+.unit-check {
+    padding-top: .8rem;
+}
+
+.subunit-label{
+    font-size:12px
+}
+
+
 /* Buttons  -------------------------------------------------------------------*/   
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
@@ -204,12 +214,21 @@ input[type=range]::-moz-range-thumb {
     margin-top: 1.5rem;
 }
 /* world map first unit*/
+#worldmapu2{
+    border: 1px solid grey;
+    background: lightblue;
+}
 #worldmap{
     border: 1px solid grey;
 }
+.subcounty, .district{
+    fill:white;
+    fill-opacity: 0.01;
+}
+
 .stroke {
     fill: none;
-    stroke: #000;
+    stroke: grey;
     stroke-width: 3px;
   }
 
@@ -234,6 +253,21 @@ input[type=range]::-moz-range-thumb {
     stroke-width: .5px;
 }
 /*------*/
+/* adm map first unit page4*/
+#adm-map {
+    opacity: .9;
+}
+#adm-germany, #adm-kenya, #adm-zaf {
+    margin-top: 1.5rem;
+    border-left: 1px solid lightgrey;
+    text-align: center;
+}
+
+.mapboxGER, .mapboxKEN{
+    display: none;
+}
+
+/*------*/
 .continent {
     stroke: white;
     stroke-width: .5px;
@@ -241,6 +275,15 @@ input[type=range]::-moz-range-thumb {
 .continent:hover{
     stroke:white;
     stroke-width: 2px;
+}
+#zaf-popdense .country {
+    stroke: white;
+    stroke-width: 2px;
+}
+
+#zaf-popdense .country:hover {
+    stroke: white;
+    stroke-width: 4px;
 }
 
 .country, .countryU3, .adminarea, .adminarea3a {
@@ -264,7 +307,7 @@ input[type=range]::-moz-range-thumb {
 } 
 
 /*Styles for Legend */
-.legend text {
+.legend text, #legendu4 text {
     font-size: 18pt;
     font-weight: 400;
     font-family: 'Open Sans', sans-serif;
@@ -277,7 +320,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 /*Styles for Scale */
-.scalebartick text, .label{
+.scalebartick text, .label, .legendtick text{ 
     font-size: 16pt;
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
@@ -307,7 +350,6 @@ input[type=range]::-moz-range-thumb {
 }
 
 .axis line, .axis path {
-  shape-rendering: crispEdges;
   fill: transparent;
   stroke: #555;
 }
@@ -334,6 +376,92 @@ input[type=range]::-moz-range-thumb {
 .bar.right {
   fill: firebrick;
 }
+
+.tick{
+    font-size: 6px;
+}
+#ylabel,#xlabel{
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+
+.card{
+    border: 1px solid #dfdfdf;
+    text-align: center;
+    background: #f5f5f5;
+    margin-bottom: 1rem;
+    height: 95%;
+}
+
+.card-body {
+    border-top: 1px solid #dfdfdf;
+    padding: .5rem;
+}
+
+.card .card-highlight {
+    border-radius: 5px;
+    height: 24px;
+}
+
+.card-highlight.hint{
+    border: 1px solid #ffc49a;
+    background: #feffb4;
+}
+
+.card-highlight.active {
+    border: 1px solid #ffa5a5;
+    background: #ffe7e7;
+}
+
+.card img{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    padding: 0rem;
+    border-radius: 5px;
+    height: 80%;
+}
+
+.chart-text {
+    margin: 0 0 .5rem 0;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+.chart-text:hover{
+    cursor: grab;
+}
+
+#switch {
+    border-radius: 5px;
+    min-height: 40px;
+}
+
+#pyrstg0, #pyrstg1, #pyrstg2, #pyrstg3{
+    width: 25%;
+    margin: 5px;
+    
+}
+#pyrstg0 {
+    border: solid #F8B365 3px;
+}
+#pyrstg1{
+    border: solid #F8CDE2 3px;
+}
+#pyrstg2{
+    border: solid #BEBADA 3px;
+}
+#pyrstg3{
+    border: solid #90CEC4 3px;
+}
+
 /*------------------------------------------------------------------------*/
 
 /*Drag n Drop styles -----------------------------------------------------*/
@@ -353,6 +481,9 @@ input[type=range]::-moz-range-thumb {
     border-radius: 5px;
     background-color: lightgrey;
 }
+.slist:hover{
+    cursor: grab;
+}
 
 .slist, .slist-assign {
     list-style: none;
@@ -367,7 +498,6 @@ input[type=range]::-moz-range-thumb {
     background: #f5f5f5;
 }
 
-/* (B) DRAG-AND-DROP HINT */
 .slist li.hint, .slist-assign li.hint  {
     border: 1px solid #ffc49a;
     background: #feffb4;
@@ -376,8 +506,65 @@ input[type=range]::-moz-range-thumb {
     border: 1px solid #ffa5a5;
     background: #ffe7e7;
 }
-/*------------------------------------------------------------------------*/
 
+.slist-wrong {
+	color: #c00;
+}
+
+.slist-correct:before {
+	content: '✓';
+	color: darkgreen;
+}
+
+.slist-wrong:before {
+	content: '✗';
+	color: #f00;
+}
+
+.slist-correct:before,
+.slist-wrong:before {
+	font: 1em bold;
+	padding: 0 0.2em;
+}
+/* Styles for Map-Quiz --------------------------------------------------*/
+#map-quiz .map-question {
+    padding-top: 1rem;
+}
+#map-quiz .form-check{
+    padding-left: 3rem;
+}
+
+/*------------------------------------------------------------------------*/
+/* Styles for tables --------------------------------------------------*/
+.table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table td, th {
+  border-bottom: 1px solid darkgrey;
+  text-align: left;
+  padding: .5rem;  
+}
+.table th:nth-child(even),
+.table td:nth-child(2) {
+  background-color: #dddddd;
+}
+
+.table td:nth-child(4){
+    border-top: 1px solid darkgrey;
+    border-left: 1px solid darkgrey;
+}
+
+.table td:nth-child(2),
+.table td:nth-child(3),
+.table th:nth-child(2),
+.table th:nth-child(3){
+    font-weight: 300;
+    font-size: 12pt;
+    text-align: center;
+}
 /* MCT styles-------------------------------------------------------------*/
 #quiz ul {
 	list-style: none;
@@ -416,12 +603,14 @@ input[type=range]::-moz-range-thumb {
 	background-color: darkgray;
 }
 
-#quiz input {
-    display:none	
+#quiz input:checked ~ label,
+#quiz input:focus ~ label {
+    background-color: lightsteelblue;
 }
 
-#quiz button:not(.startBtn) {
-	display: none;
+
+#quiz input {
+    display:none	
 }
 
 #quiz button {

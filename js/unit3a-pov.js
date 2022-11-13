@@ -1,8 +1,8 @@
 var tooltipG;
 //Create colors scheme    
-let gerC = [(d3.scaleThreshold().domain([11, 15, 17, 19, 24]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([20, 29, 38, 47, 55]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([17, 22, 25, 27, 29]).range(d3.schemeReds[6]))];
-let kenC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
-let zafC = [(d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6])), (d3.scaleThreshold().domain([80, 85, 90, 95, 100]).range(d3.schemeReds[6]))];
+let gerC = [(d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 55.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(d3.schemeReds[5]))];
+let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 69.8]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 57]).range(d3.schemeReds[5]))];
+let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 35]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([12.4, 27.9, 32.8, 36.6, 39.5]).range(d3.schemeReds[5]))];
 let b = 1, z = 1, g=2, k=2;
 let gin = 0;
 //Load in GeoJSON data //Promise resolve
@@ -53,6 +53,7 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
             return d.properties.poverty_rel;
         })
         .attr("poverty_rel_f1", function (d) {
+            console.log(drawTarget, d.properties.poverty_rel_f1)
             return d.properties.poverty_rel_f1;
         })
         .attr("poverty_rel_f2", function (d) {
@@ -73,7 +74,7 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
 
     drawScalebar(mapProjection, mapID);
     drawLegendG(mapID, colorG);
-};
+
 
 //Build Tooltip
 function drawTooltipG() {
@@ -87,7 +88,7 @@ function drawTooltipG() {
     } else if (this.id.includes('zaf')){
         tttar=z;
     }
-    tooltipG = d3.select('.mapboxG')
+    tooltipG = d3.select(drawTarget)
         .append("div")
         .attr("class", "tooltip")
         .attr('id', 'tt')
@@ -104,6 +105,8 @@ function drawTooltipG() {
             update =>
                 update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + (tttar==0? d3.format(".1f")(d3.select(this).attr("poverty_rel")): tttar==1? d3.format(".1f")(d3.select(this).attr("poverty_rel_f1")): d3.format(".1f")(d3.select(this).attr("poverty_rel_f2"))) + "% </p>")
         )
+
+};
 
 };
 
@@ -133,7 +136,7 @@ function drawLegendG(mapID, colorG) {
     legendSvgG.append("g")
         .append("text")
         .text(function () {
-            return "Population in poverty [%]";
+            return "Population in poverty";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -163,7 +166,7 @@ function drawLegendG(mapID, colorG) {
             } else if (i == colorG.domain().length - 1) {
                 return "≥ " + + d
             } else {
-                return colorG.domain()[i - 1] + 1 + " to " + d
+                return colorG.domain()[i - 1]  + " to < " + d
             };
         })
 
@@ -177,9 +180,9 @@ function drawLegendG(mapID, colorG) {
         .attr("fill", function (d, i) {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return colorG(d - 1);
-        })
-
+        })   
 };
+
 d3.selectAll(".colbut").on("click", function () { changeColor(this.id) });
 d3.selectAll(".check").on("click", function () { getResult(this.id) });
 
@@ -189,7 +192,7 @@ function changeColor(id) {
     let arrleg;
     let txt;
     id.includes('ger') ? tar = '#giniger' : id.includes('ken') ? tar = '#giniken' : id.includes('zaf') ? tar = '#ginizaf' : 'not found'
-    id.includes('ger') ? tarleg = '#pger_leg' : id.includes('ken') ? tar = '#pken_leg' : id.includes('zaf') ? tar = '#pzaf_leg' : 'not found'
+    id.includes('ger') ? tarleg = '#pger_leg' : id.includes('ken') ? tarleg = '#pken_leg' : id.includes('zaf') ? tarleg = '#pzaf_leg' : 'not found'
     id.includes('gini_t') ? b = 0 : id.includes('gini_f1') ? b = 1 : b = 2
     for (let a = 0; a < d3.selectAll(tar)._groups[0].length; a++) {
         if (tar == '#giniger') {
