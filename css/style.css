@@ -500,16 +500,16 @@ input[type=range]::-moz-range-thumb {
     
 }
 #pyrstg0 {
-    border: solid #F8B365 3px;
+    border: solid #bebada 3px;
 }
 #pyrstg1{
-    border: solid #F8CDE2 3px;
+    border: solid #fb8072 3px;
 }
 #pyrstg2{
-    border: solid #BEBADA 3px;
+    border: solid #e78ac3 3px;
 }
 #pyrstg3{
-    border: solid #90CEC4 3px;
+    border: solid #fdb462 3px;
 }
 
 /*------------------------------------------------------------------------*/
