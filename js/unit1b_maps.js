@@ -150,17 +150,14 @@ circles.raise();
 //Build Tooltip
 function drawTooltip() {
 
-    let bbox = getPosition(this)
-
-    let leftpos = svgBox.offsetLeft + bbox.left*.8 +30 + "px"
-    let toppos = svgBox.offsetTop + bbox.top*.6+ "px"
+    let bbox = this.getBoundingClientRect();
 
 
     tooltip.transition()
         .duration(200)
         .style("opacity", ".7")
-        .style("left", leftpos)
-        .style("top", toppos);
+        .style("left", bbox.x + bbox.width / 2 + 30 + "px")
+        .style("top", bbox.y + bbox.height / 2 + "px");
 
 
     tooltip.html("<p><strong>"+d3.select(this).attr("name")+"</strong></p>"+
@@ -303,6 +300,7 @@ function drawLegend() {
 
 //Build Scalebar -- 
 function drawScalebar() {
+    console.log(height)
     let scaleBar = d3.geoScaleBar()
         .projection(projection)
         //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 
@@ -322,7 +320,7 @@ function drawScalebar() {
         .append("g")
         .attr("class", "scalebar")
         .attr("transform",function(){
-            return "translate(10,"+(svgBox.clientHeight*2)+")"
+            return "translate(10,"+height*.9+")"
         });
 
     scaleSvg.append("g").call(scaleBar);
