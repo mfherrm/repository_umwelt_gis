@@ -221,7 +221,7 @@ input[type=range]::-moz-range-thumb {
 #worldmap{
     border: 1px solid grey;
 }
-.subcounty{
+.subcounty, .district{
     fill:white;
     fill-opacity: 0.01;
 }

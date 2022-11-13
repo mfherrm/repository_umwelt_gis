@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Factbook South Africa</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -36,12 +43,13 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("../pages/nav.html", function(data){
+        $.get("../pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -50,11 +58,12 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <p>Overview</p>
-                        <p>Geography</p>
-                        <p>Demography</p>
-                        <p>Education</p>
-                        <p>Cost of Living</p>
+                        <h4> Table of contents</h4>
+                        <a href="#overview">Overview</a> <br>
+                        <a href="#geography">Geography</a> <br>
+                        <a href="#demography">Demography</a> <br>
+                        <a href="#education">Education</a> <br>
+                        <a href="#cost">Cost of living</a> <br>
                     </div>
                 </div>
             </div>
@@ -63,8 +72,13 @@
                     <div class="title justify-content-center">
                         <h2>Factbook: South Africa</h2>
                     </div>
-                    <div class="Overview">
-                        <p>??? </p> 
+                    <div id="overview" class="Overview">
+                        <p>South Africa is Africa's second largest economy and fifth most populous state. There are 11
+                            official languages in South Africa some of which include Zulu, Xhosa, Afrikaans and English.
+                            The Republic of South Africa (Official name) is a parliamentary republic and divided into 9
+                            provinces governed by unicameral legislatures.
+                            It is one of the few countries that has multiple capitals, which are comprised of Pretoria,
+                            Cape Town and Johannesburg.</p>
                     </div>
                     <div class="row">
                         <div class="col-3"></div>
@@ -72,12 +86,17 @@
                         </div>
                         <div class="col-2"></div>
                     </div>
-                    <div class="geography">
+                    <div id="geography" class="geography">
                         </br>
                         <h3>Geography</h3>
                         <h5>Location</h5>
                         <ul class="factbook-list">
-                            <li>Africa's southernmost country lies at the tip of the continent. The coastline stretches along the South Atlantic Ocean and Indian Ocean. Border countries: Namibia, Botswana and Zimbabwe to the north; Mozambique and Eswatini to the east; Completely enclaves Lesotho</li>
+                            <li>Africa's southernmost country lies at the tip of the continent. South Africa's coastline
+                                stretches along the South Atlantic Ocean and Indian Ocean. It shares borders with
+                                Namibia,
+                                Botswana and Zimbabwe to the north, Mozambique and Eswatini to the east and completely
+                                enclaves Lesotho.
+                            </li>
                         </ul>
                         <h5>Area</h5>
                         <ul class="factbook-list">
@@ -87,29 +106,56 @@
                         </ul>
                         <h5>Terrain</h5>
                         <ul class="factbook-list">
-                            <li>vast interior plateau rimmed by rugged hills and narrow coastal plain.</li>
+                            <li>South Africa is made up of a vast interior plateau rimmed by rugged hills and a narrow
+                                coastal plain. Its highest point is the Mafadi mountain at a height of 3446m.</li>
                         </ul>
                         <h5>Climate</h5>
                         <ul class="factbook-list">
-                            <li>mostly semiarid; subtropical along east coast; sunny days, cool nights</li>
+                            <li>South Africa sports a multitude of different climatic zones. While its south-east is
+                                mostly temperate, its north-east is arid. On the other hand is western South Africa
+                                where up north, towards the namib, there is a very arid climate. Down south there is an
+                                almost mediterannean climate with wet winters and dry, hot summers.</li>
                         </ul>
                     </div>
-                    <div class="demography">
+                    <div id="demography" class="demography">
                         </br>
                         <h3>Demography</h3>
                         <h5>Population</h5>
                         <ul class="factbook-list">
                             <li>57,516,665 (2022 est.)</li>
                         </ul>
+                        <h5>Population distribution</h5>
+                        <ul class="factbook-list">
+                            <li>South African population is heavily concentrated in the east of the country, especially
+                                along the south-eastern coastline.
+                                Other
+                                areas of high density include Cape Town in the south-west, and Pretoria, as well as the
+                                north-east albeit not as dense as the aforementioned cities.</li>
+                        </ul>
                         <h5>Ethnic Groups</h5>
                         <ul class="factbook-list">
-                            <li>Black African 80.9%, Colored 8.8%, White 7.8%, Indian/Asian 2.6% (2021 est.)</li>
+                            <li>South African population is made up of the following ethnicities (2021 est.):
+                                <ul>
+                                    <li>Black African 80.9%</li>
+                                    <li>Colored 8.8%</li>
+                                    <li>White 7.8%</li>
+                                    <li>Indian/Asian 2.6%</li>
+                                </ul>
+                            </li>
                         </ul>
                         <h5>Religions</h5>
                         <ul class="factbook-list">
-                            <li>Christian 86%, ancestral, tribal, animist, or other traditional African religions 5.4%, Muslim 1.9%, other 1.5%, nothing in particular 5.2% (2015 est.)</li>
+                            <li> The most popular religions in South Africa are the following (2015 est.):</li>
+                            <ul>
+                                <li>Christian 86%</li>
+                                <li>Ancestral, tribal, animist, or other traditional African religions 5.4%</li>
+                                <li>Muslim 1.9%</li>
+                                <li>Other 1.5%</li>
+                                <li>None 5.2%</li>
+                                <li>Other 1.8% </li>
+                                <li>None 1.8% </li>
+                            </ul>
                         </ul>
-                        
                         <h5>Age</h5>
                         <ul class="factbook-list">
                             <li><strong>Median Age:</strong> 28 years total, 28 years male, 28.1 years (2020 est.)</li>
@@ -118,7 +164,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="chart" id="pyr_southafrica">
-                
+
                                 </div>
                             </div>
                         </div>
@@ -128,49 +174,83 @@
                             <li>9.26 deaths/1,000 population (2022 est.)</li>
                             <li>18.56 births/1,000 population (2022 est.)</li>
                             <li>0.93% (2022 est.)</li>
-                        </ul> 
-                        <h5>Life expectancy at birth</h5>  
+                        </ul>
+                        <h5>Life expectancy at birth</h5>
                         <ul class="factbook-list">
                             <li><strong>total:</strong> 65.32 years (2022 est.)</li>
                             <li><strong>male:</strong> 63.99 years (2022 est.)</li>
                             <li><strong>female:</strong> 66.68 years (2022 est.)</li>
-                        </ul>     
+                        </ul>
 
                     </div>
                     </br>
-                    <div class="government">
+                    <div id="education" class="government">
                         <h3>Education</h3>
                         <ul class="factbook-list">
-                            <li></li>
+                            <li>South Africa's national educational system is divided into three strata..
+                                <ul>
+                                    <li>General education and training: Comprised of nine compulsory years, of which six
+                                        years are primary
+                                        school and three years are middle school. After completing middle
+                                        school, students receive a 'basic education and training certificate'.</li>
+                                    <li>Further education and training: Students choose between either a vocational
+                                        school or a government school. They will attend for three further years.</li>
+                                    <li>Higher education and training: Students will receive higher education in the an
+                                        institution fitting their previously chosen branch.
+                                    </li>
+                                </ul>
+                                The administrative structure of most schools does not reflect the three stratas however.
+                                Most schools are either primary schools (grades 1 to 7) or secondary schools, also known
+                                as high
+                                schools (grades 8 to 12).
+                            </li>
                         </ul>
                     </div>
-                    <div class="cost-living">
+                    <div id="cost" class="cost-living">
                         <h3>Cost of living</h3>
                         <ul class="factbook-list">
-                            <li></li>
+                            <li>The cost of living in South Africa differs from city to city. For example, the average
+                                rent for a one bedroom apartment in
+                                Bloemfontein's (Free State) city centre is about R2950 (~ $171, 2022 est.), living in
+                                the same
+                                kind of apartment in Johannesburg (Gauteng) is definitely more expensive (R6940 / ~ $402,
+                                2022 est.).
+                                <br>
+                                On the other hand, when using the same two cities from before, one can see, that this is not strictly the same for sustenance.
+                                While rent is cheaper in Bloemfontein, food and drinks are more expensive, i.e. a 1.5l bottle of water can be bought for
+                                R22.50 or R16.74 respectively (Bloemfontein, ~ $1.30,
+                                2022 est. /
+                                Johannesburg, ~ $0.97, 2022 est.). This pattern continues when taking a look at a
+                                loaf of white bread (500g), where
+                                Johannesburg edges out Bloemfontein by 0.63 Rand (R15.17 / ~ $0.88, 2022 est. / R15.80 / ~
+                                $0.92, 2022
+                                est.) but also for example for a kilogram of white rice (R26 / ~ $1.51, 2022 est.
+                                (Johannesburg), R33 / ~ $1.91, 2022 est. (Bloemfontein)).
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
-        
+
     </div>
     <script>
-        $.get("../pages/footer.html", function(data){
+        $.get("../pages/footer.html", function (data) {
             $("#footer-placeholder").replaceWith(data);
         });
     </script>
     <!--end of Footer bar-->
-   
+
 </body>
 <script src="../js/unit2-pyr.js"></script>
 <script src="../js/factbook_zaf.js"></script>
+
 </html>
