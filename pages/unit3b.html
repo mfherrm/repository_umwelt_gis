@@ -7,35 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit 3b - SDG 4.2.2</title>
 
-     <!-- D3.js import --> 
-     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
-     <!-- D3-geo-scale-bar import-->
-     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
- 
-     <!-- D3 Projections import -->
-     <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
- 
-     <!-- Leaflet import-->
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
- 
-     <!-- Bootstrap CSS JS import -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-     
-     <!-- Bootstrap icons import -->
+    <!-- D3.js import -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- D3-geo-scale-bar import-->
+    <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+
+    <!-- D3 Projections import -->
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+
+    <!-- Leaflet import-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
+    <!-- Bootstrap CSS JS import -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
- 
-     <!-- Google Font import-->
-     <link rel="preconnect" href="https://fonts.googleapis.com"> 
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
- 
-     <!-- my CSS -->
-     <link rel="stylesheet" href="../css/style.css">
- 
-     <!-- JQuery for navbar-->
-     <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <!-- Google Font import-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- my CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- JQuery for navbar-->
+    <script src="//code.jquery.com/jquery.min.js"></script>
 
 </head>
 
@@ -58,11 +64,13 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Choose which game mode you want to play by pressing the left-most button in the right divider.
+                        <p> Choose which game mode you want to play by pressing the left-most button in the right
+                            divider.
                             Afterwards, select the three administrative areas you think have the highest or lowest
                             participation in pre-primary education depending on your chosen game mode.
-                            <br>
-                            To verify whether you were right, press the button labeled 'Check results'.
+                        </p>
+                        <hr>
+                        <p>To verify whether you were right, press the button labeled 'Check results'.
                             <br>
                             The game can be restarted by pressing the right-most button.
                         </p>
@@ -72,8 +80,8 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Germany</h4>
-                            <div class="mapbox" id="germany"> </div>
+                        <h5>Germany</h5>
+                        <div class="mapbox" id="germany"> </div>
                     </div>
                 </div>
             </div>
@@ -114,8 +122,10 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
-                            <br>Try to recall what you learned about the administrative division of Germany and remember what was written in the factbook.
+                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are
+                            areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
+                            <br>Try to recall what you learned about the administrative division of Germany and remember
+                            what was written in the factbook.
                             <hr>
                             Write down your observations in your journal.
                         </p>
@@ -125,8 +135,8 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Germany Solution</h4>
-                            <div class="mapboxsol" id="ger">
+                        <h5>Germany Solution</h5>
+                        <div class="mapboxsol" id="ger">
                         </div>
 
                     </div>
@@ -156,11 +166,13 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Choose which game mode you want to play by pressing the left-most button in the right divider.
+                        <p> Choose which game mode you want to play by pressing the left-most button in the right
+                            divider.
                             Afterwards, select the three administrative areas you think have the highest or lowest
                             participation in pre-primary education depending on your chosen game mode.
-                            <br>
-                            To verify whether you were right, press the button labeled 'Check results'.
+                        </p>
+                        <hr>
+                        <p>To verify whether you were right, press the button labeled 'Check results'.
                             <br>
                             The game can be restarted by pressing the right-most button.
                         </p>
@@ -170,9 +182,9 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Kenya</h4>
+                        <h5>Kenya</h5>
                     </div>
-                        <div class="mapbox" id="kenya"></div>
+                    <div class="mapbox" id="kenya"></div>
                 </div>
             </div>
             <div class="col-2">
@@ -212,8 +224,10 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
-                            <br>Try to recall what you learned about the administrative division of Kenya and remember what was written in the factbook.
+                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are
+                            areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
+                            <br>Try to recall what you learned about the administrative division of Kenya and remember
+                            what was written in the factbook.
                             <hr>
                             Write down your observations in your journal.
                         </p>
@@ -223,9 +237,9 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Kenya Solution</h4>
+                        <h5>Kenya Solution</h5>
                     </div>
-                        <div class="mapboxsol" id="ken"> </div>
+                    <div class="mapboxsol" id="ken"> </div>
                 </div>
             </div>
             <div class="col-2">
@@ -251,11 +265,13 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Choose which game mode you want to play by pressing the left-most button in the right divider.
+                        <p> Choose which game mode you want to play by pressing the left-most button in the right
+                            divider.
                             Afterwards, select the three administrative areas you think have the highest or lowest
                             participation in pre-primary education depending on your chosen game mode.
-                            <br>
-                            To verify whether you were right, press the button labeled 'Check results'.
+                        </p>
+                        <hr>
+                        <p>To verify whether you were right, press the button labeled 'Check results'.
                             <br>
                             The game can be restarted by pressing the right-most button.
                         </p>
@@ -265,9 +281,9 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>South Africa</h4>
+                        <h5>South Africa</h5>
                     </div>
-                        <div class="mapbox" id="southafrica">
+                    <div class="mapbox" id="southafrica">
                     </div>
 
                 </div>
@@ -308,8 +324,10 @@
                 <div class="col-2-left">
                     <div class="p-2">
                         <h5>Unit 3b - SDG 4.2.2</h5>
-                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
-                            <br>Try to recall what you learned about the administrative division of South Africa and remember what was written in the factbook.
+                        <p> Carefully look at the map. Are there any spatial patterns? <br> Think back to Unit 3a. Are
+                            areas that had a high score in SDG 1.2.1 also scoring high in this SDG?
+                            <br>Try to recall what you learned about the administrative division of South Africa and
+                            remember what was written in the factbook.
                             <hr>
                             Write down your observations in your journal.
                         </p>
@@ -319,9 +337,9 @@
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>South Africa Solution</h4>
+                        <h5>South Africa Solution</h5>
                     </div>
-                        <div class="mapboxsol" id="zaf">
+                    <div class="mapboxsol" id="zaf">
                     </div>
 
                 </div>

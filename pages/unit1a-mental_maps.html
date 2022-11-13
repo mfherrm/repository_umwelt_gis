@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit 1a – Mental Maps</title>
 
-    <!-- D3.js import --> 
+    <!-- D3.js import -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
+
     <!-- D3-geo-scale-bar import-->
     <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
     <!-- D3 Projections import -->
-    <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
     <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
     <!-- Bootstrap CSS JS import -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- Bootstrap icons import -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 
     <!-- Google Font import-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- my CSS -->
     <link rel="stylesheet" href="../css/style.css">
@@ -36,13 +43,14 @@
     <!-- JQuery for navbar-->
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <!-- navbar placeholder-->
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("./nav.html", function(data){
+        $.get("./nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -53,10 +61,13 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
-                        <p>In this Unit you can test your own mental map of the world. </p>
-                        <p>Please select the three countries Germany, Kenya and South Africa on the map.</p> 
-                        <p>You can check whether you answered right by pressing the 'Check' button on the right.</p>
+                        <h5>Unit 1a - Mental maps</h5>
+                        <p>In this Unit you can test your own mental map of the world. <br>
+                            Please select the three countries Germany, Kenya and South Africa on the map. <br>
+                        </p>
+                        <hr>
+                        <p>You can check whether you answered right by pressing the button labeled 'Check' on the right.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -72,25 +83,32 @@
             <div class="col-2">
                 <div class="col-2-right">
                     <div class="p-2">
-                        <p>Select up to three countries.</p>
+                        <p>Select up to three countries. Press the right button to restart the game.</p>
+                        <hr>
                         <div class="unit-check">
-                            <button class="btn btn-secondary btn-sm " id="check-world" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart-world" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="check-world" href="#" role="button"> Check
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-world" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-              
-            </div> 
+
+            </div>
 
         </div>
         <div class="row page hide" id="page1">
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
-                         <p>Before continuing on to the administrative boundaries, let's check your mental map of Kenya, Germany and South Africa in regard to their area and total population</p>
+                        <h5>Unit 1a - Mental maps</h5>
+                        <p>Before continuing on to the administrative boundaries, let's check your mental map of Kenya,
+                            Germany and South Africa in regards to their total area and population</p>
+                        <hr>
+                        <p>Order both lists from highest to lowest by dragging the entries. When you're done, press the
+                            button labeled 'Check' to see the results. Press the button to its right to restart the
+                            game.</p>
                     </div>
                 </div>
             </div>
@@ -99,8 +117,8 @@
                     <div class="maptitle justify-content-center">
                         <h5>Area & Population</h5>
                     </div>
-                    <p>Please order both lists from highest to lowest.</p>
-                   
+
+
                     <div class="row justify-content-center">
                         <div class="col-4 sortlist" id="area">
                             <p>By Area</p>
@@ -112,7 +130,7 @@
                         </div>
                         <div class="col-1"></div>
                         <div class="col-4 sortlist" id="population">
-                            <p>By Population:</p>
+                            <p>By Population</p>
                             <ul class="slist">
                                 <li draggable="true">Kenya</li>
                                 <li draggable="true">South Africa</li>
@@ -126,8 +144,9 @@
                 <div class="col-2-right">
                     <div class="p-2">
                         <div>
-                            <button class="btn btn-secondary btn-sm " id="check-area" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart-area" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="check-area" href="#" role="button"> Check
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-area" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
@@ -139,21 +158,24 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
-                        <p>You can change the displayed style below.</p>
+                        <h5>Unit 1a - Mental maps</h5>
+                        <p>Drag the sliders to in- / decrease the opacity of the countries. </p>
                     </div>
                     <div class="row p-2">
                         <div class="col-6">
-                            <p>Display</p>
+                            <p>Opacity</p>
                             <label for="zafRange" class="form-label">South Africa</label>
-                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="80" id="zafRange">
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="80"
+                                id="zafRange">
                             <label for="kenRange" class="form-label">Kenya</label>
-                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="70" id="kenRange">
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="70"
+                                id="kenRange">
                             <label for="gerRange" class="form-label">Germany</label>
-                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="50" id="gerRange">
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="50"
+                                id="gerRange">
                         </div>
                         <div class="col-5">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -164,12 +186,12 @@
                         <h5>Area & Population Solution</h5>
                     </div>
                     <div id="area-map">
-                        
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                     <div class="p-2">
                         <h5></h5>
                     </div>
@@ -178,19 +200,28 @@
                         <ul class="factbook-list">
                             <li>Area: 1,219,090 sq km</li>
                             <li>Total Population: 57,516,665 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The Population is concentrated along southern and southeastern coast and in Gautend, which includes Pretoria; The west is less densly populated than the east.</li>
+                            <li style="padding-top: .4rem">South Africa's population is concentrated along the southern
+                                and
+                                south-eastern coast and in Gauteng, which includes Pretoria. The west is populated less
+                                densely
+                                than the east.</li>
                         </ul>
                         <p><strong>Kenya</strong></p>
                         <ul class="factbook-list">
                             <li>Area: 580,367 sq km </li>
                             <li>Total Population: 55,864,655 (2022 est.)</li>
-                            <li style="padding-top: .4rem">The population is concentrated in the west along the Lake Victoria, and around the capital Nairobi and southeast along the Indian Ocean.</li>
+                            <li style="padding-top: .4rem">The kenyan population is concentrated in the west along Lake
+                                Victoria, around Kenya's capital Nairobi and in the south-east along the Indian Ocean.
+                            </li>
                         </ul>
                         <p><strong>Germany</strong></p>
                         <ul class="factbook-list">
                             <li>Area: 357,022 sq km</li>
                             <li>Total Population: 84,316,622 (2022 est.)</li>
-                            <li style="padding-top: .4rem">Fairly even population distribution throughout most of the country, with urban areas attracting larger and denser populations, particularly in the far western part of the industrial state of North Rhine-Westphalia.</li>
+                            <li style="padding-top: .4rem">Germany's population is distributed fairly evenly throughout
+                                most of the
+                                country, with urban areas attracting larger and denser populations, particularly in the
+                                far western part of the industrial state of North Rhine-Westphalia.</li>
                         </ul>
                     </div>
                 </div>
@@ -200,18 +231,22 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
-                        <p>Now you are familiar with the national boundaries of our countries.</p>
-                        <p>For our final exercise please order the administrative divisions of each country (right) to the corresponding level (left). The description in the right column or the maps on the right might help you.</p>
+                        <h5>Unit 1a - Mental maps</h5>
+                        <p>Put the administrative divisions of each country (right) in the right order by dragging them
+                            into the corresponding entry of the left column.
+                        </p>
+                        <hr>
+                        <p>Reading the description on the right-hand side or taking a look at the maps on the right
+                            might help you.</p>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Administrative Boundaries</h4>
+                        <h5>Administrative Boundaries</h5>
                     </div>
-                   <div class="row">
+                    <div class="row">
                         <div class="col-3">
                             <div class="sortlist sortlistcolor">
                                 <p>Level 1</p>
@@ -230,7 +265,7 @@
                                 <ul class="slist-assign" id="level3">
                                     <li draggable="true"></li>
                                 </ul>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-3">
                             <div class="sortlist">
@@ -265,19 +300,22 @@
                             </div>
                             <div class="adm-radio">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="germany" checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1" value="germany" checked>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Germany
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="kenya">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault2" value="kenya">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Kenya
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="zaf">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault3" value="zaf">
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         South Africa
                                     </label>
@@ -285,31 +323,34 @@
                             </div>
                         </div>
                     </div>
-                  
+
                 </div>
             </div>
             <div class="col-2">
-                <div class="col-2-right">   
+                <div class="col-2-right">
                     <div class="p-2">
                         <h5></h5>
-                        <p>A politcal Border or administrative boundary is an imaginary line that separates areas of land. Some boundaries might follow a river or other natural features but that does not automatically define one. 
-                           Usually countries have multiple levels of divisions. </p>
-                           <p>For example:</p>
+                        <p>A political border or administrative boundary is an imaginary line that separates areas of
+                            land. Some boundaries might follow a river or other natural features but that does not
+                            automatically define one.
+                            Usually countries have multiple levels of divisions. </p>
+                        <p>For example:</p>
                         <ul class="factbook-list">
                             <li><strong>'Level 0'</strong> – National-level</li>
                             <!--li><strong>'Level 0.5'</strong> – Inferior to to the sub-national divisions but superior to the national level. Often 'super-regions' that to not correspond to the common political divisions (e.g. west and east germany)</li-->
                             <li><strong>'Level 1'</strong> – First sub-national level</li>
                             <li><strong>'Level 2'</strong> – Second sub-national level</li>
                             <li><strong>'Level 3'</strong> – Third sub-national level</li>
-                            <li>...And so on</li>
+                            <li>...</li>
                         </ul>
                         <div class="unit-check">
-                            <button class="btn btn-secondary btn-sm " id="check-adm" href="#" role="button"> Check </button>
-                            <button class="btn btn-secondary btn-sm " id="restart-adm" href="#" role="button"> 
+                            <button class="btn btn-secondary btn-sm " id="check-adm" href="#" role="button"> Check
+                            </button>
+                            <button class="btn btn-secondary btn-sm " id="restart-adm" href="#" role="button">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </button>
                         </div>
-                    </div>                
+                    </div>
                 </div>
             </div>
         </div>
@@ -317,41 +358,47 @@
             <div class="col-2">
                 <div class="col-2-left">
                     <div class="p-2">
-                        <h5>Mental Maps</h5>
-                        <p>Nice, you did it!</p>
+                        <h5>Unit 1a - Mental maps</h5>
+                        <p>In the next units the focus is going to be on the first administrative level of each country.</p>
+                        <hr>
+                        <p>Try and understand the meaning of the spatial level of detail. After you've done so, move on to the next Unit!</p>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
                     <div class="maptitle justify-content-center">
-                        <h4>Administrative Boundaries</h4>
+                        <h5>Administrative Boundaries</h5>
                     </div>
                     <div class="row">
-                            <p>
-                                In our next units we are going to focus on the first administrative level of each country. 
-                                Statistics are often recorded for smaller areas (higher admin level of detail) and then aggregated to larger areas (lower admin level).
-                                The representation of data in a higher level of detail while sticking to the same spatial extent has the advantage of revealing patterns. 
-                                Too much detail (e.g. many small areas) can confuse the viewer due to the amount of presented information. 
-                                Understanding the administrative division of a country helps the interpretation of statistical values and their presentation. 
-                            </p>
-                    <div class="row">
-                        <div class="col-4" id="adm-germany">
-                            <p>Germany's level 1 – Federal states<p>
+
+                        <div class="row">
+                            <div class="col-4" id="adm-germany">
+                                <p>Germany's level 1 – Federal states
+                                <p>
+                            </div>
+                            <div class="col-4" id="adm-kenya">
+                                <p>Kenya's level 1 – Counties</p>
+                            </div>
+                            <div class="col-4" id="adm-zaf">
+                                <p>South Africa's level 1 – Provinces</p>
+                            </div>
                         </div>
-                        <div class="col-4" id="adm-kenya">
-                            <p>Kenya's level 1 – Counties</p>
-                        </div>
-                        <div class="col-4" id="adm-zaf">
-                            <p>South Africa's level 1 – Provinces</p>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
-
+                    <h5>Level of detail</h5>
+                    <p> Statistics are often recorded for smaller areas (higher administrative level of detail) and then
+                        aggregated to larger areas (lower administrative level).
+                        The representation of data in a higher level of detail while sticking to the same spatial
+                        extent has the advantage of revealing patterns.
+                        Too much detail (e.g. many small areas) can confuse viewers due to the amount of
+                        presented information.
+                        Understanding the administrative division of a country helps the interpretation of
+                        statistical values and their presentation.
+                    </p>
                 </div>
             </div>
         </div>
@@ -359,20 +406,20 @@
         <div id="control-placeholder">
         </div>
         <script>
-            $.get("./unit-control.html", function(data){
+            $.get("./unit-control.html", function (data) {
                 $("#control-placeholder").replaceWith(data);
             });
         </script>
         <!-- END of control placeholder -->
     </div>
 
-        <!-- footer placeholder-->
-        <div id="footer-placeholder"></div>
-        <script>
-            $.get("../pages/footer.html", function(data){
-                $("#footer-placeholder").replaceWith(data);
-            });
-        </script>
+    <!-- footer placeholder-->
+    <div id="footer-placeholder"></div>
+    <script>
+        $.get("../pages/footer.html", function (data) {
+            $("#footer-placeholder").replaceWith(data);
+        });
+    </script>
     <!--end of Footer bar-->
 </body>
 <script src="../js/unit1a_world-map.js"></script>
