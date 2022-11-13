@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <!-- D3.js import --> 
-   <script src="https://d3js.org/d3.v7.min.js"></script>
-    
-   <!-- D3-geo-scale-bar import-->
-   <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
+    <!-- D3.js import -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
-   <!-- D3 Projections import -->
-   <script src=  "https://d3js.org/d3-geo-projection.v2.min.js"> </script>
+    <!-- D3-geo-scale-bar import-->
+    <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
-   <!-- Leaflet import-->
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-   <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <!-- D3 Projections import -->
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"> </script>
 
-   <!-- Bootstrap CSS JS import -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   
-   <!-- Bootstrap icons import -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+    <!-- Leaflet import-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
 
-   <!-- Google Font import-->
-   <link rel="preconnect" href="https://fonts.googleapis.com"> 
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <!-- Bootstrap CSS JS import -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
-   <!-- my CSS -->
-   <link rel="stylesheet" href="../css/style.css">
+    <!-- Bootstrap icons import -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 
-   <!-- JQuery for navbar-->
-   <script src="//code.jquery.com/jquery.min.js"></script>
+    <!-- Google Font import-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-   <title>Main Page</title>
+    <!-- my CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- JQuery for navbar-->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <title>Main Page</title>
 </head>
+
 <body>
 
     <!-- navbar placeholder-->
@@ -40,10 +48,10 @@
 
     </div>
     <script>
-        $.get("./pages/nav.html", function(data){
+        $.get("./pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
-        </script>
+    </script>
     <!--end of Navigation bar-->
 
     <div class="container-fluid">
@@ -56,15 +64,20 @@
                     <div class="p-2">
                         <h4>Introduction</h4>
                         <p>
-                            Hello, this webtool is made for students by students. 
-                            It was created as one component of a blended learning expierence. 
+                            Hello, this webtool is made for students by students.
+                            It was created as one component of a blended learning expierence.
                             Every test, game or basically anything to click, can be reapeated as often as you like.
-                            Also nothing is restricted, which means if you want to jump to the end of an unit just click the 'Next'-button. But there is no possibility to save, so if you refresh the page your inputs are lost.
-                            Although we tested the tool quite extensively there can be always some error. To fix it you have to reload the page.
+                            Also nothing is restricted, which means if you want to jump to the end of an unit just click
+                            the 'Next'-button. But there is no possibility to save, so if you refresh the page your
+                            inputs are lost.
+                            Although we tested the tool quite extensively there can be always some error. To fix it you
+                            have to reload the page.
                         </p>
                         <br>
                         <p>
-                            We highly recommend that you keep a journal with notes, like any topic related question that might arise (Don't forget to ask your professor the next time). This will help you to keep track of the things you learned as well as your progress.    
+                            We highly recommend that you keep a journal with notes, like any topic related question that
+                            might arise (Don't forget to ask your professor the next time). This will help you to keep
+                            track of the things you learned as well as your progress.
                         </p>
                     </div>
                     <div class="p-2">
@@ -74,19 +87,21 @@
                             <h5>Unit 1 – Mental Maps & Statistics Basics</h5>
                             <p>
                                 This unit is split into two parts, Unit1a – Mental Maps and Unit1b – Statistics Basics.
-                                The first part will test your 'mental map' of the world.                                  
+                                The first part will test your 'mental map' of the world.
                             </p>
                             <div class="row">
                                 <div class="col unit-links">
-                                   <button type="button" class="btn btn-secondary">
-                                        <a href="../pages/unit1a-mental_maps.html">Unit 1a</a>
-                                   </button>
-                                   <button type="button" class="btn btn-secondary">
-                                         <a href="../pages/unit1b-statistics_basics.html">Unit 1b</a>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit1a-mental_maps.html'">
+                                        Unit 1a
+                                    </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit1b-statistics_basics.html'">
+                                        Unit 1b
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <br>
                         </div>
                         <div>
@@ -94,9 +109,10 @@
                             <p>Text</p>
                             <div class="row">
                                 <div class="col unit-links">
-                                    <button type="button" class="btn btn-secondary">
-                                        <a href="../pages/unit2.html"> Unit 2</a>
-                                   </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit2.html'">
+                                        Unit 2
+                                    </button>
                                 </div>
                             </div>
                             <br>
@@ -104,15 +120,17 @@
                         <div>
                             <h5>Unit 3 – Sustainable Development Goals (SDGs)</h5>
                             <p>Text</p>
-                           
+
                             <div class="row">
                                 <div class="col unit-links">
-                                    <button type="button" class="btn btn-secondary">
-                                        <a href="./pages/unit3a.html"> Unit 3a </a> 
-                                   </button>
-                                   <button type="button" class="btn btn-secondary">
-                                    <a href="./pages/unit3b.html"> Unit 3b </a>
-                               </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit3a.html'">
+                                        Unit 3a
+                                    </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit3b.html'">
+                                        Unit 3b
+                                    </button>
                                 </div>
                             </div>
                             <br>
@@ -122,33 +140,35 @@
                             <p>Text</p>
                             <div class="row">
                                 <div class="col unit-links">
-                                    <button type="button" class="btn btn-secondary">
-                                        <a href="./pages/unit4.html"> Unit 4 </a>
-                                   </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="window.location.href='../pages/unit4.html'">
+                                        Unit 4
+                                    </button>
                                 </div>
                             </div>
                             <br>
                         </div>
-                    </div>  
+                    </div>
                     <div class="p-2">
                         <h4>Roadmap</h4>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
-                    
+
                 </div>
             </div>
         </div>
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder"></div>
-        <script>
-            $.get("../pages/footer.html", function(data){
-                $("#footer-placeholder").replaceWith(data);
-            });
-        </script>
+    <script>
+        $.get("../pages/footer.html", function (data) {
+            $("#footer-placeholder").replaceWith(data);
+        });
+    </script>
     <!--end of Footer bar-->
 </body>
+
 </html>
