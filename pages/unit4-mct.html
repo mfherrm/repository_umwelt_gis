@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,12 +37,13 @@
      <!-- JQuery for navbar-->
      <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
+
 <body>
     <div id="nav-placeholder">
 
     </div>
     <script>
-        $.get("../pages/nav.html", function(data){
+        $.get("../pages/nav.html", function (data) {
             $("#nav-placeholder").replaceWith(data);
         });
     </script>
@@ -57,37 +59,42 @@
             </div>
             <div class="col-8">
                 <div class="col-8-middle">
-                    <div width = "1000" height = "2000" style="float:left">
+                    <div width="1000" height="2000" style="float:left">
                         <main id="main">
-                        <form id="quiz" action="">
-                            <p id="intro1">This test contains nine questions. Answer each one according to your knowledge and what you learned in the last unit. The test can be repeated as many times as you want. There is no required score to pass this test.</p>
-                        </form>
+                            <form id="quiz" action="">
+                                <p id="intro1">This test contains nine questions. Answer each one according to your
+                                    knowledge and what you learned in the last unit. The test can be repeated as many
+                                    times as you want. There is no required score to pass this test.</p>
+                            </form>
                         </main>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-2">
                 <div class="col-2-right">
                     <h5>How it works</h5>
-                    <p>After clicking on 'start the quiz' you will have to pick one of up to five answers. At the end of the quiz you will be able to see your results and compare them with the right answers, as well as restart the test.</p>
-  
+                    <p>After clicking on 'start the quiz' you will have to pick one of up to three answers. At the end of
+                        the quiz you will be able to see your results and compare them with the right answers, as well
+                        as restart the test.</p>
+
                 </div>
             </div>
         </div>
-       
+
     </div>
     <!-- footer placeholder-->
     <div id="footer-placeholder">
-        
+
     </div>
     <script>
-        $.get("../pages/footer.html", function(data){
+        $.get("../pages/footer.html", function (data) {
             $("#footer-placeholder").replaceWith(data);
         });
     </script>
     <!--end of Footer bar-->
 
     <script src="../js/unit4-mct.js"></script>
-   
+
 </body>
+
 </html>

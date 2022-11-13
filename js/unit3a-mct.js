@@ -135,7 +135,7 @@ var myQuiz = {
 		// Hinweis für Tastatur-User
 		t.intoContainer(t.createElement({
 			tag: "button",
-			text: "confirm choice",
+			text: "Confirm choice",
 			type: "submit"
 		}));
 	},
@@ -156,13 +156,13 @@ var myQuiz = {
 		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
-		question: 'What correlation is there between SDG 1.2.1. and the population density?',
+		question: 'What correlation is there between SDG 1.2.1 and the population density?',
 		solution: 'Income is usually lower in rural areas',
 		falses: ['There is none', 'Income is usually lower in urban areas'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'What correlation is there between SDG 1.2.1. and the population size?',
+		question: 'What correlation is there between SDG 1.2.1 and the population size?',
 		solution: 'A single dataset influences the result a lot more when there is a smaller sample size',
 		falses: ['There is none', 'A large population means that there is a lot of poverty', 'A large population means that there is little poverty'],
 		explanation: ''
@@ -352,7 +352,7 @@ var myQuiz = {
 		// show message
 		t.intoContainer(t.createElement({
 			tag: "b",
-			text: "Restart the quiz?"
+			text: "Restart quiz?"
 		}));
 	},
 	// helper function: shuffle array (adapted from http://javascript.jstruebig.de/javascript/69)
@@ -382,7 +382,7 @@ var myQuiz = {
 		t.intoContainer(t.createElement({
 			className: "startBtn",
 			tag: "button",
-			text: "Start the quiz"
+			text: "Start quiz"
 		}), "p");
 	}
 	
