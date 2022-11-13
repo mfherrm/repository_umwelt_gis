@@ -2,7 +2,8 @@
 //Width and height
 var widthArea = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var heightArea = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
+let colorScaleBlues5 = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe']
+let colorScaleReds5 = ['#fef0d9','#fdd49e','#fdbb84','#fc8d59','#e34a33']
 //rgb2hex use as method rgb2hex(COLOR IN RGB) -- https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
 
@@ -23,8 +24,8 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function drawZaf(data) {
-    color1 = d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(d3.schemeBlues[6])
-    color4 = d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(d3.schemeReds[6])
+    color1 = d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)
     //Define Projection
     let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]);
 
@@ -82,8 +83,8 @@ function drawZaf(data) {
 }
 
 function drawKenya(data, s) {
-    color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(d3.schemeBlues[6])
-    color4 = d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(d3.schemeReds[6])
+    color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(colorScaleReds5)
     let projectionKenya = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]);
 
     let pathKenya = d3.geoPath()
@@ -138,8 +139,8 @@ function drawKenya(data, s) {
 }
 
 function drawGermany(data, s) {
-    color1 = d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(d3.schemeBlues[6])
-    color4 = d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(d3.schemeReds[6])
+    color1 = d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(colorScaleReds5)
 
     let projectionGermany = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
 

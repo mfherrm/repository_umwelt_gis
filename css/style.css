@@ -338,12 +338,12 @@ input[type=range]::-moz-range-thumb {
 }
 
 .country, .countryU3, .adminarea, .adminarea3a {
-    stroke: white;
-    stroke-width: .5px;
+    stroke: grey;
+    stroke-width: 1.5px;
 }
-.country:hover, .adminarea:hover{
-    stroke:white;
-    stroke-width: 2px;
+.country:hover, .adminarea:hover, .adminarea3a:hover {
+    stroke:grey;
+    stroke-width: 2.5px;
     cursor: pointer;
 }
 
@@ -502,7 +502,7 @@ input[type=range]::-moz-range-thumb {
     
 }
 #pyrstg0 {
-    border: solid #bebada 3px;
+    background-color: solid #bebada 3px;
 }
 #pyrstg1{
     border: solid #fb8072 3px;

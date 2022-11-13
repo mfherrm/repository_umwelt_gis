@@ -1,8 +1,8 @@
 var tooltipG;
-//Create colors scheme    
-let gerC = [(d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 55.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(d3.schemeReds[5]))];
-let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 69.8]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 57]).range(d3.schemeReds[5]))];
-let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 35]).range(d3.schemeReds[5])), (d3.scaleThreshold().domain([12.4, 27.9, 32.8, 36.6, 39.5]).range(d3.schemeReds[5]))];
+//Create colors scheme   
+let gerC = [(d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 55.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(colorScaleBlues5))];
+let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 69.8]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 57]).range(colorScaleBlues5))];
+let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 35]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([12.4, 27.9, 32.8, 36.6, 39.5]).range(colorScaleBlues5))];
 let b = 1, z = 1, g=2, k=2;
 let gin = 0;
 //Load in GeoJSON data //Promise resolve
