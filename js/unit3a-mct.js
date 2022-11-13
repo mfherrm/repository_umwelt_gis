@@ -156,19 +156,19 @@ var myQuiz = {
 		explanation: ''
 	}, {
 		/* category: 'Kategorie?', */
-		question: 'What correlation is there between SDG 1.2.1 and the population density?',
+		question: 'What interconnection is there between SDG 1.2.1 and the population density?',
 		solution: 'Income is usually lower in rural areas',
 		falses: ['There is none', 'Income is usually lower in urban areas'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'What correlation is there between SDG 1.2.1 and the population size?',
+		question: 'What interconnection is there between SDG 1.2.1 and the population size?',
 		solution: 'A single dataset influences the result a lot more when there is a smaller sample size',
 		falses: ['There is none', 'A large population means that there is a lot of poverty', 'A large population means that there is little poverty'],
 		explanation: ''
 	},{
 		/* category: 'Kategorie?', */
-		question: 'How do you think the level of detail influences the Gini coefficient?',
+		question: 'How does the level of detail influence the Gini coefficient?',
 		solution: 'Disparities between urban and rural areas are highlighted better',
 		falses: ['There are no differences between levels of detail', 'A high level of detail means a higher Gini coefficient'],
 		explanation: ''
