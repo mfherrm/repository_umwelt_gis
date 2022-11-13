@@ -111,7 +111,7 @@ function drawMap(data) {
             if (src=='wmu3'){
                 country.attr("fill") == 'green'? '': getCountry(country)
             } else if (src=='wmu4'){
-                (country.attr("fill") == "#90CEC4" || country.attr("fill") == "#BEBADA" || country.attr("fill") == "#F8CDE2" || country.attr("fill") == "#F8B365")?'':getPyramid(country)
+                (country.attr("fill") == "#fdb462" || country.attr("fill") == "#e78ac3" || country.attr("fill") == "#fb8072" || country.attr("fill") == "#bebada")?'':getPyramid(country)
                 }
         });
     i++;
@@ -207,7 +207,7 @@ d3.select("#pyr_imgs").on("click", function () {
     let con = select4[0]._groups[0][0].__data__.properties.pyramid
     console.log(con)
     if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
-        con == 1 ? select4[0].attr("fill", "#F8B365") : con == 2 ? select4[0].attr("fill", "#F8CDE2") : con == 3 ? select4[0].attr("fill", "#BEBADA") : con == 4 ? select4[0].attr("fill", "#90CEC4") : ''
+        con == 1 ? select4[0].attr("fill", "#bebada") : con == 2 ? select4[0].attr("fill", "#fb8072") : con == 3 ? select4[0].attr("fill", "#e78ac3") : con == 4 ? select4[0].attr("fill", "#fdb462") : ''
         select4.pop();
     } else {
         select4[0].attr("fill", "#EC5B5B");
