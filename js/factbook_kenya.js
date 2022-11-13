@@ -49,18 +49,56 @@ function drawMap(data){
         .append("path")
         .attr("d", path)
         .attr("class",function(d){
-            return d.properties.LEVL == 0 ? "country-overview" : "district";
+            return d.properties.LEVEL == 0 ? "country-overview" : d.properties.LEVEL == 2? "subcounty":"county";
         })
         .attr("fill", function(d,i,e){
             if(d.properties.ADM0_NAME == "Kenya" &&  d.properties.LEVEL == 0){
                 return "none"
-            }else if(d.properties.LEVEL == 2) {
+            }else if(d.properties.LEVEL == 2){
                 return "none"
-            }else{
-                return d.properties.LEVEL == 0 ? "lightgrey" : color(i);
+            } else {
+                return d.properties.LEVEL == 0? "lightgrey" : color(i);
             }
         })
+        .attr('name', function(d){
+            return d.properties.name_1
+        })
+        .attr('level', function(d){
+            return d.properties.LEVEL
+        })
         .attr("stroke","grey")
+        .on("mouseover", drawTooltip)
+        .on("mouseout", eraseTooltip)
+    //Build Tooltip
+    function drawTooltip() {
+        if (d3.select(this).attr('class') == 'subcounty') {
+            window.onresize = this.getBoundingClientRect();
+            let bbox = this.getBoundingClientRect();
+            tooltip = d3.select('#kenya-overview')
+                .append("div")
+                .attr("class", "tooltip")
+                .attr("opacity", 0)
+                .attr('id', 'tt');
+            tooltip
+                .style("opacity", .7)
+                .style("left", bbox.x + bbox.width / 2 + "px")
+                .attr('id', 'tt')
+                .style("top", bbox.y + bbox.height / 2  + "px")
+                ;
+            tooltip.join(
+                enter =>
+                    enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
+                update =>
+                    update.html("<p>" + d3.select(this).attr("name") + "</p>")
+            )
+        }
+    };
+
+
+    function eraseTooltip() {
+        d3.selectAll('#tt').remove();
+
+    };
 
     drawScalebar();
 };
