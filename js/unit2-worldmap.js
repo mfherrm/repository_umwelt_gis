@@ -76,8 +76,8 @@ function drawMap(data) {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", function(d){
-                return d.properties.pyramid==null? 'nonCountry' : "country"
+        .attr("class", function (d) {
+            return d.properties.pyramid == null ? 'nonCountry' : "country"
         })
         .attr("fill", "grey")
         .attr('state', function () { return false })
@@ -99,8 +99,8 @@ function drawMap(data) {
             return d.properties.pyramid;
         })
         //Cursor on mouseover
-        .style("cursor", function(d){
-          return d.properties.pyramid? "pointer": '' 
+        .style("cursor", function (d) {
+            return d.properties.pyramid ? "pointer" : ''
 
         }
         )
@@ -139,9 +139,9 @@ function getCountry(country) {
 
         return country.attr("fill", "#00677F")
     } else {
-        if (select[0].selected[0] == undefined){
+        if (select[0].selected[0] == undefined) {
             console.log('undefined')
-        }else if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        } else if (select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select[0].selected.pop();
             return country.attr("fill", "grey")
         }
@@ -152,10 +152,18 @@ function getCountry(country) {
 }
 
 
-d3.select("#pyr_countries").on("mouseup", function () {
-    let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
+d3.select("#pyr_countries").on("mouseup", getPyr)
+d3.select("#pyr_southafrica").on("mouseup", getPyr)
+d3.select("#pyr_germany").on("mouseup", getPyr)
+d3.select("#pyr_kenya").on("mouseup", getPyr)
+
+function getPyr() {
+    console.log(document.querySelectorAll(':hover'))
+    let elem;
+    document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4]==null? elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 5]: elem = document.querySelectorAll(':hover')[8]
     let elemid = elem.getAttribute('id')
     console.log(elemid)
+    if(select[0].selected[0]!=undefined){
     let con = select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL
     console.log(con)
     if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
@@ -175,8 +183,7 @@ d3.select("#pyr_countries").on("mouseup", function () {
     } else {
         select[0].selected[0].attr("fill", "#EC5B5B");
     }
-}
-);
+}};
 
 let select4 = [];
 
@@ -188,9 +195,9 @@ function getPyramid(country) {
         select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
-        if (select4[0]== undefined){
+        if (select4[0] == undefined) {
             console.log('undefined')
-        }else if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
+        } else if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select4.pop();
             return country.attr("fill", "grey")
         }

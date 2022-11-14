@@ -249,8 +249,9 @@ function drawLegend(id, csize, color) {
             return "translate(0,-20)"
         })
         .attr('x', xLabel)
-        .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 130})
+        .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 77 : yCircle - size(d) * 2 + 130})
         .text(function (d) { return d })
+        .style('font-size', '20px')
         .attr('alignment-basline', 'middle')
        
 
