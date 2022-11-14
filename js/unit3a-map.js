@@ -239,9 +239,9 @@ function drawLegend(id, csize, color) {
         .enter()
         .append('text')
         .attr('x', xLabel)
-        .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 130})
+        .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 77 : yCircle - size(d) * 2 + 130})
         .text(function (d) { return d })
-        .style('font-size', 17)
+        .style('font-size', '20px')
         .attr('alignment-basline', 'middle')
 
     //get and set of color by domain (d) & range (i)

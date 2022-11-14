@@ -108,10 +108,18 @@ function getContinent(continent) {
     }
 }
 
-d3.select("#pyr_continents").on("mouseup", function () {
-    let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
+d3.select("#pyr_continents").on("mouseup", getPyrC);
+d3.select("#pyr_europe").on("mouseup", getPyrC);
+d3.select("#pyr_africa").on("mouseup", getPyrC);
+
+
+function getPyrC() {
+    console.log(document.querySelectorAll(':hover'))
+    let elem;
+    document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4]==null? elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 5] : elem = document.querySelectorAll(':hover')[8]
     let elemid = elem.getAttribute('id')
     console.log(elemid)
+    if(selectC[0].selected[0]!=undefined){
     let con = selectC[0].selected[0]._groups[0][0].__data__.properties.CONTINENT
     console.log(con)
     if ((con.includes("Africa") && elemid.includes('pyr_africa'))) {
@@ -127,9 +135,7 @@ d3.select("#pyr_continents").on("mouseup", function () {
     } else {
         selectC[0].selected[0].attr("fill", "#EC5B5B");
     }
-}
-
-)
+}}
 
 d3.select("#restart").on("click", function () {
     selectC[0].africa = false;
