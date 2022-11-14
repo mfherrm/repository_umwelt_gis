@@ -8,8 +8,8 @@ let data = [
                 {text:"Bar chart",value:"bar",chart: "../icons/barChart.svg"},
                 {text:"Scatter plot",value:"scatter",chart: "../icons/scatterPlot.svg"},
                 {text:"Pie chart",value:"pie",chart: "../icons/pieChart.svg"},
-                {text:"Stacked bar",value:"stacked",chart:"../icons/stackedChart.svg"},
-                {text:"Area chart",value:"area",chart:"../icons/areaChart.svg"} //raushauen 
+                {text:"Stacked bar",value:"stacked",chart:"../icons/stackedChart.svg"}
+                
             ]
 
 drawChartGallery()
@@ -20,7 +20,6 @@ let charts = [];
 randomize();
 
 drawChartLayout();
-
 
 //randomize only once for page load, so restart button just draws the page again
 function randomize(){

@@ -201,18 +201,30 @@ function drawLegend() {
         .append("g")
         .attr("class", "entry")
         .attr("transform", function (d, i) {
-            return "translate(0," + i * 40 + ")";
+            
+            return "translate(0," + (i * 40 +40) + ")";
         });
 
     legendSvg.append("g")
         .append("text")
         .text(function () {
-            return "Population Density [/km²]"
+            return "Population Density"
         })
         .attr("transform", function (d, i) {
             //set spacing
             return "translate(0," + -8 + ")";
         });
+       
+
+    legendSvg.append("g")
+        .append("text")
+        .text(function(){ return "[ Inhabitants/km² ]"})
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(0," + 25 + ")";
+        });
+
+
     //fill rects by color domain (d) & range (i)                  
     legend.append("rect")
         //rect on position (5,5) in SVG with the width and height 30            
