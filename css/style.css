@@ -13,6 +13,11 @@ p {
     font-size: 11pt;
 }
 
+svg text {
+    font-family: 'Open Sans', sans-serif;
+    color:  #1a1a1a;
+}
+
 a {
     text-decoration: none;
 }
@@ -22,7 +27,9 @@ a:hover {
 }
 
 li {
+    font-family: 'Open Sans', sans-serif;
     color: #1a1a1a;
+    font-size: 11pt;
 }
 
 .factbook-list {
@@ -111,6 +118,12 @@ a .bi {
 .unit-links .btn {
    margin-left: 1rem;
    margin-top: .5rem;
+   width: 80px;
+   background-color: grey;
+}
+
+.unit-links .btn:hover {
+    background-color: #5a5a5a;    
 }
 
 .factbook-jumper {
@@ -214,8 +227,15 @@ a .bi {
     padding-left: .5rem;
 }
 
+#page0 #sliststart li {
+    text-align:center
+}
 
+.ol-list li{
+    padding-top: .5rem
+}
 /* Buttons  -------------------------------------------------------------------*/   
+
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
     /* fix for FF unable to apply focus style bug  */
@@ -243,6 +263,11 @@ input[type=range]::-moz-range-thumb {
 .control {
     width: 7rem;
 }
+
+.unit-links .btn-mct {
+    width: 150px;
+    background-color: darkgrey;
+}
 /*-----------------------------------------------------------------------------*/
 
 /* Styles for Map e.g. Boundaries ---------------------------------------------*/   
@@ -251,7 +276,7 @@ input[type=range]::-moz-range-thumb {
     text-align: center;
 }
 
-#worldmapall, #germany-overview, #zaf-overview, #kenya-overview, #continentmap {
+#worldmapall, #germany-overview, #zaf-overview, #kenya-overview {
     border: 2px solid grey;
     border-radius: 5px;
     overflow:hidden;
@@ -262,6 +287,14 @@ input[type=range]::-moz-range-thumb {
 #germany-overview, #zaf-overview, #kenya-overview {
     margin-top: 1.5rem;
 }
+
+#continentmap {
+    background-color: white;
+    border: 2px solid grey;
+    border-radius: 5px;
+    overflow:hidden;
+    padding: 0;
+}
 /* world map first unit*/
 #worldmapu2{
     border: 1px solid grey;
@@ -270,6 +303,14 @@ input[type=range]::-moz-range-thumb {
 #worldmap{
     border: 1px solid grey;
 }
+#worldmap .country {
+    stroke: white;
+    stroke-width: .3px;
+}
+#worldmap .country:hover {
+    stroke-width: 1.2px;
+}
+
 .subcounty, .district{
     fill:white;
     fill-opacity: 0.01;
@@ -338,22 +379,21 @@ input[type=range]::-moz-range-thumb {
 }
 .country {
     stroke: white;
-    stroke-width: .7px;
+    stroke-width: .5px;
 }
 
 .country:hover {
-    stroke-width: 2.5px;
+    stroke-width: 2px;
 }
 
 .countryU3, .adminarea, .adminarea3a {
     stroke: #333333;
-    stroke-width: 1.5px;
+    stroke-width: 1px;
 }
-.adminarea:hover{
-    stroke-width: 2px;
+.adminarea:hover, .adminarea3a:hover {
+    stroke-width: 2.5px;
     cursor: pointer;
 }
-
 /*-------------------------------------------------------------------------*/
 
 /* Styles for Graticular --------------------------------------------------*/
@@ -445,8 +485,7 @@ input[type=range]::-moz-range-thumb {
     font-weight: 400;
 }
 
-
-.card{
+#page2 .card{
     border: 1px solid #dfdfdf;
     text-align: center;
     background: #f5f5f5;
@@ -454,27 +493,27 @@ input[type=range]::-moz-range-thumb {
     height: 95%;
 }
 
-.card-body {
+#page2 .card-body {
     border-top: 1px solid #dfdfdf;
     padding: .5rem;
 }
 
-.card .card-highlight {
+#page2 .card .card-highlight {
     border-radius: 5px;
     height: 24px;
 }
 
-.card-highlight.hint{
+#page2 .card-highlight.hint{
     border: 1px solid #ffc49a;
     background: #feffb4;
 }
 
-.card-highlight.active {
+#page2 .card-highlight.active {
     border: 1px solid #ffa5a5;
     background: #ffe7e7;
 }
 
-.card img{
+#page2 .card img{
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -486,7 +525,7 @@ input[type=range]::-moz-range-thumb {
     height: 80%;
 }
 
-.chart-text {
+#page2 .chart-text {
     margin: 0 0 .5rem 0;
     border: 1px solid #dfdfdf;
     border-radius: 4px;
@@ -494,7 +533,54 @@ input[type=range]::-moz-range-thumb {
     text-align: center;
 }
 
-.chart-text:hover{
+#page3 .card{
+    border: 1px solid #dfdfdf;
+    text-align: center;
+    background: #f5f5f5;
+    margin-bottom: 1rem;
+}
+
+#page3 .card-body {
+    border-top: 1px solid #dfdfdf;
+    padding: .5rem;
+}
+
+#page3 .card .card-highlight {
+    border-radius: 5px;
+    height: 24px;
+}
+
+#page3 .card-highlight.hint{
+    border: 1px solid #ffc49a;
+    background: #feffb4;
+}
+
+#page3 .card-highlight.active {
+    border: 1px solid #ffa5a5;
+    background: #ffe7e7;
+}
+
+#page3 .card img{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    padding: 0rem;
+    border-radius: 5px;
+    max-height: 210px;
+}
+
+#page3 .chart-text {
+    margin: 0 0 .5rem 0;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+#page3 .chart-text:hover{
     cursor: grab;
 }
 
@@ -506,19 +592,8 @@ input[type=range]::-moz-range-thumb {
 #pyrstg0, #pyrstg1, #pyrstg2, #pyrstg3{
     width: 25%;
     margin: 5px;
-    
-}
-#pyrstg0 {
-    border: solid #bebada 3px;
-}
-#pyrstg1{
-    border: solid #fb8072 3px;
-}
-#pyrstg2{
-    border: solid #e78ac3 3px;
-}
-#pyrstg3{
-    border: solid #fdb462 3px;
+    cursor: pointer; 
+    border: solid #1a1a1a 1px;
 }
 
 /*------------------------------------------------------------------------*/
@@ -588,7 +663,7 @@ input[type=range]::-moz-range-thumb {
 }
 /* Styles for Map-Quiz --------------------------------------------------*/
 #map-quiz-container {
-    margin-left:-8%;
+    margin-left:-3%;
 }
 
 #map-quiz .map-question {
@@ -597,7 +672,6 @@ input[type=range]::-moz-range-thumb {
 #map-quiz .form-check{
     padding-left: 3rem;
 }
-
 
 
 /*------------------------------------------------------------------------*/
@@ -720,4 +794,5 @@ input[type=range]::-moz-range-thumb {
 	font: 2em bold;
 	padding: 0 0.2em;
 }
+
 

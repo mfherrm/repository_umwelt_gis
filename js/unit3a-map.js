@@ -14,9 +14,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(colorScaleBlues5), 50)
-    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(colorScaleBlues5), 80)
-    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(colorScaleBlues5), 50)
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(colorScaleBlues5), 50)
+    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(colorScaleBlues5), 80)
+    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(colorScaleBlues5), 50)
 }
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -216,12 +216,15 @@ function drawLegend(id, csize, color) {
         })
         .style('fill', 'none')
         .style('stroke', '#1e1e1e')
+        .attr("transform", function(){
+            return "translate(0,-25)"
+        })
 
     legendSvg
         .append("g")
         .append("text")
         .text("Total Population")
-        .attr("transform", 'translate(0,315)');
+        .attr("transform", 'translate(0,280)');
 
     var legendSegments = legendSvg.selectAll('.legend')
         .data(valuesToShow)
@@ -233,16 +236,23 @@ function drawLegend(id, csize, color) {
         .attr('y2', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 125})
         .attr('stroke', '#1e1e1e')
         .style('stroke-dasharray', ('2,2'))
+        .attr("transform", function(){
+            return "translate(0,-25)"
+        })
 
     var legendLabels = legendSvg.selectAll('.legend')
         .data(valuesToShow)
         .enter()
         .append('text')
+        .attr("class","text-bandage")   
+        .attr("transform", function(){
+            return "translate(0,-20)"
+        })
         .attr('x', xLabel)
         .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 130})
         .text(function (d) { return d })
-        .style('font-size', 17)
         .attr('alignment-basline', 'middle')
+       
 
     //get and set of color by domain (d) & range (i)
     legend.append("text")
