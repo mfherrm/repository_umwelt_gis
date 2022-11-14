@@ -2,16 +2,14 @@
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var height = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var i = 0
-//Create SVG element // viewBox for responsive Map
-
 // Define Graticule 
 var graticule = d3.geoGraticule();
 let country
 
-
 //Define Ordinal Color scheme
 var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+//Super clunky load, way more elegant in other scripts (3a, 3b)
 //Load in GeoJSON data //Promise resolve
 d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
@@ -21,30 +19,26 @@ d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
     .catch(error => { console.log(error) });
 
-
-
-
 //Build Map
 function drawMap(data) {
-    i == 0 ? (projection =  projection = d3.geoMercator().translate([((width / 3.3)), (height*1.05)]).scale(1.75 * height / Math.PI)) :
-        (projection = d3.geoMercator().translate([((width / 3.3)), (height*1.05)]).scale(1.75 * height / Math.PI))
+    //Define projection
+    (projection = projection = d3.geoMercator().translate([((width / 3.3)), (height * 1.05)]).scale(1.75 * height / Math.PI))
 
     //Define path generator
     var path = d3.geoPath().projection(projection);
 
+    //Draw into different divs based on which iteration of drawMap this is
     let target
     i == 0 ? target = '#worldmapu2' : target = "#worldmapall"
 
+    //Create new svg for each map
     var svg = d3.select(target)
         .append("svg")
         //responsive size
         .attr("viewBox", function () {
-            if (i == 0) {
-                return [0, 0, width, 2548]
-            } else {
-                return [0, 0, width, 2548]
-            }
+            return [0, 0, width, 2548]
         })
+        //different IDs will be needed to access data later on
         .attr('id', function () {
             if (i == 0) {
                 return 'wmu3'
@@ -54,10 +48,6 @@ function drawMap(data) {
         })
 
         ;
-    // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
-    // Update the projection    
-    //Bind data and create one path per GeoJSON feature
-
     //Add Graticular
     svg.append("path")
         .datum(graticule)
@@ -77,18 +67,11 @@ function drawMap(data) {
         .append("path")
         .attr("d", path)
         .attr("class", function (d) {
+            //To make clickable countries more intuitively emphasized
             return d.properties.pyramid == null ? 'nonCountry' : "country"
         })
         .attr("fill", "grey")
         .attr('state', function () { return false })
-
-        /*
-        function(d,i){
-            let min = Math.ceil(0);
-            let max = Math.floor(27)
-            return color(Math.floor(Math.random()*(max-min)+min))
-        })
-        */
         .attr("name", function (d) {
             return d.properties.NAME_ENGL;
         })
@@ -98,36 +81,38 @@ function drawMap(data) {
         .attr('pyramid', function (d) {
             return d.properties.pyramid;
         })
-        //Cursor on mouseover
+        //Cursor on mouseover, but only clickable countries
         .style("cursor", function (d) {
             return d.properties.pyramid ? "pointer" : ''
-
-        }
-        )
+        })
+        //Get country, decide what to do based on which element this was triggered from
         .on("click", function (event) {
             country = d3.select(this);
             let src = document.querySelectorAll(':hover')[9].id
             console.log(src)
-            if (src=='wmu3'){
-                country.attr("fill") == 'green'? '': getCountry(country)
-            } else if (src=='wmu4'){
-                (country.attr("fill") == "#fdb462" || country.attr("fill") == "#fccde5" || country.attr("fill") == "#b3de69" || country.attr("fill") == "#bc80bd")?'':getPyramid(country)
-                }
+            if (src == 'wmu3') {
+                country.attr("fill") == 'green' ? '' : getCountry(country)
+            } else if (src == 'wmu4') {
+                (country.attr("fill") == "#fdb462" || country.attr("fill") == "#fccde5" || country.attr("fill") == "#b3de69" || country.attr("fill") == "#bc80bd") ? '' : getPyramid(country)
+            }
         });
     i++;
 };
 
-
+//Array for selected countries
 let select = [{
     'germany': false,
     'kenya': false,
     'southafrica': false,
     'selected': []
-}] //Array for selected countries
+}]
 
+//Used in the second map
+//Do nothing if all selections are right, fill green and return true if right, fill red and pop() if wrong
+//If undefined do not throw error, just log undefined, If already selected fill grey and pop()
+//In essence, checks if selections are right, wrong, previously selected, acts accordingly 
 function getCountry(country) {
     let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
-    console.log(elemid.toLowerCase())
     if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
@@ -151,42 +136,50 @@ function getCountry(country) {
     }
 }
 
-
+//So that even my project partner can use the population pyramids
 d3.select("#pyr_countries").on("mouseup", getPyr)
 d3.select("#pyr_southafrica").on("mouseup", getPyr)
 d3.select("#pyr_germany").on("mouseup", getPyr)
 d3.select("#pyr_kenya").on("mouseup", getPyr)
 
+//Gets hovered element (either div -> [length-5] or pyramid [8])
+//Compares names of selected element from previous method and the element this was triggered from
+//Because of this two-pronged users will have to select a country first
+//Do nothing if all selections are right, fill green and return true if right, fill red and pop() if wrong
+//If undefined do not throw error, just log undefined, if already selected fill grey and pop()
 function getPyr() {
     console.log(document.querySelectorAll(':hover'))
     let elem;
-    document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 4]==null? elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 5]: elem = document.querySelectorAll(':hover')[8]
+    document.querySelectorAll(':hover')[8] == null ? elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 5] : elem = document.querySelectorAll(':hover')[8]
     let elemid = elem.getAttribute('id')
     console.log(elemid)
-    if(select[0].selected[0]!=undefined){
-    let con = select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL
-    console.log(con)
-    if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
-        select[0].germany = true;
-        select[0].selected[0].attr("fill", "#4FE34F");
-        select[0].selected.pop();
-    } else if ((con.includes('Kenya') && elemid.includes('pyr_kenya'))) {
-        select[0].kenya = true;
-        select[0].selected[0].attr("fill", "#4FE34F");
-        select[0].selected.pop();
-    } else if (con.includes('South Africa') && elemid.includes('pyr_southafrica')) {
-        select[0].southafrica = true;
-        select[0].selected[0].attr("fill", "#4FE34F");
-        select[0].selected.pop();
-    } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
+    if (select[0].selected[0] != undefined) {
+        let con = select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL
+        console.log(con)
+        if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
+            select[0].germany = true;
+            select[0].selected[0].attr("fill", "#4FE34F");
+            select[0].selected.pop();
+        } else if ((con.includes('Kenya') && elemid.includes('pyr_kenya'))) {
+            select[0].kenya = true;
+            select[0].selected[0].attr("fill", "#4FE34F");
+            select[0].selected.pop();
+        } else if (con.includes('South Africa') && elemid.includes('pyr_southafrica')) {
+            select[0].southafrica = true;
+            select[0].selected[0].attr("fill", "#4FE34F");
+            select[0].selected.pop();
+        } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
 
-    } else {
-        select[0].selected[0].attr("fill", "#EC5B5B");
+        } else {
+            select[0].selected[0].attr("fill", "#EC5B5B");
+        }
     }
-}};
-
+};
+//Used in the third map (Page4)
 let select4 = [];
-
+//Used in the third map
+//Adds a country if not already selected, not clickable, array not full (Only one country can be added)
+//Prevent error if undefined by logging undefined
 function getPyramid(country) {
     let elemid = country.attr('name');
     let elempyr = country.attr('pyramid');
@@ -201,12 +194,14 @@ function getPyramid(country) {
             select4.pop();
             return country.attr("fill", "grey")
         }
-
-
-
     }
 }
-
+//Used in the third map
+//Checks which element this was triggered from
+//Checks which country was selected
+//If the selected country is a country with the right population pyramid
+//Fill green, pop()
+//Else fill red
 d3.select("#pyr_imgs").on("click", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
     let elemid = elem.getAttribute('id')
