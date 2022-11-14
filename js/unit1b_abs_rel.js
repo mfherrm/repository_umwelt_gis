@@ -7,7 +7,7 @@ let questions = [
                 {question:"9.2% of Kenya's total population live in the county Nairobi.",answer:"relative"},
                 {question:"South Africa is approximately 3.4 times bigger than Germany.",answer:"relative"},
                 {question:"South Africa's province Gauteng has a population density of approximately 870/km².",answer:"relative"},
-                {question:"Kenya has an area of 580,367 sq km.",answer:"absolute"},
+                {question:"Kenya has an area of 580,367km².",answer:"absolute"},
                 {question:"Germany's total male population aged 50 to 54 is approximately 3.4 million.",answer:"absolute"},
                 {question:"Kenya's first level of administrative boundaries is comprised of 47 counties.",answer:"absolute"},
                 {question:"South Africa has a GINI index of roughly 55%.",answer:"relative"},

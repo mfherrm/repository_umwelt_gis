@@ -50,11 +50,11 @@ let circles = d3.select(".mapbox")
 
 //mapQuestions for creating random MCT
 let mapQuestions = [
-    {question:"Which administrative level does the map show?",answer:"1",labels:["1","2","3","1.5"]},
-    {question:"What is this administrative level called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
-    {question:"Is the population density a relative or absolute value?",answer:"relative",labels:["absolute","relative","none of them"]},
-    {question:"How is the population density calculated?",answer:"total population divided by area",labels:["total population divided by area","total population divided by no. of admin levels","area divided by total population","total population times area"]},
-    {question:"Why is the circle of 'North Cape' so small?",answer:"area",labels:["Only 1000 people live there","Large area and relatively small population","Large area"]}
+    {question:"Which administrative level is shown in the map?",answer:"1",labels:["1","2","3","1.5"]},
+    {question:"What is the administrative level shown called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
+    {question:"What kind of value is the population density?",answer:"relative",labels:["An absolute value","A relative value","Neither"]},
+    {question:"How is the population density calculated?",answer:"Total population divided by area",labels:["Total population divided by area","Total population divided by no. of administrative levels","Area divided by total population","Total population multiplied by area"]},
+    {question:"Why is the diagram of North Cape so small?",answer:"Because it is a large area with a relatively small population",labels:["Only 1000 people live there","Because it is a large area with a relatively small population","Because it is a large area"]}
 ]
 
 d3.shuffle(mapQuestions)
