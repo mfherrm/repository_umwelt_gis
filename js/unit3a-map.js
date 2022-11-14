@@ -53,7 +53,7 @@ function drawMap(data, target, id, projection, color, csize) {
         .append("path")
         .attr("d", path)
         .attr("class", "adminarea3a")
-        .attr("gini", function (d) {
+        .attr('gini', function (d) {
             return d.properties.gini_t;
         })
         .attr("population", function (d) {
@@ -96,6 +96,9 @@ function drawMap(data, target, id, projection, color, csize) {
             .attr('name', function (d) {
                 return d.properties.name_1
             })
+            .attr('gini', function (d) {
+                return d.properties.gini_t;
+            })
             //Cursor on mouseover
             .style("cursor", "pointer")
             .style("fill", "#1e1e1e")
@@ -123,14 +126,12 @@ function drawTooltip() {
             .style("opacity", .7)
             .style("left", bbox.x + bbox.width / 2 + 10 + "px")
             .attr('id', 'tt')
-            .style("top", bbox.y + bbox.height / 2 + "px")
-            ;
-
+            .style("top", bbox.y + bbox.height / 2 + "px");
         tooltip.join(
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("population") + "</p>")
+                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>Total Population: " + d3.select(this).attr("population") + "</p><p>Gini: " + d3.select(this).attr("gini") + "%</p>")
         )
     }
     let name = d3.select(this).attr("name");

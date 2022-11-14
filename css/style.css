@@ -227,7 +227,7 @@ a .bi {
     padding-left: .5rem;
 }
 
-#page0 #sliststart li {
+#page0 #sliststart li, #page0 #slistparam li{
     text-align:center
 }
 
