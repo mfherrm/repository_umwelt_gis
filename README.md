@@ -1,16 +1,16 @@
 # repository_umwelt_gis
-<h4>Webtool Blended Learning SDG 1.2.1 | SDG 4.2.2</h4>
+<h3>Webtool Blended Learning SDG 1.2.1 | SDG 4.2.2</h3>
 <p>This is a webtool designed to be part of a blended learning experience. It aims to give students a basic understanding of statistics using the United Nation established Sustainable Development Goals (SDGs), specifically SDG 1.2.1 and 4.2.2, as examples.
 <br>
-<h5>Copyright</h5>
+<h4>Copyright</h4>
 <p>The webtool was created as part of an assignment. It was initially conceptualized by Maria Siebert and Agnes Jeworrek (21-10 - 21-12) and reimagined as well as polished by Anton Dolgov and Marius Herrmann (22-10 - 22-11). <br>
 The Website is hosted and operated by faculty IMM of University of Applied Sciences Karlsruhe.
 Any unauthorized use is not allowed.</p>
 <br>
-<h5>Data sources</h5>
+<h4>Data sources</h4>
 <p>All data used in the tool can be seen in data_links.html or by clicking the database icon on the website. Any information on the website stems from the group members. </p>
 <br>
-<h5>Files</h5>
+<h4>Files</h4>
 <p>Folders included are:
 <ul> <li>css: includes the cascading style sheet for the webtool</li>
      <li>geojson: includes all geojson-format files used for maps in the webtool</li>
