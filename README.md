@@ -6,9 +6,10 @@
 The Website is hosted and operated by faculty IMM of University of Applied Sciences Karlsruhe.
 Any unauthorized use is not allowed.</p>
 <h4>Data sources</h4>
-<p>All data used in the tool can be seen in data_links.html or by clicking the database icon on the website. Any information on the website stems from the group members. </p>
+<p>All data used in the tool can be seen in data_links.html or by clicking the database icon on the website. Any information on the website stems from the group members. 
+</p>
 <h4>Files</h4>
-<p>Folders included are:
+<p>Folders included are:</p>
 <ul> <li>css: includes the cascading style sheet for the webtool</li>
      <li>geojson: includes all geojson-format files used for maps in the webtool</li>
      <li>icons: includes all svg-images used in the webtool</li>
@@ -29,6 +30,4 @@ Any unauthorized use is not allowed.</p>
      <li>Bootstrap 5 icons</li>
      <li>Google Font</li>
      <li>JQuery</li>
-
 </ul>
-</p>
