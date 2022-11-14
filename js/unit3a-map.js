@@ -202,7 +202,12 @@ function drawLegend(id, csize, color) {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
-            return color(d);
+            if (i==4){
+                return colorScaleBlues5[i]
+            } else {
+            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
+            return color(d - 1);
+            }
         })
 
 

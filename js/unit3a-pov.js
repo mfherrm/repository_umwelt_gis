@@ -1,6 +1,6 @@
 var tooltipG;
 //Create colors scheme   
-let gerC = [(d3.scaleThreshold().domain([11.9, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 53.21]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(colorScaleBlues5))];
+let gerC = [(d3.scaleThreshold().domain([11.9, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 53.21]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.45, 23.4, 25.8, 27.75, 29.2]).range(colorScaleBlues5))];
 let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 69.7]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 64.8]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 54]).range(colorScaleBlues5))];
 let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 32.83]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([12.4, 27.9, 31.7, 34.8, 38.2]).range(colorScaleBlues5))];
 let b = 1, z = 1, g=2, k=2;
@@ -171,7 +171,7 @@ function drawLegendG(mapID, colorG) {
                 }
             } else if (i == colorG.domain().length - 1) {
                 if(mapID == "pger"){
-                    return colorG.domain()[i] + " to " + "37.75";
+                    return colorG.domain()[i] + " to " + "37.35";
                 } else if (mapID =="pzaf"){
                     return colorG.domain()[i] + " to " + "34.93";
                 } else {
@@ -191,8 +191,12 @@ function drawLegendG(mapID, colorG) {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
+            if (i==4){
+                return colorScaleBlues5[i]
+            } else {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return colorG(d - 1);
+            }
         })   
 };
 
@@ -237,7 +241,7 @@ function changeColor(id) {
                 
             } else if (e == arrleg.domain().length - 1) {
                 if(tarleg == '#pger_leg'){
-                    g==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 24.9":g==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 55.2":g==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 37.75" :''
+                    g==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 24.9":g==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 55.2":g==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 37.35" :''
                 } else if(tarleg == '#pken_leg'){
                     k==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 79.3":k==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 69.87":k==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 56.97" :''
                 } else if(tarleg == '#pzaf_leg'){
