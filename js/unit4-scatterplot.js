@@ -223,6 +223,70 @@ d3.selectAll("#solist .sortlist").on("mousedown", function () {
     slistScp();
 })
 
+function drawLegendSc(color, mclass, txt, pos) {
+    //set Title
+    //create svg for Legend
+    var legendSvg = d3.selectAll('.mapbox')
+        .append("g")
+        .attr("class", mclass)
+        //.attr("viewBox", [0, 0, width, height])
+        .attr("width", "100%")
+        //good height --> no. of class*spacing
+        .attr("height", function (d, i) {
+            return 6 * 45
+        })
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(5," + (30 + pos) + ")";
+        });
+    console.log(legendSvg)
+    var legend = legendSvg.selectAll(null)
+        .data(color.domain())
+        .enter()
+        .append("g")
+        .attr("class", "entry")
+        .attr("transform", function (d, i) {
+            return "translate(5," + i * 33 + ")";
+        });
+     
+    legendSvg.append("g")
+        .append("text")
+        .text(txt)
+        .attr("font-size",24)
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(0," + -8 + ")";
+        });
+    //fill rects by color domain (d) & range (i)                  
+    legend.append("rect")
+        //rect on position (5,5) in SVG with the width and height 20            
+        .attr("x", 10)
+        .attr("y", 10) //10
+        .attr("width", 25)
+        .attr("height", 25)
+        .attr("fill", function (d, i) {
+            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
+            return color(d - 1);
+        })
+
+    //get and set of color by domain (d) & range (i)
+    legend.append("text")
+        //play around for nice positonioning
+        //General tip for x--> Rect.X(5)+Rect.Width(20)+buffer(6)
+        //Genral tip for y--> anchor of text is at the bottom
+        .attr("x", 46)
+        .attr("y", 31)
+        .attr("color", "white")
+        .text(function (d, i) {
+            if (i == 0) {
+                return "≤ " + d
+            } else if (i == color.domain().length - 1) {
+                return "≥ " + + d
+            } else {
+                return color.domain()[i - 1] + 1 + " to " + d
+            };
+        })
+};
 
 //Drag n Drop
 function slistScp() {
@@ -306,9 +370,9 @@ function slistScp() {
                 current.innerText == sel[0] ? '' : current.innerText == sel[1] ? '' : sel.push(current.innerText)
                 if (sel.length == 2) {
 
-                    drawDots(dat[0], sel, "yellow");
-                    drawDots(dat[1], sel, 'red');
-                    drawDots(dat[2], sel, 'green')
+                    drawDots(dat[0], sel, "#B2D06C");
+                    drawDots(dat[1], sel, '#BEBADA');
+                    drawDots(dat[2], sel, '#F8B365')
                     tempa = []
                     tempb = []
                     ii = 0;

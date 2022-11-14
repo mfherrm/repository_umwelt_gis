@@ -15,6 +15,7 @@ Any unauthorized use is not allowed.</p>
      <li>js: includes all the javascript-format files used in the webtool</li>
      <li>json: includes all json-format files used for diagrams in the webtool</li>
      <li>pages: includes all pages that can be visited in the webtool</li>
+     <li>screenshots_bugs: includes screenshots of known bugs that couldn't be fixed before the deadline</li>
      <li>shapefiles: includes all of the used geojson-format files in a shapefile format</li>
      <li>documentation: includes the document of the webtool</li>
      <li>The folders labeled 'shapefiles' and 'documentation' can be found in this folder's parent directory.</li>
