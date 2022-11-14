@@ -14,9 +14,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 //Build Map
 
 function draw(data) {
-    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([59, 61, 63, 64, 65]).range(colorScaleBlues5), 50)
-    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([25, 26, 27, 29, 31]).range(colorScaleBlues5), 80)
-    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([24, 32, 40, 48, 52]).range(colorScaleBlues5), 50)
+    drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([61, 62, 63, 64, 65]).range(colorScaleBlues5), 50)
+    drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([26, 27, 28, 30, 31]).range(colorScaleBlues5), 80)
+    drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([32, 36, 40, 48, 52]).range(colorScaleBlues5), 50)
 }
 
 //Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
@@ -269,17 +269,24 @@ function drawLegend(id, csize, color) {
         .text(function (d, i) {
             if (i == 0) {
                 if(id == "mger"){
-                    return "25 to " + d3.format(".0f")(d)
+                    return "25 to " + (d)
                 } else if (id == "mzaf"){
-
+                    return "60 to " + (d)
                 } else {
-
+                    return "28 to " + (d)
                 }
                
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d3.format(".0f")(d-1)
+                if(id == "mger"){
+                    return (d) + " to 32"  
+                } else if (id == "mzaf"){
+                    return 64.01 + " to 65"
+                } else {
+                    return (d) + " to 62"
+                }
+                
             } else {
-                return color.domain()[i - 1]+ " to  " + d3.format(".01f")(d-0.1)
+                return d3.format(".2f")(color.domain()[i - 1]+0.01)+ " to  " + (d)
             };
         })
 };
