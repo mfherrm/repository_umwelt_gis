@@ -11,9 +11,11 @@ var projection =  d3.geoBromley()
             .center([0, 0])
             .translate([width / 2, height /2]);
 */
-projection = d3.geoMercator()
-    .translate([((widthC / 2)), (heightC/ 2)])
-    .scale((widthC / 2.1 / Math.PI));
+projection = d3.geoBromley()
+        .scale(widthC / 1 / Math.PI)
+        .rotate([-8, 0])
+        .center([0, 0])
+        .translate([widthC/2, heightC /2]);
 
 // Define Zoom
 
@@ -48,15 +50,34 @@ function drawMap(data) {
     //Bind data and create one path per GeoJSON feature
 
     //Add Graticular
-    svgC.append("path")
-        .datum(graticuleC)
-        .attr("class", "graticule")
-        .attr("d", pathC);
+     //Add Graticular
+     svgC.append("defs").append("path")
+     .datum({type: "Sphere"})
+     .attr("id", "sphere")
+     .attr("d", pathC);
 
-    svgC.append("g").append("path")
-        .datum({ type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]] })
-        .attr("class", "equator")
-        .attr("d", pathC);
+     svgC.append("use")
+     .attr("class", "stroke")
+     .attr("xlink:href", "#sphere");
+
+     svgC.append("use")
+     .attr("class", "fill")
+     .attr("xlink:href", "#sphere");
+
+     svgC.append("path")
+     .datum(graticule)
+     .attr("class", "graticule")
+     .attr("d", pathC);
+
+     svgC.insert("path", ".graticule")
+     .datum(data.features)
+     .attr("class", "land")
+     .attr("d", pathC);
+
+     svgC.insert("path", ".graticule")
+     .datum(data.features)
+     .attr("class", "boundary")
+     .attr("d", pathC);
 
     svgC.selectAll(null)
         .data(data.features)

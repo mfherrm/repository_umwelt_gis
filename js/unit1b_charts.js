@@ -6,12 +6,13 @@ let dataLine =  "../json/TotalPopulation_Ger_Ken_Zaf_2011to2021.json";
 let data = [
                 {text:"Line chart",value:"line",chart: "../icons/lineChart.svg"},
                 {text:"Bar chart",value:"bar",chart: "../icons/barChart.svg"},
-                {text:"Scatter plot",value:"scatter",chart: "../icons/chart3.svg"},
+                {text:"Scatter plot",value:"scatter",chart: "../icons/scatterPlot.svg"},
                 {text:"Pie chart",value:"pie",chart: "../icons/pieChart.svg"},
-                {text:"Histogram",value:"histogram",chart:""},
                 {text:"Stacked bar",value:"stacked",chart:"../icons/stackedChart.svg"},
-                {text:"Area chart",value:"area",chart:"../icons/areaChart.svg"}
+                {text:"Area chart",value:"area",chart:"../icons/areaChart.svg"} //raushauen 
             ]
+
+drawChartGallery()
 
 let texts = [];
 let charts = [];
@@ -19,6 +20,7 @@ let charts = [];
 randomize();
 
 drawChartLayout();
+
 
 //randomize only once for page load, so restart button just draws the page again
 function randomize(){
@@ -29,7 +31,7 @@ function randomize(){
 
     //array for text shuffle
     
-    //push text randomize order. Teachers love this trick
+    //push text --> randomize order. Teachers love this trick
     for(let i in data){
       texts.push(data[i].text)
     }
@@ -42,6 +44,8 @@ function randomize(){
     d3.shuffle(charts)
 }
 
+
+//function to draw page2 chart game 
 function drawChartLayout(){
   let container = d3.select(".chart-game-container");
 
@@ -78,7 +82,7 @@ function drawChartLayout(){
                
 
     //Build card-body (input section for game)
-    d3.selectAll(".card")
+    d3.selectAll("#page2 .card")
             .append("div")
             .attr("class","card-body")
             .append("div")
@@ -91,7 +95,7 @@ function drawChartLayout(){
     });
 }
 
-//Drag and drop
+//Drag and drop for page 2 chart game
 function slistCharts(current) {
       d3.select("#page2 .error").remove();
       let items = d3.selectAll(".chart-game").nodes();
@@ -196,130 +200,113 @@ d3.select("#check-chartgame").on("click",function() {
   });
 });
 
+function drawChartGallery(){
+ let galleryContainer = d3.select("#page3 #chartGallery")
+ console.log(data)
+
+ //<i class="bi bi-chevron-right"></i>
+  galleryContainer.selectAll("#page3 #chart-container")
+    .data(data)
+    .enter()
+    .append("div")
+    .attr("class","card hide")
+    .attr("id",function(d,i){return "card"+i})
+    .append("img")
+    .attr("src",function(d,i){return data[i].chart});
+
+
+  d3.selectAll("#page3 .card")
+    .append("div")
+    .attr("class","card-body")
+    .append("p")
+    .append("strong")
+    .text(function(d){ 
+      return d.text
+    });
+
+  d3.selectAll("#page3 .card-body")
+    .append("ul")
+    .attr("class","factbook-list")
+    .style("text-align","left")
+    .style("padding-left","7.5%")
+    .append("li")
+    .text(function(d,i){
+      console.log(d.text)
+      if(d.text == "Line chart"){
+        return "Line chart tips"
+      } else if (d.text =="Bar chart"){
+        return "Bar chart tips"
+      } else if (d.text =="Scatter plot"){
+        return "Scatter plot tips";
+      } else if (d.text == "Pie chart"){
+        return "Pie chart tips"
+      } else if (d.text =="Area chart"){
+        return "Area chart tips"
+      } else if (d.text == "Stacked bar"){
+        return "Stacked bar tips"
+      } else {
+        return
+      }
+  
+    });
+}
+
+//Chart gallery control
+let btnPrevChart = $('#page3 #prev-chart');
+let btnNextChart = $('#page3 #next-chart');
+
+let chartGalleryIndex = 0;
+
+let chartGalleryCount = $('#page3 .card').length-1
+showGallery()
+
+console.log(chartGalleryCount)
+function showGallery(){
+  $("#page3 #card"+chartGalleryIndex).removeClass("hide").addClass("show");
+}
+
+function hideGallery(){
+  $("#page3 #card"+chartGalleryIndex).removeClass("show").addClass("hide");
+}
+
+btnNextChart.on("click",function(){
+  console.log(chartGalleryCount);
+  console.log(chartGalleryIndex);
+  hideGallery();
+  chartGalleryIndex == chartGalleryCount ? chartGalleryIndex = 0: chartGalleryIndex++;
+  showGallery();
+})
+
+btnPrevChart.on("click", function() {
+  console.log(chartGalleryCount);
+  console.log(chartGalleryIndex);
+  hideGallery();
+  chartGalleryIndex == 0 ? chartGalleryIndex = chartGalleryCount : chartGalleryIndex--;
+  showGallery();
+})
+
 
 /*
-//Load in Json data //Promise resolve
-d3.json("../json/germany2019.json")
-    .then(drawVerticalBar)
-    .catch(error => { console.log(error) });
 
-d3.json("../json/total_pop_KEN_2011to2021.json")
-    .then(drawLine)
-    .catch(error => { console.log(error) });
 
-function drawVerticalBar(data){
-  //create svg
-  let svg = d3.select("#chart1").
-               append("svg")
-              .attr("viewBox", [0, 0, width, height]);
+btnNext.on("click",function(){
+    hidePage();
+    pageIndex < pages? pageIndex++ : pageIndex; 
+    showPage();
+    buttonShowHide();
+})
 
-  let g = svg.append("g")
+btnPrev.on("click", function(){
+    hidePage();
+    pageIndex > 0 ? pageIndex-- : 0;
+    showPage();
+    buttonShowHide();
+})
 
-  //Draw Axis
-  let xScale = d3.scaleBand().range ([0, width*.8]).padding(0.4),
-      yScale = d3.scaleLinear().range ([height*.8, 0]);
-
-  //Get scale for data
-  xScale.domain(data.map(function(d) { 
-    return d.group; 
-  }));
-
-  yScale.domain([0, d3.max(data, function(d) { 
-    return d.male*1.1; 
-  })]);
-
-  g.append("g")
-    .attr("transform", "translate("+width*.15+","+ height*0.95 + ")")
-    .call(d3.axisBottom(xScale))
-    .append("text")
-    .attr("y", height*.05)
-    .attr("x", width*.45)
-    .attr("text-anchor", "end")
-    .attr("stroke", "black")
-    .text("Year");
-
-  g.append("g")
-      .attr("transform", "translate("+width*.15+"," + height*.15 + ")")
-      .call(d3.axisLeft(yScale).tickFormat(function(d){
-        return "" + d/1000;
-      }))
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -height*.1)
-      .attr("x", -width*.35)
-      .attr("text-anchor", "middle")
-      .attr("stroke", "black")
-      .text("Stock Price");
-        
-  g.selectAll(".bar")
-      .data(data)
-      .enter().append("rect")
-      .attr("transform", "translate("+width*.15+"," + height*.15 + ")")
-      .attr("class", "bar")
-      .attr("x", function(d) { return xScale(d.group); })
-      .attr("y", function(d) { return yScale(d.male); })
-      .attr("width", xScale.bandwidth())
-      .attr("height", function(d) { return height*.8 - yScale(d.male); })
-      .attr("fill","lightblue");
-      
-  function drawLine(data){
-  let svg = d3.select("#chart2").
-          append("svg")
-        .attr("viewBox", [0, 0, width, height]);
-
-  let g = svg.append("g")
-
-  let line = d3.line()
-      .x(d => xScale(d.Time))
-      .y(d => yScale(d.Value))
-    
-  //Draw Axis
-  let xScale = d3.scaleBand().range ([0, width*.8]).padding(0.4),
-      yScale = d3.scaleLinear().range ([height*.8, 0]);
-
-  //Get scale for data
-  xScale.domain(data.map(function(d) { 
-    return d.Time; 
-  }));
-
-  yScale.domain([40000000, d3.max(data, function(d) { 
-    return d.Value*1.05; 
-  })]);
-
-  g.append("g")
-  .attr("transform", "translate("+width*.15+","+ height*0.95 + ")")
-  .call(d3.axisBottom(xScale))
-  .append("text")
-  .attr("y", height*.05)
-  .attr("x", width*.45)
-  .attr("text-anchor", "end")
-  .attr("stroke", "black")
-  .text("Year");
-
-g.append("g")
-    .attr("transform", "translate("+width*.15+"," + height*.15 + ")")
-    .call(d3.axisLeft(yScale).tickFormat(function(d){
-      return "" + d;
-    }))
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", -height*.1)
-    .attr("x", -width*.35)
-    .attr("text-anchor", "middle")
-    .attr("stroke", "black")
-    .text("Stock Price");
-
-  console.log(data)
-  g.selectAll(".line")
-      .data(data)
-      .enter()
-      .append("path")
-      .attr("transform", "translate("+width*.15+","+ height*0.15 + ")")
-      .attr("class","line")
-      .attr("d", line(data))
-      .attr("fill","none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", "1.5")
+function buttonShowHide(){
+    pageIndex == pages ? btnNext.css({"visibility":"hidden"}) : btnNext.css({"visibility":"visible"});
+    pageIndex == 0 ? btnPrev.css({"visibility":"hidden"}) : btnPrev.css({"visibility":"visible"});
 }
-};
+
+
 */

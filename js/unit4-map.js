@@ -27,7 +27,7 @@ function drawZaf(data) {
     color1 = d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)
     color4 = d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)
     //Define Projection
-    let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]);
+    let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([-0.03, 0]).rotate([-24,-28]);
 
     //Define path generator
     let pathZaf = d3.geoPath()
@@ -216,10 +216,11 @@ function drawLegend(color, mclass, txt, pos) {
         .attr("transform", function (d, i) {
             return "translate(5," + i * 33 + ")";
         });
-
+     
     legendSvg.append("g")
         .append("text")
         .text(txt)
+        .attr("font-size",24)
         .attr("transform", function (d, i) {
             //set spacing
             return "translate(0," + -8 + ")";
@@ -266,7 +267,7 @@ function drawScalebar(mapProjection, mclass) {
         //sets the vertical tick size of the scale bar in pixels
         .tickSize([8])
         //sets ticks on specified distances OR use distance for automatic specification
-        .tickValues([0, 150, 300])
+        .tickValues([0, 200])
         //.distance(200)
         // How far the tick text labels are from the lines
         .tickPadding(8)
@@ -276,7 +277,7 @@ function drawScalebar(mapProjection, mclass) {
         .attr("class", mclass)
         //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + '650' + ")";
+            return "translate(10," + heightArea*.9 + ")";
         });
 
     scaleSvg.append("g").call(scaleBar);

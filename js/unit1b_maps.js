@@ -48,6 +48,7 @@ let circles = d3.select(".mapbox")
     .append("g")
     .attr("class", "circles");
 
+//mapQuestions for creating random MCT
 let mapQuestions = [
     {question:"Which administrative level does the map show?",answer:"1",labels:["1","2","3","1.5"]},
     {question:"What is this administrative level called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
@@ -112,7 +113,7 @@ function drawMap(data) {
                     return "circle mapdata"
                 }})
             .attr("transform", function (d) {
-                return "translate(" + path.centroid(d) + ")";
+                return d.properties.name_1 == 'Western Cape' ? "translate(" + (path.centroid(d)[0] + ',' + (path.centroid(d)[1]+37)) +  ")" : "translate(" + path.centroid(d) + ")";
             })
             .attr("r", function (d) {
                 max = d3.max(popTot);
@@ -220,7 +221,6 @@ function drawLegend() {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
-            console.log(d)
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
         })
@@ -271,13 +271,13 @@ function drawLegend() {
         .enter()
         .append('text')
         .attr("transform", function(){
-            return "translate(280,-240)"
+            return "translate(282,-238)"
         })
         .attr('x', xLabel)
         .attr('y', function(d){ return yCircle -size(d)*2 + 5})
         .text( function(d,i,e){
             return d})
-        .style('font-size', 17)
+        .style('font-size', "20px")
         .attr('alignment-basline', 'middle')
 
     //get and set of color by domain (d) & range (i)
@@ -289,8 +289,6 @@ function drawLegend() {
         .attr("y", 36)
         .attr("color", "white")
         .text(function (d, i) {
-            color.domain()
-
             if (i == 0) {
                 return 3 +" to "+ d
             } else if (i == color.domain().length - 1) {
@@ -303,7 +301,6 @@ function drawLegend() {
 
 //Build Scalebar -- 
 function drawScalebar() {
-    console.log(height)
     let scaleBar = d3.geoScaleBar()
         .projection(projection)
         //for other procejtion sepcify ".radius"??? ---https://observablehq.com/@harrystevens/introducing-d3-geo-scale-bar#scaleBarPositioned ---https://github.com/HarryStevens/d3-geo-scale-bar#sizing 

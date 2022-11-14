@@ -14,10 +14,10 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function draw(data) {
-    drawMapG(data[0], '#zaf', 'pzaf', d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0]), zafC[b],"ginizaf")
+    drawMapG(data[0], '#zaf', 'pzaf', d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), zafC[b],"ginizaf")
     b=2;
-    drawMapG(data[1], '#ger', 'pger', d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]), gerC[b], "giniger")
-    drawMapG(data[2], '#ken', 'pken', d3.geoAzimuthalEqualArea().scale(1).translate([.03, -.01]).rotate([-38, 0]), kenC[b], "giniken")
+    drawMapG(data[1], '#ger', 'pger', d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), gerC[b], "giniger")
+    drawMapG(data[2], '#ken', 'pken', d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), kenC[b], "giniken")
 }
 
 function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
