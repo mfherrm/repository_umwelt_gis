@@ -1,8 +1,8 @@
 var tooltipG;
 //Create colors scheme   
-let gerC = [(d3.scaleThreshold().domain([11.9, 15.6, 17.2, 19.5, 24.9]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 55.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(colorScaleBlues5))];
-let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 69.8]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 57]).range(colorScaleBlues5))];
-let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 35]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([12.4, 27.9, 32.8, 36.6, 39.5]).range(colorScaleBlues5))];
+let gerC = [(d3.scaleThreshold().domain([11.9, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 53.21]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.5, 23.5, 25.8, 29.3, 37.4]).range(colorScaleBlues5))];
+let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 69.7]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 64.8]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 54]).range(colorScaleBlues5))];
+let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 32.83]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([12.4, 27.9, 31.7, 34.8, 38.2]).range(colorScaleBlues5))];
 let b = 1, z = 1, g=2, k=2;
 let gin = 0;
 //Load in GeoJSON data //Promise resolve
@@ -162,20 +162,24 @@ function drawLegendG(mapID, colorG) {
         .text(function (d, i) {
             console.log(d)
             if (i == 0) {
-                if(mapID = "pger"){
-                    return "17,9 to " + (d-0.01)
-                } else if (mapID ="pzaf"){
-                    return "17,9 to " + (d-0.01)
+                if(mapID == "pger"){
+                    return "17.85 to " + (d)
+                } else if (mapID =="pzaf"){
+                    return "3.725 to " + (d)
                 } else {
-                    return "17,9 to " + (d-0.01)
+                    return "17,9 to " + (d)
                 }
             } else if (i == colorG.domain().length - 1) {
-                let number = d3.format(".01f")(d-0.01)
-                return colorG.domain()[i - 1] + " to " + number;
+                if(mapID == "pger"){
+                    return colorG.domain()[i] + " to " + "37.75";
+                } else if (mapID =="pzaf"){
+                    return colorG.domain()[i] + " to " + "34.93";
+                } else {
+                    return colorG.domain()[i] + " to " + "56.97";
+                }
+                
             } else {
-                let number = d3.format(".2f")(d-0.01)
-                console.log(number)
-                return colorG.domain()[i - 1]  + " to " + number;
+                return d3.format(".2f")(colorG.domain()[i - 1]+0.01)  + " to " + d3.format(".2f")(d);
             };
         })
 
@@ -223,11 +227,24 @@ function changeColor(id) {
     for (let e = 0; e < d3.selectAll(tarleg)._groups[0].length; e++) {
        tarleg == '#pger_leg'? arrleg=gerC[g] : tarleg == '#pken_leg' ? arrleg=kenC[k] : tarleg == '#pzaf_leg' ? arrleg=zafC[z] : console.log('Not found')
             if (e == 0) {
-                txt= "11.0 to " + arrleg.domain()[0]
+                if(tarleg == '#pger_leg'){
+                    g==0?txt= "11.0 to " + d3.format(".2f")(arrleg.domain()[0]):g==1? txt="20.23 to " +d3.format(".2f")(arrleg.domain()[0]):g==2? txt="17.85 to "+d3.format(".2f")(arrleg.domain()[0]) :''
+                } else if(tarleg == '#pken_leg'){
+                    k==0?txt= "17.1 to " + d3.format(".2f")(arrleg.domain()[0]):k==1? txt="3.25 to " +d3.format(".2f")(arrleg.domain()[0]):k==2? txt="37 to "+d3.format(".2f")(arrleg.domain()[0]) :''
+                } else if(tarleg == '#pzaf_leg'){
+                    z==0?txt= "19.3 to " + d3.format(".2f")(arrleg.domain()[0]):z==1? txt="3.73 to " +d3.format(".2f")(arrleg.domain()[0]):z==2? txt="12.87 to "+d3.format(".2f")(arrleg.domain()[0]) :''
+                } 
+                
             } else if (e == arrleg.domain().length - 1) {
-                txt =  "≥ " + + arrleg.domain()[arrleg.domain().length - 1]
+                if(tarleg == '#pger_leg'){
+                    g==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 24.9":g==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 55.2":g==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 37.75" :''
+                } else if(tarleg == '#pken_leg'){
+                    k==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 79.3":k==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 69.87":k==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 56.97" :''
+                } else if(tarleg == '#pzaf_leg'){
+                    z==0?txt= arrleg.domain()[arrleg.domain().length - 1] + " to 59.1":z==1? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 34.93":z==2? txt= arrleg.domain()[arrleg.domain().length - 1] + " to 39.4":''
+                } 
             } else {
-                txt= arrleg.domain()[e - 1] + 1 + " to " + arrleg.domain()[e]
+                txt= d3.format(".2f")(arrleg.domain()[e - 1]+0.01) + " to " + arrleg.domain()[e]
             };
         d3.selectAll(tarleg)._groups[0][e].textContent = txt
     }
