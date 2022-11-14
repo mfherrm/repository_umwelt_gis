@@ -11,9 +11,9 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function draw(data) {
-    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)) //nat breaks
-    drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-10, -52]), d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(colorScaleReds5)) //geom int
-    drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([0, .005]).rotate([-38, 0]), d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(colorScaleReds5)) //geom int
+    drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([90.3, 91.4, 92, 93.1, 97.7]).range(colorScaleReds5)) //nat breaks
+    drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-10, -52]), d3.scaleThreshold().domain([90.3, 91.4, 92, 93.9, 94.8]).range(colorScaleReds5)) //geom int
+    drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([0, .005]).rotate([-38, 0]), d3.scaleThreshold().domain([2.3, 3.7, 5.1, 7.2, 10]).range(colorScaleReds5)) //geom int
     
 
 }
@@ -139,8 +139,12 @@ function drawLegend(color, mapID) {
         .attr("width", 25)
         .attr("height", 25)
         .attr("fill", function (d, i) {
+            if (i==4){
+                return colorScaleReds5[i]
+            } else {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return color(d - 1);
+            }
         })
 
     //get and set of color by domain (d) & range (i)
@@ -153,11 +157,25 @@ function drawLegend(color, mapID) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                return "≤ " + d
+                if (mapID=="solger"){
+                    return "85.3 to " +d
+                } else if (mapID=="solken"){
+                    return "1.6 to " +d
+                } else if (mapID=="solzaf"){
+                    return "85.2 to " +d
+                }
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d
+                if (mapID=="solger"){
+                    return d + " to 95.7"
+                } else if (mapID=="solken"){
+                    return d + " to 14.1"
+                }else if (mapID=="solzaf"){
+                    return d + " to 98.2"
+                }
+
+                
             } else {
-                return color.domain()[i - 1] + " to <" + d
+                return d3.format(".2f")(color.domain()[i - 1]+0.01) + " to " + d
             };
         })
 };
