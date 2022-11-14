@@ -20,4 +20,15 @@ Any unauthorized use is not allowed.</p>
      <li>documentation: includes the document of the webtool</li>
      <li>The folders labeled 'shapefiles' and 'documentation' can be found in this folder's parent directory.</li>
 </ul>
+<h4>Used Frameworks and Libraries
+<ul> <li>D3.js</li>
+     <li>D3-geo-scale-bar</li>
+     <li>D3-geo-projection</li>
+     <li>D3-regression</li>
+     <li>Bootstrap 5</li>
+     <li>Bootstrap 5 icons</li>
+     <li>Google Font</li>
+     <li>JQuery</li>
+
+</ul>
 </p>
