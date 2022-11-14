@@ -64,7 +64,7 @@ function drawGermanyAdm(data){
         .translate(t); 
 
     //Bind data and create one path per GeoJSON feature
-    //Draw Order important!!
+    //Drawing Order important!!
     //level 1 Bundeslaender
     svgAdm.selectAll(null)
         .data(data[0].features)

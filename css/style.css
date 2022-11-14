@@ -569,7 +569,7 @@ input[type=range]::-moz-range-thumb {
     background-color: white;
     padding: 0rem;
     border-radius: 5px;
-    max-height: 210px;
+    max-height: 35vh;
 }
 
 #page3 .chart-text {
