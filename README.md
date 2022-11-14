@@ -8,7 +8,7 @@ The Website is hosted and operated by faculty IMM of University of Applied Scien
 Any unauthorized use is not allowed.</p>
 <br>
 <h5>Data sources</h5>
-<p>All data used in the tool can be seen in data_links.html or by clicking the database icon on the website. Any information from the website was created by the group members. </p>
+<p>All data used in the tool can be seen in data_links.html or by clicking the database icon on the website. Any information on the website stems from the group members. </p>
 <br>
 <h5>Files</h5>
 <p>Folders included are:
