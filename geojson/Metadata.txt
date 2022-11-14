@@ -6,7 +6,7 @@ https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_1
 https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_0
 https://geoportal.icpac.net/layers/geonode%3Aafr_g2014_2013_2
 
-germany overview
+Germany overview
 https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/nuts
 
 South Africa (all from 2015)
