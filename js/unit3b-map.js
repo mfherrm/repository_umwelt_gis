@@ -87,7 +87,7 @@ function drawTooltip() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + d3.select(this).attr("education_rel") + "% </p>")
+                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>" + d3.select(this).attr("education_rel") + "% </p>")
         )
 };
 

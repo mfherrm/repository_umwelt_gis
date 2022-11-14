@@ -102,7 +102,7 @@ function drawTooltipG() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update =>
-                update.html("<p>" + d3.select(this).attr("name") + "</p><p>" + (tttar==0? d3.format(".1f")(d3.select(this).attr("poverty_rel")): tttar==1? d3.format(".1f")(d3.select(this).attr("poverty_rel_f1")): d3.format(".1f")(d3.select(this).attr("poverty_rel_f2"))) + "% </p>")
+                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>" + (tttar==0? d3.format(".1f")(d3.select(this).attr("poverty_rel")): tttar==1? d3.format(".1f")(d3.select(this).attr("poverty_rel_f1")): d3.format(".1f")(d3.select(this).attr("poverty_rel_f2"))) + "% </p>")
         )
 
 };
