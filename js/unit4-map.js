@@ -25,8 +25,8 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 
 //Build Map
 function drawZaf(data) {
-    color1 = d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)
-    color4 = d3.scaleThreshold().domain([85.3, 89.3, 91.2, 93.2, 98.3]).range(colorScaleReds5)
+    color1 = d3.scaleThreshold().domain([21.7, 36.7, 41.4, 43.2, 52.3]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([90.3, 91.4, 92, 93.1, 97.7]).range(colorScaleReds5)
     //Define Projection
     let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([-0.03, 0]).rotate([-24,-28]);
 
@@ -66,9 +66,8 @@ function drawZaf(data) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
-    drawLegend(color1, 'mapboxZAF', "Population in poverty [%]", 10)
-
-    drawLegend(color4, 'mapboxZAF', "Children taking part in pre-primary education [%]", 235)
+    drawLegend(color1, 'mapboxZAF', "Population in poverty [%]", 10, 'z1')
+    drawLegend(color4, 'mapboxZAF', "Children taking part in pre-primary education [%]", 235, 'z2')
     drawScalebar(projectionZaf, 'mapboxZAF')
 
     //set value of range slider for opacity
@@ -84,8 +83,8 @@ function drawZaf(data) {
 }
 
 function drawKenya(data, s) {
-    color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 79.3]).range(colorScaleBlues5)
-    color4 = d3.scaleThreshold().domain([1.6, 3.7, 5.1, 7.2, 10]).range(colorScaleKReds5)
+    color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 69.7]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([2.3, 3.7, 5.1, 7.2, 10]).range(colorScaleKReds5)
     let projectionKenya = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]);
 
     let pathKenya = d3.geoPath()
@@ -112,7 +111,7 @@ function drawKenya(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1");
 
-    drawLegend(color1, 'mapboxKEN', "Population in poverty [%]", 10)
+    drawLegend(color1, 'mapboxKEN', "Population in poverty [%]", 10, 'k1')
 
 
 
@@ -128,7 +127,7 @@ function drawKenya(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1");
 
-    drawLegend(color4, 'mapboxKEN', "Children taking part in pre-primary education [%]", 235)
+    drawLegend(color4, 'mapboxKEN', "Children taking part in pre-primary education [%]", 235, 'k2')
     drawScalebar(projectionKenya, 'mapboxKEN')
     //set value of range slider for opacity
     d3.select("#sdgRange").attr("value", function () { return d3.select("#kenya-4").style("opacity") * 100 })
@@ -140,8 +139,8 @@ function drawKenya(data, s) {
 }
 
 function drawGermany(data, s) {
-    color1 = d3.scaleThreshold().domain([12.4, 15.6, 17.2, 19.5, 25]).range(colorScaleBlues5)
-    color4 = d3.scaleThreshold().domain([85.3, 89, 91.7, 93.5, 94.8]).range(colorScaleReds5)
+    color1 = d3.scaleThreshold().domain([12.3, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)
+    color4 = d3.scaleThreshold().domain([90.3, 91.4, 92, 93.9, 94.8]).range(colorScaleReds5)
 
     let projectionGermany = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
 
@@ -167,7 +166,7 @@ function drawGermany(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
-    drawLegend(color1, 'mapboxGER', "Population in poverty [%]", 10)
+    drawLegend(color1, 'mapboxGER', "Population in poverty [%]", 10, 'g1')
 
     svgBoundaries.selectAll("null")
         .data(data.features)
@@ -181,7 +180,7 @@ function drawGermany(data, s) {
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
 
-    drawLegend(color4, 'mapboxGER', "Children taking part in pre-primary education [%]", 235)
+    drawLegend(color4, 'mapboxGER', "Children taking part in pre-primary education [%]", 235, 'g2')
     drawScalebar(projectionGermany, 'mapboxGER')
     //set value of range slider for opacity
     d3.select("#sdgRange").attr("value", function () { return d3.select("#germany-4").style("opacity") * 100 })
@@ -192,7 +191,7 @@ function drawGermany(data, s) {
     });
 }
 
-function drawLegend(color, mclass, txt, pos) {
+function drawLegend(color, mclass, txt, pos, id) {
     //set Title
     //create svg for Legend
     var legendSvg = d3.selectAll('.mapbox')
@@ -248,11 +247,36 @@ function drawLegend(color, mclass, txt, pos) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                return "≤ " + d
+                if(id == "g1"){
+                    return "11.9 to " + (d)
+                } else if (id=="g2"){
+                    return "85.3 to " + (d)
+                } else if(id == "z1"){
+                    return "19.3 to " + (d)
+                } else if (id=="z2"){
+                    return "85.2 to " + (d)
+                }else if(id == "k1"){
+                    return "17.1 to " + (d)
+                } else if (id=="k2"){
+                    return "1.6 to " + (d)
+                }
+                
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d
+                if(id == "g1"){
+                    return (d) + " to 24.9"
+                } else if (id=="g2"){
+                    return (d) + " to 95.7"
+                } else if(id == "z1"){
+                    return (d) + " to 59.1"
+                } else if (id=="z2"){
+                    return (d) + " to 98.2"
+                }else if(id == "k1"){
+                    return (d) + " to 79.3"
+                } else if (id=="k2"){
+                    return (d) + " to 14.1"
+                }
             } else {
-                return color.domain()[i - 1] + 1 + " to " + d
+                return d3.format(".2f")(color.domain()[i - 1]+0.01) + " to " + d
             };
         })
 };

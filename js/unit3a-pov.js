@@ -1,8 +1,8 @@
 var tooltipG;
 //Create colors scheme   
-let gerC = [(d3.scaleThreshold().domain([11.9, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 53.21]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.45, 23.4, 25.8, 27.75, 29.2]).range(colorScaleBlues5))];
+let gerC = [(d3.scaleThreshold().domain([12.3, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([21.7, 37.1, 42.3, 48.9, 53.21]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([18.45, 23.4, 25.8, 27.75, 29.2]).range(colorScaleBlues5))];
 let kenC = [(d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 69.7]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([10.8, 14.5, 22.1, 37.7, 64.8]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([42.1, 45.7, 48.2, 51.8, 54]).range(colorScaleBlues5))];
-let zafC = [(d3.scaleThreshold().domain([19, 21.8, 36.8, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 32.83]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([12.4, 27.9, 31.7, 34.8, 38.2]).range(colorScaleBlues5))];
+let zafC = [(d3.scaleThreshold().domain([21.7, 36.7, 41.4, 43.2, 52.3]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([4.8, 13.5, 18.6, 27.3, 32.83]).range(colorScaleBlues5)), (d3.scaleThreshold().domain([14.7, 27.9, 31.7, 34.8, 38.2]).range(colorScaleBlues5))];
 let b = 1, z = 1, g=2, k=2;
 let gin = 0;
 //Load in GeoJSON data //Promise resolve
@@ -165,9 +165,9 @@ function drawLegendG(mapID, colorG) {
                 if(mapID == "pger"){
                     return "17.85 to " + (d)
                 } else if (mapID =="pzaf"){
-                    return "3.725 to " + (d)
+                    return "3.73 to " + (d)
                 } else {
-                    return "17,9 to " + (d)
+                    return "17.9 to " + (d)
                 }
             } else if (i == colorG.domain().length - 1) {
                 if(mapID == "pger"){
@@ -232,7 +232,7 @@ function changeColor(id) {
        tarleg == '#pger_leg'? arrleg=gerC[g] : tarleg == '#pken_leg' ? arrleg=kenC[k] : tarleg == '#pzaf_leg' ? arrleg=zafC[z] : console.log('Not found')
             if (e == 0) {
                 if(tarleg == '#pger_leg'){
-                    g==0?txt= "11.0 to " + d3.format(".2f")(arrleg.domain()[0]):g==1? txt="20.23 to " +d3.format(".2f")(arrleg.domain()[0]):g==2? txt="17.85 to "+d3.format(".2f")(arrleg.domain()[0]) :''
+                    g==0?txt= "11.9 to " + d3.format(".2f")(arrleg.domain()[0]):g==1? txt="20.23 to " +d3.format(".2f")(arrleg.domain()[0]):g==2? txt="17.85 to "+d3.format(".2f")(arrleg.domain()[0]) :''
                 } else if(tarleg == '#pken_leg'){
                     k==0?txt= "17.1 to " + d3.format(".2f")(arrleg.domain()[0]):k==1? txt="3.25 to " +d3.format(".2f")(arrleg.domain()[0]):k==2? txt="37 to "+d3.format(".2f")(arrleg.domain()[0]) :''
                 } else if(tarleg == '#pzaf_leg'){
