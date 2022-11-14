@@ -16,7 +16,7 @@ Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/ge
 function draw(data) {
     drawMapG(data[0], '#zaf', 'pzaf', d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), zafC[b],"ginizaf")
     b=2;
-    drawMapG(data[1], '#ger', 'pger', d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), gerC[b], "giniger")
+    drawMapG(data[1], '#ger', 'pger', d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-10, -52]), gerC[b], "giniger")
     drawMapG(data[2], '#ken', 'pken', d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), kenC[b], "giniken")
 }
 
@@ -53,7 +53,6 @@ function drawMapG(data, drawTarget, mapID, mapProjection, colorG, pID) {
             return d.properties.poverty_rel;
         })
         .attr("poverty_rel_f1", function (d) {
-            console.log(drawTarget, d.properties.poverty_rel_f1)
             return d.properties.poverty_rel_f1;
         })
         .attr("poverty_rel_f2", function (d) {
@@ -116,9 +115,9 @@ function eraseTooltipG() {
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegendG(mapID, colorG) {
+    console.log(mapID)
     //set Title
     //create svg for Legend
-    console.log('#' + mapID)
     var legendSvgG = d3.selectAll('#' + mapID)
         .append("g")
         .attr("class", "legend")
@@ -136,7 +135,7 @@ function drawLegendG(mapID, colorG) {
     legendSvgG.append("g")
         .append("text")
         .text(function () {
-            return "Population in poverty";
+            return "Population in Poverty [%]";
         })
         .attr("transform", function (d, i) {
             //set spacing
@@ -161,12 +160,22 @@ function drawLegendG(mapID, colorG) {
         .attr("color", "white")
         .attr('id', mapID + '_leg')
         .text(function (d, i) {
+            console.log(d)
             if (i == 0) {
-                return "≤ " + d
+                if(mapID = "pger"){
+                    return "17,9 to " + (d-0.01)
+                } else if (mapID ="pzaf"){
+                    return "17,9 to " + (d-0.01)
+                } else {
+                    return "17,9 to " + (d-0.01)
+                }
             } else if (i == colorG.domain().length - 1) {
-                return "≥ " + + d
+                let number = d3.format(".01f")(d-0.01)
+                return colorG.domain()[i - 1] + " to " + number;
             } else {
-                return colorG.domain()[i - 1]  + " to < " + d
+                let number = d3.format(".2f")(d-0.01)
+                console.log(number)
+                return colorG.domain()[i - 1]  + " to " + number;
             };
         })
 
@@ -175,8 +184,8 @@ function drawLegendG(mapID, colorG) {
         //rect on position (5,5) in SVG with the width and height 20            
         .attr("x", 10)
         .attr("y", 10)
-        .attr("width", 25)
-        .attr("height", 25)
+        .attr("width", 30)
+        .attr("height", 30)
         .attr("fill", function (d, i) {
             //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
             return colorG(d - 1);
@@ -187,6 +196,7 @@ d3.selectAll(".colbut").on("click", function () { changeColor(this.id) });
 d3.selectAll(".check").on("click", function () { getResult(this.id) });
 
 function changeColor(id) {
+    console.log(id)
     let tar;
     let tarleg;
     let arrleg;
@@ -205,16 +215,15 @@ function changeColor(id) {
             colorG = zafC[b]
             z = b;
         } else {
-            console.log(tar)
+            console.log()
         }
-        console.log(b, tar)
         b == 0 ? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel)) : b == 1 ? (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel_f1)) : (colorl = colorG(d3.selectAll(tar)._groups[0][a].__data__.properties.poverty_rel_f2));
         d3.selectAll(tar)._groups[0][a].style.fill = colorl
     }
     for (let e = 0; e < d3.selectAll(tarleg)._groups[0].length; e++) {
        tarleg == '#pger_leg'? arrleg=gerC[g] : tarleg == '#pken_leg' ? arrleg=kenC[k] : tarleg == '#pzaf_leg' ? arrleg=zafC[z] : console.log('Not found')
             if (e == 0) {
-                txt= "≤ " + arrleg.domain()[0]
+                txt= "11.0 to " + arrleg.domain()[0]
             } else if (e == arrleg.domain().length - 1) {
                 txt =  "≥ " + + arrleg.domain()[arrleg.domain().length - 1]
             } else {

@@ -151,6 +151,8 @@ function eraseTooltip() {
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend(id, csize, color) {
+
+    console.log(id)
     let size = d3.scaleSqrt()
         .domain([1, max])
         .range([1, csize]);
@@ -265,11 +267,18 @@ function drawLegend(id, csize, color) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                return "≤ " + d3.format(".0f")(d)
+                if(id == "mger"){
+                    return "25 to " + d3.format(".0f")(d)
+                } else if (id == "mzaf"){
+
+                } else {
+
+                }
+               
             } else if (i == color.domain().length - 1) {
-                return "≥ " + + d3.format(".0f")(d)
+                return "≥ " + + d3.format(".0f")(d-1)
             } else {
-                return color.domain()[i - 1]+ " to < " + d3.format(".0f")(d)
+                return color.domain()[i - 1]+ " to  " + d3.format(".01f")(d-0.1)
             };
         })
 };

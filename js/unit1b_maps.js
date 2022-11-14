@@ -51,10 +51,10 @@ let circles = d3.select(".mapbox")
 //mapQuestions for creating random MCT
 let mapQuestions = [
     {question:"Which administrative level does the map show?",answer:"1",labels:["1","2","3","1.5"]},
-    {question:"What is this administrative level called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
+    {question:"What is the administrative level shown called?",answer:"Provinces",labels:["Provinces","Federal States","District municipalities","Nations"]},
     {question:"Is the population density a relative or absolute value?",answer:"relative",labels:["absolute","relative","none of them"]},
     {question:"How is the population density calculated?",answer:"total population divided by area",labels:["total population divided by area","total population divided by no. of admin levels","area divided by total population","total population times area"]},
-    {question:"Why is the circle of 'North Cape' so small?",answer:"area",labels:["Only 1000 people live there","Large area and relatively small population","Large area"]}
+    {question:"Why is the diagram of 'North Cape' so small?",answer:"area",labels:["Only 1000 people live there","Large area and relatively small population","Large area"]}
 ]
 
 d3.shuffle(mapQuestions)
@@ -201,18 +201,30 @@ function drawLegend() {
         .append("g")
         .attr("class", "entry")
         .attr("transform", function (d, i) {
-            return "translate(0," + i * 40 + ")";
+            
+            return "translate(0," + (i * 40 +40) + ")";
         });
 
     legendSvg.append("g")
         .append("text")
         .text(function () {
-            return "Population Density [/km²]"
+            return "Population Density"
         })
         .attr("transform", function (d, i) {
             //set spacing
             return "translate(0," + -8 + ")";
         });
+       
+
+    legendSvg.append("g")
+        .append("text")
+        .text(function(){ return "[ Inhabitants/km² ]"})
+        .attr("transform", function (d, i) {
+            //set spacing
+            return "translate(0," + 25 + ")";
+        });
+
+
     //fill rects by color domain (d) & range (i)                  
     legend.append("rect")
         //rect on position (5,5) in SVG with the width and height 30            

@@ -17,14 +17,10 @@
    <!-- D3-geo-scale-bar import-->
    <script src="https://unpkg.com/d3-geo-scale-bar@1.2.5/build/d3-geo-scale-bar.min.js"></script>
 
-    <!-- Leaflet import-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>    
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-
     <!-- Bootstrap CSS JS import -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+
     <!-- Bootstrap icons import -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 
@@ -185,6 +181,35 @@
                             Write down your results and discuss in small groups. Continue to the multiple choice test
                             afterwards.
                         </p>
+                        <hr>
+                        <div class="col-7">
+                            <label for="sdgRange" class="form-label">SDG 1.2.1 - SDG 4.2.2</label>
+                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="100"
+                                id="sdgRange">
+                        </div>
+                        <div class="adm-radio">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault1" value="germany">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Germany
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2" value="kenya">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Kenya
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault3" value="zaf" checked>
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    South Africa
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -217,35 +242,7 @@
                             <b>Goal:</b> By 2030 ensure that all girls and boys have access to quality early childhood
                             development, care and pre-primary education.
                         </p>
-                        <hr>
-                        <div class="col-7">
-                            <label for="sdgRange" class="form-label">SDG 1.2.1 - SDG 4.2.2</label>
-                            <input type="range" class="form-range" min="0" max="100" step="10" data-value="100"
-                                id="sdgRange">
-                        </div>
-                        <div class="adm-radio">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1" value="germany">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Germany
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault2" value="kenya">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Kenya
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault3" value="zaf" checked>
-                                <label class="form-check-label" for="flexRadioDefault3">
-                                    South Africa
-                                </label>
-                            </div>
-                        </div>
+                      
                         <hr>
                         <button class="btn btn-secondary btn-sm " id="mct_unit3b"
                             onclick="window.location.href = './unit4-mct.html';" role="button">
