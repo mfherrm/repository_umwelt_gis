@@ -173,9 +173,9 @@ function drawLegendG(mapID, colorG) {
                 if (mapID == "pger") {
                     return "17.85 to " + (d)
                 } else if (mapID == "pzaf") {
-                    return "3.73 to " + (d)
+                    return "3.73 to " + d3.format(".2f")(d)
                 } else {
-                    return "17.9 to " + (d)
+                    return "37 to " + d3.format(".2f")(d)
                 }
             } else if (i == colorG.domain().length - 1) {
                 if (mapID == "pger") {
@@ -274,7 +274,7 @@ function changeColor(id) {
             }
         } else {
             //All values inbetween in 0.01 increments
-            txt = d3.format(".2f")(arrleg.domain()[e - 1] + 0.01) + " to " + arrleg.domain()[e]
+            txt = d3.format(".2f")(arrleg.domain()[e - 1] + 0.01) + " to " + d3.format(".2f")(arrleg.domain()[e])
         };
         //update text
         d3.selectAll(tarleg)._groups[0][e].textContent = txt
