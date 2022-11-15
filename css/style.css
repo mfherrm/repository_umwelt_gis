@@ -128,6 +128,9 @@ a .bi {
 
 .factbook-jumper {
     color: #1a1a1a;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
 }
 
 .factbook-jumper a{
