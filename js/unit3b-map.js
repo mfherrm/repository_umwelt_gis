@@ -1,25 +1,22 @@
 var tooltip;
+//Create color scheme  
 let colorScaleReds5 = ['#fef0d9','#fdd49e','#fdbb84','#fc8d59','#e34a33']
-//Create colors scheme    
+  
 
 //Load in GeoJSON data //Promise resolve
 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
-//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-
-//Build Map
+//Parameter function
 function draw(data) {
     drawMapSol(data[0], '#zaf', "solzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([90.3, 91.4, 92, 93.1, 97.7]).range(colorScaleReds5)) //nat breaks
     drawMapSol(data[1], '#ger', "solger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-10, -52]), d3.scaleThreshold().domain([90.3, 91.4, 92, 93.9, 94.8]).range(colorScaleReds5)) //geom int
     drawMapSol(data[2], '#ken', "solken", d3.geoAzimuthalEqualArea().scale(1).translate([0, .005]).rotate([-38, 0]), d3.scaleThreshold().domain([2.3, 3.7, 5.1, 7.2, 10]).range(colorScaleReds5)) //geom int
-    
-
 }
 
 function drawMapSol(data, drawTarget, mapID, mapProjection, color) {
-
+    //set individual projection
     var pathM = d3.geoPath().projection(mapProjection);
 
     var bbox = pathM.bounds(data),
@@ -45,6 +42,7 @@ function drawMapSol(data, drawTarget, mapID, mapProjection, color) {
         .data(data.features)
         .enter()
         .append("path")
+        //different paths for the different countries
         .attr("d", pathM)
         .attr("class","adminarea")
         .attr("education_rel", function (d) {
@@ -68,7 +66,7 @@ function drawMapSol(data, drawTarget, mapID, mapProjection, color) {
 
 };
 
-//Build Tooltip
+//Build new Tooltip -> Erase function
 function drawTooltip() {
     window.onresize = this.getBoundingClientRect();
     let bbox = this.getBoundingClientRect();
@@ -90,7 +88,7 @@ function drawTooltip() {
                 update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>" + d3.select(this).attr("education_rel") + "% </p>")
         )
 };
-
+//Remove tooltips
 function eraseTooltip() {
     d3.selectAll('#tt').remove();
 };
@@ -139,6 +137,7 @@ function drawLegend(color, mapID) {
         .attr("width", 25)
         .attr("height", 25)
         .attr("fill", function (d, i) {
+            // Second to last color appears twice without this, don't know why though
             if (i==4){
                 return colorScaleReds5[i]
             } else {
@@ -157,6 +156,7 @@ function drawLegend(color, mapID) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
+                //Hardcode 'cause time, sets lowest and highest value
                 if (mapID=="solger"){
                     return "85.3 to " +d
                 } else if (mapID=="solken"){
@@ -175,6 +175,7 @@ function drawLegend(color, mapID) {
 
                 
             } else {
+                //0.01 increments
                 return d3.format(".2f")(color.domain()[i - 1]+0.01) + " to " + d
             };
         })

@@ -1,30 +1,30 @@
 //Width and height
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548)+30;
+var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 2548) + 30;
+//Used to set stroke on circle hover
 let prov
+//Used to get maximum value of dataset
 let max
+//Used to draw tooltip
 let tooltip
+//Used to store circles
 let circles
-let colorScaleBlues5 = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe']  
+//Define color scale
+let colorScaleBlues5 = ['#f1eef6', '#d0d1e6', '#a6bddb', '#74a9cf', '#2b8cbe']
+//Load data for all maps, then draw 
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(draw).catch(error => { console.log(error) })
 
-//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-
-//Build Map
-
+//Parameter function, defining parameters that differ between the countries
 function draw(data) {
     drawMap(data[0], '#southafrica', "mzaf", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0]).rotate([-24, -28]), d3.scaleThreshold().domain([61, 62, 63, 64, 65]).range(colorScaleBlues5), 50)
     drawMap(data[1], '#germany', "mger", d3.geoAzimuthalEqualArea().scale(1).translate([0, 0.0]).rotate([-10, -52]), d3.scaleThreshold().domain([26, 27, 28, 30, 31]).range(colorScaleBlues5), 80)
     drawMap(data[2], '#kenya', "mken", d3.geoAzimuthalEqualArea().scale(1).translate([0, -.01]).rotate([-38, 0]), d3.scaleThreshold().domain([32, 36, 40, 48, 52]).range(colorScaleBlues5), 50)
 }
 
-//Create tooltip for mouseover on body for absolute position -- https://www.freecodecamp.org/news/how-to-work-with-d3-jss-general-update-pattern-8adce8d55418/ -- https://bl.ocks.org/d3noob/a22c42db65eb00d4e369
-
-
-//Build Map
+//Draw Map
 function drawMap(data, target, id, projection, color, csize) {
-    //Create SVG element // viewBox for responsive Map
+    //Create SVG element // viewBox for responsive Map, target as specified to create three svgs
     var svg = d3.select(target)
         .append("svg")
         //responsive size
@@ -33,6 +33,7 @@ function drawMap(data, target, id, projection, color, csize) {
         .attr("preserveAspectRatio", "xMinYMin")
         .append("g")
         .attr("class", "mapbox")
+        //So that the svg is accessible later on
         .attr('id', id);
     //Define path generatoryx   
     var path = d3.geoPath()
@@ -73,20 +74,26 @@ function drawMap(data, target, id, projection, color, csize) {
     drawLegend(id, csize, color);
 
     function drawDiagram(d) {
+        //Used to store all population data
         let popTot = []
+        //Add all data to array, so that d3.Max() can be used
         for (let i = 0; i < data.features.length; i++) {
             popTot.push(data.features[i].properties.population)
         }
+        //Create circles
         circles = svg.selectAll(null)
             .data(data.features)
             .enter()
             .append("circle")
             .attr('class', 'circle')
             .attr("transform", function (d) {
+                //Manually change position of Brandenburg so that it does not overlap with Berlin
                 return d.properties.name_1 == 'Brandenburg' ? "translate(" + (path.centroid(d)[0] + 40 + ',' + path.centroid(d)[1]) + ")" : "translate(" + path.centroid(d) + ")";
             })
             .attr("r", function (d) {
+                //Get max value of all admin areas of this country
                 max = d3.max(popTot);
+                //Circle size equals target size * share of current population with max
                 size = csize * d.properties.population / max
                 return size
             })
@@ -106,62 +113,64 @@ function drawMap(data, target, id, projection, color, csize) {
             .on("mouseover", drawTooltip)
             .on("mouseout", eraseTooltip)
     }
-    circles= circles.sort(function(x,y){
+    //Sort circles by population, raise afterwards, this way the smaller circles are always on top of the bigger ones, making them always visible (e.g. south-western Kenya)
+    circles = circles.sort(function (x, y) {
         return d3.descending(x.properties.population, y.properties.population)
     });
     circles.raise();
 
 
-    //Build Tooltip
-function drawTooltip() {
-    window.onresize = this.getBoundingClientRect();
-    let bbox = this.getBoundingClientRect();
-    tooltip = d3.select(target)
-        .append("div")
-        .attr("class", "tooltip")
-        .attr("opacity", 0)
-        .attr('id', 'tt');
-    if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'circle') {
-        tooltip
-            .style("opacity", .7)
-            .style("left", bbox.x + bbox.width / 2 + 10 + "px")
-            .attr('id', 'tt')
-            .style("top", bbox.y + bbox.height / 2 + "px");
-        tooltip.join(
-            enter =>
-                enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
-            update =>
-                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>Total Population: " + d3.select(this).attr("population") + "</p><p>Gini: " + d3.select(this).attr("gini") + "%</p>")
-        )
-    }
-    let name = d3.select(this).attr("name");
-    prov = document.querySelector('[name="' + name + '"]');
-    this.style.strokeWidth = '3px';
-    prov.style.strokeWidth = '3px';
-};
+    //Build Tooltip, creates new tooltip each time, which is why erase tooltip is more important than ever
+    function drawTooltip() {
+        window.onresize = this.getBoundingClientRect();
+        let bbox = this.getBoundingClientRect();
+        tooltip = d3.select(target)
+            .append("div")
+            .attr("class", "tooltip")
+            .attr("opacity", 0)
+            .attr('id', 'tt');
+        //Only show tooltips for circles
+        if (document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1].getAttribute('class') == 'circle') {
+            tooltip
+                .style("opacity", .7)
+                .style("left", bbox.x + bbox.width / 2 + 10 + "px")
+                .attr('id', 'tt')
+                .style("top", bbox.y + bbox.height / 2 + "px");
+            tooltip.join(
+                enter =>
+                    enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
+                update =>
+                    update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>Total Population: " + d3.select(this).attr("population") + "</p><p>Gini: " + d3.select(this).attr("gini") + "%</p>")
+            )
+        }
+        //Get hovered element and increase its boundary, same for the province it belongs to
+        let name = d3.select(this).attr("name");
+        prov = document.querySelector('[name="' + name + '"]');
+        this.style.strokeWidth = '3px';
+        prov.style.strokeWidth = '3px';
+    };
 
 };
-
+//Erase 
 function eraseTooltip() {
     this.style.strokeWidth = '1px';
     d3.selectAll('#tt').remove();
 
     prov.style.strokeWidth = '0.5px'
-
 };
 
 //Build Vertical-Legend -- https://bl.ocks.org/jkeohan/b8a3a9510036e40d3a4e
 function drawLegend(id, csize, color) {
-
-    console.log(id)
+    //Get circle size for legend
     let size = d3.scaleSqrt()
         .domain([1, max])
         .range([1, csize]);
+    //Define which values shall be shown in the legend
     let valuesToShow = [(Math.round(1 / 4 * max / 1000000) * 1000000), (Math.round(2 / 3 * max / 1000000) * 1000000), max];
+    //Hardcoded positions for circle
     let xCircle = 90;
     let yCircle = 361;
     let xLabel = 190;
-    //set Title
     //create svg for Legend
     var legendSvg = d3.select('#' + id)
         .append("g")
@@ -175,7 +184,7 @@ function drawLegend(id, csize, color) {
             //set spacing
             return "translate(0," + 45 + ")";
         });
-
+    //Add entries for choropleth map
     var legend = legendSvg.selectAll(".legend")
         .data(color.domain())
         .enter()
@@ -184,7 +193,7 @@ function drawLegend(id, csize, color) {
         .attr("transform", function (d, i) {
             return "translate(0," + i * 40 + ")";
         });
-
+    //Return entry text
     legendSvg.append("g")
         .append("text")
         .text(function () {
@@ -202,15 +211,15 @@ function drawLegend(id, csize, color) {
         .attr("width", 30)
         .attr("height", 30)
         .attr("fill", function (d, i) {
-            if (i==4){
+            //For some reason the legend returns the second to last value twice, this fixes it
+            if (i == 4) {
                 return colorScaleBlues5[i]
             } else {
-            //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
-            return color(d - 1);
+                //return color corresponding to no. of domain // (d-1) for right color, dunno why it's that way
+                return color(d - 1);
             }
         })
-
-
+    //Append three circles, change their position based on what their max size is 
     var legendCircle = legendSvg.selectAll('.legend')
         .data(valuesToShow)
         .enter()
@@ -218,13 +227,13 @@ function drawLegend(id, csize, color) {
         .attr('class', 'legendCircle')
         .append("circle")
         .attr("cx", xCircle)
-        .attr("cy", function (d) { return csize==50 ? yCircle - size(d) + 70 : yCircle - size(d) + 125})
+        .attr("cy", function (d) { return csize == 50 ? yCircle - size(d) + 70 : yCircle - size(d) + 125 })
         .attr('r', function (d) {
             return size(d)
         })
         .style('fill', 'none')
         .style('stroke', '#1e1e1e')
-        .attr("transform", function(){
+        .attr("transform", function () {
             return "translate(0,-25)"
         })
 
@@ -233,35 +242,34 @@ function drawLegend(id, csize, color) {
         .append("text")
         .text("Total Population")
         .attr("transform", 'translate(0,280)');
-
+    //Append three lines to label the circles, position based on the max circle size
     var legendSegments = legendSvg.selectAll('.legend')
         .data(valuesToShow)
         .enter()
         .append('line')
         .attr('x1', function (d) { return xCircle })
         .attr('x2', xLabel)
-        .attr('y1', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 125})
-        .attr('y2', function (d) { return csize==50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 125})
+        .attr('y1', function (d) { return csize == 50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 125 })
+        .attr('y2', function (d) { return csize == 50 ? yCircle - size(d) * 2 + 70 : yCircle - size(d) * 2 + 125 })
         .attr('stroke', '#1e1e1e')
         .style('stroke-dasharray', ('2,2'))
-        .attr("transform", function(){
+        .attr("transform", function () {
             return "translate(0,-25)"
         })
-
+    //Add labels to the endn of the lines 
     var legendLabels = legendSvg.selectAll('.legend')
         .data(valuesToShow)
         .enter()
         .append('text')
-        .attr("class","text-bandage")   
-        .attr("transform", function(){
+        .attr("transform", function () {
             return "translate(0,-20)"
         })
         .attr('x', xLabel)
-        .attr('y', function (d) { return csize==50 ? yCircle - size(d) * 2 + 77 : yCircle - size(d) * 2 + 130})
+        .attr('y', function (d) { return csize == 50 ? yCircle - size(d) * 2 + 77 : yCircle - size(d) * 2 + 130 })
         .text(function (d) { return d })
         .style('font-size', '20px')
         .attr('alignment-basline', 'middle')
-       
+
 
     //get and set of color by domain (d) & range (i)
     legend.append("text")
@@ -272,26 +280,30 @@ function drawLegend(id, csize, color) {
         .attr("y", 36)
         .attr("color", "white")
         .text(function (d, i) {
+            //There surely is a better way to do this
             if (i == 0) {
-                if(id == "mger"){
+                //Set upper-left value to smallest value of the dataset
+                if (id == "mger") {
                     return "25 to " + (d)
-                } else if (id == "mzaf"){
+                } else if (id == "mzaf") {
                     return "60 to " + (d)
                 } else {
                     return "28 to " + (d)
                 }
-               
+
             } else if (i == color.domain().length - 1) {
-                if(id == "mger"){
-                    return (d) + " to 32"  
-                } else if (id == "mzaf"){
+                //Set lower-right value to highest value of the dataset
+                if (id == "mger") {
+                    return (d) + " to 32"
+                } else if (id == "mzaf") {
                     return 64.01 + " to 65"
                 } else {
                     return (d) + " to 62"
                 }
-                
+
             } else {
-                return d3.format(".2f")(color.domain()[i - 1]+0.01)+ " to  " + (d)
+                //Next value with a 0.01 increment
+                return d3.format(".2f")(color.domain()[i - 1] + 0.01) + " to  " + (d)
             };
         })
 };
@@ -317,7 +329,7 @@ function drawScalebar(mapProjection, mapID) {
         .attr("class", "scalebar")
         //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + height*.9 + ")";
+            return "translate(10," + height * .9 + ")";
         });
 
     scaleSvg.append("g").call(scaleBar);

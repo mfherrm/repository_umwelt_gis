@@ -2,9 +2,12 @@
 //Width and height
 var widthArea = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var heightArea = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-let colorScaleBlues5 = ['#f1eef6','#d0d1e6','#a6bddb','#74a9cf','#2b8cbe']
-let colorScaleReds5 = ['#fef0d9','#fdd49e','#fdbb84','#fc8d59','#e34a33']
-let colorScaleKReds5 = ['#ffffd4','#fee391','#fec44f','#fe9929','#d95f0e']
+//Color scale for poverty
+let colorScaleBlues5 = ['#f1eef6', '#d0d1e6', '#a6bddb', '#74a9cf', '#2b8cbe']
+//Color scale for education in ZAF and GER
+let colorScaleReds5 = ['#fef0d9', '#fdd49e', '#fdbb84', '#fc8d59', '#e34a33']
+//Color sclae for education in Kenya (low values)
+let colorScaleKReds5 = ['#ffffd4', '#fee391', '#fec44f', '#fe9929', '#d95f0e']
 //rgb2hex use as method rgb2hex(COLOR IN RGB) -- https://stackoverflow.com/questions/1740700/how-to-get-hex-color-value-rather-than-rgb-value 
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
 
@@ -18,17 +21,18 @@ var svgBoundaries = d3.select("#map")
     .append("g")
     .attr("class", "mapbox");
 
-
+//Load in GeoJSON data //Promise resolve
 Promise.all([d3.json("../geojson/zaf_provinces.geojson"), d3.json("../geojson/germany_bundeslaender.geojson"), d3.json("../geojson/kenya_counties.geojson")])
     .then(drawZaf)
     .catch(error => { console.log(error) });
 
-//Build Map
+//draw function
 function drawZaf(data) {
+    //sets different domain according to data used, creates different color for easy use later on
     color1 = d3.scaleThreshold().domain([21.7, 36.7, 41.4, 43.2, 52.3]).range(colorScaleBlues5)
     color4 = d3.scaleThreshold().domain([90.3, 91.4, 92, 93.1, 97.7]).range(colorScaleReds5)
     //Define Projection
-    let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([-0.03, 0]).rotate([-24,-28]);
+    let projectionZaf = d3.geoAzimuthalEqualArea().scale(1).translate([-0.03, 0]).rotate([-24, -28]);
 
     //Define path generator
     let pathZaf = d3.geoPath()
@@ -37,11 +41,11 @@ function drawZaf(data) {
     let bbox = pathZaf.bounds(data[0]),
         s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / widthArea, (bbox[1][1] - bbox[0][1]) / heightArea),
         t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
-
+    // Update the projection  
     projectionZaf
         .scale(s)
         .translate(t);
-
+    //Create path for poverty
     svgBoundaries.selectAll("null")
         .data(data[0].features)
         .enter()
@@ -53,7 +57,7 @@ function drawZaf(data) {
         .attr("stroke", "grey")
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
-
+    //Create path for education
     svgBoundaries.selectAll("null")
         .data(data[0].features)
         .enter()
@@ -65,9 +69,10 @@ function drawZaf(data) {
         .attr("stroke", "grey")
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
-
+    //Draw legend twice with different parameters
     drawLegend(color1, 'mapboxZAF', "Population in poverty [%]", 10, 'z1')
     drawLegend(color4, 'mapboxZAF', "Children taking part in pre-primary education [%]", 235, 'z2')
+    //Scalebar does not change so it is only drawn once
     drawScalebar(projectionZaf, 'mapboxZAF')
 
     //set value of range slider for opacity
@@ -83,10 +88,12 @@ function drawZaf(data) {
 }
 
 function drawKenya(data, s) {
+    //sets different domain according to data used, creates different color for easy use later on
     color1 = d3.scaleThreshold().domain([24, 30, 36.7, 51.2, 69.7]).range(colorScaleBlues5)
     color4 = d3.scaleThreshold().domain([2.3, 3.7, 5.1, 7.2, 10]).range(colorScaleKReds5)
+    //projection for kenya
     let projectionKenya = d3.geoAzimuthalEqualArea().scale(1).translate([-.01, .005]).rotate([-38, 0]);
-
+    //path for kenya
     let pathKenya = d3.geoPath()
         .projection(projectionKenya);
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
@@ -96,9 +103,7 @@ function drawKenya(data, s) {
     projectionKenya
         .scale(s)
         .translate(t);
-
-
-
+    //Create path for poverty
     svgBoundaries.selectAll(null)
         .data(data.features)
         .enter()
@@ -113,8 +118,7 @@ function drawKenya(data, s) {
 
     drawLegend(color1, 'mapboxKEN', "Population in poverty [%]", 10, 'k1')
 
-
-
+    //Create path for education
     svgBoundaries.selectAll(null)
         .data(data.features)
         .enter()
@@ -139,21 +143,22 @@ function drawKenya(data, s) {
 }
 
 function drawGermany(data, s) {
+    //sets different domain according to data used, creates different color for easy use later on
     color1 = d3.scaleThreshold().domain([12.3, 15.6, 17.2, 18.5, 19.4]).range(colorScaleBlues5)
     color4 = d3.scaleThreshold().domain([90.3, 91.4, 92, 93.9, 94.8]).range(colorScaleReds5)
-
+    //projection for germany
     let projectionGermany = d3.geoAzimuthalEqualArea().scale(1).translate([0.005, 0.0]).rotate([-10, -52]);
-
+    //path for germany
     let pathGermany = d3.geoPath()
         .projection(projectionGermany);
 
     let bbox = pathGermany.bounds(data);
     let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
-
+    //Update projection
     projectionGermany
         .scale(s)
         .translate(t);
-
+    //Create path for poverty
     svgBoundaries.selectAll("null")
         .data(data.features)
         .enter()
@@ -165,9 +170,9 @@ function drawGermany(data, s) {
         .attr("stroke", "grey")
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
-
+    //draw legend for poverty
     drawLegend(color1, 'mapboxGER', "Population in poverty [%]", 10, 'g1')
-
+    //Create path for education
     svgBoundaries.selectAll("null")
         .data(data.features)
         .enter()
@@ -179,7 +184,7 @@ function drawGermany(data, s) {
         .attr("stroke", "grey")
         .attr("stroke-width", "1.5px")
         .attr("opacity", "1")
-
+    //draw legend for education
     drawLegend(color4, 'mapboxGER', "Children taking part in pre-primary education [%]", 235, 'g2')
     drawScalebar(projectionGermany, 'mapboxGER')
     //set value of range slider for opacity
@@ -190,7 +195,7 @@ function drawGermany(data, s) {
         return d3.select("#map").attr("fill")
     });
 }
-
+//Draws legend
 function drawLegend(color, mclass, txt, pos, id) {
     //set Title
     //create svg for Legend
@@ -216,11 +221,11 @@ function drawLegend(color, mclass, txt, pos, id) {
         .attr("transform", function (d, i) {
             return "translate(5," + i * 33 + ")";
         });
-     
+
     legendSvg.append("g")
         .append("text")
         .text(txt)
-        .attr("font-size",24)
+        .attr("font-size", 24)
         .attr("transform", function (d, i) {
             //set spacing
             return "translate(0," + -8 + ")";
@@ -247,36 +252,39 @@ function drawLegend(color, mclass, txt, pos, id) {
         .attr("color", "white")
         .text(function (d, i) {
             if (i == 0) {
-                if(id == "g1"){
+                //Hardcoded 'cause time
+                //Lowest boundary
+                if (id == "g1") {
                     return "11.9 to " + (d)
-                } else if (id=="g2"){
+                } else if (id == "g2") {
                     return "85.3 to " + (d)
-                } else if(id == "z1"){
+                } else if (id == "z1") {
                     return "19.3 to " + (d)
-                } else if (id=="z2"){
+                } else if (id == "z2") {
                     return "85.2 to " + (d)
-                }else if(id == "k1"){
+                } else if (id == "k1") {
                     return "17.1 to " + (d)
-                } else if (id=="k2"){
+                } else if (id == "k2") {
                     return "1.6 to " + (d)
                 }
-                
+                //Hardcoded 'cause time
+                //Highest boundary
             } else if (i == color.domain().length - 1) {
-                if(id == "g1"){
+                if (id == "g1") {
                     return (d) + " to 24.9"
-                } else if (id=="g2"){
+                } else if (id == "g2") {
                     return (d) + " to 95.7"
-                } else if(id == "z1"){
+                } else if (id == "z1") {
                     return (d) + " to 59.1"
-                } else if (id=="z2"){
+                } else if (id == "z2") {
                     return (d) + " to 98.2"
-                }else if(id == "k1"){
+                } else if (id == "k1") {
                     return (d) + " to 79.3"
-                } else if (id=="k2"){
+                } else if (id == "k2") {
                     return (d) + " to 14.1"
                 }
             } else {
-                return d3.format(".2f")(color.domain()[i - 1]+0.01) + " to " + d
+                return d3.format(".2f")(color.domain()[i - 1] + 0.01) + " to " + d
             };
         })
 };
@@ -302,7 +310,7 @@ function drawScalebar(mapProjection, mclass) {
         .attr("class", mclass)
         //move the Scalebar like the legend
         .attr("transform", function () {
-            return "translate(10," + heightArea*.9 + ")";
+            return "translate(10," + heightArea * .9 + ")";
         });
 
     scaleSvg.append("g").call(scaleBar);
@@ -336,9 +344,10 @@ d3.select("#sdgRange").on("input", function () {
 d3.select(".adm-radio").on("change", drawMapTrigger);
 
 function drawMapTrigger() {
+    //Change map depending on which button is selected
     let selected = d3.select("input[type=radio]:checked").property("value");
     if (selected == "germany") {
-        //Load in GeoJSON data //Promise resolve
+        
         d3.selectAll(".mapboxGER").transition().duration(500).style("display", "flex");
         d3.selectAll(".mapboxZAF").transition().duration(500).style("display", "none");
         d3.selectAll(".mapboxKEN").transition().duration(500).style("display", "none");
