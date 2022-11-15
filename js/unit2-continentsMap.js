@@ -100,13 +100,17 @@ let selectC = [{
 
 function getContinent(continent) {
     let elemid = continent._groups[0][0].__data__.properties.CONTINENT
+    //If everything true, pop()
     if (selectC[0].africa == true && selectC[0].europe == true) {
         selectC[0].selected.pop();
+        //If one is true, pop()
     } else if ((elemid.toLowerCase() == 'africa' && selectC[0].africa == true) || (elemid.toLowerCase() == 'europe' && selectC[0].europe == true)) {
         selectC[0].selected.pop();
+        //If nothing selected, select
     } else if (continent.attr("fill") != "#00677F" && selectC[0].selected.length < 1) {
         selectC[0].selected.push(continent);
         return continent.attr("fill", "#00677F")
+        //If already selected, deselect
     } else {
         if (selectC[0].selected[0]._groups[0][0].__data__.properties.CONTINENT == elemid) {
             selectC[0].selected.pop();

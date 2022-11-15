@@ -14,7 +14,6 @@ var color = d3.scaleOrdinal(d3.schemeCategory10);
 d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
     .catch(error => { console.log(error) });
-//Define vars for unit
 d3.json("../geojson/world_countries2020.geojson")
     .then(drawMap)
     .catch(error => { console.log(error) });
@@ -27,7 +26,7 @@ function drawMap(data) {
     //Define path generator
     var path = d3.geoPath().projection(projection);
 
-    //Draw into different divs based on which iteration of drawMap this is
+    //Draw into different divs based on which iteration of drawMap() this is
     let target
     i == 0 ? target = '#worldmapu2' : target = "#worldmapall"
 
@@ -81,7 +80,7 @@ function drawMap(data) {
         .attr('pyramid', function (d) {
             return d.properties.pyramid;
         })
-        //Cursor on mouseover, but only clickable countries
+        //Pointer on mouseover, but only clickable countries
         .style("cursor", function (d) {
             return d.properties.pyramid ? "pointer" : ''
         })
@@ -91,8 +90,10 @@ function drawMap(data) {
             let src = document.querySelectorAll(':hover')[9].id
             console.log(src)
             if (src == 'wmu3') {
-                country.attr("fill") == 'green' ? '' : getCountry(country)
+                //Do nothing if already true, otherwise get country
+                country.attr("fill") == '#4FE34F' ? '' : getCountry(country)
             } else if (src == 'wmu4') {
+                //Do nothing if already true, otherwise get country
                 (country.attr("fill") == "#fdb462" || country.attr("fill") == "#fccde5" || country.attr("fill") == "#b3de69" || country.attr("fill") == "#bc80bd") ? '' : getPyramid(country)
             }
         });
@@ -113,16 +114,19 @@ let select = [{
 //In essence, checks if selections are right, wrong, previously selected, acts accordingly 
 function getCountry(country) {
     let elemid = country._groups[0][0].__data__.properties.NAME_ENGL
+    //All countries are already true
     if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
+        //Is the selected country right?
     } else if ((elemid.toLowerCase() == 'germany' && select[0].germany == true) || (elemid.toLowerCase() == 'kenya' && select[0].kenya == true) || (elemid.toLowerCase() == 'south africa' && select[0].southafrica == true)) {
         console.log(select[0].selected[0])
         select[0].selected.pop();
+        //Select new country
     } else if (country.attr("fill") != "#00677F" && select[0].selected.length < 1 && country.attr("continent") != 0) {
         select[0].selected.push(country);
-
         return country.attr("fill", "#00677F")
+        //Country is already selected, deselect
     } else {
         if (select[0].selected[0] == undefined) {
             console.log('undefined')
@@ -130,9 +134,6 @@ function getCountry(country) {
             select[0].selected.pop();
             return country.attr("fill", "grey")
         }
-
-
-
     }
 }
 
@@ -150,26 +151,32 @@ d3.select("#pyr_kenya").on("mouseup", getPyr)
 function getPyr() {
     console.log(document.querySelectorAll(':hover'))
     let elem;
+    //Get element from trigger
     document.querySelectorAll(':hover')[8] == null ? elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 5] : elem = document.querySelectorAll(':hover')[8]
     let elemid = elem.getAttribute('id')
     console.log(elemid)
+    //Do nothing if undefined
     if (select[0].selected[0] != undefined) {
         let con = select[0].selected[0]._groups[0][0].__data__.properties.NAME_ENGL
         console.log(con)
+        //If Germany was clicked, fill green, set Germany true and pop()
         if ((con.includes("Germany") && elemid.includes('pyr_germany'))) {
             select[0].germany = true;
             select[0].selected[0].attr("fill", "#4FE34F");
             select[0].selected.pop();
+            //If Kenya was clicked, fill green, set Kenya true and pop()
         } else if ((con.includes('Kenya') && elemid.includes('pyr_kenya'))) {
             select[0].kenya = true;
             select[0].selected[0].attr("fill", "#4FE34F");
             select[0].selected.pop();
+            //If ZAF was clicked, fill green, set it true and pop()
         } else if (con.includes('South Africa') && elemid.includes('pyr_southafrica')) {
             select[0].southafrica = true;
             select[0].selected[0].attr("fill", "#4FE34F");
             select[0].selected.pop();
+            //Do nothing if everything is already correct
         } else if (select[0].germany == true && select[0].kenya == true && select[0].southafrica == true) {
-
+            //Fill red if it is not right
         } else {
             select[0].selected[0].attr("fill", "#EC5B5B");
         }
@@ -182,14 +189,15 @@ let select4 = [];
 //Prevent error if undefined by logging undefined
 function getPyramid(country) {
     let elemid = country.attr('name');
-    let elempyr = country.attr('pyramid');
-    let elemstat = country.attr('state');
+    //Add new country if empty, fill blue
     if (country.attr("fill") != "#00677F" && select4.length < 1 && country.attr("continent") != 0) {
         select4.push(country);
         return country.attr("fill", "#00677F")
     } else {
+        //Do nothing if undefined
         if (select4[0] == undefined) {
             console.log('undefined')
+            //If already selected pop()
         } else if (select4[0]._groups[0][0].__data__.properties.NAME_ENGL == elemid) {
             select4.pop();
             return country.attr("fill", "grey")
@@ -205,12 +213,13 @@ function getPyramid(country) {
 d3.select("#pyr_imgs").on("click", function () {
     let elem = document.querySelectorAll(':hover')[document.querySelectorAll(':hover').length - 1]
     let elemid = elem.getAttribute('id')
-    let conid = country.attr('name')
     let con = select4[0]._groups[0][0].__data__.properties.pyramid
     console.log(con)
+    //Check which pyramid was clicked, return fill on true, pop()
     if ((con == 1 && elemid.includes('pyrstg0')) || (con == 2 && elemid.includes('pyrstg1')) || (con == 3 && elemid.includes('pyrstg2')) || (con == 4 && elemid.includes('pyrstg3'))) {
         con == 1 ? select4[0].attr("fill", "#bc80bd") : con == 2 ? select4[0].attr("fill", "#b3de69") : con == 3 ? select4[0].attr("fill", "#fccde5") : con == 4 ? select4[0].attr("fill", "#fdb462") : ''
         select4.pop();
+        //Fill red if wrong
     } else {
         select4[0].attr("fill", "#EC5B5B");
     }
