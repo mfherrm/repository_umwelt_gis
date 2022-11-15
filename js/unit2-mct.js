@@ -103,7 +103,8 @@ var myQuiz = {
 			ul = document.createElement("ul");
 		t.emptyContainer();
 		t.intoContainer(t.createElement({
-			tag: "h2",
+			tag: "h5",
+			style: "padding-left: 2.5%; padding-top: .5rem",
 			text: /* "(" + t.currentQuestion.category + ") " + */ t.currentQuestion.question
 		}));
 		t.intoContainer(ul);
@@ -118,6 +119,7 @@ var myQuiz = {
 				label = t.createElement({
 					htmlFor: "a" + t.questions.length + "_" + i,
 					tag: "label",
+					style: "padding: .5rem;",
 					text: s
 				}),
 				radio = t.createElement({
@@ -134,6 +136,7 @@ var myQuiz = {
 		});
 		// Hinweis für Tastatur-User
 		t.intoContainer(t.createElement({
+			className: "btn btn-secondary",
 			tag: "button",
 			text: "Confirm choice",
 			type: "submit"
@@ -378,7 +381,7 @@ var myQuiz = {
 		t.currentQuestion = null;
 		// install start button
 		t.intoContainer(t.createElement({
-			className: "startBtn",
+			className: "btn btn-secondary startBtn",
 			tag: "button",
 			text: "Start quiz"
 		}), "p");
