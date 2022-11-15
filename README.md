@@ -23,12 +23,12 @@ Any unauthorized use is not allowed.</p>
      <li>The folders labeled 'shapefiles' and 'documentation' can be found in this folder's parent directory.</li>
 </ul>
 <h4>Used Frameworks and Libraries</h4>
-<ul> <li>D3.js</li>
-     <li>D3-geo-scale-bar</li>
-     <li>D3-geo-projection</li>
+<ul> <li>D3.js v7</li>
+     <li>D3-geo-scale-bar 1.2.5</li>
+     <li>D3-geo-projection v2</li>
      <li>D3-regression</li>
-     <li>Bootstrap 5</li>
-     <li>Bootstrap 5 icons</li>
+     <li>Bootstrap 5.0.2</li>
+     <li>Bootstrap 5 icons 1.10.1</li>
      <li>Google Font</li>
      <li>JQuery</li>
 </ul>

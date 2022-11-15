@@ -21,7 +21,8 @@ d3.json("../geojson/world_countries2020.geojson")
 //Build Map
 function drawMap(data) {
     //Define projection
-    (projection = projection = d3.geoMercator().translate([((width / 3.3)), (height * 1.05)]).scale(1.75 * height / Math.PI))
+    i == 0 ? (projection = d3.geoMercator().translate([((width / 3.3)), (height*.95)]).scale(1.6 * height / Math.PI)) :
+    (projection = d3.geoMercator().translate([((width / 2.7)), (height *.95)]).scale(1.6 * height / Math.PI))
 
     //Define path generator
     var path = d3.geoPath().projection(projection);
