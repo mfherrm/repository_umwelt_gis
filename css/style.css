@@ -745,9 +745,8 @@ input[type=range]::-moz-range-thumb {
 
 #quiz input:checked ~ label,
 #quiz input:focus ~ label {
-    background-color: lightsteelblue;
+    background-color: steelblue;
 }
-
 
 #quiz input {
     display:none	
@@ -755,10 +754,9 @@ input[type=range]::-moz-range-thumb {
 
 #quiz button {
 	font-family: sans-serif;
-	font-size: 20px;
+	font-size: 12pt;
 	margin-top: 20px;
-	margin-left: 30px;	
-	margin-bottom: 100px;
+	margin-left: 2rem;	
 }
 
 #quiz button, #quiz label {
