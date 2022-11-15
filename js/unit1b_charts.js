@@ -201,7 +201,6 @@ d3.select("#check-chartgame").on("click",function() {
 
 function drawChartGallery(){
  let galleryContainer = d3.select("#page3 #chartGallery")
- console.log(data)
 
  //<i class="bi bi-chevron-right"></i>
   galleryContainer.selectAll("#page3 #chart-container")
@@ -230,7 +229,6 @@ function drawChartGallery(){
     .style("padding-left","7.5%")
     .append("li")
     .text(function(d,i){
-      console.log(d.text)
       if(d.text == "Line chart"){
         return "Line chart tips"
       } else if (d.text =="Bar chart"){
@@ -259,7 +257,6 @@ let chartGalleryIndex = 0;
 let chartGalleryCount = $('#page3 .card').length-1
 showGallery()
 
-console.log(chartGalleryCount)
 function showGallery(){
   $("#page3 #card"+chartGalleryIndex).removeClass("hide").addClass("show");
 }
@@ -269,43 +266,13 @@ function hideGallery(){
 }
 
 btnNextChart.on("click",function(){
-  console.log(chartGalleryCount);
-  console.log(chartGalleryIndex);
   hideGallery();
   chartGalleryIndex == chartGalleryCount ? chartGalleryIndex = 0: chartGalleryIndex++;
   showGallery();
 })
 
 btnPrevChart.on("click", function() {
-  console.log(chartGalleryCount);
-  console.log(chartGalleryIndex);
   hideGallery();
   chartGalleryIndex == 0 ? chartGalleryIndex = chartGalleryCount : chartGalleryIndex--;
   showGallery();
 })
-
-
-/*
-
-
-btnNext.on("click",function(){
-    hidePage();
-    pageIndex < pages? pageIndex++ : pageIndex; 
-    showPage();
-    buttonShowHide();
-})
-
-btnPrev.on("click", function(){
-    hidePage();
-    pageIndex > 0 ? pageIndex-- : 0;
-    showPage();
-    buttonShowHide();
-})
-
-function buttonShowHide(){
-    pageIndex == pages ? btnNext.css({"visibility":"hidden"}) : btnNext.css({"visibility":"visible"});
-    pageIndex == 0 ? btnPrev.css({"visibility":"hidden"}) : btnPrev.css({"visibility":"visible"});
-}
-
-
-*/

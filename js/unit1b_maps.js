@@ -395,7 +395,14 @@ function createMapQuestions(){
                     .attr("name",function(){return i})
                     .html(function(d){
                         return "<input class='form-check-input' type='radio' name='"+i+"' value='"+d+"'>"+d+"</input>"})             
+    
     }
+    d3.selectAll("#map-quiz input").on("change",function(){
+        let classRemover = d3.selectAll(".map-question p").nodes()
+        console.log(classRemover)
+        classRemover.classList.remove("slist-wrong")
+        classRemover.classList.remove("slist-correct")
+    })
 }
   
 d3.select("#restart-mapquiz").on("click",function(){
@@ -409,9 +416,7 @@ d3.select("#check-mapquiz").on("click",function(){
     let index = 0;
 
     for(let item of userInput){
-        console.log(item.value)
         let result = d3.select("#map-question"+index+" p").nodes()
-        console.log(result)
         if (mapQuestions[index].answer == item.value){
             result[0].classList.add("slist-correct")
         }else{
@@ -421,6 +426,3 @@ d3.select("#check-mapquiz").on("click",function(){
     }
 })
 
-d3.selectAll("#map-quiz input").on("change",function(){
-
-})

@@ -104,7 +104,7 @@ var myQuiz = {
 		t.emptyContainer();
 		t.intoContainer(t.createElement({
 			tag: "h5",
-			style: "padding-left: 2.5%; padding-top: .5rem",
+			style: "padding-left: 2.5%;",
 			text: /* "(" + t.currentQuestion.category + ") " + */ t.currentQuestion.question
 		}));
 		t.intoContainer(ul);

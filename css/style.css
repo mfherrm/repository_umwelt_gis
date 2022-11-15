@@ -723,7 +723,7 @@ input[type=range]::-moz-range-thumb {
 #quiz li {
 	margin: 5px;
 	padding: 5px;
-	width: 800px;
+	width: 100%;
 	font-family: sans-serif;
 	font-size: 16px;
 }
@@ -733,10 +733,8 @@ input[type=range]::-moz-range-thumb {
 	background-color: lightgray;
 	border: 1px solid gray;
 	border-radius: 0.2em;
-	margin: 0.1em 0;
-	padding: 1em 2em;
 	text-align: start;
-	max-width: 33em;
+	max-width: 30em;
 }
 
 #quiz label:hover {
