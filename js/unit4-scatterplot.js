@@ -229,7 +229,7 @@ function drawTooltip() {
             enter =>
                 enter.html("<p>" + d3.select(this).attr("name") + "</p>"),
             update => //Takes the two parameters and shows them depending on which is selected replace(' ', '_') because ' ' is not allowed as an attribute name
-                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>" + "<p> slope: " + (s) + "</p>" + "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
+                update.html("<p><strong>" + d3.select(this).attr("name") + "</strong></p><p>" + sel[0] + ': ' + d3.select(this).attr(sel[0].replace(' ', '_')) + "</p>" + "<p>" + sel[1] + ': ' + d3.select(this).attr(sel[1].replace(' ', '_')) + "</p>" + "<p> slope: " + d3.format('.5f')((s)) + "</p>" + "<p> rsquared: " + d3.format('.5f')(r2) + "</p>")
         )
     }
 };
