@@ -66,8 +66,12 @@ function drawZaf(data){
 
 function drawKenya(data, s){
     let projectionKenya = d3.geoAzimuthalEqualArea()
+            //translate for left/right and up/down 
             .translate([-0.01,-.02])
+            //scale > 1 --> smaller view
             .scale(1)
+            //rotations: "central coordinates of projection" 
+            //left value: lon; right value: lat
             .rotate([-39,0]); 
 
     let pathKenya = d3.geoPath()
