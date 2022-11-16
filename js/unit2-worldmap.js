@@ -36,7 +36,7 @@ function drawMap(data) {
         .append("svg")
         //responsive size
         .attr("viewBox", function () {
-            return [0, 0, width, 2548]
+            return [0, 0, width, width*1.5]
         })
         //different IDs will be needed to access data later on
         .attr('id', function () {

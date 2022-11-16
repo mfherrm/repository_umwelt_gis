@@ -38,9 +38,9 @@ function drawZaf(data) {
     let pathZaf = d3.geoPath()
         .projection(projectionZaf);
 
-    let bbox = pathZaf.bounds(data[0]),
-        s = .92 / Math.max((bbox[1][0] - bbox[0][0]) / widthArea, (bbox[1][1] - bbox[0][1]) / heightArea),
-        t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let bboxS = pathZaf.bounds(data[0]),
+        s = .92 / Math.max((bboxS[1][0] - bboxS[0][0]) / widthArea, (bboxS[1][1] - bboxS[0][1]) / heightArea),
+        t = [(widthArea - s * (bboxS[1][0] + bboxS[0][0])) / 2, (heightArea - s * (bboxS[1][1] + bboxS[0][1])) / 2];
     // Update the projection  
     projectionZaf
         .scale(s)
@@ -97,8 +97,8 @@ function drawKenya(data, s) {
     let pathKenya = d3.geoPath()
         .projection(projectionKenya);
     // Calculate bounding box transforms for entire collection // bbox = [[x0,y0],[x1,y1]]
-    let bbox = pathKenya.bounds(data)
-    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let bboxK = pathKenya.bounds(data)
+    let t = [(widthArea - s * (bboxK[1][0] + bboxK[0][0])) / 2, (heightArea - s * (bboxK[1][1] + bboxK[0][1])) / 2];
     // Update the projection  
     projectionKenya
         .scale(s)
@@ -152,8 +152,8 @@ function drawGermany(data, s) {
     let pathGermany = d3.geoPath()
         .projection(projectionGermany);
 
-    let bbox = pathGermany.bounds(data);
-    let t = [(widthArea - s * (bbox[1][0] + bbox[0][0])) / 2, (heightArea - s * (bbox[1][1] + bbox[0][1])) / 2];
+    let bboxG = pathGermany.bounds(data);
+    let t = [(widthArea - s * (bboxG[1][0] + bboxG[0][0])) / 2, (heightArea - s * (bboxG[1][1] + bboxG[0][1])) / 2];
     //Update projection
     projectionGermany
         .scale(s)
